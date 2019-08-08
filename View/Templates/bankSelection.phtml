@@ -1,0 +1,91 @@
+<?php use tpaySDK\Locale\Lang; ?>
+<link rel="stylesheet" type="text/css" href="<?php echo $data['static_files_url'] ?>View/Styles/style.css"/>
+<div class="tpay-insidebg" id="main-payment">
+    <?php if ($data['is_simple'] === false) { ?>
+        <div class="tpay-header-wrapper">
+            <div class="tpay-header-logo">
+                <img class="tpay-logo" src="https://tpay.com/img/banners/tpay_logo_white.svg" alt="logo-tpay"/>
+            </div>
+            <div class="tpay-header-belt"></div>
+        </div>
+    <?php } ?>
+    <div id="groups_v" class="tpay-panel-inside-content">
+        <div id="bank-selection-form" class="tpay-groups-wrapper">
+            <?php if ($data['small_list'] === true) { ?>
+                <select name="bank_list" id="tpay-bank-list" onchange="changeOption()" class="tpay-select">
+                    <?php
+                    foreach ($data['groups_list'] as $group) {
+                        echo '<option value="'.$group['id'].'">'.$group['name'].'</option>';
+                    }
+                    ?>
+                </select>
+            <?php } else {
+                foreach ($data['groups_list'] as $group) {
+                    echo '<div class="tpay-group-holder tpay-with-logo" id="bank-'.$group['id'].'" onclick="changeBank(\''.$group['id'].'\')">'.
+                        '<div class="tpay-group-name">'.$group['name'].'</div>'.
+                        '<div class="tpay-group-logo-holder">'.
+                        '<img src="https://secure.tpay.com/_/g/103.png?3" class="tpay-group-logo" alt="'.$group['name'].'">'.
+                        '</div></div>';
+                }
+            } ?>
+        </div>
+    </div>
+</div>
+
+<form id="tpay-payment" class="tpay-form" action="<?php echo $data['action_url'] ?>" method="POST"
+      accept-charset="UTF-8">
+    <input name="groupId" id="tpay-channel-input" type="hidden"/>
+    <?php if ($data['show_regulations_checkbox'] === true) { ?>
+        <input name="tpay-regulations" id="tpay-regulations-input" type="hidden"/>
+        <div class="tpay-amPmCheckbox">
+            <input id="tpay-accept-regulations-checkbox" type="checkbox" name="regulations" value="0">
+            <label for="tpay-accept-regulations-checkbox" class="tpay-info-label">
+                <?php Lang::lang('accept') ?> <a href="<?php echo $data['regulation_url'] ?>"
+                                                 target="_blank"><?php Lang::lang('regulations_url') ?></a>
+                <?php Lang::lang('regulations'); ?>
+            </label>
+        </div>
+    <?php } ?>
+    <?php if ($data['is_simple'] === false) { ?>
+        <div class="tpay-buttons-holder">
+            <input class="tpay-pay-button" id="tpay-payment-submit" type="submit" value="<?php Lang::lang('pay') ?>">
+        </div>
+    <?php } ?>
+</form>
+
+<script type="text/javascript">
+    function changeBank(bank_id) {
+        var input = document.getElementById('tpay-channel-input'),
+            bank_block = document.getElementById('bank-' + bank_id),
+            active_bank_blocks = document.getElementsByClassName('tpay-active');
+        input.value = bank_id;
+
+        if (active_bank_blocks.length > 0) {
+            active_bank_blocks[0].className = active_bank_blocks[0].className.replace('tpay-active', '');
+        }
+        if (bank_block !== null) {
+            bank_block.className = bank_block.className + ' tpay-active';
+        }
+    }
+
+    function changeOption () {
+        document.getElementById('tpay-channel-input').value = document.getElementById('tpay-bank-list').value;
+    }
+</script>
+<script type="text/javascript">
+    var regulation_checkbox = document.getElementById('tpay-accept-regulations-checkbox'),
+        submit_form_input = document.getElementById('tpay-payment-submit'),
+        regulations_form_input = document.getElementById('tpay-regulations-input');
+    <?php if ($data['show_regulations_checkbox'] === true){ ?>
+    submit_form_input.onclick = function () {
+        if (regulations_form_input.value == 0) {
+            alert('<?php Lang::lang('acceptance_is_required') ?>');
+            return false;
+        }
+        return true;
+    };
+    regulation_checkbox.onchange = function () {
+        regulations_form_input.value = (this.checked) ? 1 : 0;
+    };
+    <?php } ?>
+</script>

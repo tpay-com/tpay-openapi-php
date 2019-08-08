@@ -1,0 +1,6 @@
+.idea
+.sonar
+sonar-project.properties
+Logs/*
+!Logs/.gitkeep
+.scannerwork
