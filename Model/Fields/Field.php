@@ -113,7 +113,7 @@ class Field extends FieldTypes
         }
         if ($this->FieldValidator->isValueValidType($this->type, $value) === false) {
             $this->errors[] = sprintf(
-                'Value type of field %s is invalid. Should be type of %s', $this->name, print_r($this->type, true)
+                'Value type of field %s is invalid. Should be %s type', $this->name, $this->type
             );
         }
     }

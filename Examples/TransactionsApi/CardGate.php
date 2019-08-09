@@ -65,7 +65,7 @@ class CardGate extends ExamplesConfig
 
     private function getNewCardTransaction()
     {
-        //If you set the third getOnSiteCardForm() parameter true, you can get client name and email here.
+        //If you set the fourth getOnSiteCardForm() parameter true, you can get client name and email here.
         //Otherwise, you must get those values from your DB.
 //        $clientName = Util::cast($_POST['client_name'], FieldTypes::STRING);
 //        $clientEmail = Util::cast($_POST['client_email'], FieldTypes::STRING);

@@ -21,10 +21,12 @@
                 </select>
             <?php } else {
                 foreach ($data['groups_list'] as $group) {
-                    echo '<div class="tpay-group-holder tpay-with-logo" id="bank-'.$group['id'].'" onclick="changeBank(\''.$group['id'].'\')">'.
+                    echo '<div class="tpay-group-holder tpay-with-logo" id="bank-'.$group['id'].
+                        '" onclick="changeBank(\''.$group['id'].'\')">'.
                         '<div class="tpay-group-name">'.$group['name'].'</div>'.
                         '<div class="tpay-group-logo-holder">'.
-                        '<img src="https://secure.tpay.com/_/g/103.png?3" class="tpay-group-logo" alt="'.$group['name'].'">'.
+                        '<img src="https://secure.tpay.com/_/g/103.png?3" class="tpay-group-logo" alt="'.
+                        $group['name'].'">'.
                         '</div></div>';
                 }
             } ?>
@@ -76,7 +78,7 @@
     var regulation_checkbox = document.getElementById('tpay-accept-regulations-checkbox'),
         submit_form_input = document.getElementById('tpay-payment-submit'),
         regulations_form_input = document.getElementById('tpay-regulations-input');
-    <?php if ($data['show_regulations_checkbox'] === true){ ?>
+    <?php if ($data['show_regulations_checkbox'] === true) { ?>
     submit_form_input.onclick = function () {
         if (regulations_form_input.value == 0) {
             alert('<?php Lang::lang('acceptance_is_required') ?>');

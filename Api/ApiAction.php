@@ -86,16 +86,20 @@ class ApiAction
         if (!empty($fields)) {
             $headers[] = 'Content-Type: application/json';
         }
-        Logger::log('Outgoing request', sprintf("URL: %s \n Fields: %s \n Headers: %s",
-                $requestUrl, json_encode($fields), json_encode($headers)));
+        Logger::log(
+            'Outgoing request',
+            sprintf("URL: %s \n Fields: %s \n Headers: %s", $requestUrl, json_encode($fields), json_encode($headers))
+        );
         $this->Curl
             ->setRequestUrl($requestUrl)
             ->setPostData($fields)
             ->setMethod($requestMethod)
             ->setHeader($headers)
             ->sendRequest();
-        Logger::log('Request response', sprintf("Fields: %s \n HTTP code: %s", json_encode($this->getRequestResult()),
-                $this->getHttpResponseCode()));
+        Logger::log(
+            'Request response',
+            sprintf("Fields: %s \n HTTP code: %s", json_encode($this->getRequestResult()), $this->getHttpResponseCode())
+        );
         $this->checkResponse();
 
         return $this;
