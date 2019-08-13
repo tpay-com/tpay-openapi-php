@@ -1,14 +1,14 @@
-#Tpay OpenAPI library
+# Tpay OpenAPI library
 
 Library for all methods available via OpenAPI Tpay
 
-#This library and some of openAPI methods are still under development.
+# This library and some of openAPI methods are still under development.
 
 ## Requirements
 
   * PHP >= 5.6.0
 
-##Installation
+## Installation
 
 Install via composer:
 ```php
@@ -26,7 +26,7 @@ git clone https://github.com/tpay-com/tpay-openapi-php.git
 manual download:
 https://github.com/tpay-com/tpay-openapi-php/archive/master.zip
 
-##Configuration
+## Configuration
 
 The only thing you need to do is to set your oAuth credentials like in example config file ([see example](Examples/ExamplesConfig.php))
 You can generate access keys in tpay merchant panel (https://panel.tpay.com)
@@ -41,33 +41,33 @@ All methods described in [Tpay OpenAPI documentation](https://openapi.tpay.com) 
 
 All currently available API methods have an example usage in ([see examples](Examples)) directory.
 
-###Example credentials
+### Example credentials
  
- ####for all API calls:
+ #### for all API calls:
 
   Client id: 1010-e5736adfd4bc5d8c
   
   Client secret: 493e01af815383a687b747675010f65d1eefaeb42f63cfe197e7b30f14a556b7
 
- ####for notifications validation:
+ #### for notifications validation:
   
   Confirmation code: demo
 
- ####for credit card encrypting:
+ #### for credit card encrypting:
   
   Public Key: LS0tLS1CRUdJTiBQVUJMSUMgS0VZLS0tLS0NCk1JR2ZNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0R05BRENCaVFLQmdRQ2NLRTVZNU1Wemd5a1Z5ODNMS1NTTFlEMEVrU2xadTRVZm1STS8NCmM5L0NtMENuVDM2ekU0L2dMRzBSYzQwODRHNmIzU3l5NVpvZ1kwQXFOVU5vUEptUUZGVyswdXJacU8yNFRCQkxCcU10TTVYSllDaVQNCmVpNkx3RUIyNnpPOFZocW9SK0tiRS92K1l1YlFhNGQ0cWtHU0IzeHBhSUJncllrT2o0aFJDOXk0WXdJREFRQUINCi0tLS0tRU5EIFBVQkxJQyBLRVktLS0tLQ==
 
-###Examples of usage
+### Examples of usage
 
-#####Fronted forms and payment handlers: 
+##### Fronted forms and payment handlers: 
 
    [Payment method choice form](Examples/TransactionsApi/BankSelectionForm.php), [BLIK method form](Examples/TransactionsApi/BlikPayment.php), [Simple credit card form](Examples/TransactionsApi/CardGate.php), [Extended credit card form](Examples/TransactionsApi/CardGateExtended.php), [Recurrent payment example](Examples/TransactionsApi/RecurrentPayment.php)
 
-#####Fronted forms and payment handlers: 
+##### Fronted forms and payment handlers: 
 
    [Payment notification webhook](Examples/Notifications/PaymentNotificationExample.php),
 
-#####Merchant accounts registration (for partners only)
+##### Merchant accounts registration (for partners only)
 
    [Example of usages](Examples/AccountsApi/AccountsApiExample.php)
 
