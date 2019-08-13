@@ -1,0 +1,32 @@
+{
+  "name": "tpay-com/tpay-openapi-php",
+  "type": "library",
+  "license": "LGPL-3.0",
+  "description": "Tpay OpenAPI library",
+  "extra": [
+    {
+      "engine": "PHP SDK"
+    }
+  ],
+  "minimum-stability": "dev",
+  "authors": [
+    {
+      "name": "Tpay",
+      "homepage": "https://tpay.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.6.0",
+    "ext-curl": "*"
+  },
+  "support": {
+    "issues": "https://github.com/tpay-com/tpay-openapi-php/issues",
+    "email": "support@tpay.com",
+    "docs": "https://openapi.tpay.com"
+  },
+  "autoload": {
+    "psr-4": {
+      "tpay-com\\tpaySDK\\": ""
+    }
+  }
+}
