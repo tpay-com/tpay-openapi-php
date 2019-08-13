@@ -25,9 +25,9 @@
     "docs": "https://openapi.tpay.com"
   },
   "autoload": {
-    "classmap": [
-      "tpaySDK/"
-    ],
+    "psr-4": {
+      "tpaySDK\\": ""
+    },
     "exclude-from-classmap": ["**/Examples/"]
   }
 }
