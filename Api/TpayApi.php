@@ -4,6 +4,7 @@ namespace tpaySDK\Api;
 use tpaySDK\Api\Accounts\AccountsApi;
 use tpaySDK\Api\Transactions\TransactionsApi;
 use tpaySDK\Api\Authorization\AuthorizationApi;
+use tpaySDK\Utilities\TpayException;
 
 class TpayApi
 {
@@ -65,7 +66,17 @@ class TpayApi
             'client_secret' => $clientSecret,
             'scope' => $scope,
         ];
-        $this->token = $AuthApi->getNewToken($fields);
+        $AuthApi->getNewToken($fields);
+        if ($AuthApi->getHttpResponseCode() === 200) {
+            $this->token = $AuthApi->getRequestResult();
+        } else {
+            throw new TpayException(sprintf(
+                    'Authorization error. HTTP code %s Response: %s',
+                    $AuthApi->getHttpResponseCode(),
+                    json_encode($AuthApi->getRequestResult())
+                )
+            );
+        }
     }
 
 }
