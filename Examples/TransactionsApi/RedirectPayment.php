@@ -45,7 +45,7 @@ class RedirectPayment extends ExamplesConfig
                 ],
             ],
             'pay' => [
-                'groupId' => $_POST['groupId'],
+                'groupId' => (int)$_POST['groupId'],
             ],
         ];
     }

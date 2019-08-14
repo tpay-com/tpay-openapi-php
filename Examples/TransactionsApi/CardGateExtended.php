@@ -81,7 +81,7 @@ class CardGateExtended extends ExamplesConfig
                 ],
             ],
             'pay' => [
-                'groupId' => 'gr_k9NmLeGvN6GbEP4j',
+                'groupId' => 103,
             ],
         ];
         $TpayApi = new TpayApi(static::MERCHANT_CLIENT_ID, static::MERCHANT_CLIENT_SECRET, true, 'read');
@@ -99,7 +99,7 @@ class CardGateExtended extends ExamplesConfig
         $saveCard = Util::cast($_POST['card_save'], FieldTypes::STRING);
         $transaction = $this->getNewCardTransaction();
         $request = [
-            'groupId' => 'gr_k9NmLeGvN6GbEP4j',
+            'groupId' => 103,
             'cardPaymentData' => [
                 'card' => $cardData,
                 'save' => $saveCard === 'on',
@@ -146,7 +146,7 @@ class CardGateExtended extends ExamplesConfig
     private function payBySavedCard($cardToken, $transaction)
     {
         $request = [
-            'groupId' => 'gr_k9NmLeGvN6GbEP4j',
+            'groupId' => 103,
             'cardPaymentData' => [
                 'cardToken' => $cardToken,
             ],

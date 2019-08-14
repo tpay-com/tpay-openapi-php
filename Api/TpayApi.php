@@ -70,8 +70,9 @@ class TpayApi
         if ($AuthApi->getHttpResponseCode() === 200) {
             $this->token = $AuthApi->getRequestResult();
         } else {
-            throw new TpayException(sprintf(
-                    'Authorization error. HTTP code %s Response: %s',
+            throw new TpayException(
+                sprintf(
+                    'Authorization error. HTTP code: %s, response: %s',
                     $AuthApi->getHttpResponseCode(),
                     json_encode($AuthApi->getRequestResult())
                 )

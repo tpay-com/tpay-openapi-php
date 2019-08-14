@@ -27,8 +27,8 @@ class ObjectsValidator
             }
             /** @var Field $field */
             if (is_null($field->getValue())) {
-                throw new UnexpectedValueException(sprintf(
-                    'Field "%s" is required in object %s', $field->getName(), $objectClass->getName())
+                throw new UnexpectedValueException(
+                    sprintf('Field "%s" is required in object %s', $field->getName(), $objectClass->getName())
                 );
             }
         }

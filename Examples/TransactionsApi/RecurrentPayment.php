@@ -29,7 +29,7 @@ class RecurrentPayment extends ExamplesConfig
                 'name' => $clientName,
             ],
             'pay' => [
-                'groupId' => 'gr_k9NmLeGvN6GbEP4j',
+                'groupId' => 103,
                 'cardPaymentData' => [
                     'cardToken' => $clientToken,
                 ],

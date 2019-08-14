@@ -7,6 +7,6 @@ class GroupId extends Field
 {
     protected $name = __CLASS__;
 
-    protected $type = self::STRING;
+    protected $type = self::INT;
 
 }

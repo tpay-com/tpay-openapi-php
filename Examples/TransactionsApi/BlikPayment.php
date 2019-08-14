@@ -28,7 +28,7 @@ class BlikPayment extends ExamplesConfig
         $transaction = $TpayApi->Transactions->createTransaction($this->getRequestBody());
         if (isset($transaction['transactionId'])) {
             $blikPaymentFields = [
-                'groupId' => 'gr_2ma9rjlZxzV1bqYW',
+                'groupId' => 150,
                 'method' => 'transfer',
                 'blikPaymentData' => [
                     'blikToken' => $blikCode,
@@ -71,7 +71,7 @@ class BlikPayment extends ExamplesConfig
                 ],
             ],
             'pay' => [
-                'groupId' => 'gr_2ma9rjlZxzV1bqYW',
+                'groupId' => 150,
             ],
         ];
     }

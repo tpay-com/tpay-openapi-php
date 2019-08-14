@@ -22,7 +22,7 @@ class TransactionsApiExample extends ExamplesConfig
         $this
             ->getTransactions()
             ->getBankGroups()
-            ->createBasicTransaction('gr_NqopBgGaKJbDjPL4')
+            ->createBasicTransaction(150)
             ->createSavedCardTransaction()
             ->createNewCardTransaction()
             ->createBlikTransaction();
@@ -128,7 +128,7 @@ class TransactionsApiExample extends ExamplesConfig
     protected function getBlikPaymentParameters()
     {
         return [
-            'groupId' => 'gr_2ma9rjlZxzV1bqYW',
+            'groupId' => 150,
             'blikPaymentData' => [
                 'blikToken' => '302664', //This must be a string
                 'aliases' => [
@@ -143,7 +143,7 @@ class TransactionsApiExample extends ExamplesConfig
     protected function getNewCardPaymentParameters()
     {
         return [
-            'groupId' => 'gr_k9NmLeGvN6GbEP4j',
+            'groupId' => 103,
             'cardPaymentData' => [
                 'card' => 'drBWwFVDf\/OtqVogY5wYJMlUY\/Y\/OFr9Z8SZtyCq0pwXy+1kMUjVuUadtF7wGtSnr2kGxqpgoYrHSFmSl9N8DRj\/nxw8P+8MJgt0w1fMuwlcIPwUQMloYvfhFf9WG0B3xbIafngsOTsUXngcDIlGJySM\/zsU1+xW1EvQrFvsmzM=',
                 'save' => true,
@@ -154,7 +154,7 @@ class TransactionsApiExample extends ExamplesConfig
     protected function getSavedCardPaymentParameters()
     {
         return [
-            'groupId' => 'gr_k9NmLeGvN6GbEP4j',
+            'groupId' => 103,
             'cardPaymentData' => [
                 'cardToken' => 't59c2810d59285e3e0ee9d1f1eda1c2f4c554e24',
             ],

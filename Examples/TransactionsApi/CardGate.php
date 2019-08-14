@@ -46,7 +46,7 @@ class CardGate extends ExamplesConfig
         $cardData = Util::cast($_POST['carddata'], FieldTypes::STRING);
         $saveCard = Util::cast($_POST['card_save'], FieldTypes::STRING);
         $request = [
-            'groupId' => 'gr_k9NmLeGvN6GbEP4j',
+            'groupId' => 103,
             'cardPaymentData' => [
                 'card' => $cardData,
                 'save' => $saveCard === 'on',
@@ -90,7 +90,7 @@ class CardGate extends ExamplesConfig
                 ],
             ],
             'pay' => [
-                'groupId' => 'gr_k9NmLeGvN6GbEP4j',
+                'groupId' => 103,
             ],
         ];
         $TpayApi = new TpayApi(static::MERCHANT_CLIENT_ID, static::MERCHANT_CLIENT_SECRET, true, 'read');
