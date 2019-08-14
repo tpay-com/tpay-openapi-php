@@ -3,7 +3,7 @@ namespace tpaySDK\Model\Fields;
 
 use InvalidArgumentException;
 
-class Field extends FieldTypes
+class Field implements FieldTypes
 {
     protected $name = __CLASS__;
 

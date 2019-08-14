@@ -1,7 +1,7 @@
 <?php
 namespace tpaySDK\Model\Fields;
 
-class FieldTypes
+interface FieldTypes
 {
     const STRING = 'string';
 
