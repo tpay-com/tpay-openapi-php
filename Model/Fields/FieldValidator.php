@@ -1,7 +1,7 @@
 <?php
 namespace tpaySDK\Model\Fields;
 
-class FieldValidator extends FieldTypes
+class FieldValidator implements FieldTypes
 {
     public function isTooLong($maxLength, $value)
     {

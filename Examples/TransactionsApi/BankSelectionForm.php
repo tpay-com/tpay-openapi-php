@@ -15,7 +15,7 @@ class BankSelectionForm extends ExamplesConfig
     {
         $PaymentForms = new PaymentForms('en');
         $form = $PaymentForms->getBankSelectionForm(
-            $this->getBanksList(),
+            $this->getBanksList(true),
             false,
             true,
             'RedirectPayment.php',
@@ -24,10 +24,10 @@ class BankSelectionForm extends ExamplesConfig
         echo $form;
     }
 
-    protected function getBanksList()
+    protected function getBanksList($onlineOnly = false)
     {
         $TpayApi = new TpayApi(static::MERCHANT_CLIENT_ID, static::MERCHANT_CLIENT_SECRET, true, 'read');
-        $result = $TpayApi->Transactions->getBankGroups();
+        $result = $TpayApi->Transactions->getBankGroups($onlineOnly);
         if (!isset($result['result']) || $result['result'] !== 'success') {
             throw new TpayException('Unable to get banks list. Response: '.json_encode($result));
         }

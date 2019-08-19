@@ -24,9 +24,14 @@ class TransactionsApi extends ApiAction
         return $this->run(static::GET, sprintf('/transactions/%s/refunds', $transactionId));
     }
 
-    public function getBankGroups()
+    public function getBankGroups($onlineOnly = false)
     {
-        return $this->run(static::GET, '/transactions/bank-groups');
+        $requestUrl = '/transactions/bank-groups';
+        if ($onlineOnly === true) {
+            $requestUrl = sprintf('%s?onlyOnline=true', $requestUrl);
+        }
+
+        return $this->run(static::GET, $requestUrl);
     }
 
     public function createTransaction($fields)
