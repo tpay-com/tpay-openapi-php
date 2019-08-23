@@ -9,8 +9,8 @@ class Country extends Field
 
     protected $type = self::STRING;
 
-    protected $maxLength = 3;
+    protected $maxLength = 2;
 
-    protected $minLength = 3;
+    protected $minLength = 2;
 
 }

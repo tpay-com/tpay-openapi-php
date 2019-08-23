@@ -109,7 +109,7 @@ class TransactionsApiExample extends ExamplesConfig
                 'address' => 'Long Street 123/2',
                 'code' => '11-123',
                 'city' => 'New York',
-                'country' => 'USA',
+                'country' => 'US',
             ],
             'lang' => 'en',
             'callbacks' => [

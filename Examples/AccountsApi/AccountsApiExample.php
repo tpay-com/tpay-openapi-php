@@ -20,14 +20,14 @@ class AccountsApiExample extends ExamplesConfig
     public function runAllExamples()
     {
         $this
+            ->createAccount()
             ->getAccounts()
             ->getCategories()
             ->getCategoryById(60)
             ->getDocuments()
             ->getDocumentById(1)
             ->getLegalForms()
-            ->getLegalFormById(16)
-            ->createAccount();
+            ->getLegalFormById(16);
     }
 
     public function getAccounts()
