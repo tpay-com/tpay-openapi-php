@@ -4,6 +4,7 @@ namespace tpaySDK\Api;
 use tpaySDK\Curl\Curl;
 use tpaySDK\Dictionary\HttpCodesDictionary;
 use tpaySDK\Manager\Manager;
+use tpaySDK\Model\Objects\Authorization\Token;
 use tpaySDK\Utilities\Logger;
 use tpaySDK\Utilities\TpayException;
 
@@ -21,21 +22,21 @@ class ApiAction
 
     const PUT = 'PUT';
 
-    /**
-     * @var Manager
-     */
     public $Manager;
 
     protected $Curl;
 
-    private $token;
+    /**
+     * @var Token
+     */
+    protected $Token;
 
     private $productionMode;
 
-    public function __construct($token, $productionMode)
+    public function __construct($Token, $productionMode)
     {
         $this->productionMode = $productionMode;
-        $this->token = $token;
+        $this->Token = $Token;
         $this->Curl = new Curl;
         $this->Manager = new Manager;
     }
@@ -80,15 +81,18 @@ class ApiAction
             $this->productionMode === true ? static::TPAY_API_URL_PRODUCTION : static::TPAY_API_URL_SANDBOX,
             $apiMethod
         );
-        if (isset($this->token['access_token']) && $apiMethod !== '/oauth/auth') {
-            $headers[] = sprintf('Authorization: Bearer %s', $this->token['access_token']);
+        if (is_string($this->Token->access_token->getValue()) && $apiMethod !== '/oauth/auth') {
+            $headers[] = sprintf('Authorization: Bearer %s', $this->Token->access_token->getValue());
         }
         if (!empty($fields)) {
             $headers[] = 'Content-Type: application/json';
         }
         Logger::log(
             'Outgoing request',
-            sprintf("URL: %s \n Fields: %s \n Headers: %s", $requestUrl, json_encode($fields), json_encode($headers))
+            vsprintf(
+                "URL: %s \n Method: %s \n Fields: %s \n Headers: %s",
+                [$requestUrl, $requestMethod, json_encode($fields), json_encode($headers)]
+            )
         );
         $this->Curl
             ->setRequestUrl($requestUrl)

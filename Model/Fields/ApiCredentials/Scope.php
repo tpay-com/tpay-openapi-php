@@ -12,6 +12,7 @@ class Scope extends Field
     protected $enum = [
         'read',
         'write',
+        'read write',
     ];
 
 }
