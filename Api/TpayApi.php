@@ -2,6 +2,7 @@
 namespace tpaySDK\Api;
 
 use tpaySDK\Api\Accounts\AccountsApi;
+use tpaySDK\Api\Refunds\RefundsApi;
 use tpaySDK\Api\Transactions\TransactionsApi;
 use tpaySDK\Api\Authorization\AuthorizationApi;
 use tpaySDK\Model\Objects\Authorization\Token;
@@ -13,6 +14,7 @@ class TpayApi
         'Accounts' => AccountsApi::class,
         'Authorization' => AuthorizationApi::class,
         'Transactions' => TransactionsApi::class,
+        'Refunds' => RefundsApi::class,
     ];
 
     /**
@@ -29,6 +31,11 @@ class TpayApi
      * @var TransactionsApi
      */
     public $Transactions;
+
+    /**
+     * @var RefundsApi
+     */
+    public $Refunds;
 
     /**
      * @var Token

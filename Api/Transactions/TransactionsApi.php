@@ -18,7 +18,6 @@ class TransactionsApi extends ApiAction
         return $this->run(static::GET, sprintf('/transactions/%s', $transactionId));
     }
 
-    //Not yet implemented on server side
     public function getRefundsByTransactionId($transactionId)
     {
         return $this->run(static::GET, sprintf('/transactions/%s/refunds', $transactionId));
@@ -44,7 +43,6 @@ class TransactionsApi extends ApiAction
         return $this->run(static::POST, sprintf('/transactions/%s/pay', $transactionId), $fields, new Pay);
     }
 
-    //Not yet implemented on server side
     public function createRefundByTransactionId($fields, $transactionId)
     {
         return $this->run(static::POST, sprintf('/transactions/%s/refunds', $transactionId), $fields, new Refund);
