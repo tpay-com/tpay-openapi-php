@@ -3,6 +3,7 @@ namespace tpaySDK\Model\Objects\RequestBody;
 
 use tpaySDK\Model\Fields\Account\Krs;
 use tpaySDK\Model\Fields\Account\LegalForm;
+use tpaySDK\Model\Fields\Account\NotifyByEmail;
 use tpaySDK\Model\Fields\Account\OfferCode;
 use tpaySDK\Model\Fields\Account\Regon;
 use tpaySDK\Model\Fields\Account\TaxId;
@@ -26,6 +27,7 @@ class Account extends Objects
         'krs' => Krs::class,
         'legalForm' => LegalForm::class,
         'categoryId' => CategoryId::class,
+        'notifyByEmail' => NotifyByEmail::class,
         'website' => [PointOfSale::class],
         'address' => [Address::class],
         'person' => [Person::class],
@@ -65,6 +67,11 @@ class Account extends Objects
      * @var CategoryId
      */
     public $categoryId;
+
+    /**
+     * @var NotifyByEmail
+     */
+    public $notifyByEmail;
 
     /**
      * @var PointOfSale
