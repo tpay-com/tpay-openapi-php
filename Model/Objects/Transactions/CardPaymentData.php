@@ -2,7 +2,7 @@
 namespace tpaySDK\Model\Objects\Transactions;
 
 use tpaySDK\Model\Fields\CardPaymentData\Card;
-use tpaySDK\Model\Fields\CardPaymentData\CardToken;
+use tpaySDK\Model\Fields\CardPaymentData\Token;
 use tpaySDK\Model\Fields\CardPaymentData\PreauthorizedToken;
 use tpaySDK\Model\Fields\CardPaymentData\Save;
 use tpaySDK\Model\Objects\Objects;
@@ -11,7 +11,7 @@ class CardPaymentData extends Objects
 {
     const OBJECT_FIELDS = [
         'card' => Card::class,
-        'cardToken' => CardToken::class,
+        'token' => Token::class,
         'preauthorizedToken' => PreauthorizedToken::class,
         'save' => Save::class,
     ];
@@ -22,9 +22,9 @@ class CardPaymentData extends Objects
     public $card;
 
     /**
-     * @var CardToken
+     * @var Token
      */
-    public $cardToken;
+    public $token;
 
     /**
      * @var PreauthorizedToken

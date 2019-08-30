@@ -130,7 +130,7 @@ class TransactionsApiExample extends ExamplesConfig
         return [
             'groupId' => 150,
             'blikPaymentData' => [
-                'blikToken' => '302664', //This must be a string
+                'blikToken' => '123456', //This must be a string
                 'aliases' => [
                     'value' => 'test__custom_alias_123',
                     'type' => 'UID',
@@ -156,7 +156,7 @@ class TransactionsApiExample extends ExamplesConfig
         return [
             'groupId' => 103,
             'cardPaymentData' => [
-                'cardToken' => 't59c2810d59285e3e0ee9d1f1eda1c2f4c554e24',
+                'token' => 't59c2810d59285e3e0ee9d1f1eda1c2f4c554e24',
             ],
         ];
     }

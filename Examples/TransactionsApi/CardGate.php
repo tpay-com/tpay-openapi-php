@@ -13,6 +13,20 @@ require_once '../../Loader.php';
 
 class CardGate extends ExamplesConfig
 {
+    const SUPPORTED_CARD_VENDORS = [
+        'visa',
+        'mastercard',
+        'maestro',
+    ];
+
+    private $TpayApi;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->TpayApi = new TpayApi(static::MERCHANT_CLIENT_ID, static::MERCHANT_CLIENT_SECRET, true, 'read');
+    }
+
     public function init()
     {
         if (empty($_POST)) {
@@ -20,31 +34,46 @@ class CardGate extends ExamplesConfig
             //Show new payment form
             echo $PaymentForms->getOnSiteCardForm(static::MERCHANT_RSA_KEY, 'CardGate.php', true, false);
         } else {
-            $transaction = $this->getNewCardTransaction();
-            if (!isset($transaction['transactionId'])) {
-                //Code error handling @see POST /transactions HTTP 400 response details
-                throw new TpayException('Unable to create transaction. Response: '.json_encode($transaction));
+            $this->processNewCardPayment();
+        }
+    }
+
+    private function processNewCardPayment()
+    {
+        if (isset($_POST['card_vendor']) && in_array($_POST['card_vendor'], static::SUPPORTED_CARD_VENDORS)) {
+            $this->saveUserCardVendor($_POST['card_vendor']);
+        }
+        $transaction = $this->getNewCardTransaction();
+        if (!isset($transaction['transactionId'])) {
+            //Code error handling @see POST /transactions HTTP 400 response details
+            throw new TpayException('Unable to create transaction. Response: '.json_encode($transaction));
+        } else {
+            //Try to sale with provided card data
+            $response = $this->makeCardPayment($transaction);
+            if (!isset($response['result']) || $response['result'] === 'failure') {
+                header("Location: ".$transaction['transactionPaymentUrl']);
+            }
+            if (isset($response['status']) && $response['status'] === 'correct') {
+                //Successful payment by card not protected by 3DS
+                $this->setOrderAsComplete($response);
+            } elseif (isset($response['transactionPaymentUrl'])) {
+                //Successfully generated 3DS link for payment authorization
+                header("Location: ".$response['transactionPaymentUrl']);
             } else {
-                //Try to sale with provided card data
-                $response = $this->makeCardPayment($transaction);
-                if (isset($response['result']) && $response['result'] === 'success' && !isset($response['continueUrl'])) {
-                    //Successful payment by card not protected by 3DS
-                    $this->setOrderAsComplete($response);
-                } elseif (isset($response['continueUrl'])) {
-                    //Successfully generated 3DS link for payment authorization
-                    header("Location: ".$response['continueUrl']);
-                } else {
-                    //Invalid credit card data
-                    header("Location: ".$transaction['transactionPaymentUrl']);
-                }
+                //Invalid credit card data
+                header("Location: ".$transaction['transactionPaymentUrl']);
             }
         }
     }
 
     private function makeCardPayment($transaction)
     {
+        if (isset($_POST['card_save'])) {
+            $saveCard = Util::cast($_POST['card_save'], FieldTypes::STRING);
+        } else {
+            $saveCard = false;
+        }
         $cardData = Util::cast($_POST['carddata'], FieldTypes::STRING);
-        $saveCard = Util::cast($_POST['card_save'], FieldTypes::STRING);
         $request = [
             'groupId' => 103,
             'cardPaymentData' => [
@@ -53,9 +82,8 @@ class CardGate extends ExamplesConfig
             ],
             'method' => 'sale',
         ];
-        $TpayApi = new TpayApi(static::MERCHANT_CLIENT_ID, static::MERCHANT_CLIENT_SECRET, true, 'read');
 
-        return $TpayApi->Transactions->createPaymentByTransactionId($request, $transaction['transactionId']);
+        return $this->TpayApi->Transactions->createPaymentByTransactionId($request, $transaction['transactionId']);
     }
 
     private function setOrderAsComplete($response)
@@ -93,9 +121,13 @@ class CardGate extends ExamplesConfig
                 'groupId' => 103,
             ],
         ];
-        $TpayApi = new TpayApi(static::MERCHANT_CLIENT_ID, static::MERCHANT_CLIENT_SECRET, true, 'read');
 
-        return $TpayApi->Transactions->createTransaction($request);
+        return $this->TpayApi->Transactions->createTransaction($request);
+    }
+
+    private function saveUserCardVendor($cardVendor)
+    {
+        //Code saving the user card vendor name for later use
     }
 
 }

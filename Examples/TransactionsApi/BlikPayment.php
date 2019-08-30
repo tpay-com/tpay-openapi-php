@@ -41,6 +41,7 @@ class BlikPayment extends ExamplesConfig
                 //The BLIK code was valid, now the customer needs to confirm payment on his mobile app
                 //Redirect client to thank you page and wait for asynchronous POST payment notification
                 //Do not mark your order as paid here!
+                echo 'BLIK code is valid';
             } else {
                 //The BLIK code was incorrect, redirect to transaction panel to try again
                 header('Location: '.$transaction['transactionPaymentUrl']);
