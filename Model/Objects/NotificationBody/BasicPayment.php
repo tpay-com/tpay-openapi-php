@@ -1,6 +1,7 @@
 <?php
 namespace tpaySDK\Model\Objects\NotificationBody;
 
+use tpaySDK\Model\Fields\Notification\CardToken;
 use tpaySDK\Model\Fields\Notification\Crc;
 use tpaySDK\Model\Fields\Notification\Description;
 use tpaySDK\Model\Fields\Notification\Error;
@@ -37,6 +38,7 @@ class BasicPayment extends Objects
         'test_mode' => TestMode::class,
         'wallet' => Wallet::class,
         'tr_channel' => TransactionChannel::class,
+        'card_token' => CardToken::class,
     ];
 
     /**
@@ -108,6 +110,11 @@ class BasicPayment extends Objects
      * @var TransactionChannel
      */
     public $tr_channel;
+
+    /**
+     * @var CardToken
+     */
+    public $card_token;
 
     public function getRequiredFields()
     {
