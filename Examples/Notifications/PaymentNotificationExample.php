@@ -26,3 +26,8 @@ $notification = (new PaymentNotificationExample)->checkPayment();
 var_dump($notification->tr_id->getValue());
 //The above example will check the notification and print the value of received tr_id field
 //You can access any notification field by $notification->fieldName
+
+$notificationArray = $notification->getNotificationAssociative();
+var_dump($notificationArray);
+//The above method will get the notification as an associative array and print its contents.
+//You can access notification field value by $notificationArray['fieldName']

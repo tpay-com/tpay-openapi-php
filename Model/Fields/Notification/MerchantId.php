@@ -3,12 +3,10 @@ namespace tpaySDK\Model\Fields\Notification;
 
 use tpaySDK\Model\Fields\Field;
 
-class TestMode extends Field
+class MerchantId extends Field
 {
-    protected $name = 'test_mode';
+    protected $name = 'id';
 
     protected $type = self::INT;
-
-    protected $enum = [0, 1];
 
 }

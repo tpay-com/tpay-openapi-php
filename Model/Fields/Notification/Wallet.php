@@ -5,7 +5,7 @@ use tpaySDK\Model\Fields\Field;
 
 class Wallet extends Field
 {
-    protected $name = __CLASS__;
+    protected $name = 'wallet';
 
     protected $type = self::STRING;
 

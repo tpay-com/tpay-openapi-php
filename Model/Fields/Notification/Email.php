@@ -3,14 +3,10 @@ namespace tpaySDK\Model\Fields\Notification;
 
 use tpaySDK\Model\Fields\Field;
 
-class Md5sum extends Field
+class Email extends Field
 {
-    protected $name = 'md5sum';
+    protected $name = 'tr_email';
 
     protected $type = self::STRING;
-
-    protected $minLength = 32;
-
-    protected $maxLength = 32;
 
 }
