@@ -31,7 +31,7 @@ class RecurrentPayment extends ExamplesConfig
             'pay' => [
                 'groupId' => 103,
                 'cardPaymentData' => [
-                    'cardToken' => $clientToken,
+                    'token' => $clientToken,
                 ],
             ],
         ];
