@@ -6,9 +6,11 @@ use tpaySDK\Model\Objects\RequestBody\Account;
 
 class AccountsApi extends ApiAction
 {
-    public function getAccounts()
+    public function getAccounts($queryFields = [])
     {
-        return $this->run(static::GET, '/accounts');
+        $requestUrl = $this->addQueryFields('/accounts', $queryFields);
+
+        return $this->run(static::GET, $requestUrl);
     }
 
     public function getAccountById($accountId)

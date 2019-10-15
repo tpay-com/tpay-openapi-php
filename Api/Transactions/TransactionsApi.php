@@ -8,9 +8,11 @@ use tpaySDK\Model\Objects\RequestBody\Transaction;
 
 class TransactionsApi extends ApiAction
 {
-    public function getTransactions()
+    public function getTransactions($queryFields = [])
     {
-        return $this->run(static::GET, '/transactions');
+        $requestUrl = $this->addQueryFields('/transactions', $queryFields);
+
+        return $this->run(static::GET, $requestUrl);
     }
 
     public function getTransactionById($transactionId)
@@ -18,16 +20,18 @@ class TransactionsApi extends ApiAction
         return $this->run(static::GET, sprintf('/transactions/%s', $transactionId));
     }
 
-    public function getRefundsByTransactionId($transactionId)
+    public function getRefundsByTransactionId($transactionId, $queryFields = [])
     {
-        return $this->run(static::GET, sprintf('/transactions/%s/refunds', $transactionId));
+        $requestUrl = $this->addQueryFields(sprintf('/transactions/%s/refunds', $transactionId), $queryFields);
+
+        return $this->run(static::GET, $requestUrl);
     }
 
     public function getBankGroups($onlineOnly = false)
     {
         $requestUrl = '/transactions/bank-groups';
         if ($onlineOnly === true) {
-            $requestUrl = sprintf('%s?onlyOnline=true', $requestUrl);
+            $requestUrl = $this->addQueryFields($requestUrl, ['onlyOnline' => json_encode($onlineOnly)]);
         }
 
         return $this->run(static::GET, $requestUrl);

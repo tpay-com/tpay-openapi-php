@@ -43,7 +43,7 @@ class ApiAction
 
     public function run($requestMethod, $apiMethod, $fields = [], $requestBody = null, $headers = [])
     {
-        if (!empty($fields)) {
+        if (is_array($fields) && count($fields) > 0) {
             $this->Manager
                 ->setRequestBody($requestBody)
                 ->setFields($fields);
@@ -107,6 +107,15 @@ class ApiAction
         $this->checkResponse();
 
         return $this;
+    }
+
+    protected function addQueryFields($requestUrl, $queryFields)
+    {
+        if (is_array($queryFields) && count($queryFields) > 0) {
+            $requestUrl .= '?'.http_build_query($queryFields);
+        }
+
+        return $requestUrl;
     }
 
     private function checkResponse()
