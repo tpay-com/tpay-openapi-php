@@ -9,7 +9,7 @@ class Name extends Field
 
     protected $type = self::STRING;
 
-    protected $minLength = 3;
+    protected $minLength = 1;
 
     protected $maxLength = 255;
 

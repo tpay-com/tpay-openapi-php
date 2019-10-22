@@ -3,7 +3,7 @@ namespace tpaySDK\Model\Objects\Accounts;
 
 use tpaySDK\Model\Fields\Address\Description;
 use tpaySDK\Model\Fields\Address\FriendlyName;
-use tpaySDK\Model\Fields\Address\Name;
+use tpaySDK\Model\Fields\PointOfSale\Name;
 use tpaySDK\Model\Fields\PointOfSale\Url;
 use tpaySDK\Model\Identifiers\AccountId;
 use tpaySDK\Model\Identifiers\PosId;

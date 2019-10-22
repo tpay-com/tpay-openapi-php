@@ -9,6 +9,6 @@ class HouseNumber extends Field
 
     protected $type = self::STRING;
 
-    protected $maxLength = 5;
+    protected $maxLength = 10;
 
 }

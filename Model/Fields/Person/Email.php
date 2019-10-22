@@ -9,4 +9,6 @@ class Email extends Field
 
     protected $name = __CLASS__;
 
+    protected $maxLength = 255;
+
 }

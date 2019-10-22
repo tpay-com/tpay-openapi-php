@@ -9,4 +9,6 @@ class HiddenDescription extends Field
 
     protected $type = self::STRING;
 
+    protected $maxLength = 128;
+
 }

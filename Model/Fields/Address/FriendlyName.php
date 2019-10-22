@@ -9,4 +9,6 @@ class FriendlyName extends Field
 
     protected $type = self::STRING;
 
+    protected $maxLength = 255;
+
 }

@@ -9,8 +9,8 @@ class City extends Field
 
     protected $type = self::STRING;
 
-    protected $maxLength = 255;
+    protected $maxLength = 64;
 
-    protected $minLength = 2;
+    protected $minLength = 1;
 
 }

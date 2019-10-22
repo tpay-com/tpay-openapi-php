@@ -9,6 +9,8 @@ class OfferCode extends Field
 
     protected $type = self::STRING;
 
-    protected $maxLength = 50;
+    protected $maxLength = 5;
+
+    protected $minLength = 5;
 
 }

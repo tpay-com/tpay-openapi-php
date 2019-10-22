@@ -13,13 +13,11 @@ use tpaySDK\Model\Fields\Address\Phone;
 use tpaySDK\Model\Fields\Address\PostalCode;
 use tpaySDK\Model\Fields\Address\RoomNumber;
 use tpaySDK\Model\Fields\Address\Street;
-use tpaySDK\Model\Identifiers\AddressId;
 use tpaySDK\Model\Objects\Objects;
 
 class Address extends Objects
 {
     const OBJECT_FIELDS = [
-        'addressId' => AddressId::class,
         'city' => City::class,
         'country' => Country::class,
         'friendlyName' => FriendlyName::class,
@@ -33,11 +31,6 @@ class Address extends Objects
         'roomNumber' => RoomNumber::class,
         'street' => Street::class,
     ];
-
-    /**
-     * @var AddressId
-     */
-    public $addressId;
 
     /**
      * @var City

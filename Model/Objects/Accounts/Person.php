@@ -1,7 +1,7 @@
 <?php
 namespace tpaySDK\Model\Objects\Accounts;
 
-use tpaySDK\Model\Fields\Address\Name;
+use tpaySDK\Model\Fields\Person\Name;
 use tpaySDK\Model\Fields\Beneficiary\Nationality;
 use tpaySDK\Model\Fields\Person\CountryOfBirth;
 use tpaySDK\Model\Fields\Person\DateOfBirth;

@@ -9,4 +9,6 @@ class Description extends Field
 
     protected $type = self::STRING;
 
+    protected $maxLength = 128;
+
 }

@@ -7,7 +7,7 @@ class Contact extends Field
 {
     protected $type = self::STRING;
 
-    protected $maxLength = 50;
+    protected $maxLength = 255;
 
     protected $name = __CLASS__;
 

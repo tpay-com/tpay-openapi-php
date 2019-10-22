@@ -9,7 +9,7 @@ class Url extends Field
 
     protected $type = self::STRING;
 
-    protected $maxLength = 120;
+    protected $maxLength = 255;
 
     protected $pattern = 'https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&\/=]*)';
 
