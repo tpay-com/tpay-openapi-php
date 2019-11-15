@@ -22,6 +22,7 @@ function CardPayment(url, pubkey) {
         encrypted = encrypt.encrypt(cd);
         $("#carddata").val(encrypted);
         $("#card_vendor").val($.payment.cardType(cardNumber));
+        $("#card_short_code").val(cardNumber.substr(-4));
         numberInput.val('');
         expiryInput.val('');
         cvcInput.val('');

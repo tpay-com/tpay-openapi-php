@@ -13,12 +13,6 @@ require_once '../../Loader.php';
 
 class CardGate extends ExamplesConfig
 {
-    const SUPPORTED_CARD_VENDORS = [
-        'visa',
-        'mastercard',
-        'maestro',
-    ];
-
     private $TpayApi;
 
     public function __construct()
@@ -40,8 +34,8 @@ class CardGate extends ExamplesConfig
 
     private function processNewCardPayment()
     {
-        if (isset($_POST['card_vendor']) && in_array($_POST['card_vendor'], static::SUPPORTED_CARD_VENDORS)) {
-            $this->saveUserCardVendor($_POST['card_vendor']);
+        if (isset($_POST['card_vendor'], $_POST['card_short_code'])) {
+            $this->saveUserCardDetails($_POST['card_vendor'], $_POST['card_short_code']);
         }
         $transaction = $this->getNewCardTransaction();
         if (!isset($transaction['transactionId'])) {
@@ -125,9 +119,9 @@ class CardGate extends ExamplesConfig
         return $this->TpayApi->Transactions->createTransaction($request);
     }
 
-    private function saveUserCardVendor($cardVendor)
+    private function saveUserCardDetails($cardVendor, $cardShortCode)
     {
-        //Code saving the user card vendor name for later use
+        //Code saving the user card vendor name and short code for later use
     }
 
 }
