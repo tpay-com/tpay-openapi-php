@@ -5,6 +5,7 @@ use tpaySDK\Model\Fields\Notification\CardToken;
 use tpaySDK\Model\Fields\Notification\Crc;
 use tpaySDK\Model\Fields\Notification\Description;
 use tpaySDK\Model\Fields\Notification\Error;
+use tpaySDK\Model\Fields\Notification\Masterpass;
 use tpaySDK\Model\Fields\Notification\Md5sum;
 use tpaySDK\Model\Fields\Notification\MerchantId;
 use tpaySDK\Model\Fields\Notification\Paid;
@@ -34,6 +35,7 @@ class BasicPayment extends Objects
         'md5sum' => Md5sum::class,
         'test_mode' => TestMode::class,
         'wallet' => Wallet::class,
+        'masterpass' => Masterpass::class,
         'tr_channel' => TransactionChannel::class,
         'card_token' => CardToken::class,
     ];
@@ -102,6 +104,11 @@ class BasicPayment extends Objects
      * @var Wallet
      */
     public $wallet;
+
+    /**
+     * @var Masterpass
+     */
+    public $masterpass;
 
     /**
      * @var TransactionChannel
