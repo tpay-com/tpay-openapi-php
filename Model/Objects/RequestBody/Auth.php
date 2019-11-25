@@ -3,14 +3,11 @@ namespace tpaySDK\Model\Objects\RequestBody;
 
 use tpaySDK\Model\Fields\ApiCredentials\ClientSecret;
 use tpaySDK\Model\Fields\ApiCredentials\Scope;
-use tpaySDK\Model\Objects\ObjectHelper;
 use tpaySDK\Model\Identifiers\ClientId;
 use tpaySDK\Model\Objects\Objects;
 
 class Auth extends Objects
 {
-    use ObjectHelper;
-
     const OBJECT_FIELDS = [
         'client_id' => ClientId::class,
         'client_secret' => ClientSecret::class,

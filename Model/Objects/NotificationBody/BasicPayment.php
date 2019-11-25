@@ -16,13 +16,10 @@ use tpaySDK\Model\Fields\Notification\TransactionId;
 use tpaySDK\Model\Fields\Notification\TransactionStatus;
 use tpaySDK\Model\Fields\Notification\Wallet;
 use tpaySDK\Model\Fields\Notification\Email;
-use tpaySDK\Model\Objects\ObjectHelper;
 use tpaySDK\Model\Objects\Objects;
 
 class BasicPayment extends Objects
 {
-    use ObjectHelper;
-
     const OBJECT_FIELDS = [
         'id' => MerchantId::class,
         'tr_id' => TransactionId::class,

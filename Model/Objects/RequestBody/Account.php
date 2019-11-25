@@ -7,7 +7,6 @@ use tpaySDK\Model\Fields\Account\NotifyByEmail;
 use tpaySDK\Model\Fields\Account\OfferCode;
 use tpaySDK\Model\Fields\Account\Regon;
 use tpaySDK\Model\Fields\Account\TaxId;
-use tpaySDK\Model\Objects\ObjectHelper;
 use tpaySDK\Model\Fields\Person\Email;
 use tpaySDK\Model\Identifiers\CategoryId;
 use tpaySDK\Model\Objects\Accounts\Address;
@@ -17,8 +16,6 @@ use tpaySDK\Model\Objects\Accounts\PointOfSale;
 
 class Account extends Objects
 {
-    use ObjectHelper;
-
     const OBJECT_FIELDS = [
         'offerCode' => OfferCode::class,
         'email' => Email::class,

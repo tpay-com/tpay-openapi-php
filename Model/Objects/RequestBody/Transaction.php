@@ -5,7 +5,6 @@ use tpaySDK\Model\Fields\Transaction\Amount;
 use tpaySDK\Model\Fields\Transaction\Description;
 use tpaySDK\Model\Fields\Transaction\HiddenDescription;
 use tpaySDK\Model\Fields\Transaction\Lang;
-use tpaySDK\Model\Objects\ObjectHelper;
 use tpaySDK\Model\Objects\Objects;
 use tpaySDK\Model\Objects\Transactions\Callbacks;
 use tpaySDK\Model\Objects\Transactions\Payer;
@@ -13,8 +12,6 @@ use tpaySDK\Model\Objects\Transactions\Verification;
 
 class Transaction extends Objects
 {
-    use ObjectHelper;
-
     const OBJECT_FIELDS = [
         'amount' => Amount::class,
         'description' => Description::class,

@@ -7,13 +7,10 @@ use tpaySDK\Model\Fields\Token\ExpiresIn;
 use tpaySDK\Model\Fields\Token\IssuedAt;
 use tpaySDK\Model\Fields\Token\TokenType;
 use tpaySDK\Model\Identifiers\ClientId;
-use tpaySDK\Model\Objects\ObjectHelper;
 use tpaySDK\Model\Objects\Objects;
 
 class Token extends Objects
 {
-    use ObjectHelper;
-
     const OBJECT_FIELDS = [
         'issued_at' => IssuedAt::class,
         'scope' => Scope::class,

@@ -2,13 +2,10 @@
 namespace tpaySDK\Model\Objects\RequestBody;
 
 use tpaySDK\Model\Fields\ApiCredentials\GrantType;
-use tpaySDK\Model\Objects\ObjectHelper;
 use tpaySDK\Model\Objects\Objects;
 
 class BasicAuth extends Objects
 {
-    use ObjectHelper;
-
     const OBJECT_FIELDS = [
         'grant_type' => GrantType::class,
     ];

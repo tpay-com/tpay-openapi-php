@@ -47,7 +47,7 @@ class Notification
         }
         $this->Manager
             ->setRequestBody($requestBody)
-            ->setFields($_POST);
+            ->setFields($_POST, false);
         $notification = $this->Manager->getRequestBody();
         if (is_string($response) && strlen($response) > 0) {
             echo $response;
