@@ -143,6 +143,7 @@ class AccountsApiExample extends ExamplesConfig
             'website' => [$pos],
             'address' => [$address1],
             'person' => [$person],
+            'notifyByEmail' => true,
         ];
     }
 
