@@ -1,6 +1,7 @@
 <?php
 namespace tpaySDK\Model\Objects\RequestBody;
 
+use tpaySDK\Model\Fields\Pay\ApplePayPaymentData;
 use tpaySDK\Model\Fields\Pay\Method;
 use tpaySDK\Model\Identifiers\GroupId;
 use tpaySDK\Model\Objects\Objects;
@@ -16,6 +17,7 @@ class Pay extends Objects
         'blikPaymentData' => BlikPaymentData::class,
         'cardPaymentData' => CardPaymentData::class,
         'recursive' => Recursive::class,
+        'applePayPaymentData' => ApplePayPaymentData::class
     ];
 
     /**
@@ -42,6 +44,11 @@ class Pay extends Objects
      * @var Recursive
      */
     public $recursive;
+
+    /**
+     * @var ApplePayPaymentData
+     */
+    public $applePayPaymentData;
 
     public function getRequiredFields()
     {
