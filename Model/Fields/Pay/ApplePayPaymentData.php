@@ -1,6 +1,6 @@
 <?php
 
-namespace tpaySDK\Model\Objects\Transactions;
+namespace tpaySDK\Model\Fields\Pay;
 
 use tpaySDK\Model\Fields\Field;
 
