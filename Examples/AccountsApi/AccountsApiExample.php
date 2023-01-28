@@ -144,6 +144,7 @@ class AccountsApiExample extends ExamplesConfig
             'address' => [$address1],
             'person' => [$person],
             'notifyByEmail' => true,
+            'merchantApiConsent' => true,
         ];
     }
 

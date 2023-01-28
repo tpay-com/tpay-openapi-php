@@ -3,6 +3,7 @@ namespace tpaySDK\Model\Objects\RequestBody;
 
 use tpaySDK\Model\Fields\Account\Krs;
 use tpaySDK\Model\Fields\Account\LegalForm;
+use tpaySDK\Model\Fields\Account\MerchantApiConsent;
 use tpaySDK\Model\Fields\Account\NotifyByEmail;
 use tpaySDK\Model\Fields\Account\OfferCode;
 use tpaySDK\Model\Fields\Account\Regon;
@@ -28,6 +29,7 @@ class Account extends Objects
         'website' => [PointOfSale::class],
         'address' => [Address::class],
         'person' => [Person::class],
+        'merchantApiConsent' => MerchantApiConsent::class,
     ];
 
     /**
@@ -85,6 +87,11 @@ class Account extends Objects
      */
     public $person;
 
+    /**
+     * @var MerchantApiConsent
+     */
+    public $merchantApiConsent;
+
     public function getRequiredFields()
     {
         return [
@@ -95,6 +102,7 @@ class Account extends Objects
             $this->categoryId,
             $this->website,
             $this->address,
+            $this->merchantApiConsent
         ];
     }
 
