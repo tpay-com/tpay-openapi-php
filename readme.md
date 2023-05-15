@@ -114,7 +114,7 @@ $PaymentForms = new PaymentForms('pl');
 //After this line all static messages (input labels, buttons titles) will be displayed in Polish
 
 //If you want to access translations manually, use:
-$Lang = new Lang;
+$Lang = new Lang();
 $Lang->setLang('pl'); //for setting language
 $Lang->lang('pay'); //to echo translated key
 ```

@@ -74,14 +74,14 @@ class TpayApi
 
     private function authorize($clientId, $clientSecret, $scope = null)
     {
-        $AuthApi = new AuthorizationApi(new Token, $this->productionMode);
+        $AuthApi = new AuthorizationApi(new Token(), $this->productionMode);
         $fields = [
             'client_id' => $clientId,
             'client_secret' => $clientSecret,
             'scope' => $scope,
         ];
         $AuthApi->getNewToken($fields);
-        $this->Token = new Token;
+        $this->Token = new Token();
         if ($AuthApi->getHttpResponseCode() === 200) {
             $this->Token = $this->Token->setObjectValues($this->Token, $AuthApi->getRequestResult());
         } else {

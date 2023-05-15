@@ -163,4 +163,4 @@ class TransactionsApiExample extends ExamplesConfig
 
 }
 
-(new TransactionsApiExample)->runAllExamples();
+(new TransactionsApiExample())->runAllExamples();

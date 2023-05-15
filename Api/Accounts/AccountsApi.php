@@ -55,7 +55,7 @@ class AccountsApi extends ApiAction
 
     public function createAccount($fields)
     {
-        return $this->run(static::POST, '/accounts', $fields, new Account);
+        return $this->run(static::POST, '/accounts', $fields, new Account());
     }
 
 }

@@ -39,17 +39,17 @@ class TransactionsApi extends ApiAction
 
     public function createTransaction($fields)
     {
-        return $this->run(static::POST, '/transactions', $fields, new Transaction);
+        return $this->run(static::POST, '/transactions', $fields, new Transaction());
     }
 
     public function createPaymentByTransactionId($fields, $transactionId)
     {
-        return $this->run(static::POST, sprintf('/transactions/%s/pay', $transactionId), $fields, new Pay);
+        return $this->run(static::POST, sprintf('/transactions/%s/pay', $transactionId), $fields, new Pay());
     }
 
     public function createRefundByTransactionId($fields, $transactionId)
     {
-        return $this->run(static::POST, sprintf('/transactions/%s/refunds', $transactionId), $fields, new Refund);
+        return $this->run(static::POST, sprintf('/transactions/%s/refunds', $transactionId), $fields, new Refund());
     }
 
 }

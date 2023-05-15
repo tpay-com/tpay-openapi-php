@@ -37,8 +37,8 @@ class ApiAction
     {
         $this->productionMode = $productionMode;
         $this->Token = $Token;
-        $this->Curl = new Curl;
-        $this->Manager = new Manager;
+        $this->Curl = new Curl();
+        $this->Manager = new Manager();
     }
 
     public function run($requestMethod, $apiMethod, $fields = [], $requestBody = null, $headers = [])

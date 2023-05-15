@@ -11,7 +11,7 @@ class Manager
 
     public function __construct()
     {
-        $this->ObjectsValidator = new ObjectsValidator;
+        $this->ObjectsValidator = new ObjectsValidator();
     }
 
     public function setFields($fields, $strictCheck = true)

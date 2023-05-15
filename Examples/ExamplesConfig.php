@@ -28,7 +28,7 @@ class ExamplesConfig
 
     private function loadLibrary()
     {
-        $Loader = new Loader;
+        $Loader = new Loader();
         $Loader->loadDependencies();
     }
 
