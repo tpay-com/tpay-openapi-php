@@ -5,6 +5,7 @@ use tpaySDK\Api\ApiAction;
 use tpaySDK\Model\Objects\RequestBody\Pay;
 use tpaySDK\Model\Objects\RequestBody\Refund;
 use tpaySDK\Model\Objects\RequestBody\Transaction;
+use tpaySDK\Model\Objects\RequestBody\TransactionWithInstantRedirection;
 
 class TransactionsApi extends ApiAction
 {
@@ -37,9 +38,19 @@ class TransactionsApi extends ApiAction
         return $this->run(static::GET, $requestUrl);
     }
 
+    public function getChannels()
+    {
+        return $this->run(static::GET, '/transactions/channels');
+    }
+
     public function createTransaction($fields)
     {
         return $this->run(static::POST, '/transactions', $fields, new Transaction());
+    }
+
+    public function createTransactionWithInstantRedirection($fields)
+    {
+        return $this->run(static::POST, '/transactions', $fields, new TransactionWithInstantRedirection());
     }
 
     public function createPaymentByTransactionId($fields, $transactionId)
