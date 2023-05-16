@@ -8,7 +8,7 @@ class AuthorizationApi extends ApiAction
 {
     public function getNewToken($fields)
     {
-        return $this->run(static::POST, '/oauth/auth', $fields, new Auth);
+        return $this->run(static::POST, '/oauth/auth', $fields, new Auth());
     }
 
     public function getTokenInfo()

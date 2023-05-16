@@ -32,7 +32,7 @@ class Field implements FieldTypes
 
     public function __construct()
     {
-        $this->FieldValidator = new FieldValidator;
+        $this->FieldValidator = new FieldValidator();
     }
 
     public function getValue()

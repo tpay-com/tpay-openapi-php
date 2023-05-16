@@ -16,7 +16,7 @@ class PaymentNotificationExample extends ExamplesConfig
      */
     public function checkPayment()
     {
-        $NotificationWebhook = new PaymentNotification;
+        $NotificationWebhook = new PaymentNotification();
 
         return $NotificationWebhook->getNotification('TRUE', static::MERCHANT_CONFIRMATION_CODE);
     }

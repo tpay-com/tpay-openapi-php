@@ -30,15 +30,15 @@ class Objects implements ObjectsInterface
     {
         foreach ($objectFields as $objectVar => $fieldClass) {
             if (is_array($fieldClass)) {
-                $this->{$objectVar}[] = new $fieldClass[0];
+                $this->{$objectVar}[] = new $fieldClass[0]();
                 continue;
             }
-            $this->$objectVar = new $fieldClass;
+            $this->$objectVar = new $fieldClass();
         }
     }
 
     /**
-     * @param string $object object name
+     * @param object $object object name
      * @param array $values array containing object fields with values
      * @return $this
      */

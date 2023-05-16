@@ -22,7 +22,9 @@ class TransactionsApiExample extends ExamplesConfig
         $this
             ->getTransactions()
             ->getBankGroups()
+            ->getChannels()
             ->createBasicTransaction(150)
+            ->createTransactionWithInstantRedirection(4)
             ->createSavedCardTransaction()
             ->createNewCardTransaction()
             ->createBlikTransaction();
@@ -31,6 +33,14 @@ class TransactionsApiExample extends ExamplesConfig
     public function getBankGroups()
     {
         $bankGroups = $this->TpayApi->Transactions->getBankGroups();
+        var_dump($bankGroups);
+
+        return $this;
+    }
+
+    public function getChannels()
+    {
+        $bankGroups = $this->TpayApi->Transactions->getChannels();
         var_dump($bankGroups);
 
         return $this;
@@ -58,6 +68,17 @@ class TransactionsApiExample extends ExamplesConfig
         $transactionParameters = $this->getTransactionParameters();
         $transactionParameters['pay'] = ['groupId' => $bankGroupId];
         $newTransaction = $this->TpayApi->Transactions->createTransaction($transactionParameters);
+        var_dump($newTransaction);
+
+        return $this;
+    }
+
+    //Create transaction with a specified channel id and instant redirection
+    public function createTransactionWithInstantRedirection($channelId)
+    {
+        $transactionParameters = $this->getTransactionParameters();
+        $transactionParameters['pay'] = ['channelId' => $channelId];
+        $newTransaction = $this->TpayApi->Transactions->createTransactionWithInstantRedirection($transactionParameters);
         var_dump($newTransaction);
 
         return $this;
@@ -163,4 +184,4 @@ class TransactionsApiExample extends ExamplesConfig
 
 }
 
-(new TransactionsApiExample)->runAllExamples();
+(new TransactionsApiExample())->runAllExamples();

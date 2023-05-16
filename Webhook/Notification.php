@@ -22,7 +22,7 @@ class Notification
 
     public function __construct()
     {
-        $this->Manager = new Manager;
+        $this->Manager = new Manager();
     }
 
     /**

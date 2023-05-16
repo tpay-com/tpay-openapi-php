@@ -42,7 +42,7 @@ class PaymentNotification extends Notification
     protected function getRequestBody()
     {
         if (isset($_POST['tr_id'])) {
-            return new BasicPayment;
+            return new BasicPayment();
         }
         throw new TpayException('Not recognised or invalid notification type. POST: '.json_encode($_POST));
     }
