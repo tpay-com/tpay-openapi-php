@@ -115,7 +115,6 @@ class JWSVerifiedPaymentNotification extends Notification
     private function getResourcePrefix()
     {
         if ($this->productionMode) {
-
             return self::PRODUCTION_PREFIX;
         }
 
