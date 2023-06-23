@@ -12,7 +12,7 @@ class ApiAction
 {
     const TPAY_API_URL_PRODUCTION = 'https://api.tpay.com';
 
-    const TPAY_API_URL_SANDBOX = 'https://api.tpay.com/test';
+    const TPAY_API_URL_SANDBOX = 'https://openapi.sandbox.tpay.com';
 
     const GET = 'GET';
 

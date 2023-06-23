@@ -4,3 +4,4 @@ sonar-project.properties
 Logs/*
 !Logs/.gitkeep
 .scannerwork
+vendor/
