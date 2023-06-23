@@ -13,6 +13,7 @@ class JWSVerifiedPaymentNotification extends Notification
 {
     const PRODUCTION_PREFIX = 'https://secure.tpay.com';
     const SANDBOX_PREFIX = 'https://secure.sandbox.tpay.com';
+
     private $productionMode;
     private $merchantSecret;
 
@@ -52,12 +53,14 @@ class JWSVerifiedPaymentNotification extends Notification
 
     private function checkMd5($notification)
     {
-        $this->checkMd5Validity($notification->id->getValue(),
+        $this->checkMd5Validity(
+            $notification->id->getValue(),
             $notification->tr_id->getValue(),
             Util::numberFormat($notification->tr_amount->getValue()),
             $notification->tr_crc->getValue(),
             $this->merchantSecret,
-            $notification->md5sum->getValue());
+            $notification->md5sum->getValue()
+        );
     }
 
     protected function checkJwsSignature()
@@ -112,8 +115,10 @@ class JWSVerifiedPaymentNotification extends Notification
     private function getResourcePrefix()
     {
         if ($this->productionMode) {
+
             return self::PRODUCTION_PREFIX;
         }
+
         return self::SANDBOX_PREFIX;
     }
 
@@ -131,6 +136,7 @@ class JWSVerifiedPaymentNotification extends Notification
         $this->Manager
             ->setRequestBody($requestBody)
             ->setFields($_POST, false);
+
         return $this->Manager->getRequestBody();
     }
 }

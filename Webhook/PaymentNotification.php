@@ -15,9 +15,7 @@ class PaymentNotification extends Notification
 {
     public $requestBody;
     protected $secureIP = NotificationsIP::SECURE_IPS;
-
     protected $validateServerIP = true;
-
     protected $validateForwardedIP = false;
 
     /**
