@@ -4,24 +4,26 @@
 namespace tpaySDK\Utilities\phpseclib\File;
 
 if (class_exists('phpseclib3\File\X509')) {
-
-    class X509 extends \phpseclib3\File\X509
-    {
-        public function withSettings($publicKey, $hash, $signature)
+    if (!class_exists('tpaySDK\Utilities\phpseclib\File\X509')) {
+        class X509 extends \phpseclib3\File\X509
         {
-            return $publicKey->withHash($hash)->withPadding($signature);
+            public function withSettings($publicKey, $hash, $signature)
+            {
+                return $publicKey->withHash($hash)->withPadding($signature);
+            }
         }
     }
-
 } elseif (class_exists('phpseclib\File\X509')) {
-    class X509 extends \phpseclib\File\X509
-    {
-        public function withSettings($publicKey, $hash, $signature)
+    if (!class_exists('tpaySDK\Utilities\phpseclib\File\X509')) {
+        class X509 extends \phpseclib\File\X509
         {
-            $publicKey->setHash($hash);
-            $publicKey->setSignatureMode($signature);
+            public function withSettings($publicKey, $hash, $signature)
+            {
+                $publicKey->setHash($hash);
+                $publicKey->setSignatureMode($signature);
 
-            return $publicKey;
+                return $publicKey;
+            }
         }
     }
 } else {
