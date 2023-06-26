@@ -2,10 +2,9 @@
 
 namespace tpaySDK\Webhook;
 
-use phpseclib3\Crypt\RSA;
-use phpseclib3\File\X509;
 use tpaySDK\Model\Objects\NotificationBody\BasicPayment;
-use tpaySDK\Utilities\Logger;
+use tpaySDK\Utilities\phpseclib\Crypt\RSA;
+use tpaySDK\Utilities\phpseclib\File\X509;
 use tpaySDK\Utilities\TpayException;
 use tpaySDK\Utilities\Util;
 
@@ -103,10 +102,8 @@ class JWSVerifiedPaymentNotification extends Notification
         $body = file_get_contents('php://input');
         $payload = str_replace('=', '', strtr(base64_encode($body), '+/', '-_'));
         $decodedSignature = base64_decode(strtr($signature, '-_', '+/'));
-
-        $publicKey = $x509->getPublicKey()
-            ->withHash('sha256')
-            ->withPadding(RSA::SIGNATURE_PKCS1);
+        $publicKey = $x509->getPublicKey();
+        $publicKey = $x509->withSettings($publicKey, 'sha256', RSA::SIGNATURE_PKCS1);
         if (!$publicKey->verify($headers . '.' . $payload, $decodedSignature)) {
             throw new TpayException('FALSE - Invalid JWS signature');
         }
