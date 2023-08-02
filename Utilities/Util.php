@@ -85,7 +85,7 @@ class Util
 
     public static function setLanguage($language)
     {
-        (new Lang)::setLang($language);
+        Lang::setLang($language);
     }
 
 }
