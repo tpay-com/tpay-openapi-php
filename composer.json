@@ -1,7 +1,7 @@
 {
   "name": "tpay-com/tpay-openapi-php",
   "type": "library",
-  "license": "LGPL-3.0",
+  "license": "MIT",
   "description": "Tpay OpenAPI library",
   "extra": [
     {
