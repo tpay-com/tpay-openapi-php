@@ -1,38 +1,39 @@
 {
-  "name": "tpay-com/tpay-openapi-php",
-  "type": "library",
-  "license": "MIT",
-  "description": "Tpay OpenAPI library",
-  "extra": [
-    {
-      "engine": "PHP SDK"
-    }
-  ],
-  "minimum-stability": "dev",
-  "authors": [
-    {
-      "name": "Tpay",
-      "homepage": "https://tpay.com"
-    }
-  ],
-  "require": {
-    "php": ">=5.6.0",
-    "ext-curl": "*",
-    "ext-json": "*",
-    "phpseclib/phpseclib": "^2|^3"
-  },
-  "require-dev": {
-    "php-parallel-lint/php-parallel-lint": "^1.3.2"
-  },
-  "support": {
-    "issues": "https://github.com/tpay-com/tpay-openapi-php/issues",
-    "email": "support@tpay.com",
-    "docs": "https://openapi.tpay.com"
-  },
-  "autoload": {
-    "psr-4": {
-      "tpaySDK\\": ""
+    "name": "tpay-com/tpay-openapi-php",
+    "description": "Tpay OpenAPI library",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Tpay",
+            "homepage": "https://tpay.com"
+        }
+    ],
+    "support": {
+        "email": "support@tpay.com",
+        "issues": "https://github.com/tpay-com/tpay-openapi-php/issues",
+        "docs": "https://openapi.tpay.com"
     },
-    "exclude-from-classmap": ["**/Examples/"]
-  }
+    "require": {
+        "php": ">=5.6.0",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "phpseclib/phpseclib": "^2 || ^3"
+    },
+    "require-dev": {
+        "php-parallel-lint/php-parallel-lint": "^1.3.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "tpaySDK\\": ""
+        },
+        "exclude-from-classmap": [
+            "**/Examples/"
+        ]
+    },
+    "extra": [
+        {
+            "engine": "PHP SDK"
+        }
+    ]
 }
