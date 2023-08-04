@@ -1,7 +1,2 @@
-.idea
-.sonar
-sonar-project.properties
-Logs/*
-!Logs/.gitkeep
-.scannerwork
-vendor/
+/vendor/
+/composer.lock
