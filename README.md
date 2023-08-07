@@ -7,6 +7,8 @@ Library for all methods available via OpenAPI [Tpay](https://tpay.com).
 [![License](https://img.shields.io/github/license/tpay-com/tpay-openapi-php.svg)](LICENSE)
 [![CI status](https://github.com/tpay-com/tpay-openapi-php/actions/workflows/ci.yaml/badge.svg?branch=master)](https://github.com/tpay-com/tpay-openapi-php/actions)
 
+[Polish version :poland: wersja polska](./README_PL.md)
+
 ## Installation
 
 Install via [Composer](https://getcomposer.org):
@@ -40,7 +42,7 @@ $TpayApi = new TpayApi($clientId, $clientSecret, true, 'read');
 $transactions = $this->TpayApi->Transactions->getTransactions();
 ```
 
-All currently available API methods have an example usage in [examples](Examples) directory.
+All currently available API methods have an example usage in [`Examples`](Examples) directory.
 
 ### Example credentials
 
@@ -64,23 +66,19 @@ All currently available API methods have an example usage in [examples](Examples
 
 ##### Frontend forms and payment handlers:
 
-   [Payment method choice form](Examples/TransactionsApi/BankSelectionForm.php), [BLIK method form](Examples/TransactionsApi/BlikPayment.php), [simple credit card form](Examples/TransactionsApi/CardGate.php), [extended credit card form](Examples/TransactionsApi/CardGateExtended.php), [recurrent payment example](Examples/TransactionsApi/RecurrentPayment.php).
-
-##### Frontend forms and payment handlers:
-
-   [Payment notification webhook](Examples/Notifications/PaymentNotificationExample.php).
+[Payment method choice form](Examples/TransactionsApi/BankSelectionForm.php), [BLIK method form](Examples/TransactionsApi/BlikPayment.php), [simple credit card form](Examples/TransactionsApi/CardGate.php), [extended credit card form](Examples/TransactionsApi/CardGateExtended.php), [recurrent payment example](Examples/TransactionsApi/RecurrentPayment.php), [payment notification webhook](Examples/Notifications/PaymentNotificationExample.php).
 
 ##### Merchant accounts registration (for partners only)
 
-   [Example of usages](Examples/AccountsApi/AccountsApiExample.php).
+[Example of usages](Examples/AccountsApi/AccountsApiExample.php).
 
 ## Logs
+
 Library has own logging system to save all API calls, responses, webhook notifications, and exceptions.
-Make sure that Logs directory is writable and add rule to Apache .htaccess or NGINX to deny access to this area from browser.
+Make sure that `Logs` directory is writable and add rule to Apache `.htaccess` or NGINX to deny access to this area from browser.
 The log files are created for each day separately.
 
 The logging is enabled by default, but you can disable this feature by command:
-
 ```php
 Logger::$loggingEnabled = false;
 ```
@@ -95,7 +93,6 @@ The logs file names will be assigned automatically.
 ## Custom templates and static files path
 
 You can set your own templates path, so you can copy and modify the `phtml` template files from this library.
-
 ```php
 Util::$customTemplateDirectory = '/my/own/templates/path/';
 ```
@@ -109,7 +106,6 @@ Util::$libraryPath = '/my/own/path/';
 
 The library supports two languages (English and Polish). Default language is English.
 Change language example:
-
 ```php
 // Any time you construct the class providing payment forms, you can pass the language in constructor
 $paymentForms = new PaymentForms('pl');
@@ -120,3 +116,7 @@ $lang = new Lang();
 $lang->setLang('pl'); // for setting language
 $lang->lang('pay'); // to echo translated key
 ```
+
+## License
+
+This library is released under the [MIT License](http://www.opensource.org/licenses/MIT).
