@@ -63,7 +63,6 @@ class CardGateExtended extends ExamplesConfig
             //Invalid credit card data
             header('Location: '.$transaction['transactionPaymentUrl']);
         }
-
     }
 
     private function saveUserCardDetails($cardVendor, $cardShortCode)
@@ -157,7 +156,6 @@ class CardGateExtended extends ExamplesConfig
             return header('Location: '.$transaction['transactionPaymentUrl']);
         }
         return $this->payBySavedCard($cardToken, $transaction);
-
     }
 
     private function payBySavedCard($cardToken, $transaction)
@@ -174,7 +172,6 @@ class CardGateExtended extends ExamplesConfig
             return $this->setOrderAsComplete($result);
         }
         return header('Location: '.$transaction['transactionPaymentUrl']);
-
     }
 
     private function setOrderAsComplete($params)

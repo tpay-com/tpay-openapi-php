@@ -56,7 +56,6 @@ class ApiAction
         }
 
         return $this->Curl->getResult();
-
     }
 
     public function getHttpResponseMessage()

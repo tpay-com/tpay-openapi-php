@@ -58,7 +58,6 @@ class CardGate extends ExamplesConfig
             //Invalid credit card data
             header('Location: '.$transaction['transactionPaymentUrl']);
         }
-
     }
 
     private function makeCardPayment($transaction)
