@@ -36,7 +36,7 @@ Klucze dostępu możesz wygenerować w [panelu sprzedawcy Tpay](https://panel.tp
 
 Plik [`loader.php`](Loader.php) obsługuje ładowanie wszystkich wymaganych klas, więc możesz dołączyć ten plik do dowolnego pliku, który edytujesz.
 
-Wszystkie metody opisane w [dokumentacji Tpay OpenAPI](https://openapi.tpay.com) można łatwo wykonać, uruchamiając jedną z metod z tej biblioteki, takich jak:
+Wszystkie metody opisane w [dokumentacji Tpay OpenAPI](https://openapi.tpay.com) można łatwo wykonać, uruchamiając jedną z metod z tej biblioteki, takie jak:
 ```php
 $TpayApi = new TpayApi($clientId, $clientSecret, true, 'read');
 $transactions = $this->TpayApi->Transactions->getTransactions();
@@ -66,7 +66,7 @@ Wszystkie obecnie dostępne metody API mają przykładowe użycie w katalogu [`E
 
 ##### Formularze frontendowe i moduły obsługi płatności:
 
-[Formularz wyboru metody płatności](Examples/TransactionsApi/BankSelectionForm.php), [Formularz metody BLIK](Examples/TransactionsApi/BlikPayment.php), [prosty formularz karty kredytowej](Examples/TransactionsApi/CardGate.php), [rozszerzony kredyt formularz karty](Examples/TransactionsApi/CardGateExtended.php), [przykład płatności cyklicznej](Examples/TransactionsApi/RecurrentPayment.php), [webhook z powiadomieniem o płatności](Examples/Notifications/PaymentNotificationExample.php).
+[Formularz wyboru metody płatności](Examples/TransactionsApi/BankSelectionForm.php), [Formularz metody BLIK](Examples/TransactionsApi/BlikPayment.php), [Prosty formularz karty kredytowej](Examples/TransactionsApi/CardGate.php), [Rozszerzony formularz karty kredytowej](Examples/TransactionsApi/CardGateExtended.php), [Przykład płatności cyklicznej](Examples/TransactionsApi/RecurrentPayment.php), [Webhook z powiadomieniem o płatności](Examples/Notifications/PaymentNotificationExample.php).
 
 ##### Rejestracja kont handlowców (tylko dla partnerów)
 
@@ -90,7 +90,7 @@ Logger::$customLogPatch = '/my/own/path/Logs/';
 
 Nazwy plików dzienników zostaną przypisane automatycznie.
 
-## Niestandardowa Ścieżka szablonów
+## Niestandardowa ścieżka szablonów
 
 Możesz ustawić własną ścieżkę szablonów, dzięki czemu możesz kopiować i modyfikować pliki szablonów `phtml` z tej biblioteki.
 ```php
