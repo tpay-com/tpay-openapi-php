@@ -1,4 +1,5 @@
 <?php
+
 namespace tpaySDK\Utilities;
 
 use Exception;
@@ -13,5 +14,4 @@ class TpayException extends Exception
 
         return $this->message;
     }
-
 }

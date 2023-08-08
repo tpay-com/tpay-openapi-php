@@ -1,10 +1,11 @@
 <?php
+
 namespace tpaySDK\Model\Objects\Transactions;
 
 use tpaySDK\Model\Fields\CardPaymentData\Card;
-use tpaySDK\Model\Fields\CardPaymentData\Token;
 use tpaySDK\Model\Fields\CardPaymentData\PreauthorizedToken;
 use tpaySDK\Model\Fields\CardPaymentData\Save;
+use tpaySDK\Model\Fields\CardPaymentData\Token;
 use tpaySDK\Model\Objects\Objects;
 
 class CardPaymentData extends Objects
@@ -35,5 +36,4 @@ class CardPaymentData extends Objects
      * @var Save
      */
     public $save;
-
 }

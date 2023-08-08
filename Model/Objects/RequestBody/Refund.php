@@ -1,4 +1,5 @@
 <?php
+
 namespace tpaySDK\Model\Objects\RequestBody;
 
 use tpaySDK\Model\Fields\Transaction\Amount;
@@ -14,5 +15,4 @@ class Refund extends Objects
      * @var Amount
      */
     public $amount;
-
 }

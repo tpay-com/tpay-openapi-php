@@ -1,4 +1,5 @@
 <?php
+
 namespace tpaySDK\Examples\AccountsApi;
 
 use tpaySDK\Api\TpayApi;
@@ -146,7 +147,6 @@ class AccountsApiExample extends ExamplesConfig
             'notifyByEmail' => true,
         ];
     }
-
 }
 
-(new AccountsApiExample)->runAllExamples();
+(new AccountsApiExample())->runAllExamples();

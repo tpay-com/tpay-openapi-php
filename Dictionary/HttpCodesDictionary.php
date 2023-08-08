@@ -1,4 +1,5 @@
 <?php
+
 namespace tpaySDK\Dictionary;
 
 class HttpCodesDictionary

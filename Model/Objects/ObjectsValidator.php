@@ -1,4 +1,5 @@
 <?php
+
 namespace tpaySDK\Model\Objects;
 
 use tpaySDK\Model\Fields\Field;
@@ -8,7 +9,9 @@ class ObjectsValidator
 {
     /**
      * @param Objects $objectClass
+     *
      * @throws UnexpectedValueException
+     *
      * @return bool
      */
     public function isSetRequiredFields($objectClass)
@@ -35,5 +38,4 @@ class ObjectsValidator
 
         return true;
     }
-
 }

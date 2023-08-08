@@ -1,4 +1,5 @@
 <?php
+
 namespace tpaySDK\Model\Objects\RequestBody;
 
 use tpaySDK\Model\Fields\Pay\ApplePayPaymentData;
@@ -17,7 +18,7 @@ class PayWithInstantRedirection extends Objects
         'blikPaymentData' => BlikPaymentData::class,
         'cardPaymentData' => CardPaymentData::class,
         'recursive' => Recursive::class,
-        'applePayPaymentData' => ApplePayPaymentData::class
+        'applePayPaymentData' => ApplePayPaymentData::class,
     ];
 
     /**
@@ -56,5 +57,4 @@ class PayWithInstantRedirection extends Objects
             $this->channelId,
         ];
     }
-
 }

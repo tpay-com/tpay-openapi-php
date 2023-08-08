@@ -1,4 +1,5 @@
 <?php
+
 namespace tpaySDK\Examples\TransactionsApi;
 
 use tpaySDK\Api\TpayApi;
@@ -181,7 +182,6 @@ class TransactionsApiExample extends ExamplesConfig
             ],
         ];
     }
-
 }
 
 (new TransactionsApiExample())->runAllExamples();

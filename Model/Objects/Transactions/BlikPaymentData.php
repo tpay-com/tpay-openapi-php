@@ -1,4 +1,5 @@
 <?php
+
 namespace tpaySDK\Model\Objects\Transactions;
 
 use tpaySDK\Model\Fields\BlikPaymentData\BlikToken;
@@ -27,5 +28,4 @@ class BlikPaymentData extends Objects
      * @var Type
      */
     public $type;
-
 }

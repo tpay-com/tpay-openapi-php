@@ -1,4 +1,5 @@
 <?php
+
 namespace tpaySDK\Model\Objects\Transactions;
 
 use tpaySDK\Model\Fields\PointOfSale\Url;
@@ -20,5 +21,4 @@ class CallbacksPayerUrls extends Objects
      * @var Url
      */
     public $error;
-
 }

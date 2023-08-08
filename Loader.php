@@ -1,4 +1,5 @@
 <?php
+
 namespace tpaySDK;
 
 class Loader
@@ -12,7 +13,7 @@ class Loader
             $baseDir = __DIR__.'/';
             // does the class use the namespace prefix?
             $len = strlen($prefix);
-            if (strncmp($prefix, $class, $len) !== 0) {
+            if (0 !== strncmp($prefix, $class, $len)) {
                 // no, move to the next registered autoloader
                 return;
             }
@@ -28,5 +29,4 @@ class Loader
             }
         });
     }
-
 }

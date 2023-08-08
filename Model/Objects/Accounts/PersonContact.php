@@ -1,4 +1,5 @@
 <?php
+
 namespace tpaySDK\Model\Objects\Accounts;
 
 use tpaySDK\Model\Fields\PersonContact\Contact;
@@ -21,5 +22,4 @@ class PersonContact extends Objects
      * @var Contact
      */
     public $contact;
-
 }

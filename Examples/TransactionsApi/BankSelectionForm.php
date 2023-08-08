@@ -1,4 +1,5 @@
 <?php
+
 namespace tpaySDK\Examples\TransactionsApi;
 
 use tpaySDK\Api\TpayApi;
@@ -28,12 +29,11 @@ class BankSelectionForm extends ExamplesConfig
     {
         $TpayApi = new TpayApi(static::MERCHANT_CLIENT_ID, static::MERCHANT_CLIENT_SECRET, true, 'read');
         $result = $TpayApi->Transactions->getBankGroups($onlineOnly);
-        if (!isset($result['result']) || $result['result'] !== 'success') {
+        if (!isset($result['result']) || 'success' !== $result['result']) {
             throw new TpayException('Unable to get banks list. Response: '.json_encode($result));
         }
 
         return $result['groups'];
     }
-
 }
-(new BankSelectionForm)->getBankForm();
+(new BankSelectionForm())->getBankForm();

@@ -1,4 +1,5 @@
 <?php
+
 namespace tpaySDK\Model\Objects\Transactions;
 
 use tpaySDK\Model\Objects\Objects;
@@ -13,5 +14,4 @@ class Verification extends Objects
      * @var VerificationData
      */
     public $data;
-
 }

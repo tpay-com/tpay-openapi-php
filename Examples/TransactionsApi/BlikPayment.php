@@ -1,4 +1,5 @@
 <?php
+
 namespace tpaySDK\Examples\TransactionsApi;
 
 use tpaySDK\Api\TpayApi;
@@ -37,7 +38,7 @@ class BlikPayment extends ExamplesConfig
             ];
             $result = $TpayApi->Transactions
                 ->createPaymentByTransactionId($blikPaymentFields, $transaction['transactionId']);
-            if (isset($result['result']) && $result['result'] === 'success') {
+            if (isset($result['result']) && 'success' === $result['result']) {
                 //The BLIK code was valid, now the customer needs to confirm payment on his mobile app
                 //Redirect client to thank you page and wait for asynchronous POST payment notification
                 //Do not mark your order as paid here!
@@ -76,7 +77,6 @@ class BlikPayment extends ExamplesConfig
             ],
         ];
     }
-
 }
 
-new BlikPayment;
+new BlikPayment();

@@ -1,4 +1,5 @@
 <?php
+
 namespace tpaySDK\Model\Objects\Transactions;
 
 use tpaySDK\Model\Objects\Objects;
@@ -19,5 +20,4 @@ class Callbacks extends Objects
      * @var CallbacksNotification
      */
     public $notification;
-
 }

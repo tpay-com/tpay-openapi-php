@@ -1,4 +1,5 @@
 <?php
+
 namespace tpaySDK\Model\Objects;
 
 use InvalidArgumentException;
@@ -39,7 +40,8 @@ class Objects implements ObjectsInterface
 
     /**
      * @param object $object object name
-     * @param array $values array containing object fields with values
+     * @param array  $values array containing object fields with values
+     *
      * @return $this
      */
     public function setObjectValues(&$object, $values)
@@ -55,10 +57,10 @@ class Objects implements ObjectsInterface
                 $this->setObjectValues($object->$fieldName, $fieldValue);
             } else {
                 $errorField = $fieldName;
-                if ($errorField === 0) {
+                if (0 === $errorField) {
                     $errorField = $fieldValue;
                 }
-                if ($this->strictCheck === true) {
+                if (true === $this->strictCheck) {
                     throw new InvalidArgumentException(sprintf('Field %s is not supported', $errorField));
                 }
             }
@@ -81,7 +83,7 @@ class Objects implements ObjectsInterface
                 if (isset($object->{$fieldName}->$field) && $this->isField($object->{$fieldName}->$field)) {
                     $object->{$fieldName}->$field->setValue($value);
                 } else {
-                    if ($this->strictCheck === true) {
+                    if (true === $this->strictCheck) {
                         throw new InvalidArgumentException(sprintf('Field %s is not supported', $field));
                     }
                 }
@@ -98,5 +100,4 @@ class Objects implements ObjectsInterface
     {
         return is_subclass_of($class, Objects::class);
     }
-
 }

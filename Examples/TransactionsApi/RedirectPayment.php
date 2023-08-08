@@ -1,4 +1,5 @@
 <?php
+
 namespace tpaySDK\Examples\TransactionsApi;
 
 use tpaySDK\Api\TpayApi;
@@ -49,7 +50,6 @@ class RedirectPayment extends ExamplesConfig
             ],
         ];
     }
-
 }
 
-(new RedirectPayment)->processTransaction();
+(new RedirectPayment())->processTransaction();

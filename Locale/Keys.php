@@ -1,4 +1,5 @@
 <?php
+
 namespace tpaySDK\Locale;
 
 use tpaySDK\Utilities\TpayException;
@@ -6,7 +7,6 @@ use tpaySDK\Utilities\TpayException;
 class Keys
 {
     static $translations = [];
-
     private $keys = [
         // GLOBALS
         'fee_info',
@@ -53,8 +53,8 @@ class Keys
     public function __construct()
     {
         static::$translations = [
-            'pl' => (new Polish)->translations,
-            'en' => (new English)->translations,
+            'pl' => (new Polish())->translations,
+            'en' => (new English())->translations,
         ];
         $this->checkKeysTranslations();
     }
@@ -64,20 +64,19 @@ class Keys
         foreach ($this->keys as $key) {
             foreach (static::$translations as $key1 => $value) {
                 if (!array_key_exists($key, $value)) {
-                    throw new TpayException('Translation for key '.$key.' does not exist in '.$key1.
-                        ' translator.');
+                    throw new TpayException('Translation for key '.$key.' does not exist in '.$key1
+                        .' translator.');
                 }
             }
         }
         foreach (static::$translations as $key => $value) {
             foreach ($value as $item => $item2) {
                 if (!in_array($item, $this->keys)) {
-                    throw new TpayException('Translation for key '.$item.' exists in '.$key.
-                        ' translator but is not declared in keys array.');
+                    throw new TpayException('Translation for key '.$item.' exists in '.$key
+                        .' translator but is not declared in keys array.');
                 }
             }
         }
 
     }
-
 }

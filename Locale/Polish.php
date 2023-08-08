@@ -1,4 +1,5 @@
 <?php
+
 namespace tpaySDK\Locale;
 
 class Polish
@@ -47,5 +48,4 @@ class Polish
         'saved_card_label' => 'Zapłać zapisaną kartą ',
         'new_card_label' => 'Zapłać nową kartą',
     ];
-
 }

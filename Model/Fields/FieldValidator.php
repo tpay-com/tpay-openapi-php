@@ -1,33 +1,22 @@
 <?php
+
 namespace tpaySDK\Model\Fields;
 
 class FieldValidator implements FieldTypes
 {
     public function isTooLong($maxLength, $value)
     {
-        if (strlen($value) > $maxLength) {
-            return true;
-        }
-
-        return false;
+        return (bool)(strlen($value) > $maxLength);
     }
 
     public function isTooShort($minLength, $value)
     {
-        if (strlen($value) < $minLength) {
-            return true;
-        }
-
-        return false;
+        return (bool)(strlen($value) < $minLength);
     }
 
     public function isValidPattern($value, $pattern)
     {
-        if (preg_match('/'.$pattern.'/', $value) !== 1) {
-            return false;
-        }
-
-        return true;
+        return ! (1 !== preg_match('/'.$pattern.'/', $value));
     }
 
     public function isValidEnum($value, $enum)
@@ -61,5 +50,4 @@ class FieldValidator implements FieldTypes
 
         return $isValid;
     }
-
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace tpaySDK\Examples\TransactionsApi;
 
 use tpaySDK\Api\TpayApi;
@@ -39,8 +40,8 @@ class RecurrentPayment extends ExamplesConfig
         $transaction = $TpayApi->Transactions->createTransaction($request);
         if (
             isset($transaction['result'], $transaction['status'])
-            && $transaction['result'] === 'success'
-            && $transaction['status'] === 'correct'
+            && 'success' === $transaction['result']
+            && 'correct' === $transaction['status']
         ) {
             $this->setOrderAsConfirmed();
         } else {
@@ -54,9 +55,8 @@ class RecurrentPayment extends ExamplesConfig
         //Code updating order status as paid at your DB
         //Save transaction Id for later use
     }
-
 }
-(new RecurrentPayment)
+(new RecurrentPayment())
     ->processPayment(
         'payment for order xyz',
         '5c87eb70c0e5060fb17da028c16011a840db2b83',

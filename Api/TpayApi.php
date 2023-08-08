@@ -1,10 +1,11 @@
 <?php
+
 namespace tpaySDK\Api;
 
 use tpaySDK\Api\Accounts\AccountsApi;
+use tpaySDK\Api\Authorization\AuthorizationApi;
 use tpaySDK\Api\Refunds\RefundsApi;
 use tpaySDK\Api\Transactions\TransactionsApi;
-use tpaySDK\Api\Authorization\AuthorizationApi;
 use tpaySDK\Model\Objects\Authorization\Token;
 use tpaySDK\Utilities\TpayException;
 
@@ -82,7 +83,7 @@ class TpayApi
         ];
         $AuthApi->getNewToken($fields);
         $this->Token = new Token();
-        if ($AuthApi->getHttpResponseCode() === 200) {
+        if (200 === $AuthApi->getHttpResponseCode()) {
             $this->Token = $this->Token->setObjectValues($this->Token, $AuthApi->getRequestResult());
         } else {
             throw new TpayException(
@@ -94,5 +95,4 @@ class TpayApi
             );
         }
     }
-
 }

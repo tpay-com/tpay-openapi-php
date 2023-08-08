@@ -1,4 +1,5 @@
 <?php
+
 namespace tpaySDK\Model\Objects\RequestBody;
 
 use tpaySDK\Model\Fields\Pay\ApplePayPaymentData;
@@ -19,7 +20,7 @@ class Pay extends Objects
         'cardPaymentData' => CardPaymentData::class,
         'recursive' => Recursive::class,
         'applePayPaymentData' => ApplePayPaymentData::class,
-        'googlePayPaymentData' => GooglePayPaymentData::class
+        'googlePayPaymentData' => GooglePayPaymentData::class,
     ];
 
     /**
@@ -63,5 +64,4 @@ class Pay extends Objects
             $this->groupId,
         ];
     }
-
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace tpaySDK\Model\Objects\Accounts;
 
 use tpaySDK\Model\Fields\Address\Description;
@@ -70,5 +71,4 @@ class PointOfSale extends Objects
             $this->url,
         ];
     }
-
 }

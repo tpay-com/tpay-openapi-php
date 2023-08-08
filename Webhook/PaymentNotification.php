@@ -1,4 +1,5 @@
 <?php
+
 namespace tpaySDK\Webhook;
 
 use tpaySDK\Dictionary\NotificationsIP;
@@ -22,11 +23,14 @@ class PaymentNotification extends Notification
      * Check cURL request from Tpay server after payment.
      * This method check server ip, required fields and checksum sent by payment server.
      * Display information to prevent sending repeated notifications.
-     * @param string $response Print response to Tpay server.
-     * If empty, then you have to print it somewhere else to avoid rescheduling notifications
+     *
+     * @param string $response       Print response to Tpay server.
+     *                               If empty, then you have to print it somewhere else to avoid rescheduling notifications
      * @param string $merchantSecret
-     * @return BasicPayment
+     *
      * @throws TpayException
+     *
+     * @return BasicPayment
      */
     public function getNotification($response = 'TRUE', $merchantSecret = '')
     {
@@ -42,7 +46,7 @@ class PaymentNotification extends Notification
             $notification->md5sum->getValue()
         );
         Logger::logLine('Check MD5: '.(int)$checkMD5);
-        if ($checkMD5 === false) {
+        if (false === $checkMD5) {
             throw new TpayException('MD5 checksum is invalid');
         }
 
@@ -64,7 +68,9 @@ class PaymentNotification extends Notification
 
     /**
      * Validation of Tpay server ip is mandatory in production mode.
-     * @param boolean $validateServerIP
+     *
+     * @param bool $validateServerIP
+     *
      * @return Notification
      */
     public function setValidateServerIP($validateServerIP)
@@ -76,7 +82,9 @@ class PaymentNotification extends Notification
 
     /**
      * Set validation of Tpay server IP in forwarded IP table - enabling this is not recommended due to security risk
-     * @param boolean $validateForwardedIP
+     *
+     * @param bool $validateForwardedIP
+     *
      * @return Notification
      */
     public function setValidateForwardedIP($validateForwardedIP)
@@ -95,13 +103,15 @@ class PaymentNotification extends Notification
      * Check cURL request from Tpay server after payment.
      * This method check server ip, required fields and checksum sent by payment server.
      * Display information to prevent sending repeated notifications.
+     *
      * @param string $response Print response to Tpay server.
-     * If empty, then you have to print it somewhere else to avoid rescheduling notifications
+     *                         If empty, then you have to print it somewhere else to avoid rescheduling notifications
+     *
      * @throws TpayException
      */
     public function checkNotification($response = '')
     {
-        if ($this->validateServerIP === true && $this->isTpayServer() === false) {
+        if (true === $this->validateServerIP && false === $this->isTpayServer()) {
             throw new TpayException('Request is not from secure server');
         }
         $requestBody = $this->requestBody;

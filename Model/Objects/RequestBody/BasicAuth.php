@@ -1,4 +1,5 @@
 <?php
+
 namespace tpaySDK\Model\Objects\RequestBody;
 
 use tpaySDK\Model\Fields\ApiCredentials\GrantType;
@@ -14,5 +15,4 @@ class BasicAuth extends Objects
      * @var GrantType
      */
     public $grant_type;
-
 }

@@ -1,9 +1,11 @@
 <?php
+
 namespace tpaySDK\Model\Objects\NotificationBody;
 
 use tpaySDK\Model\Fields\Notification\CardToken;
 use tpaySDK\Model\Fields\Notification\Crc;
 use tpaySDK\Model\Fields\Notification\Description;
+use tpaySDK\Model\Fields\Notification\Email;
 use tpaySDK\Model\Fields\Notification\Error;
 use tpaySDK\Model\Fields\Notification\Masterpass;
 use tpaySDK\Model\Fields\Notification\Md5sum;
@@ -16,7 +18,6 @@ use tpaySDK\Model\Fields\Notification\TransactionDate;
 use tpaySDK\Model\Fields\Notification\TransactionId;
 use tpaySDK\Model\Fields\Notification\TransactionStatus;
 use tpaySDK\Model\Fields\Notification\Wallet;
-use tpaySDK\Model\Fields\Notification\Email;
 use tpaySDK\Model\Objects\Objects;
 
 class BasicPayment extends Objects
@@ -139,6 +140,7 @@ class BasicPayment extends Objects
 
     /**
      * Returns associative array containing all notification fields
+     *
      * @return array
      */
     public function getNotificationAssociative()
@@ -152,5 +154,4 @@ class BasicPayment extends Objects
 
         return $notification;
     }
-
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace tpaySDK\Api\Transactions;
 
 use tpaySDK\Api\ApiAction;
@@ -31,7 +32,7 @@ class TransactionsApi extends ApiAction
     public function getBankGroups($onlineOnly = false)
     {
         $requestUrl = '/transactions/bank-groups';
-        if ($onlineOnly === true) {
+        if (true === $onlineOnly) {
             $requestUrl = $this->addQueryFields($requestUrl, ['onlyOnline' => json_encode($onlineOnly)]);
         }
 
@@ -62,5 +63,4 @@ class TransactionsApi extends ApiAction
     {
         return $this->run(static::POST, sprintf('/transactions/%s/refunds', $transactionId), $fields, new Refund());
     }
-
 }

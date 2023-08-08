@@ -1,4 +1,5 @@
 <?php
+
 namespace tpaySDK\Examples\TransactionsApi;
 
 use tpaySDK\Api\TpayApi;
@@ -41,23 +42,23 @@ class CardGate extends ExamplesConfig
         if (!isset($transaction['transactionId'])) {
             //Code error handling @see POST /transactions HTTP 400 response details
             throw new TpayException('Unable to create transaction. Response: '.json_encode($transaction));
-        } else {
-            //Try to sale with provided card data
-            $response = $this->makeCardPayment($transaction);
-            if (!isset($response['result']) || $response['result'] === 'failure') {
-                header("Location: ".$transaction['transactionPaymentUrl']);
-            }
-            if (isset($response['status']) && $response['status'] === 'correct') {
-                //Successful payment by card not protected by 3DS
-                $this->setOrderAsComplete($response);
-            } elseif (isset($response['transactionPaymentUrl'])) {
-                //Successfully generated 3DS link for payment authorization
-                header("Location: ".$response['transactionPaymentUrl']);
-            } else {
-                //Invalid credit card data
-                header("Location: ".$transaction['transactionPaymentUrl']);
-            }
         }
+        //Try to sale with provided card data
+        $response = $this->makeCardPayment($transaction);
+        if (!isset($response['result']) || 'failure' === $response['result']) {
+            header('Location: '.$transaction['transactionPaymentUrl']);
+        }
+        if (isset($response['status']) && 'correct' === $response['status']) {
+            //Successful payment by card not protected by 3DS
+            $this->setOrderAsComplete($response);
+        } elseif (isset($response['transactionPaymentUrl'])) {
+            //Successfully generated 3DS link for payment authorization
+            header('Location: '.$response['transactionPaymentUrl']);
+        } else {
+            //Invalid credit card data
+            header('Location: '.$transaction['transactionPaymentUrl']);
+        }
+
     }
 
     private function makeCardPayment($transaction)
@@ -72,7 +73,7 @@ class CardGate extends ExamplesConfig
             'groupId' => 103,
             'cardPaymentData' => [
                 'card' => $cardData,
-                'save' => $saveCard === 'on',
+                'save' => 'on' === $saveCard,
             ],
             'method' => 'sale',
         ];
@@ -89,8 +90,8 @@ class CardGate extends ExamplesConfig
     {
         //If you set the fourth getOnSiteCardForm() parameter true, you can get client name and email here.
         //Otherwise, you must get those values from your DB.
-//        $clientName = Util::cast($_POST['client_name'], FieldTypes::STRING);
-//        $clientEmail = Util::cast($_POST['client_email'], FieldTypes::STRING);
+        //        $clientName = Util::cast($_POST['client_name'], FieldTypes::STRING);
+        //        $clientEmail = Util::cast($_POST['client_email'], FieldTypes::STRING);
         $clientEmail = 'customer@example.com';
         $clientName = 'John Doe';
         $request = [
@@ -123,7 +124,6 @@ class CardGate extends ExamplesConfig
     {
         //Code saving the user card vendor name and short code for later use
     }
-
 }
 
-(new CardGate)->init();
+(new CardGate())->init();

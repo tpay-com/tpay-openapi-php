@@ -1,4 +1,5 @@
 <?php
+
 namespace tpaySDK\Examples\RefundsApi;
 
 use tpaySDK\Api\TpayApi;
@@ -32,6 +33,5 @@ class RefundsApiExample extends ExamplesConfig
 
         return $this;
     }
-
 }
-(new RefundsApiExample)->getRefunds();
+(new RefundsApiExample())->getRefunds();

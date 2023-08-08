@@ -1,31 +1,25 @@
 <?php
+
 namespace tpaySDK\Curl;
 
 class CurlOptions
 {
     protected $headers = [];
-
     private $verifyHost = 0;
-
     private $timeout = 30;
-
     private $connectTimeout = 15;
-
     private $verifyPeer = false;
-
     private $verbose = true;
-
     private $post = true;
-
     private $returnTransfer = true;
-
     private $failOnError = false;
-
     private $followLocation = false;
 
     /**
      * Set timeout time
+     *
      * @param int $timeout
+     *
      * @return $this
      */
     public function setTimeout($timeout)
@@ -37,7 +31,9 @@ class CurlOptions
 
     /**
      * Set connect timeout time
+     *
      * @param int $timeout
+     *
      * @return $this
      */
     public function setConnectTimeout($timeout)
@@ -49,7 +45,9 @@ class CurlOptions
 
     /**
      * Set host verification
+     *
      * @param int $verifyHost
+     *
      * @return $this
      */
     public function setVerifyHost($verifyHost)
@@ -61,6 +59,7 @@ class CurlOptions
 
     /**
      * Disable peer verification
+     *
      * @return $this
      */
     public function disableVerifyPeer()
@@ -72,6 +71,7 @@ class CurlOptions
 
     /**
      * Disable Verbose
+     *
      * @return $this
      */
     public function disableVerbose()
@@ -83,6 +83,7 @@ class CurlOptions
 
     /**
      * Disable POST
+     *
      * @return $this
      */
     public function disablePost()
@@ -94,6 +95,7 @@ class CurlOptions
 
     /**
      * Disable Return Transfer
+     *
      * @return $this
      */
     public function disableReturnTransfer()
@@ -105,6 +107,7 @@ class CurlOptions
 
     /**
      * Disable Failing on Error
+     *
      * @return $this
      */
     public function disableFailOnError()
@@ -116,6 +119,7 @@ class CurlOptions
 
     /**
      * Disable Following Location
+     *
      * @return $this
      */
     public function disableFollowLocation()
@@ -139,6 +143,7 @@ class CurlOptions
 
     /**
      * enable Verbose
+     *
      * @return $this
      */
     public function enableVerbose()
@@ -150,6 +155,7 @@ class CurlOptions
 
     /**
      * enable POST
+     *
      * @return $this
      */
     public function enablePost()
@@ -161,6 +167,7 @@ class CurlOptions
 
     /**
      * enable Return Transfer
+     *
      * @return $this
      */
     public function enableReturnTransfer()
@@ -172,6 +179,7 @@ class CurlOptions
 
     /**
      * enable Failing on Error
+     *
      * @return $this
      */
     public function enableFailOnError()
@@ -183,6 +191,7 @@ class CurlOptions
 
     /**
      * enable Following Location
+     *
      * @return $this
      */
     public function enableFollowLocation()
@@ -210,8 +219,7 @@ class CurlOptions
             CURLOPT_VERBOSE => $this->verbose,
             CURLOPT_POST => $this->post,
             CURLOPT_RETURNTRANSFER => $this->returnTransfer,
-            CURLOPT_FAILONERROR => $this->failOnError
+            CURLOPT_FAILONERROR => $this->failOnError,
         ];
     }
-
 }

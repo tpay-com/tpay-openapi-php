@@ -1,4 +1,5 @@
 <?php
+
 namespace tpaySDK\Model\Fields\Person;
 
 use tpaySDK\Model\Fields\Field;
@@ -6,9 +7,6 @@ use tpaySDK\Model\Fields\Field;
 class IsAuthorizedPerson extends Field
 {
     protected $type = self::BOOL;
-
     protected $value = false;
-
     protected $name = __CLASS__;
-
 }

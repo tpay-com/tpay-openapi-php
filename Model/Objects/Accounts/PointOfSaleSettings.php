@@ -1,4 +1,5 @@
 <?php
+
 namespace tpaySDK\Model\Objects\Accounts;
 
 use tpaySDK\Model\Fields\PointOfSaleSettings\ConfirmationCode;
@@ -21,5 +22,4 @@ class PointOfSaleSettings extends Objects
      * @var IsTestMode
      */
     public $isTestMode;
-
 }

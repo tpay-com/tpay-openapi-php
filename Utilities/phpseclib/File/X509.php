@@ -1,6 +1,5 @@
 <?php
 
-// phpcs:ignoreFile
 namespace tpaySDK\Utilities\phpseclib\File;
 
 if (class_exists('phpseclib3\File\X509')) {
