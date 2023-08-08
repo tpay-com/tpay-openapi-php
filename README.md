@@ -97,7 +97,7 @@ You can set your own templates path, so you can copy and modify the `phtml` temp
 Util::$customTemplateDirectory = '/my/own/templates/path/';
 ```
 
-You can set your own static files path, so you can copy and modify the css and js files from this library. By default, the path is based on `$_SERVER['REQUEST_URI']` value.
+You can set your own static files path, so you can copy and modify the `css` and `js` files from this library. By default, the path is based on `$_SERVER['REQUEST_URI']` value.
 ```php
 Util::$libraryPath = '/my/own/path/';
 ```
