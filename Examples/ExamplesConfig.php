@@ -6,7 +6,7 @@ use tpaySDK\Loader;
 
 class ExamplesConfig
 {
-    //Ask Tpay to get Partner access
+    // Ask Tpay to get Partner access
     const PARTNER_CLIENT_ID = '';
     const PARTNER_CLIENT_SECRET = '';
     const MERCHANT_CLIENT_ID = '1010-e5736adfd4bc5d8c';

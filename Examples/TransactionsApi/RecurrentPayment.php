@@ -45,15 +45,15 @@ class RecurrentPayment extends ExamplesConfig
         ) {
             $this->setOrderAsConfirmed();
         } else {
-            //Code your action when the recurrent payment fails
+            // Code your action when the recurrent payment fails
             throw new TpayException('Unable to process payment. Response: '.json_encode($transaction));
         }
     }
 
     private function setOrderAsConfirmed()
     {
-        //Code updating order status as paid at your DB
-        //Save transaction Id for later use
+        // Code updating order status as paid at your DB
+        // Save transaction Id for later use
     }
 }
 (new RecurrentPayment())

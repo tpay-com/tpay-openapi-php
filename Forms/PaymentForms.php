@@ -6,11 +6,7 @@ use tpaySDK\Utilities\Util;
 
 class PaymentForms
 {
-    /**
-     * @var string
-     */
     const PAYMENT_FORM = 'paymentForm';
-
     const TPAY_TERMS_OF_SERVICE_URL = 'https://secure.tpay.com/regulamin.pdf';
 
     public function __construct($language = 'en')

@@ -21,7 +21,7 @@ class RedirectPayment extends ExamplesConfig
         if (isset($result['transactionPaymentUrl'])) {
             header('Location: '.$result['transactionPaymentUrl']);
         } else {
-            //Code error handling @see POST /transactions HTTP 400 response details
+            // Code error handling @see POST /transactions HTTP 400 response details
             throw new TpayException('Unable to create transaction. Response: '.json_encode($result));
         }
     }

@@ -26,7 +26,7 @@ class CardGate extends ExamplesConfig
     {
         if (empty($_POST)) {
             $PaymentForms = new PaymentForms('en');
-            //Show new payment form
+            // Show new payment form
             echo $PaymentForms->getOnSiteCardForm(static::MERCHANT_RSA_KEY, 'CardGate.php', true, false);
         } else {
             $this->processNewCardPayment();
@@ -40,22 +40,22 @@ class CardGate extends ExamplesConfig
         }
         $transaction = $this->getNewCardTransaction();
         if (!isset($transaction['transactionId'])) {
-            //Code error handling @see POST /transactions HTTP 400 response details
+            // Code error handling @see POST /transactions HTTP 400 response details
             throw new TpayException('Unable to create transaction. Response: '.json_encode($transaction));
         }
-        //Try to sale with provided card data
+        // Try to sale with provided card data
         $response = $this->makeCardPayment($transaction);
         if (!isset($response['result']) || 'failure' === $response['result']) {
             header('Location: '.$transaction['transactionPaymentUrl']);
         }
         if (isset($response['status']) && 'correct' === $response['status']) {
-            //Successful payment by card not protected by 3DS
+            // Successful payment by card not protected by 3DS
             $this->setOrderAsComplete($response);
         } elseif (isset($response['transactionPaymentUrl'])) {
-            //Successfully generated 3DS link for payment authorization
+            // Successfully generated 3DS link for payment authorization
             header('Location: '.$response['transactionPaymentUrl']);
         } else {
-            //Invalid credit card data
+            // Invalid credit card data
             header('Location: '.$transaction['transactionPaymentUrl']);
         }
     }
@@ -87,10 +87,8 @@ class CardGate extends ExamplesConfig
 
     private function getNewCardTransaction()
     {
-        //If you set the fourth getOnSiteCardForm() parameter true, you can get client name and email here.
-        //Otherwise, you must get those values from your DB.
-        //        $clientName = Util::cast($_POST['client_name'], FieldTypes::STRING);
-        //        $clientEmail = Util::cast($_POST['client_email'], FieldTypes::STRING);
+        // If you set the fourth getOnSiteCardForm() parameter true, you can get client name and email here.
+        // Otherwise, you must get those values from your DB.
         $clientEmail = 'customer@example.com';
         $clientName = 'John Doe';
         $request = [
@@ -121,7 +119,7 @@ class CardGate extends ExamplesConfig
 
     private function saveUserCardDetails($cardVendor, $cardShortCode)
     {
-        //Code saving the user card vendor name and short code for later use
+        // Code saving the user card vendor name and short code for later use
     }
 }
 

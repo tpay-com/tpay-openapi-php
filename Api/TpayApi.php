@@ -58,7 +58,7 @@ class TpayApi
     }
 
     /**
-     * @param $Token Token
+     * @param mixed $Token Token
      */
     public function setCustomToken($Token)
     {

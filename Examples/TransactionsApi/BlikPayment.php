@@ -39,16 +39,16 @@ class BlikPayment extends ExamplesConfig
             $result = $TpayApi->Transactions
                 ->createPaymentByTransactionId($blikPaymentFields, $transaction['transactionId']);
             if (isset($result['result']) && 'success' === $result['result']) {
-                //The BLIK code was valid, now the customer needs to confirm payment on his mobile app
-                //Redirect client to thank you page and wait for asynchronous POST payment notification
-                //Do not mark your order as paid here!
+                // The BLIK code was valid, now the customer needs to confirm payment on his mobile app
+                // Redirect client to thank you page and wait for asynchronous POST payment notification
+                // Do not mark your order as paid here!
                 echo 'BLIK code is valid';
             } else {
-                //The BLIK code was incorrect, redirect to transaction panel to try again
+                // The BLIK code was incorrect, redirect to transaction panel to try again
                 header('Location: '.$transaction['transactionPaymentUrl']);
             }
         } else {
-            //Code error handling @see POST /transactions HTTP 400 response details
+            // Code error handling @see POST /transactions HTTP 400 response details
             throw new TpayException('Unable to create transaction. Response: '.json_encode($transaction));
         }
     }

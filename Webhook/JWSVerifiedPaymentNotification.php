@@ -17,8 +17,8 @@ class JWSVerifiedPaymentNotification extends Notification
     private $merchantSecret;
 
     /**
-     * @param $merchantSecret string Merchant notification check secret
-     * @param $productionMode bool is prod or sandbox flag
+     * @param mixed $merchantSecret string Merchant notification check secret
+     * @param mixed $productionMode bool is prod or sandbox flag
      */
     public function __construct($merchantSecret, $productionMode = true)
     {
@@ -38,7 +38,6 @@ class JWSVerifiedPaymentNotification extends Notification
     public function getNotification()
     {
         $notification = $this->getNotificationObject();
-        /** @var BasicPayment $notification */
         $this->checkMd5($notification);
         $this->checkJwsSignature();
 
