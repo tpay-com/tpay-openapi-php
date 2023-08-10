@@ -1,4 +1,5 @@
 <?php
+
 namespace tpaySDK\Model\Objects\RequestBody;
 
 use tpaySDK\Model\Fields\Account\Krs;
@@ -10,9 +11,9 @@ use tpaySDK\Model\Fields\Account\TaxId;
 use tpaySDK\Model\Fields\Person\Email;
 use tpaySDK\Model\Identifiers\CategoryId;
 use tpaySDK\Model\Objects\Accounts\Address;
-use tpaySDK\Model\Objects\Objects;
 use tpaySDK\Model\Objects\Accounts\Person;
 use tpaySDK\Model\Objects\Accounts\PointOfSale;
+use tpaySDK\Model\Objects\Objects;
 
 class Account extends Objects
 {
@@ -97,5 +98,4 @@ class Account extends Objects
             $this->address,
         ];
     }
-
 }

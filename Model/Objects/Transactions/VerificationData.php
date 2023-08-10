@@ -1,4 +1,5 @@
 <?php
+
 namespace tpaySDK\Model\Objects\Transactions;
 
 use tpaySDK\Model\Fields\Beneficiary\AccountNumber;
@@ -28,5 +29,4 @@ class VerificationData extends Objects
      * @var AccountNumber
      */
     public $bankAccountNumber;
-
 }

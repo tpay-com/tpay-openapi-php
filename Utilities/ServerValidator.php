@@ -1,10 +1,10 @@
 <?php
+
 namespace tpaySDK\Utilities;
 
 class ServerValidator
 {
     const REMOTE_ADDRESS = 'REMOTE_ADDR';
-
     const FORWARDER_ADDRESS = 'HTTP_X_FORWARDED_FOR';
 
     /**
@@ -47,18 +47,15 @@ class ServerValidator
         if ($this->checkIP($remoteIP)) {
             return true;
         }
-        if ($this->validateForwardedIP && $this->checkIP($forwarderIP)) {
-            return true;
-        }
-
-        return false;
+        return (bool)($this->validateForwardedIP && $this->checkIP($forwarderIP));
     }
 
     /**
      * Get value from $_SERVER array if exists
      *
      * @param string $name
-     * @return string|null
+     *
+     * @return null|string
      */
     private function getServerValue($name)
     {
@@ -72,12 +69,10 @@ class ServerValidator
     /**
      * Validate if $ip is secure
      *
-     * @param $ip
      * @return bool
      */
     private function checkIP($ip)
     {
         return in_array($ip, $this->secureIP, true);
     }
-
 }

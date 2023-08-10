@@ -1,4 +1,5 @@
 <?php
+
 namespace tpaySDK\Model\Objects\RequestBody;
 
 use tpaySDK\Model\Fields\ApiCredentials\ClientSecret;
@@ -36,5 +37,4 @@ class Auth extends Objects
             $this->client_secret,
         ];
     }
-
 }

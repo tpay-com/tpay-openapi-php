@@ -1,4 +1,5 @@
 <?php
+
 namespace tpaySDK\Model\Objects\RequestBody;
 
 use tpaySDK\Model\Fields\Transaction\Amount;
@@ -66,5 +67,4 @@ class Transaction extends Objects
             $this->payer,
         ];
     }
-
 }

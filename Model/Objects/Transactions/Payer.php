@@ -1,4 +1,5 @@
 <?php
+
 namespace tpaySDK\Model\Objects\Transactions;
 
 use tpaySDK\Model\Fields\Address\City;
@@ -64,5 +65,4 @@ class Payer extends Objects
             $this->name,
         ];
     }
-
 }

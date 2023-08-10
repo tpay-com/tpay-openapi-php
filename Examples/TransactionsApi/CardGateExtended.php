@@ -1,4 +1,5 @@
 <?php
+
 namespace tpaySDK\Examples\TransactionsApi;
 
 use tpaySDK\Api\TpayApi;
@@ -27,11 +28,11 @@ class CardGateExtended extends ExamplesConfig
         if (isset($_POST['carddata'])) {
             $this->processNewCardPayment();
         } elseif (isset($_POST['savedId'])) {
-            //Payment by saved card
+            // Payment by saved card
             $this->processSavedCardPayment($_POST['savedId']);
         } else {
             $userCards = $this->getUserSavedCards($this->getCurrentUserId());
-            //Show new payment form
+            // Show new payment form
             echo (new PaymentForms('en'))
                 ->getOnSiteCardForm(static::MERCHANT_RSA_KEY, 'CardGateExtended.php', true, false, $userCards);
         }
@@ -44,37 +45,34 @@ class CardGateExtended extends ExamplesConfig
         }
         $transaction = $this->getNewCardTransaction();
         if (!isset($transaction['transactionId'])) {
-            //Code error handling @see POST /transactions HTTP 400 response details
+            // Code error handling @see POST /transactions HTTP 400 response details
             throw new TpayException('Unable to create transaction. Response: '.json_encode($transaction));
+        }
+        // Try to sale with provided card data
+        $response = $this->makeCardPayment($transaction);
+        if (!isset($response['result']) || 'failure' === $response['result']) {
+            header('Location: '.$transaction['transactionPaymentUrl']);
+        }
+        if (isset($response['status']) && 'correct' === $response['status']) {
+            // Successful payment by card not protected by 3DS
+            $this->setOrderAsComplete($response);
+        } elseif (isset($response['transactionPaymentUrl'])) {
+            // Successfully generated 3DS link for payment authorization
+            header('Location: '.$response['transactionPaymentUrl']);
         } else {
-            //Try to sale with provided card data
-            $response = $this->makeCardPayment($transaction);
-            if (!isset($response['result']) || $response['result'] === 'failure') {
-                header("Location: ".$transaction['transactionPaymentUrl']);
-            }
-            if (isset($response['status']) && $response['status'] === 'correct') {
-                //Successful payment by card not protected by 3DS
-                $this->setOrderAsComplete($response);
-            } elseif (isset($response['transactionPaymentUrl'])) {
-                //Successfully generated 3DS link for payment authorization
-                header("Location: ".$response['transactionPaymentUrl']);
-            } else {
-                //Invalid credit card data
-                header("Location: ".$transaction['transactionPaymentUrl']);
-            }
+            // Invalid credit card data
+            header('Location: '.$transaction['transactionPaymentUrl']);
         }
     }
 
     private function saveUserCardDetails($cardVendor, $cardShortCode)
     {
-        //Code saving the user card vendor name and short code for later use
+        // Code saving the user card vendor name and short code for later use
     }
 
     private function getNewCardTransaction()
     {
-        //If you set the fourth getOnSiteCardForm() parameter true, you can get client name and email here. Otherwise, you must get those values from your DB.
-//        $clientName = Util::cast($_POST['client_name'], FieldTypes::STRING);
-//        $clientEmail = Util::cast($_POST['client_email'], FieldTypes::STRING);
+        // If you set the fourth getOnSiteCardForm() parameter true, you can get client name and email here. Otherwise, you must get those values from your DB.
         $clientEmail = 'customer@example.com';
         $clientName = 'John Doe';
         $request = [
@@ -119,7 +117,7 @@ class CardGateExtended extends ExamplesConfig
             'groupId' => 103,
             'cardPaymentData' => [
                 'card' => $cardData,
-                'save' => $saveCard === 'on',
+                'save' => 'on' === $saveCard,
             ],
             'method' => 'sale',
         ];
@@ -134,7 +132,7 @@ class CardGateExtended extends ExamplesConfig
         if (!is_numeric($savedCardId)) {
             Logger::log('Invalid saved cardId', 'CardId: '.$savedCardId);
 
-            return header("Location: ".$transaction['transactionPaymentUrl']);
+            return header('Location: '.$transaction['transactionPaymentUrl']);
         }
         $requestedCardId = (int)$savedCardId;
         $currentUserCards = $this->getUserSavedCards($exampleCurrentUserId);
@@ -146,17 +144,16 @@ class CardGateExtended extends ExamplesConfig
                 $cardToken = $card['cli_auth'];
             }
         }
-        if ($isValid === false) {
+        if (false === $isValid) {
             Logger::log(
                 'Unauthorized payment try',
                 sprintf('User %s has tried to pay by not owned cardId: %s', $exampleCurrentUserId, $requestedCardId)
             );
 
-            //Reject current payment try and redirect user to tpay payment panel new card form
-            return header("Location: ".$transaction['transactionPaymentUrl']);
-        } else {
-            return $this->payBySavedCard($cardToken, $transaction);
+            // Reject current payment try and redirect user to tpay payment panel new card form
+            return header('Location: '.$transaction['transactionPaymentUrl']);
         }
+        return $this->payBySavedCard($cardToken, $transaction);
     }
 
     private function payBySavedCard($cardToken, $transaction)
@@ -169,27 +166,28 @@ class CardGateExtended extends ExamplesConfig
             'method' => 'sale',
         ];
         $result = $this->TpayApi->Transactions->createPaymentByTransactionId($request, $transaction['transactionId']);
-        if (isset($result['result'], $result['status']) && $result['status'] === 'correct') {
+        if (isset($result['result'], $result['status']) && 'correct' === $result['status']) {
             return $this->setOrderAsComplete($result);
-        } else {
-            return header("Location: ".$transaction['transactionPaymentUrl']);
         }
+        return header('Location: '.$transaction['transactionPaymentUrl']);
     }
 
     private function setOrderAsComplete($params)
     {
-        //Code setting the order status and other details in your system
+        // Code setting the order status and other details in your system
         var_dump($params);
     }
 
     /**
      * Returns stored cards by userId as array. Each row contains card details
+     *
      * @param int $userId
+     *
      * @return array
      */
     private function getUserSavedCards($userId = 0)
     {
-        //Code getting current logged user cards from your DB. This is only an example of DB.
+        // Code getting current logged user cards from your DB. This is only an example of DB.
         $exampleDbUsersIdsWithCards = [
             0 => [],
             2 => [
@@ -225,10 +223,9 @@ class CardGateExtended extends ExamplesConfig
 
     private function getCurrentUserId()
     {
-        //Code getting the user Id from your system. This is only an example.
+        // Code getting the user Id from your system. This is only an example.
         return 2;
     }
-
 }
 
-(new CardGateExtended)->init();
+(new CardGateExtended())->init();

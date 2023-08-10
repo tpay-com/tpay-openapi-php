@@ -1,4 +1,5 @@
 <?php
+
 namespace tpaySDK\Api\Accounts;
 
 use tpaySDK\Api\ApiAction;
@@ -57,5 +58,4 @@ class AccountsApi extends ApiAction
     {
         return $this->run(static::POST, '/accounts', $fields, new Account());
     }
-
 }

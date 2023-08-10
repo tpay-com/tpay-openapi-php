@@ -1,7 +1,7 @@
 <?php
+
 namespace tpaySDK\Model\Objects\Accounts;
 
-use tpaySDK\Model\Fields\Person\Name;
 use tpaySDK\Model\Fields\Beneficiary\Nationality;
 use tpaySDK\Model\Fields\Person\CountryOfBirth;
 use tpaySDK\Model\Fields\Person\DateOfBirth;
@@ -11,6 +11,7 @@ use tpaySDK\Model\Fields\Person\IsBeneficiary;
 use tpaySDK\Model\Fields\Person\IsContactPerson;
 use tpaySDK\Model\Fields\Person\IsRepresentative;
 use tpaySDK\Model\Fields\Person\IssuingAuthority;
+use tpaySDK\Model\Fields\Person\Name;
 use tpaySDK\Model\Fields\Person\PepStatement;
 use tpaySDK\Model\Fields\Person\Pesel;
 use tpaySDK\Model\Fields\Person\SerialNumber;
@@ -125,5 +126,4 @@ class Person extends Objects
      * @var PersonContact
      */
     public $contact;
-
 }

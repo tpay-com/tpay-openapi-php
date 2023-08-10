@@ -1,4 +1,5 @@
 <?php
+
 namespace tpaySDK\Api\Refunds;
 
 use tpaySDK\Api\ApiAction;
@@ -14,5 +15,4 @@ class RefundsApi extends ApiAction
     {
         return $this->run(static::GET, sprintf('/refunds/%s', $refundId));
     }
-
 }

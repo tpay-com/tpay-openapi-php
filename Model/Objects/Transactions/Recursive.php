@@ -1,4 +1,5 @@
 <?php
+
 namespace tpaySDK\Model\Objects\Transactions;
 
 use tpaySDK\Model\Fields\Recursive\ExpirationDate;
@@ -45,5 +46,4 @@ class Recursive extends Objects
             $this->expirationDate,
         ];
     }
-
 }

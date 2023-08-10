@@ -1,4 +1,5 @@
 <?php
+
 namespace tpaySDK\Model\Objects\Transactions;
 
 use tpaySDK\Model\Fields\Alias\Key;
@@ -43,5 +44,4 @@ class Alias extends Objects
             $this->type,
         ];
     }
-
 }

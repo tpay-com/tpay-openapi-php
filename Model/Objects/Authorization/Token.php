@@ -1,4 +1,5 @@
 <?php
+
 namespace tpaySDK\Model\Objects\Authorization;
 
 use tpaySDK\Model\Fields\ApiCredentials\Scope;
@@ -49,5 +50,4 @@ class Token extends Objects
      * @var AccessToken
      */
     public $access_token;
-
 }

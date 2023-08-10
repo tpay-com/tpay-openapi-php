@@ -1,4 +1,5 @@
 <?php
+
 namespace tpaySDK\Curl;
 
 use tpaySDK\Dictionary\HttpCodesDictionary;
@@ -8,27 +9,28 @@ class Curl extends CurlOptions
 {
     /**
      * Last executed cURL info
-     * @var array|null
+     *
+     * @var null|array
      */
     private $curlInfo;
+
     /**
      * Last executed cURL error
+     *
      * @var string
      */
     private $curlError;
 
     /**
      * Last executed cURL errno
+     *
      * @var string
      */
     private $curlErrorNumber;
 
     private $url;
-
     private $postData;
-
     private $result;
-
     private $method;
 
     public function __construct()
@@ -40,8 +42,6 @@ class Curl extends CurlOptions
 
     /**
      * Get last info
-     *
-     * @return mixed
      */
     public function getCurlLastInfo()
     {
@@ -50,8 +50,6 @@ class Curl extends CurlOptions
 
     /**
      * Get last Curl error info
-     *
-     * @return mixed
      */
     public function getCurlLastError()
     {
@@ -60,8 +58,6 @@ class Curl extends CurlOptions
 
     /**
      * Get last Curl error number info
-     *
-     * @return mixed
      */
     public function getCurlLastErrorNo()
     {
@@ -166,5 +162,4 @@ class Curl extends CurlOptions
                 throw new TpayException(sprintf('Curl method %s is not allowed', $this->method));
         }
     }
-
 }

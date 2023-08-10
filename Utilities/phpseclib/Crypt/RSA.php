@@ -1,6 +1,5 @@
 <?php
 
-// phpcs:ignoreFile
 namespace tpaySDK\Utilities\phpseclib\Crypt;
 
 if (class_exists('phpseclib3\Crypt\RSA')) {

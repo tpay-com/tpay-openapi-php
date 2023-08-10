@@ -1,4 +1,5 @@
 <?php
+
 namespace tpaySDK\Locale;
 
 class English
@@ -46,5 +47,4 @@ class English
         'saved_card_label' => 'Pay by saved card ',
         'new_card_label' => 'Pay by a new card',
     ];
-
 }

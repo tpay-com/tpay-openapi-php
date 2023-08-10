@@ -1,4 +1,5 @@
 <?php
+
 namespace tpaySDK\Examples\TransactionsApi;
 
 use tpaySDK\Api\TpayApi;
@@ -20,7 +21,7 @@ class RedirectPayment extends ExamplesConfig
         if (isset($result['transactionPaymentUrl'])) {
             header('Location: '.$result['transactionPaymentUrl']);
         } else {
-            //Code error handling @see POST /transactions HTTP 400 response details
+            // Code error handling @see POST /transactions HTTP 400 response details
             throw new TpayException('Unable to create transaction. Response: '.json_encode($result));
         }
     }
@@ -49,7 +50,6 @@ class RedirectPayment extends ExamplesConfig
             ],
         ];
     }
-
 }
 
-(new RedirectPayment)->processTransaction();
+(new RedirectPayment())->processTransaction();

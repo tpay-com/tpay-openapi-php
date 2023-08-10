@@ -1,4 +1,5 @@
 <?php
+
 namespace tpaySDK\Utilities;
 
 use tpaySDK\Locale\Lang;
@@ -18,8 +19,10 @@ class Util
 
     /**
      * Parse template file
+     *
      * @param string $templateFileName filename
-     * @param array $data
+     * @param array  $data
+     *
      * @return string
      */
     public static function parseTemplate($templateFileName, $data = [])
@@ -46,7 +49,7 @@ class Util
         include_once $templateDirectory.$templateFileName.'.phtml';
         $parsedHTML = ob_get_contents();
         ob_clean();
-        if ($buffer !== false) {
+        if (false !== $buffer) {
             ob_start();
             echo $buffer;
         }
@@ -56,20 +59,21 @@ class Util
 
     /**
      * Get casted value by cast type.
+     *
      * @param string $value
-     * @param string $type variable type
-     * @return mixed
+     * @param string $type  variable type
+     *
      * @throws TpayException
      */
     public static function cast($value, $type)
     {
-        if ($type === FieldTypes::INT) {
+        if (FieldTypes::INT === $type) {
             $value = (int)$value;
-        } elseif ($type === FieldTypes::NUMBER) {
+        } elseif (FieldTypes::NUMBER === $type) {
             $value = (float)$value;
-        } elseif ($type === FieldTypes::STRING) {
+        } elseif (FieldTypes::STRING === $type) {
             $value = (string)$value;
-        } elseif ($type === FieldTypes::BOOL) {
+        } elseif (FieldTypes::BOOL === $type) {
             $value = (bool)$value;
         } else {
             throw new TpayException(sprintf('Undefined variable type %s', $type));
@@ -87,5 +91,4 @@ class Util
     {
         Lang::setLang($language);
     }
-
 }

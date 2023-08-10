@@ -17,8 +17,8 @@ class JWSVerifiedPaymentNotification extends Notification
     private $merchantSecret;
 
     /**
-     * @param $merchantSecret string Merchant notification check secret
-     * @param $productionMode bool is prod or sandbox flag
+     * @param mixed $merchantSecret string Merchant notification check secret
+     * @param mixed $productionMode bool is prod or sandbox flag
      */
     public function __construct($merchantSecret, $productionMode = true)
     {
@@ -30,13 +30,14 @@ class JWSVerifiedPaymentNotification extends Notification
     /**
      * Get checked notification object.
      * If exception occurs it means that something went wrong with notification verification process.
-     * @return BasicPayment
+     *
      * @throws TpayException
+     *
+     * @return BasicPayment
      */
     public function getNotification()
     {
         $notification = $this->getNotificationObject();
-        /** @var BasicPayment $notification */
         $this->checkMd5($notification);
         $this->checkJwsSignature();
 
@@ -45,7 +46,7 @@ class JWSVerifiedPaymentNotification extends Notification
 
     private function checkMd5Validity($id, $transactionId, $amount, $orderId, $merchantSecret, $requestMd5)
     {
-        if (md5($id . $transactionId . $amount . $orderId . $merchantSecret) !== $requestMd5) {
+        if (md5($id.$transactionId.$amount.$orderId.$merchantSecret) !== $requestMd5) {
             throw new TpayException('MD5 checksum is invalid');
         }
     }
@@ -90,7 +91,7 @@ class JWSVerifiedPaymentNotification extends Notification
         }
 
         $certificate = file_get_contents($x5u);
-        $trusted = file_get_contents($this->getResourcePrefix() . '/x509/tpay-jws-root.pem');
+        $trusted = file_get_contents($this->getResourcePrefix().'/x509/tpay-jws-root.pem');
 
         $x509 = new X509();
         $x509->loadX509($certificate);
@@ -104,7 +105,7 @@ class JWSVerifiedPaymentNotification extends Notification
         $decodedSignature = base64_decode(strtr($signature, '-_', '+/'));
         $publicKey = $x509->getPublicKey();
         $publicKey = $x509->withSettings($publicKey, 'sha256', RSA::SIGNATURE_PKCS1);
-        if (!$publicKey->verify($headers . '.' . $payload, $decodedSignature)) {
+        if (!$publicKey->verify($headers.'.'.$payload, $decodedSignature)) {
             throw new TpayException('FALSE - Invalid JWS signature');
         }
     }
@@ -121,7 +122,7 @@ class JWSVerifiedPaymentNotification extends Notification
     private function getNotificationObject()
     {
         if (!isset($_POST['tr_id'])) {
-            throw new TpayException('Not recognised or invalid notification type. POST: ' . json_encode($_POST));
+            throw new TpayException('Not recognised or invalid notification type. POST: '.json_encode($_POST));
         }
         $requestBody = new BasicPayment();
         foreach ($_POST as $parameter => $value) {

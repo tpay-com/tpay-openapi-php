@@ -1,4 +1,5 @@
 <?php
+
 namespace tpaySDK\Model\Objects\Accounts;
 
 use tpaySDK\Model\Fields\PointOfSaleDate\Create;
@@ -21,5 +22,4 @@ class PointOfSaleDate extends Objects
      * @var Modification
      */
     public $modification;
-
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace tpaySDK\Api\Authorization;
 
 use tpaySDK\Api\ApiAction;
@@ -15,5 +16,4 @@ class AuthorizationApi extends ApiAction
     {
         return $this->run(static::GET, '/oauth/tokeninfo');
     }
-
 }

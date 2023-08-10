@@ -1,4 +1,5 @@
 <?php
+
 namespace tpaySDK\Locale;
 
 use tpaySDK\Utilities\TpayException;
@@ -9,7 +10,9 @@ class Lang extends Keys
 
     /**
      * Change current language
+     *
      * @param string $lang language code
+     *
      * @throws TpayException
      */
     public static function setLang($lang)
@@ -23,7 +26,6 @@ class Lang extends Keys
 
     /**
      * Get and print translated string
-     * @param $key
      */
     public static function lang($key)
     {
@@ -32,13 +34,13 @@ class Lang extends Keys
 
     /**
      * Get translated string
+     *
      * @param string $key
+     *
      * @return string
      */
-
     public static function get($key)
     {
         return static::$translations[static::$currentLanguage][$key];
     }
-
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace tpaySDK\Dictionary;
 
 class NotificationsIP
@@ -11,5 +12,4 @@ class NotificationsIP
         '46.248.167.59',
         '46.29.19.106',
     ];
-
 }

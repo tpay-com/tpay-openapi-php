@@ -1,4 +1,5 @@
 <?php
+
 namespace tpaySDK\Model\Fields;
 
 use InvalidArgumentException;
@@ -6,21 +7,13 @@ use InvalidArgumentException;
 class Field implements FieldTypes
 {
     protected $name = __CLASS__;
-
     protected $type;
-
     protected $maxLength;
-
     protected $minLength;
-
     protected $minimum;
-
     protected $maximum;
-
     protected $value;
-
     protected $pattern;
-
     protected $enum;
 
     /**
@@ -101,21 +94,26 @@ class Field implements FieldTypes
 
     public function checkValue($value)
     {
-        if (!is_null($this->pattern) && $this->FieldValidator->isValidPattern($value, $this->pattern) === false) {
+        if (!is_null($this->pattern) && false === $this->FieldValidator->isValidPattern($value, $this->pattern)) {
             $this->errors[] = sprintf(
-                'Value of field %s is invalid. Should match %s pattern', $this->name, $this->pattern
+                'Value of field %s is invalid. Should match %s pattern',
+                $this->name,
+                $this->pattern
             );
         }
-        if (!is_null($this->enum) && $this->FieldValidator->isValidEnum($value, $this->enum) === false) {
+        if (!is_null($this->enum) && false === $this->FieldValidator->isValidEnum($value, $this->enum)) {
             $this->errors[] = sprintf(
-                'Value of field %s is invalid. Should be one of %s', $this->name, print_r($this->enum, true)
+                'Value of field %s is invalid. Should be one of %s',
+                $this->name,
+                print_r($this->enum, true)
             );
         }
-        if ($this->FieldValidator->isValueValidType($this->type, $value) === false) {
+        if (false === $this->FieldValidator->isValueValidType($this->type, $value)) {
             $this->errors[] = sprintf(
-                'Value type of field %s is invalid. Should be %s type', $this->name, $this->type
+                'Value type of field %s is invalid. Should be %s type',
+                $this->name,
+                $this->type
             );
         }
     }
-
 }

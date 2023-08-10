@@ -1,4 +1,5 @@
 <?php
+
 namespace tpaySDK\Manager;
 
 use tpaySDK\Model\Objects\ObjectsValidator;
@@ -6,7 +7,6 @@ use tpaySDK\Model\Objects\ObjectsValidator;
 class Manager
 {
     protected $requestBody;
-
     protected $ObjectsValidator;
 
     public function __construct()
@@ -34,5 +34,4 @@ class Manager
     {
         return $this->requestBody;
     }
-
 }

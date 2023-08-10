@@ -1,4 +1,5 @@
 <?php
+
 namespace tpaySDK\Api;
 
 use tpaySDK\Curl\Curl;
@@ -11,19 +12,13 @@ use tpaySDK\Utilities\TpayException;
 class ApiAction
 {
     const TPAY_API_URL_PRODUCTION = 'https://api.tpay.com';
-
     const TPAY_API_URL_SANDBOX = 'https://openapi.sandbox.tpay.com';
-
     const GET = 'GET';
-
     const POST = 'POST';
-
     const DELETE = 'DELETE';
-
     const PUT = 'PUT';
 
     public $Manager;
-
     protected $Curl;
 
     /**
@@ -56,12 +51,11 @@ class ApiAction
 
     public function getRequestResult($associative = true)
     {
-        if ($associative === true) {
+        if (true === $associative) {
             return json_decode($this->Curl->getResult(), true);
         }
 
         return $this->Curl->getResult();
-
     }
 
     public function getHttpResponseMessage()
@@ -78,10 +72,10 @@ class ApiAction
     {
         $requestUrl = sprintf(
             '%s%s',
-            $this->productionMode === true ? static::TPAY_API_URL_PRODUCTION : static::TPAY_API_URL_SANDBOX,
+            true === $this->productionMode ? static::TPAY_API_URL_PRODUCTION : static::TPAY_API_URL_SANDBOX,
             $apiMethod
         );
-        if (is_string($this->Token->access_token->getValue()) && $apiMethod !== '/oauth/auth') {
+        if (is_string($this->Token->access_token->getValue()) && '/oauth/auth' !== $apiMethod) {
             $headers[] = sprintf('Authorization: Bearer %s', $this->Token->access_token->getValue());
         }
         if (!empty($fields)) {
@@ -130,5 +124,4 @@ class ApiAction
             throw new TpayException(sprintf('Unknown error response code %s', $responseCode));
         }
     }
-
 }

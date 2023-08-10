@@ -1,4 +1,5 @@
 <?php
+
 namespace tpaySDK\Model\Objects\Accounts;
 
 use tpaySDK\Model\Fields\Address\City;
@@ -104,5 +105,4 @@ class Address extends Objects
             $this->country,
         ];
     }
-
 }

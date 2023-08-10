@@ -1,4 +1,5 @@
 <?php
+
 namespace tpaySDK\Examples\TransactionsApi;
 
 use tpaySDK\Api\TpayApi;
@@ -62,7 +63,7 @@ class TransactionsApiExample extends ExamplesConfig
         return $this;
     }
 
-    //Create transaction with a specified bank group id
+    // Create transaction with a specified bank group id
     public function createBasicTransaction($bankGroupId)
     {
         $transactionParameters = $this->getTransactionParameters();
@@ -73,7 +74,7 @@ class TransactionsApiExample extends ExamplesConfig
         return $this;
     }
 
-    //Create transaction with a specified channel id and instant redirection
+    // Create transaction with a specified channel id and instant redirection
     public function createTransactionWithInstantRedirection($channelId)
     {
         $transactionParameters = $this->getTransactionParameters();
@@ -84,7 +85,7 @@ class TransactionsApiExample extends ExamplesConfig
         return $this;
     }
 
-    //Create transaction with the BLIK payment
+    // Create transaction with the BLIK payment
     public function createBlikTransaction()
     {
         $transactionParameters = $this->getTransactionParameters();
@@ -95,7 +96,7 @@ class TransactionsApiExample extends ExamplesConfig
         return $this;
     }
 
-    //Create transaction with a new card
+    // Create transaction with a new card
     public function createNewCardTransaction()
     {
         $transactionParameters = $this->getTransactionParameters();
@@ -106,7 +107,7 @@ class TransactionsApiExample extends ExamplesConfig
         return $this;
     }
 
-    //Create transaction with a saved card
+    // Create transaction with a saved card
     public function createSavedCardTransaction()
     {
         $transactionParameters = $this->getTransactionParameters();
@@ -151,7 +152,7 @@ class TransactionsApiExample extends ExamplesConfig
         return [
             'groupId' => 150,
             'blikPaymentData' => [
-                'blikToken' => '123456', //This must be a string
+                'blikToken' => '123456', // This must be a string
                 'aliases' => [
                     'value' => 'test__custom_alias_123',
                     'type' => 'UID',
@@ -181,7 +182,6 @@ class TransactionsApiExample extends ExamplesConfig
             ],
         ];
     }
-
 }
 
 (new TransactionsApiExample())->runAllExamples();

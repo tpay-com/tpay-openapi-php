@@ -1,4 +1,5 @@
 <?php
+
 namespace tpaySDK\Model\Objects\Transactions;
 
 use tpaySDK\Model\Fields\Person\Email;
@@ -21,5 +22,4 @@ class CallbacksNotification extends Objects
      * @var Email
      */
     public $email;
-
 }
