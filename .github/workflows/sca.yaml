@@ -13,8 +13,10 @@ jobs:
       - uses: shivammathur/setup-php@v2
         with:
           php-version: 8.2
-          extensions: none, curl, dom, iconv, json, mbstring, tokenizer, xml, xmlwriter
+          extensions: none, curl, dom, mbstring, simplexml, tokenizer
           coverage: none
+
+      - run: composer update --no-progress --classmap-authoritative
 
       - run: composer validate --strict
 
@@ -26,3 +28,6 @@ jobs:
 
       - working-directory: .dev-tools
         run: ./vendor/bin/php-cs-fixer fix -vvv --diff --dry-run
+
+      - working-directory: .dev-tools
+        run: ./vendor/bin/psalm --no-progress --shepherd
