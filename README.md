@@ -6,6 +6,7 @@ Library for all methods available via OpenAPI [Tpay](https://tpay.com).
 [![PHP version](https://img.shields.io/packagist/php-v/tpay-com/tpay-openapi-php.svg)](https://php.net)
 [![License](https://img.shields.io/github/license/tpay-com/tpay-openapi-php.svg)](LICENSE)
 [![CI status](https://github.com/tpay-com/tpay-openapi-php/actions/workflows/ci.yaml/badge.svg?branch=master)](https://github.com/tpay-com/tpay-openapi-php/actions)
+[![Type coverage](https://shepherd.dev/github/tpay-com/tpay-openapi-php/coverage.svg)](https://shepherd.dev/github/tpay-com/tpay-openapi-php)
 
 [Polish version :poland: wersja polska](./README_PL.md)
 
