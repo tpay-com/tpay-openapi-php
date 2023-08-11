@@ -16,6 +16,8 @@ jobs:
           extensions: none, curl, dom, mbstring, simplexml, tokenizer
           coverage: none
 
+      - run: composer update --no-progress --classmap-authoritative
+
       - run: composer validate --strict
 
       - working-directory: .dev-tools
