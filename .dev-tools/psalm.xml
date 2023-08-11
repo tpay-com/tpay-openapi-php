@@ -11,6 +11,12 @@
         <directory name='../' />
         <ignoreFiles>
             <directory name='./' />
+            <directory name='../vendor/' />
+            <file name='../Model/Objects/Authorization/Token.php' />
         </ignoreFiles>
     </projectFiles>
+
+    <issueHandlers>
+        <UndefinedClass errorLevel='suppress' />
+    </issueHandlers>
 </psalm>

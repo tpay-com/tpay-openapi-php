@@ -39,8 +39,8 @@ class Objects implements ObjectsInterface
     }
 
     /**
+     * @param object $object object name
      * @param array $values array containing object fields with values
-     * @param &object $object object name
      *
      * @return $this
      */
