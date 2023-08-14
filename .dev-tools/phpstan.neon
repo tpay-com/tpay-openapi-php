@@ -1,0 +1,9 @@
+parameters:
+  bootstrapFiles:
+    - ../vendor/autoload.php
+  level: 0
+  paths:
+    - ../
+  excludePaths:
+    - ../Examples/
+    - ../vendor/
