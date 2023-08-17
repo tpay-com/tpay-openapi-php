@@ -18,7 +18,7 @@ class ServerValidator
     private $validateServerIP;
 
     /**
-     * @var bool
+     * @var array<string>
      */
     private $secureIP;
 
