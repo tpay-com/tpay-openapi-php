@@ -59,6 +59,11 @@ class Transaction extends Objects
      */
     public $payer;
 
+    /**
+     * @var Callbacks
+     */
+    public $callbacks;
+
     public function getRequiredFields()
     {
         return [
