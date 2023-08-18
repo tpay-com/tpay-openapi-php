@@ -35,7 +35,7 @@ https://github.com/tpay-com/tpay-openapi-php/archive/master.zip
 Jedyne, co musisz zrobić, to ustawić dane uwierzytelniające [OAuth](https://oauth.net), tak jak w przykładowym pliku konfiguracyjnym ([zobacz przykład](Examples/ExamplesConfig.php)).
 Klucze dostępu możesz wygenerować w [panelu sprzedawcy Tpay](https://panel.tpay.com).
 
-Plik [`loader.php`](Loader.php) obsługuje ładowanie wszystkich wymaganych klas, więc możesz dołączyć ten plik do dowolnego pliku, który edytujesz.
+Plik [`src/Loader.php`](src/Loader.php) obsługuje ładowanie wszystkich wymaganych klas, więc możesz dołączyć ten plik do dowolnego pliku, który edytujesz.
 
 Wszystkie metody opisane w [dokumentacji Tpay OpenAPI](https://openapi.tpay.com) można łatwo wykonać, uruchamiając jedną z metod z tej biblioteki, takie jak:
 ```php

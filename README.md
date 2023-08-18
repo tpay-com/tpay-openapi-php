@@ -35,7 +35,7 @@ https://github.com/tpay-com/tpay-openapi-php/archive/master.zip
 The only thing you need to do is to set your [OAuth](https://oauth.net) credentials like in example config file ([see example](Examples/ExamplesConfig.php)).
 You can generate access keys in [Tpay's merchant panel](https://panel.tpay.com).
 
-The [`Loader.php`](Loader.php) file handles all required class loading, so you can include this file to any file you are editing.
+The [`src/Loader.php`](src/Loader.php) file handles all required class loading, so you can include this file to any file you are editing.
 
 All methods described in [Tpay OpenAPI documentation](https://openapi.tpay.com) can be easily executed by running one of the library methods like:
 ```php
