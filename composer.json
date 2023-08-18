@@ -26,10 +26,10 @@
     },
     "autoload": {
         "psr-4": {
-            "tpaySDK\\": ""
+            "Tpay\\": "src/"
         },
-        "exclude-from-classmap": [
-            "**/Examples/"
+        "files": [
+            "src/legacy_classes.php"
         ]
     },
     "autoload-dev": {

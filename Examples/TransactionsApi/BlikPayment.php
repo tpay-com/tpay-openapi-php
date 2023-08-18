@@ -2,13 +2,13 @@
 
 namespace tpaySDK\Examples\TransactionsApi;
 
-use tpaySDK\Api\TpayApi;
+use Tpay\Api\TpayApi;
+use Tpay\Forms\PaymentForms;
+use Tpay\Utilities\TpayException;
 use tpaySDK\Examples\ExamplesConfig;
-use tpaySDK\Forms\PaymentForms;
-use tpaySDK\Utilities\TpayException;
 
 require_once '../ExamplesConfig.php';
-require_once '../../Loader.php';
+require_once '../../src/Loader.php';
 
 class BlikPayment extends ExamplesConfig
 {

@@ -2,13 +2,13 @@
 
 namespace tpaySDK\Examples\Notifications;
 
+use Tpay\Model\Objects\NotificationBody\BasicPayment;
+use Tpay\Utilities\TpayException;
+use Tpay\Webhook\JWSVerifiedPaymentNotification;
 use tpaySDK\Examples\ExamplesConfig;
-use tpaySDK\Model\Objects\NotificationBody\BasicPayment;
-use tpaySDK\Utilities\TpayException;
-use tpaySDK\Webhook\JWSVerifiedPaymentNotification;
 
 require_once '../ExamplesConfig.php';
-require_once '../../Loader.php';
+require_once '../../src/Loader.php';
 
 class PaymentNotificationExample extends ExamplesConfig
 {

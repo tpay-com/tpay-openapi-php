@@ -25,7 +25,7 @@ class ModelsTest extends TestCase
 
     public static function dataModel()
     {
-        $modelDirectory = realpath(__DIR__.'/../../Model');
+        $modelDirectory = realpath(__DIR__.'/../../src/Model');
 
         /** @var SplFileInfo $fileInfo */
         foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($modelDirectory)) as $fileInfo) {
@@ -33,7 +33,7 @@ class ModelsTest extends TestCase
                 continue;
             }
 
-            $className = 'tpaySDK\\Model\\'.substr(
+            $className = 'Tpay\\Model\\'.substr(
                 $fileInfo->getRealPath(),
                 strlen($modelDirectory) + 1,
                 -4

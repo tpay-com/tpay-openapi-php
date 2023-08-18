@@ -2,11 +2,11 @@
 
 namespace tpaySDK\Examples\RefundsApi;
 
-use tpaySDK\Api\TpayApi;
+use Tpay\Api\TpayApi;
 use tpaySDK\Examples\ExamplesConfig;
 
 require_once '../ExamplesConfig.php';
-require_once '../../Loader.php';
+require_once '../../src/Loader.php';
 
 class RefundsApiExample extends ExamplesConfig
 {
