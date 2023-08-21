@@ -1,6 +1,6 @@
 <?php
 
-namespace tpaySDK\Examples;
+namespace TpayExample;
 
 use Tpay\Loader;
 

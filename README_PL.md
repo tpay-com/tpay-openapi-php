@@ -32,7 +32,7 @@ https://github.com/tpay-com/tpay-openapi-php/archive/master.zip
 
 ## Konfiguracja
 
-Jedyne, co musisz zrobić, to ustawić dane uwierzytelniające [OAuth](https://oauth.net), tak jak w przykładowym pliku konfiguracyjnym ([zobacz przykład](Examples/ExamplesConfig.php)).
+Jedyne, co musisz zrobić, to ustawić dane uwierzytelniające [OAuth](https://oauth.net), tak jak w przykładowym pliku konfiguracyjnym ([zobacz przykład](examples/ExamplesConfig.php)).
 Klucze dostępu możesz wygenerować w [panelu sprzedawcy Tpay](https://panel.tpay.com).
 
 Plik [`src/Loader.php`](src/Loader.php) obsługuje ładowanie wszystkich wymaganych klas, więc możesz dołączyć ten plik do dowolnego pliku, który edytujesz.
@@ -43,7 +43,7 @@ $TpayApi = new TpayApi($clientId, $clientSecret, true, 'read');
 $transactions = $this->TpayApi->Transactions->getTransactions();
 ```
 
-Wszystkie obecnie dostępne metody API mają przykładowe użycie w katalogu [`Examples`](Examples).
+Wszystkie obecnie dostępne metody API mają przykładowe użycie w katalogu [`Examples`](examples).
 
 ### Przykładowe dane uwierzytelniające
 
@@ -67,11 +67,11 @@ Wszystkie obecnie dostępne metody API mają przykładowe użycie w katalogu [`E
 
 ##### Formularze frontendowe i moduły obsługi płatności:
 
-[Formularz wyboru metody płatności](Examples/TransactionsApi/BankSelectionForm.php), [Formularz metody BLIK](Examples/TransactionsApi/BlikPayment.php), [Prosty formularz karty kredytowej](Examples/TransactionsApi/CardGate.php), [Rozszerzony formularz karty kredytowej](Examples/TransactionsApi/CardGateExtended.php), [Przykład płatności cyklicznej](Examples/TransactionsApi/RecurrentPayment.php), [Webhook z powiadomieniem o płatności](Examples/Notifications/PaymentNotificationExample.php).
+[Formularz wyboru metody płatności](examples/TransactionsApi/BankSelectionForm.php), [Formularz metody BLIK](examples/TransactionsApi/BlikPayment.php), [Prosty formularz karty kredytowej](examples/TransactionsApi/CardGate.php), [Rozszerzony formularz karty kredytowej](examples/TransactionsApi/CardGateExtended.php), [Przykład płatności cyklicznej](examples/TransactionsApi/RecurrentPayment.php), [Webhook z powiadomieniem o płatności](examples/Notifications/PaymentNotificationExample.php).
 
 ##### Rejestracja kont handlowców (tylko dla partnerów)
 
-[Przykład użycia](Examples/AccountsApi/AccountsApiExample.php).
+[Przykład użycia](examples/AccountsApi/AccountsApiExample.php).
 
 ## Logi
 
