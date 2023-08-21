@@ -1,9 +1,9 @@
 <?php
 
-namespace Tpay\Model\Objects\RequestBody;
+namespace Tpay\OpenApi\Model\Objects\RequestBody;
 
-use Tpay\Model\Fields\Transaction\Amount;
-use Tpay\Model\Objects\Objects;
+use Tpay\OpenApi\Model\Fields\Transaction\Amount;
+use Tpay\OpenApi\Model\Objects\Objects;
 
 class Refund extends Objects
 {

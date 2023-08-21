@@ -1,6 +1,6 @@
 <?php
 
-namespace Tpay;
+namespace Tpay\OpenApi;
 
 class Loader
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Tpay\Model\Fields\Alias;
+namespace Tpay\OpenApi\Model\Fields\Alias;
 
-use Tpay\Model\Fields\Field;
+use Tpay\OpenApi\Model\Fields\Field;
 
 class Value extends Field
 {

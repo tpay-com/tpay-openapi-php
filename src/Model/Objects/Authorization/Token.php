@@ -1,14 +1,14 @@
 <?php
 
-namespace Tpay\Model\Objects\Authorization;
+namespace Tpay\OpenApi\Model\Objects\Authorization;
 
-use Tpay\Model\Fields\ApiCredentials\Scope;
-use Tpay\Model\Fields\Token\AccessToken;
-use Tpay\Model\Fields\Token\ExpiresIn;
-use Tpay\Model\Fields\Token\IssuedAt;
-use Tpay\Model\Fields\Token\TokenType;
-use Tpay\Model\Identifiers\ClientId;
-use Tpay\Model\Objects\Objects;
+use Tpay\OpenApi\Model\Fields\ApiCredentials\Scope;
+use Tpay\OpenApi\Model\Fields\Token\AccessToken;
+use Tpay\OpenApi\Model\Fields\Token\ExpiresIn;
+use Tpay\OpenApi\Model\Fields\Token\IssuedAt;
+use Tpay\OpenApi\Model\Fields\Token\TokenType;
+use Tpay\OpenApi\Model\Identifiers\ClientId;
+use Tpay\OpenApi\Model\Objects\Objects;
 
 class Token extends Objects
 {

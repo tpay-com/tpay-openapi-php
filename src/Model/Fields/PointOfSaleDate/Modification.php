@@ -1,8 +1,8 @@
 <?php
 
-namespace Tpay\Model\Fields\PointOfSaleDate;
+namespace Tpay\OpenApi\Model\Fields\PointOfSaleDate;
 
-use Tpay\Model\Fields\Field;
+use Tpay\OpenApi\Model\Fields\Field;
 
 class Modification extends Field
 {

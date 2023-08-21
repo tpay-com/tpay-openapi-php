@@ -1,9 +1,9 @@
 <?php
 
-namespace Tpay\Utilities;
+namespace Tpay\OpenApi\Utilities;
 
-use Tpay\Locale\Lang;
-use Tpay\Model\Fields\FieldTypes;
+use Tpay\OpenApi\Locale\Lang;
+use Tpay\OpenApi\Model\Fields\FieldTypes;
 
 class Util
 {

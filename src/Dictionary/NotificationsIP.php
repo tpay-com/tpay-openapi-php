@@ -1,6 +1,6 @@
 <?php
 
-namespace Tpay\Dictionary;
+namespace Tpay\OpenApi\Dictionary;
 
 class NotificationsIP
 {

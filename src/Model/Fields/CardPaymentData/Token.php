@@ -1,8 +1,8 @@
 <?php
 
-namespace Tpay\Model\Fields\CardPaymentData;
+namespace Tpay\OpenApi\Model\Fields\CardPaymentData;
 
-use Tpay\Model\Fields\Field;
+use Tpay\OpenApi\Model\Fields\Field;
 
 class Token extends Field
 {

@@ -1,14 +1,14 @@
 <?php
 
-namespace Tpay\Model\Objects\RequestBody;
+namespace Tpay\OpenApi\Model\Objects\RequestBody;
 
-use Tpay\Model\Fields\Pay\ApplePayPaymentData;
-use Tpay\Model\Fields\Pay\Method;
-use Tpay\Model\Identifiers\ChannelId;
-use Tpay\Model\Objects\Objects;
-use Tpay\Model\Objects\Transactions\BlikPaymentData;
-use Tpay\Model\Objects\Transactions\CardPaymentData;
-use Tpay\Model\Objects\Transactions\Recursive;
+use Tpay\OpenApi\Model\Fields\Pay\ApplePayPaymentData;
+use Tpay\OpenApi\Model\Fields\Pay\Method;
+use Tpay\OpenApi\Model\Identifiers\ChannelId;
+use Tpay\OpenApi\Model\Objects\Objects;
+use Tpay\OpenApi\Model\Objects\Transactions\BlikPaymentData;
+use Tpay\OpenApi\Model\Objects\Transactions\CardPaymentData;
+use Tpay\OpenApi\Model\Objects\Transactions\Recursive;
 
 class PayWithInstantRedirection extends Objects
 {

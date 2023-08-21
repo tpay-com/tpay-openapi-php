@@ -1,9 +1,9 @@
 <?php
 
-namespace Tpay\Model\Objects\RequestBody;
+namespace Tpay\OpenApi\Model\Objects\RequestBody;
 
-use Tpay\Model\Fields\ApiCredentials\GrantType;
-use Tpay\Model\Objects\Objects;
+use Tpay\OpenApi\Model\Fields\ApiCredentials\GrantType;
+use Tpay\OpenApi\Model\Objects\Objects;
 
 class BasicAuth extends Objects
 {

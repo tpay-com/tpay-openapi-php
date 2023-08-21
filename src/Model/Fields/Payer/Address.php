@@ -1,8 +1,8 @@
 <?php
 
-namespace Tpay\Model\Fields\Payer;
+namespace Tpay\OpenApi\Model\Fields\Payer;
 
-use Tpay\Model\Fields\Field;
+use Tpay\OpenApi\Model\Fields\Field;
 
 class Address extends Field
 {

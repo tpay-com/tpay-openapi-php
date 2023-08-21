@@ -1,12 +1,12 @@
 <?php
 
-namespace Tpay\Webhook;
+namespace Tpay\OpenApi\Webhook;
 
-use Tpay\Model\Objects\NotificationBody\BasicPayment;
-use Tpay\Utilities\phpseclib\Crypt\RSA;
-use Tpay\Utilities\phpseclib\File\X509;
-use Tpay\Utilities\TpayException;
-use Tpay\Utilities\Util;
+use Tpay\OpenApi\Model\Objects\NotificationBody\BasicPayment;
+use Tpay\OpenApi\Utilities\phpseclib\Crypt\RSA;
+use Tpay\OpenApi\Utilities\phpseclib\File\X509;
+use Tpay\OpenApi\Utilities\TpayException;
+use Tpay\OpenApi\Utilities\Util;
 
 class JWSVerifiedPaymentNotification extends Notification
 {

@@ -1,15 +1,15 @@
 <?php
 
-namespace Tpay\Model\Objects\Transactions;
+namespace Tpay\OpenApi\Model\Objects\Transactions;
 
-use Tpay\Model\Fields\Address\City;
-use Tpay\Model\Fields\Address\Phone;
-use Tpay\Model\Fields\Address\PostalCode;
-use Tpay\Model\Fields\Payer\Address;
-use Tpay\Model\Fields\Payer\Name;
-use Tpay\Model\Fields\Person\Email;
-use Tpay\Model\Fields\Transaction\Country;
-use Tpay\Model\Objects\Objects;
+use Tpay\OpenApi\Model\Fields\Address\City;
+use Tpay\OpenApi\Model\Fields\Address\Phone;
+use Tpay\OpenApi\Model\Fields\Address\PostalCode;
+use Tpay\OpenApi\Model\Fields\Payer\Address;
+use Tpay\OpenApi\Model\Fields\Payer\Name;
+use Tpay\OpenApi\Model\Fields\Person\Email;
+use Tpay\OpenApi\Model\Fields\Transaction\Country;
+use Tpay\OpenApi\Model\Objects\Objects;
 
 class Payer extends Objects
 {

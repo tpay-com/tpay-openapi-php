@@ -1,6 +1,6 @@
 <?php
 
-namespace Tpay\Locale;
+namespace Tpay\OpenApi\Locale;
 
 class Polish
 {

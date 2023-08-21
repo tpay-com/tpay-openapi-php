@@ -1,8 +1,8 @@
 <?php
 
-namespace Tpay\Model\Fields\PersonContact;
+namespace Tpay\OpenApi\Model\Fields\PersonContact;
 
-use Tpay\Model\Fields\Field;
+use Tpay\OpenApi\Model\Fields\Field;
 
 class Type extends Field
 {

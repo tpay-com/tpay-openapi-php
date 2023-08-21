@@ -1,8 +1,8 @@
 <?php
 
-namespace Tpay\Model\Fields\Address;
+namespace Tpay\OpenApi\Model\Fields\Address;
 
-use Tpay\Model\Fields\Field;
+use Tpay\OpenApi\Model\Fields\Field;
 
 class IsCorrespondence extends Field
 {

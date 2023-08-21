@@ -1,14 +1,14 @@
 <?php
 
-namespace Tpay\Model\Objects\Accounts;
+namespace Tpay\OpenApi\Model\Objects\Accounts;
 
-use Tpay\Model\Fields\Address\Description;
-use Tpay\Model\Fields\Address\FriendlyName;
-use Tpay\Model\Fields\PointOfSale\Name;
-use Tpay\Model\Fields\PointOfSale\Url;
-use Tpay\Model\Identifiers\AccountId;
-use Tpay\Model\Identifiers\PosId;
-use Tpay\Model\Objects\Objects;
+use Tpay\OpenApi\Model\Fields\Address\Description;
+use Tpay\OpenApi\Model\Fields\Address\FriendlyName;
+use Tpay\OpenApi\Model\Fields\PointOfSale\Name;
+use Tpay\OpenApi\Model\Fields\PointOfSale\Url;
+use Tpay\OpenApi\Model\Identifiers\AccountId;
+use Tpay\OpenApi\Model\Identifiers\PosId;
+use Tpay\OpenApi\Model\Objects\Objects;
 
 class PointOfSale extends Objects
 {

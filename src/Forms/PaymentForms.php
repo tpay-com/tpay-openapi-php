@@ -1,8 +1,8 @@
 <?php
 
-namespace Tpay\Forms;
+namespace Tpay\OpenApi\Forms;
 
-use Tpay\Utilities\Util;
+use Tpay\OpenApi\Utilities\Util;
 
 class PaymentForms
 {

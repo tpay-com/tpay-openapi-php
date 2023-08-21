@@ -1,8 +1,8 @@
 <?php
 
-namespace Tpay\Model\Fields\Token;
+namespace Tpay\OpenApi\Model\Fields\Token;
 
-use Tpay\Model\Fields\Field;
+use Tpay\OpenApi\Model\Fields\Field;
 
 class IssuedAt extends Field
 {

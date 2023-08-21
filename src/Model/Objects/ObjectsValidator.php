@@ -1,8 +1,8 @@
 <?php
 
-namespace Tpay\Model\Objects;
+namespace Tpay\OpenApi\Model\Objects;
 
-use Tpay\Model\Fields\Field;
+use Tpay\OpenApi\Model\Fields\Field;
 use UnexpectedValueException;
 
 class ObjectsValidator

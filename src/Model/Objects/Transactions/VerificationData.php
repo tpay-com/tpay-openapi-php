@@ -1,11 +1,11 @@
 <?php
 
-namespace Tpay\Model\Objects\Transactions;
+namespace Tpay\OpenApi\Model\Objects\Transactions;
 
-use Tpay\Model\Fields\Beneficiary\AccountNumber;
-use Tpay\Model\Fields\Payer\Name;
-use Tpay\Model\Objects\Accounts\Address;
-use Tpay\Model\Objects\Objects;
+use Tpay\OpenApi\Model\Fields\Beneficiary\AccountNumber;
+use Tpay\OpenApi\Model\Fields\Payer\Name;
+use Tpay\OpenApi\Model\Objects\Accounts\Address;
+use Tpay\OpenApi\Model\Objects\Objects;
 
 class VerificationData extends Objects
 {

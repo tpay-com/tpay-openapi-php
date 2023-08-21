@@ -1,10 +1,10 @@
 <?php
 
-namespace Tpay\Model\Objects\Transactions;
+namespace Tpay\OpenApi\Model\Objects\Transactions;
 
-use Tpay\Model\Fields\BlikPaymentData\BlikToken;
-use Tpay\Model\Fields\BlikPaymentData\Type;
-use Tpay\Model\Objects\Objects;
+use Tpay\OpenApi\Model\Fields\BlikPaymentData\BlikToken;
+use Tpay\OpenApi\Model\Fields\BlikPaymentData\Type;
+use Tpay\OpenApi\Model\Objects\Objects;
 
 class BlikPaymentData extends Objects
 {

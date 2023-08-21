@@ -1,6 +1,6 @@
 <?php
 
-namespace Tpay\Utilities;
+namespace Tpay\OpenApi\Utilities;
 
 use Exception;
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace Tpay\Model\Fields\Pay;
+namespace Tpay\OpenApi\Model\Fields\Pay;
 
-use Tpay\Model\Fields\Field;
+use Tpay\OpenApi\Model\Fields\Field;
 
 class Method extends Field
 {

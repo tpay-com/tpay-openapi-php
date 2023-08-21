@@ -1,6 +1,6 @@
 <?php
 
-namespace Tpay\Model\Objects;
+namespace Tpay\OpenApi\Model\Objects;
 
 interface ObjectsInterface
 {

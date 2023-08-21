@@ -1,8 +1,8 @@
 <?php
 
-namespace Tpay\Model\Fields\Person;
+namespace Tpay\OpenApi\Model\Fields\Person;
 
-use Tpay\Model\Fields\Field;
+use Tpay\OpenApi\Model\Fields\Field;
 
 class IsBeneficiary extends Field
 {

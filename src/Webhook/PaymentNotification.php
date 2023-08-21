@@ -1,13 +1,13 @@
 <?php
 
-namespace Tpay\Webhook;
+namespace Tpay\OpenApi\Webhook;
 
-use Tpay\Dictionary\NotificationsIP;
-use Tpay\Model\Objects\NotificationBody\BasicPayment;
-use Tpay\Utilities\Logger;
-use Tpay\Utilities\ServerValidator;
-use Tpay\Utilities\TpayException;
-use Tpay\Utilities\Util;
+use Tpay\OpenApi\Dictionary\NotificationsIP;
+use Tpay\OpenApi\Model\Objects\NotificationBody\BasicPayment;
+use Tpay\OpenApi\Utilities\Logger;
+use Tpay\OpenApi\Utilities\ServerValidator;
+use Tpay\OpenApi\Utilities\TpayException;
+use Tpay\OpenApi\Utilities\Util;
 
 /**
  * @deprecated use JWSVerifiedPaymentNotification::class instead

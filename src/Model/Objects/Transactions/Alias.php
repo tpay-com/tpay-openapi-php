@@ -1,12 +1,12 @@
 <?php
 
-namespace Tpay\Model\Objects\Transactions;
+namespace Tpay\OpenApi\Model\Objects\Transactions;
 
-use Tpay\Model\Fields\Alias\Key;
-use Tpay\Model\Fields\Alias\Label;
-use Tpay\Model\Fields\Alias\Type;
-use Tpay\Model\Fields\Alias\Value;
-use Tpay\Model\Objects\Objects;
+use Tpay\OpenApi\Model\Fields\Alias\Key;
+use Tpay\OpenApi\Model\Fields\Alias\Label;
+use Tpay\OpenApi\Model\Fields\Alias\Type;
+use Tpay\OpenApi\Model\Fields\Alias\Value;
+use Tpay\OpenApi\Model\Objects\Objects;
 
 class Alias extends Objects
 {
