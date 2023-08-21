@@ -1,6 +1,6 @@
 <?php
 
-namespace Tpay\Model\Fields;
+namespace Tpay\OpenApi\Model\Fields;
 
 interface FieldTypes
 {

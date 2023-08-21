@@ -1,10 +1,10 @@
 <?php
 
-namespace Tpay\Model\Objects;
+namespace Tpay\OpenApi\Model\Objects;
 
 use InvalidArgumentException;
 use ReflectionClass;
-use Tpay\Model\Fields\Field;
+use Tpay\OpenApi\Model\Fields\Field;
 
 class Objects implements ObjectsInterface
 {

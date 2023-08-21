@@ -1,8 +1,8 @@
 <?php
 
-namespace Tpay\Webhook;
+namespace Tpay\OpenApi\Webhook;
 
-use Tpay\Manager\Manager;
+use Tpay\OpenApi\Manager\Manager;
 
 class Notification
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Tpay\Model\Fields\BlikPaymentData;
+namespace Tpay\OpenApi\Model\Fields\BlikPaymentData;
 
-use Tpay\Model\Fields\Field;
+use Tpay\OpenApi\Model\Fields\Field;
 
 class BlikToken extends Field
 {

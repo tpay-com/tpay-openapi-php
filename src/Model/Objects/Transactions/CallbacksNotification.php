@@ -1,10 +1,10 @@
 <?php
 
-namespace Tpay\Model\Objects\Transactions;
+namespace Tpay\OpenApi\Model\Objects\Transactions;
 
-use Tpay\Model\Fields\Person\Email;
-use Tpay\Model\Fields\PointOfSale\Url;
-use Tpay\Model\Objects\Objects;
+use Tpay\OpenApi\Model\Fields\Person\Email;
+use Tpay\OpenApi\Model\Fields\PointOfSale\Url;
+use Tpay\OpenApi\Model\Objects\Objects;
 
 class CallbacksNotification extends Objects
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace Tpay\Model\Objects\Accounts;
+namespace Tpay\OpenApi\Model\Objects\Accounts;
 
-use Tpay\Model\Fields\PersonContact\Contact;
-use Tpay\Model\Fields\PersonContact\Type;
-use Tpay\Model\Objects\Objects;
+use Tpay\OpenApi\Model\Fields\PersonContact\Contact;
+use Tpay\OpenApi\Model\Fields\PersonContact\Type;
+use Tpay\OpenApi\Model\Objects\Objects;
 
 class PersonContact extends Objects
 {

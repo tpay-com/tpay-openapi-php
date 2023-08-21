@@ -1,8 +1,8 @@
 <?php
 
-namespace Tpay\Model\Fields\ApiCredentials;
+namespace Tpay\OpenApi\Model\Fields\ApiCredentials;
 
-use Tpay\Model\Fields\Field;
+use Tpay\OpenApi\Model\Fields\Field;
 
 class ClientSecret extends Field
 {

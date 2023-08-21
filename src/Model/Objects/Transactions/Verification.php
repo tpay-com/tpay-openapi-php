@@ -1,8 +1,8 @@
 <?php
 
-namespace Tpay\Model\Objects\Transactions;
+namespace Tpay\OpenApi\Model\Objects\Transactions;
 
-use Tpay\Model\Objects\Objects;
+use Tpay\OpenApi\Model\Objects\Objects;
 
 class Verification extends Objects
 {

@@ -1,12 +1,12 @@
 <?php
 
-namespace Tpay\Api\Transactions;
+namespace Tpay\OpenApi\Api\Transactions;
 
-use Tpay\Api\ApiAction;
-use Tpay\Model\Objects\RequestBody\Pay;
-use Tpay\Model\Objects\RequestBody\Refund;
-use Tpay\Model\Objects\RequestBody\Transaction;
-use Tpay\Model\Objects\RequestBody\TransactionWithInstantRedirection;
+use Tpay\OpenApi\Api\ApiAction;
+use Tpay\OpenApi\Model\Objects\RequestBody\Pay;
+use Tpay\OpenApi\Model\Objects\RequestBody\Refund;
+use Tpay\OpenApi\Model\Objects\RequestBody\Transaction;
+use Tpay\OpenApi\Model\Objects\RequestBody\TransactionWithInstantRedirection;
 
 class TransactionsApi extends ApiAction
 {

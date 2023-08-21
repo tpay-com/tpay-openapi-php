@@ -1,19 +1,19 @@
 <?php
 
-namespace Tpay\Model\Objects\RequestBody;
+namespace Tpay\OpenApi\Model\Objects\RequestBody;
 
-use Tpay\Model\Fields\Account\Krs;
-use Tpay\Model\Fields\Account\LegalForm;
-use Tpay\Model\Fields\Account\NotifyByEmail;
-use Tpay\Model\Fields\Account\OfferCode;
-use Tpay\Model\Fields\Account\Regon;
-use Tpay\Model\Fields\Account\TaxId;
-use Tpay\Model\Fields\Person\Email;
-use Tpay\Model\Identifiers\CategoryId;
-use Tpay\Model\Objects\Accounts\Address;
-use Tpay\Model\Objects\Accounts\Person;
-use Tpay\Model\Objects\Accounts\PointOfSale;
-use Tpay\Model\Objects\Objects;
+use Tpay\OpenApi\Model\Fields\Account\Krs;
+use Tpay\OpenApi\Model\Fields\Account\LegalForm;
+use Tpay\OpenApi\Model\Fields\Account\NotifyByEmail;
+use Tpay\OpenApi\Model\Fields\Account\OfferCode;
+use Tpay\OpenApi\Model\Fields\Account\Regon;
+use Tpay\OpenApi\Model\Fields\Account\TaxId;
+use Tpay\OpenApi\Model\Fields\Person\Email;
+use Tpay\OpenApi\Model\Identifiers\CategoryId;
+use Tpay\OpenApi\Model\Objects\Accounts\Address;
+use Tpay\OpenApi\Model\Objects\Accounts\Person;
+use Tpay\OpenApi\Model\Objects\Accounts\PointOfSale;
+use Tpay\OpenApi\Model\Objects\Objects;
 
 class Account extends Objects
 {

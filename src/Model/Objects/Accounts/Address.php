@@ -1,20 +1,20 @@
 <?php
 
-namespace Tpay\Model\Objects\Accounts;
+namespace Tpay\OpenApi\Model\Objects\Accounts;
 
-use Tpay\Model\Fields\Address\City;
-use Tpay\Model\Fields\Address\Country;
-use Tpay\Model\Fields\Address\FriendlyName;
-use Tpay\Model\Fields\Address\HouseNumber;
-use Tpay\Model\Fields\Address\IsCorrespondence;
-use Tpay\Model\Fields\Address\IsInvoice;
-use Tpay\Model\Fields\Address\IsMain;
-use Tpay\Model\Fields\Address\Name;
-use Tpay\Model\Fields\Address\Phone;
-use Tpay\Model\Fields\Address\PostalCode;
-use Tpay\Model\Fields\Address\RoomNumber;
-use Tpay\Model\Fields\Address\Street;
-use Tpay\Model\Objects\Objects;
+use Tpay\OpenApi\Model\Fields\Address\City;
+use Tpay\OpenApi\Model\Fields\Address\Country;
+use Tpay\OpenApi\Model\Fields\Address\FriendlyName;
+use Tpay\OpenApi\Model\Fields\Address\HouseNumber;
+use Tpay\OpenApi\Model\Fields\Address\IsCorrespondence;
+use Tpay\OpenApi\Model\Fields\Address\IsInvoice;
+use Tpay\OpenApi\Model\Fields\Address\IsMain;
+use Tpay\OpenApi\Model\Fields\Address\Name;
+use Tpay\OpenApi\Model\Fields\Address\Phone;
+use Tpay\OpenApi\Model\Fields\Address\PostalCode;
+use Tpay\OpenApi\Model\Fields\Address\RoomNumber;
+use Tpay\OpenApi\Model\Fields\Address\Street;
+use Tpay\OpenApi\Model\Objects\Objects;
 
 class Address extends Objects
 {

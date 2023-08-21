@@ -1,8 +1,8 @@
 <?php
 
-namespace Tpay\Model\Fields\Account;
+namespace Tpay\OpenApi\Model\Fields\Account;
 
-use Tpay\Model\Fields\Field;
+use Tpay\OpenApi\Model\Fields\Field;
 
 class TaxId extends Field
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace TpayExample\RefundsApi;
+namespace Tpay\Example\RefundsApi;
 
-use Tpay\Api\TpayApi;
-use TpayExample\ExamplesConfig;
+use Tpay\Example\ExamplesConfig;
+use Tpay\OpenApi\Api\TpayApi;
 
 require_once '../ExamplesConfig.php';
 require_once '../../src/Loader.php';

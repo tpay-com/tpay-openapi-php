@@ -1,8 +1,8 @@
 <?php
 
-namespace Tpay\Model\Fields\Notification;
+namespace Tpay\OpenApi\Model\Fields\Notification;
 
-use Tpay\Model\Fields\Field;
+use Tpay\OpenApi\Model\Fields\Field;
 
 class TestMode extends Field
 {

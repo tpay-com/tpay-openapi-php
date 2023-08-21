@@ -1,24 +1,24 @@
 <?php
 
-namespace Tpay\Model\Objects\Accounts;
+namespace Tpay\OpenApi\Model\Objects\Accounts;
 
-use Tpay\Model\Fields\Beneficiary\Nationality;
-use Tpay\Model\Fields\Person\CountryOfBirth;
-use Tpay\Model\Fields\Person\DateOfBirth;
-use Tpay\Model\Fields\Person\ExpiryDate;
-use Tpay\Model\Fields\Person\IsAuthorizedPerson;
-use Tpay\Model\Fields\Person\IsBeneficiary;
-use Tpay\Model\Fields\Person\IsContactPerson;
-use Tpay\Model\Fields\Person\IsRepresentative;
-use Tpay\Model\Fields\Person\IssuingAuthority;
-use Tpay\Model\Fields\Person\Name;
-use Tpay\Model\Fields\Person\PepStatement;
-use Tpay\Model\Fields\Person\Pesel;
-use Tpay\Model\Fields\Person\SerialNumber;
-use Tpay\Model\Fields\Person\SharesPct;
-use Tpay\Model\Fields\Person\Surname;
-use Tpay\Model\Fields\Person\TypeOfDocument;
-use Tpay\Model\Objects\Objects;
+use Tpay\OpenApi\Model\Fields\Beneficiary\Nationality;
+use Tpay\OpenApi\Model\Fields\Person\CountryOfBirth;
+use Tpay\OpenApi\Model\Fields\Person\DateOfBirth;
+use Tpay\OpenApi\Model\Fields\Person\ExpiryDate;
+use Tpay\OpenApi\Model\Fields\Person\IsAuthorizedPerson;
+use Tpay\OpenApi\Model\Fields\Person\IsBeneficiary;
+use Tpay\OpenApi\Model\Fields\Person\IsContactPerson;
+use Tpay\OpenApi\Model\Fields\Person\IsRepresentative;
+use Tpay\OpenApi\Model\Fields\Person\IssuingAuthority;
+use Tpay\OpenApi\Model\Fields\Person\Name;
+use Tpay\OpenApi\Model\Fields\Person\PepStatement;
+use Tpay\OpenApi\Model\Fields\Person\Pesel;
+use Tpay\OpenApi\Model\Fields\Person\SerialNumber;
+use Tpay\OpenApi\Model\Fields\Person\SharesPct;
+use Tpay\OpenApi\Model\Fields\Person\Surname;
+use Tpay\OpenApi\Model\Fields\Person\TypeOfDocument;
+use Tpay\OpenApi\Model\Objects\Objects;
 
 class Person extends Objects
 {

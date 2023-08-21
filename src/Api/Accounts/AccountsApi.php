@@ -1,9 +1,9 @@
 <?php
 
-namespace Tpay\Api\Accounts;
+namespace Tpay\OpenApi\Api\Accounts;
 
-use Tpay\Api\ApiAction;
-use Tpay\Model\Objects\RequestBody\Account;
+use Tpay\OpenApi\Api\ApiAction;
+use Tpay\OpenApi\Model\Objects\RequestBody\Account;
 
 class AccountsApi extends ApiAction
 {

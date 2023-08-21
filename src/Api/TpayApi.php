@@ -1,13 +1,13 @@
 <?php
 
-namespace Tpay\Api;
+namespace Tpay\OpenApi\Api;
 
-use Tpay\Api\Accounts\AccountsApi;
-use Tpay\Api\Authorization\AuthorizationApi;
-use Tpay\Api\Refunds\RefundsApi;
-use Tpay\Api\Transactions\TransactionsApi;
-use Tpay\Model\Objects\Authorization\Token;
-use Tpay\Utilities\TpayException;
+use Tpay\OpenApi\Api\Accounts\AccountsApi;
+use Tpay\OpenApi\Api\Authorization\AuthorizationApi;
+use Tpay\OpenApi\Api\Refunds\RefundsApi;
+use Tpay\OpenApi\Api\Transactions\TransactionsApi;
+use Tpay\OpenApi\Model\Objects\Authorization\Token;
+use Tpay\OpenApi\Utilities\TpayException;
 
 class TpayApi
 {

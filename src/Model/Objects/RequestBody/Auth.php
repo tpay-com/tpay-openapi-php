@@ -1,11 +1,11 @@
 <?php
 
-namespace Tpay\Model\Objects\RequestBody;
+namespace Tpay\OpenApi\Model\Objects\RequestBody;
 
-use Tpay\Model\Fields\ApiCredentials\ClientSecret;
-use Tpay\Model\Fields\ApiCredentials\Scope;
-use Tpay\Model\Identifiers\ClientId;
-use Tpay\Model\Objects\Objects;
+use Tpay\OpenApi\Model\Fields\ApiCredentials\ClientSecret;
+use Tpay\OpenApi\Model\Fields\ApiCredentials\Scope;
+use Tpay\OpenApi\Model\Identifiers\ClientId;
+use Tpay\OpenApi\Model\Objects\Objects;
 
 class Auth extends Objects
 {

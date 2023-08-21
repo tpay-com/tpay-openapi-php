@@ -1,8 +1,8 @@
 <?php
 
-namespace Tpay\Api\Refunds;
+namespace Tpay\OpenApi\Api\Refunds;
 
-use Tpay\Api\ApiAction;
+use Tpay\OpenApi\Api\ApiAction;
 
 class RefundsApi extends ApiAction
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Tpay\Manager;
+namespace Tpay\OpenApi\Manager;
 
-use Tpay\Model\Objects\ObjectsValidator;
+use Tpay\OpenApi\Model\Objects\ObjectsValidator;
 
 class Manager
 {

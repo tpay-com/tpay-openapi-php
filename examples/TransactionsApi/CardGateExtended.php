@@ -1,14 +1,14 @@
 <?php
 
-namespace TpayExample\TransactionsApi;
+namespace Tpay\Example\TransactionsApi;
 
-use Tpay\Api\TpayApi;
-use Tpay\Forms\PaymentForms;
-use Tpay\Model\Fields\FieldTypes;
-use Tpay\Utilities\Logger;
-use Tpay\Utilities\TpayException;
-use Tpay\Utilities\Util;
-use TpayExample\ExamplesConfig;
+use Tpay\Example\ExamplesConfig;
+use Tpay\OpenApi\Api\TpayApi;
+use Tpay\OpenApi\Forms\PaymentForms;
+use Tpay\OpenApi\Model\Fields\FieldTypes;
+use Tpay\OpenApi\Utilities\Logger;
+use Tpay\OpenApi\Utilities\TpayException;
+use Tpay\OpenApi\Utilities\Util;
 
 require_once '../ExamplesConfig.php';
 require_once '../../src/Loader.php';

@@ -1,13 +1,13 @@
 <?php
 
-namespace Tpay\Api;
+namespace Tpay\OpenApi\Api;
 
-use Tpay\Curl\Curl;
-use Tpay\Dictionary\HttpCodesDictionary;
-use Tpay\Manager\Manager;
-use Tpay\Model\Objects\Authorization\Token;
-use Tpay\Utilities\Logger;
-use Tpay\Utilities\TpayException;
+use Tpay\OpenApi\Curl\Curl;
+use Tpay\OpenApi\Dictionary\HttpCodesDictionary;
+use Tpay\OpenApi\Manager\Manager;
+use Tpay\OpenApi\Model\Objects\Authorization\Token;
+use Tpay\OpenApi\Utilities\Logger;
+use Tpay\OpenApi\Utilities\TpayException;
 
 class ApiAction
 {

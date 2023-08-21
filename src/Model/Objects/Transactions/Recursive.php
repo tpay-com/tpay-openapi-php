@@ -1,12 +1,12 @@
 <?php
 
-namespace Tpay\Model\Objects\Transactions;
+namespace Tpay\OpenApi\Model\Objects\Transactions;
 
-use Tpay\Model\Fields\Recursive\ExpirationDate;
-use Tpay\Model\Fields\Recursive\Period;
-use Tpay\Model\Fields\Recursive\Quantity;
-use Tpay\Model\Fields\Recursive\Type;
-use Tpay\Model\Objects\Objects;
+use Tpay\OpenApi\Model\Fields\Recursive\ExpirationDate;
+use Tpay\OpenApi\Model\Fields\Recursive\Period;
+use Tpay\OpenApi\Model\Fields\Recursive\Quantity;
+use Tpay\OpenApi\Model\Fields\Recursive\Type;
+use Tpay\OpenApi\Model\Objects\Objects;
 
 class Recursive extends Objects
 {

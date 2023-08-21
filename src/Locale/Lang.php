@@ -1,8 +1,8 @@
 <?php
 
-namespace Tpay\Locale;
+namespace Tpay\OpenApi\Locale;
 
-use Tpay\Utilities\TpayException;
+use Tpay\OpenApi\Utilities\TpayException;
 
 class Lang extends Keys
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tpay\Tests\Model;
+namespace Tpay\OpenApi\Tests\Model;
 
 use PHPUnit\Framework\TestCase;
 use RecursiveDirectoryIterator;
@@ -33,7 +33,7 @@ class ModelsTest extends TestCase
                 continue;
             }
 
-            $className = 'Tpay\\Model\\'.substr(
+            $className = 'Tpay\\OpenApi\\Model\\'.substr(
                 $fileInfo->getRealPath(),
                 strlen($modelDirectory) + 1,
                 -4

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tpay\Utilities\phpseclib\File;
+namespace Tpay\OpenApi\Utilities\phpseclib\File;
 
 if (class_exists('phpseclib3\File\X509')) {
     class X509 extends \phpseclib3\File\X509

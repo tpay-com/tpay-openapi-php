@@ -1,15 +1,15 @@
 <?php
 
-namespace Tpay\Model\Objects\RequestBody;
+namespace Tpay\OpenApi\Model\Objects\RequestBody;
 
-use Tpay\Model\Fields\Transaction\Amount;
-use Tpay\Model\Fields\Transaction\Description;
-use Tpay\Model\Fields\Transaction\HiddenDescription;
-use Tpay\Model\Fields\Transaction\Lang;
-use Tpay\Model\Objects\Objects;
-use Tpay\Model\Objects\Transactions\Callbacks;
-use Tpay\Model\Objects\Transactions\Payer;
-use Tpay\Model\Objects\Transactions\Verification;
+use Tpay\OpenApi\Model\Fields\Transaction\Amount;
+use Tpay\OpenApi\Model\Fields\Transaction\Description;
+use Tpay\OpenApi\Model\Fields\Transaction\HiddenDescription;
+use Tpay\OpenApi\Model\Fields\Transaction\Lang;
+use Tpay\OpenApi\Model\Objects\Objects;
+use Tpay\OpenApi\Model\Objects\Transactions\Callbacks;
+use Tpay\OpenApi\Model\Objects\Transactions\Payer;
+use Tpay\OpenApi\Model\Objects\Transactions\Verification;
 
 class TransactionWithInstantRedirection extends Objects
 {

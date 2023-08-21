@@ -1,6 +1,6 @@
 <?php
 
-namespace Tpay\Utilities\phpseclib\Crypt;
+namespace Tpay\OpenApi\Utilities\phpseclib\Crypt;
 
 if (class_exists('phpseclib3\Crypt\RSA')) {
     abstract class RSA extends \phpseclib3\Crypt\RSA {}

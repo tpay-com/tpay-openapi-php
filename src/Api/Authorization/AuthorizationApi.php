@@ -1,9 +1,9 @@
 <?php
 
-namespace Tpay\Api\Authorization;
+namespace Tpay\OpenApi\Api\Authorization;
 
-use Tpay\Api\ApiAction;
-use Tpay\Model\Objects\RequestBody\Auth;
+use Tpay\OpenApi\Api\ApiAction;
+use Tpay\OpenApi\Model\Objects\RequestBody\Auth;
 
 class AuthorizationApi extends ApiAction
 {

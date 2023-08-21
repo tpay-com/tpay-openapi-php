@@ -1,8 +1,8 @@
 <?php
 
-namespace Tpay\Model\Fields\Recursive;
+namespace Tpay\OpenApi\Model\Fields\Recursive;
 
-use Tpay\Model\Fields\Field;
+use Tpay\OpenApi\Model\Fields\Field;
 
 class Period extends Field
 {

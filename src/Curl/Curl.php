@@ -1,9 +1,9 @@
 <?php
 
-namespace Tpay\Curl;
+namespace Tpay\OpenApi\Curl;
 
-use Tpay\Dictionary\HttpCodesDictionary;
-use Tpay\Utilities\TpayException;
+use Tpay\OpenApi\Dictionary\HttpCodesDictionary;
+use Tpay\OpenApi\Utilities\TpayException;
 
 class Curl extends CurlOptions
 {

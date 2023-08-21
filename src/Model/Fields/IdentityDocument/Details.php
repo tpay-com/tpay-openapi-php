@@ -1,8 +1,8 @@
 <?php
 
-namespace Tpay\Model\Fields\IdentityDocument;
+namespace Tpay\OpenApi\Model\Fields\IdentityDocument;
 
-use Tpay\Model\Fields\Field;
+use Tpay\OpenApi\Model\Fields\Field;
 
 class Details extends Field
 {

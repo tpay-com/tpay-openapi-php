@@ -1,10 +1,10 @@
 <?php
 
-namespace Tpay\Model\Objects\Accounts;
+namespace Tpay\OpenApi\Model\Objects\Accounts;
 
-use Tpay\Model\Fields\PointOfSaleSettings\ConfirmationCode;
-use Tpay\Model\Fields\PointOfSaleSettings\IsTestMode;
-use Tpay\Model\Objects\Objects;
+use Tpay\OpenApi\Model\Fields\PointOfSaleSettings\ConfirmationCode;
+use Tpay\OpenApi\Model\Fields\PointOfSaleSettings\IsTestMode;
+use Tpay\OpenApi\Model\Objects\Objects;
 
 class PointOfSaleSettings extends Objects
 {

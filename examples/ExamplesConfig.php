@@ -1,8 +1,8 @@
 <?php
 
-namespace TpayExample;
+namespace Tpay\Example;
 
-use Tpay\Loader;
+use Tpay\OpenApi\Loader;
 
 class ExamplesConfig
 {

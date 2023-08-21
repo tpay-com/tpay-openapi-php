@@ -1,8 +1,8 @@
 <?php
 
-namespace Tpay\Model\Identifiers;
+namespace Tpay\OpenApi\Model\Identifiers;
 
-use Tpay\Model\Fields\Field;
+use Tpay\OpenApi\Model\Fields\Field;
 
 class CategoryId extends Field
 {

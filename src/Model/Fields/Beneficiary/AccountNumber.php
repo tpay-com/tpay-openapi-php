@@ -1,8 +1,8 @@
 <?php
 
-namespace Tpay\Model\Fields\Beneficiary;
+namespace Tpay\OpenApi\Model\Fields\Beneficiary;
 
-use Tpay\Model\Fields\Field;
+use Tpay\OpenApi\Model\Fields\Field;
 
 class AccountNumber extends Field
 {

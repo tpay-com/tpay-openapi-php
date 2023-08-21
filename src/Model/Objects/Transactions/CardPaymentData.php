@@ -1,12 +1,12 @@
 <?php
 
-namespace Tpay\Model\Objects\Transactions;
+namespace Tpay\OpenApi\Model\Objects\Transactions;
 
-use Tpay\Model\Fields\CardPaymentData\Card;
-use Tpay\Model\Fields\CardPaymentData\PreauthorizedToken;
-use Tpay\Model\Fields\CardPaymentData\Save;
-use Tpay\Model\Fields\CardPaymentData\Token;
-use Tpay\Model\Objects\Objects;
+use Tpay\OpenApi\Model\Fields\CardPaymentData\Card;
+use Tpay\OpenApi\Model\Fields\CardPaymentData\PreauthorizedToken;
+use Tpay\OpenApi\Model\Fields\CardPaymentData\Save;
+use Tpay\OpenApi\Model\Fields\CardPaymentData\Token;
+use Tpay\OpenApi\Model\Objects\Objects;
 
 class CardPaymentData extends Objects
 {

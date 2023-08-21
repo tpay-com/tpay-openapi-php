@@ -1,24 +1,24 @@
 <?php
 
-namespace Tpay\Model\Objects\NotificationBody;
+namespace Tpay\OpenApi\Model\Objects\NotificationBody;
 
-use Tpay\Model\Fields\Notification\CardToken;
-use Tpay\Model\Fields\Notification\Crc;
-use Tpay\Model\Fields\Notification\Description;
-use Tpay\Model\Fields\Notification\Email;
-use Tpay\Model\Fields\Notification\Error;
-use Tpay\Model\Fields\Notification\Masterpass;
-use Tpay\Model\Fields\Notification\Md5sum;
-use Tpay\Model\Fields\Notification\MerchantId;
-use Tpay\Model\Fields\Notification\Paid;
-use Tpay\Model\Fields\Notification\TestMode;
-use Tpay\Model\Fields\Notification\TransactionAmount;
-use Tpay\Model\Fields\Notification\TransactionChannel;
-use Tpay\Model\Fields\Notification\TransactionDate;
-use Tpay\Model\Fields\Notification\TransactionId;
-use Tpay\Model\Fields\Notification\TransactionStatus;
-use Tpay\Model\Fields\Notification\Wallet;
-use Tpay\Model\Objects\Objects;
+use Tpay\OpenApi\Model\Fields\Notification\CardToken;
+use Tpay\OpenApi\Model\Fields\Notification\Crc;
+use Tpay\OpenApi\Model\Fields\Notification\Description;
+use Tpay\OpenApi\Model\Fields\Notification\Email;
+use Tpay\OpenApi\Model\Fields\Notification\Error;
+use Tpay\OpenApi\Model\Fields\Notification\Masterpass;
+use Tpay\OpenApi\Model\Fields\Notification\Md5sum;
+use Tpay\OpenApi\Model\Fields\Notification\MerchantId;
+use Tpay\OpenApi\Model\Fields\Notification\Paid;
+use Tpay\OpenApi\Model\Fields\Notification\TestMode;
+use Tpay\OpenApi\Model\Fields\Notification\TransactionAmount;
+use Tpay\OpenApi\Model\Fields\Notification\TransactionChannel;
+use Tpay\OpenApi\Model\Fields\Notification\TransactionDate;
+use Tpay\OpenApi\Model\Fields\Notification\TransactionId;
+use Tpay\OpenApi\Model\Fields\Notification\TransactionStatus;
+use Tpay\OpenApi\Model\Fields\Notification\Wallet;
+use Tpay\OpenApi\Model\Objects\Objects;
 
 class BasicPayment extends Objects
 {
