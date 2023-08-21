@@ -2,16 +2,16 @@
 
 namespace tpaySDK\Examples\TransactionsApi;
 
-use tpaySDK\Api\TpayApi;
+use Tpay\Api\TpayApi;
+use Tpay\Forms\PaymentForms;
+use Tpay\Model\Fields\FieldTypes;
+use Tpay\Utilities\Logger;
+use Tpay\Utilities\TpayException;
+use Tpay\Utilities\Util;
 use tpaySDK\Examples\ExamplesConfig;
-use tpaySDK\Forms\PaymentForms;
-use tpaySDK\Model\Fields\FieldTypes;
-use tpaySDK\Utilities\Logger;
-use tpaySDK\Utilities\TpayException;
-use tpaySDK\Utilities\Util;
 
 require_once '../ExamplesConfig.php';
-require_once '../../Loader.php';
+require_once '../../src/Loader.php';
 
 class CardGateExtended extends ExamplesConfig
 {

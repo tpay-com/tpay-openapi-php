@@ -1,0 +1,46 @@
+<?php
+
+namespace Tpay\Locale;
+
+use Tpay\Utilities\TpayException;
+
+class Lang extends Keys
+{
+    static $currentLanguage = 'en';
+
+    /**
+     * Change current language
+     *
+     * @param string $lang language code
+     *
+     * @throws TpayException
+     */
+    public static function setLang($lang)
+    {
+        if (array_key_exists($lang, static::$translations)) {
+            static::$currentLanguage = $lang;
+        } else {
+            throw new TpayException('This language is not supported: '.$lang);
+        }
+    }
+
+    /**
+     * Get and print translated string
+     */
+    public static function lang($key)
+    {
+        echo static::get($key);
+    }
+
+    /**
+     * Get translated string
+     *
+     * @param string $key
+     *
+     * @return string
+     */
+    public static function get($key)
+    {
+        return static::$translations[static::$currentLanguage][$key];
+    }
+}

@@ -2,7 +2,7 @@
 
 namespace tpaySDK\Examples;
 
-use tpaySDK\Loader;
+use Tpay\Loader;
 
 class ExamplesConfig
 {
