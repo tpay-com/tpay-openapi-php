@@ -5,5 +5,5 @@ parameters:
   paths:
     - ../
   excludePaths:
-    - ../Examples/
+    - ../examples/
     - ../vendor/

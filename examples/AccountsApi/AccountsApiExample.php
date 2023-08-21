@@ -1,9 +1,9 @@
 <?php
 
-namespace tpaySDK\Examples\AccountsApi;
+namespace TpayExample\AccountsApi;
 
 use Tpay\Api\TpayApi;
-use tpaySDK\Examples\ExamplesConfig;
+use TpayExample\ExamplesConfig;
 
 require_once '../ExamplesConfig.php';
 require_once '../../src/Loader.php';

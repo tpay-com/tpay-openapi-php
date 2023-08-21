@@ -1,13 +1,13 @@
 <?php
 
-namespace tpaySDK\Examples\TransactionsApi;
+namespace TpayExample\TransactionsApi;
 
 use Tpay\Api\TpayApi;
 use Tpay\Forms\PaymentForms;
 use Tpay\Model\Fields\FieldTypes;
 use Tpay\Utilities\TpayException;
 use Tpay\Utilities\Util;
-use tpaySDK\Examples\ExamplesConfig;
+use TpayExample\ExamplesConfig;
 
 require_once '../ExamplesConfig.php';
 require_once '../../src/Loader.php';

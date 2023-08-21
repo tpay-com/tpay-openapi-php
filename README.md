@@ -32,7 +32,7 @@ https://github.com/tpay-com/tpay-openapi-php/archive/master.zip
 
 ## Configuration
 
-The only thing you need to do is to set your [OAuth](https://oauth.net) credentials like in example config file ([see example](Examples/ExamplesConfig.php)).
+The only thing you need to do is to set your [OAuth](https://oauth.net) credentials like in example config file ([see example](examples/ExamplesConfig.php)).
 You can generate access keys in [Tpay's merchant panel](https://panel.tpay.com).
 
 The [`src/Loader.php`](src/Loader.php) file handles all required class loading, so you can include this file to any file you are editing.
@@ -43,7 +43,7 @@ $TpayApi = new TpayApi($clientId, $clientSecret, true, 'read');
 $transactions = $this->TpayApi->Transactions->getTransactions();
 ```
 
-All currently available API methods have an example usage in [`Examples`](Examples) directory.
+All currently available API methods have an example usage in [`Examples`](examples) directory.
 
 ### Example credentials
 
@@ -67,11 +67,11 @@ All currently available API methods have an example usage in [`Examples`](Exampl
 
 ##### Frontend forms and payment handlers:
 
-[Payment method choice form](Examples/TransactionsApi/BankSelectionForm.php), [BLIK method form](Examples/TransactionsApi/BlikPayment.php), [simple credit card form](Examples/TransactionsApi/CardGate.php), [extended credit card form](Examples/TransactionsApi/CardGateExtended.php), [recurrent payment example](Examples/TransactionsApi/RecurrentPayment.php), [payment notification webhook](Examples/Notifications/PaymentNotificationExample.php).
+[Payment method choice form](examples/TransactionsApi/BankSelectionForm.php), [BLIK method form](examples/TransactionsApi/BlikPayment.php), [simple credit card form](examples/TransactionsApi/CardGate.php), [extended credit card form](examples/TransactionsApi/CardGateExtended.php), [recurrent payment example](examples/TransactionsApi/RecurrentPayment.php), [payment notification webhook](examples/Notifications/PaymentNotificationExample.php).
 
 ##### Merchant accounts registration (for partners only)
 
-[Example of usages](Examples/AccountsApi/AccountsApiExample.php).
+[Example of usages](examples/AccountsApi/AccountsApiExample.php).
 
 ## Logs
 
