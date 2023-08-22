@@ -5,7 +5,7 @@
         "kubawerlos/php-cs-fixer-custom-fixers": "^3.16.2",
         "php-cs-fixer/shim": "^3.23",
         "phpstan/phpstan": "^1.10.29",
-        "vimeo/psalm": "^5.14.1"
+        "vimeo/psalm": "^5.15.0"
     },
     "config": {
         "allow-plugins": {

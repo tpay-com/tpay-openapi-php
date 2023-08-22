@@ -12,7 +12,6 @@
         <ignoreFiles>
             <directory name='./' />
             <directory name='../vendor/' />
-            <file name='../src/Model/Objects/Authorization/Token.php' />
         </ignoreFiles>
     </projectFiles>
 
