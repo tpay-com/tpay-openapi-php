@@ -134,7 +134,7 @@ class CardGateExtended extends ExamplesConfig
 
             return header('Location: '.$transaction['transactionPaymentUrl']);
         }
-        $requestedCardId = (int)$savedCardId;
+        $requestedCardId = (int) $savedCardId;
         $currentUserCards = $this->getUserSavedCards($exampleCurrentUserId);
         $isValid = false;
         $cardToken = '';
@@ -153,6 +153,7 @@ class CardGateExtended extends ExamplesConfig
             // Reject current payment try and redirect user to tpay payment panel new card form
             return header('Location: '.$transaction['transactionPaymentUrl']);
         }
+
         return $this->payBySavedCard($cardToken, $transaction);
     }
 
@@ -169,6 +170,7 @@ class CardGateExtended extends ExamplesConfig
         if (isset($result['result'], $result['status']) && 'correct' === $result['status']) {
             return $this->setOrderAsComplete($result);
         }
+
         return header('Location: '.$transaction['transactionPaymentUrl']);
     }
 

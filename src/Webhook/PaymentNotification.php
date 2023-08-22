@@ -45,25 +45,12 @@ class PaymentNotification extends Notification
             $merchantSecret,
             $notification->md5sum->getValue()
         );
-        Logger::logLine('Check MD5: '.(int)$checkMD5);
+        Logger::logLine('Check MD5: '.(int) $checkMD5);
         if (false === $checkMD5) {
             throw new TpayException('MD5 checksum is invalid');
         }
 
         return $notification;
-    }
-
-    protected function getRequestBody()
-    {
-        if (isset($_POST['tr_id'])) {
-            return new BasicPayment();
-        }
-        throw new TpayException('Not recognised or invalid notification type. POST: '.json_encode($_POST));
-    }
-
-    private function isMd5Valid($id, $transactionId, $amount, $orderId, $merchantSecret, $requestMd5)
-    {
-        return md5($id.$transactionId.$amount.$orderId.$merchantSecret) === $requestMd5;
     }
 
     /**
@@ -94,11 +81,6 @@ class PaymentNotification extends Notification
         return $this;
     }
 
-    protected function isTpayServer()
-    {
-        return (new ServerValidator($this->validateServerIP, $this->validateForwardedIP, $this->secureIP))->isValid();
-    }
-
     /**
      * Check cURL request from Tpay server after payment.
      * This method check server ip, required fields and checksum sent by payment server.
@@ -117,8 +99,8 @@ class PaymentNotification extends Notification
         $requestBody = $this->requestBody;
         Logger::log('Notification', 'POST params:'.PHP_EOL.json_encode($_POST));
         foreach ($_POST as $parameter => $value) {
-            if (isset($requestBody->$parameter)) {
-                $_POST[$parameter] = Util::cast($value, $requestBody->$parameter->getType());
+            if (isset($requestBody->{$parameter})) {
+                $_POST[$parameter] = Util::cast($value, $requestBody->{$parameter}->getType());
             }
         }
         $this->Manager
@@ -130,5 +112,23 @@ class PaymentNotification extends Notification
         }
 
         return $notification;
+    }
+
+    protected function getRequestBody()
+    {
+        if (isset($_POST['tr_id'])) {
+            return new BasicPayment();
+        }
+        throw new TpayException('Not recognised or invalid notification type. POST: '.json_encode($_POST));
+    }
+
+    protected function isTpayServer()
+    {
+        return (new ServerValidator($this->validateServerIP, $this->validateForwardedIP, $this->secureIP))->isValid();
+    }
+
+    private function isMd5Valid($id, $transactionId, $amount, $orderId, $merchantSecret, $requestMd5)
+    {
+        return md5($id.$transactionId.$amount.$orderId.$merchantSecret) === $requestMd5;
     }
 }

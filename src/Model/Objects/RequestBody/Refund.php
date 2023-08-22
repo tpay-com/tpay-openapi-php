@@ -11,8 +11,6 @@ class Refund extends Objects
         'amount' => Amount::class,
     ];
 
-    /**
-     * @var Amount
-     */
+    /** @var Amount */
     public $amount;
 }

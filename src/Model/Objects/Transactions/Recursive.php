@@ -17,24 +17,16 @@ class Recursive extends Objects
         'expirationDate' => ExpirationDate::class,
     ];
 
-    /**
-     * @var Period
-     */
+    /** @var Period */
     public $period;
 
-    /**
-     * @var Quantity
-     */
+    /** @var Quantity */
     public $quantity;
 
-    /**
-     * @var Type
-     */
+    /** @var Type */
     public $type;
 
-    /**
-     * @var ExpirationDate
-     */
+    /** @var ExpirationDate */
     public $expirationDate;
 
     public function getRequiredFields()

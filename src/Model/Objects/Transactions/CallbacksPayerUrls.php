@@ -12,13 +12,9 @@ class CallbacksPayerUrls extends Objects
         'error' => Url::class,
     ];
 
-    /**
-     * @var Url
-     */
+    /** @var Url */
     public $success;
 
-    /**
-     * @var Url
-     */
+    /** @var Url */
     public $error;
 }

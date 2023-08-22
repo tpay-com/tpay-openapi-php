@@ -17,23 +17,15 @@ class CardPaymentData extends Objects
         'save' => Save::class,
     ];
 
-    /**
-     * @var Card
-     */
+    /** @var Card */
     public $card;
 
-    /**
-     * @var Token
-     */
+    /** @var Token */
     public $token;
 
-    /**
-     * @var PreauthorizedToken
-     */
+    /** @var PreauthorizedToken */
     public $preauthorizedToken;
 
-    /**
-     * @var Save
-     */
+    /** @var Save */
     public $save;
 }

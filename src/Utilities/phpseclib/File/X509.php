@@ -2,6 +2,8 @@
 
 namespace Tpay\OpenApi\Utilities\phpseclib\File;
 
+use RuntimeException;
+
 if (class_exists('phpseclib3\File\X509')) {
     class X509 extends \phpseclib3\File\X509
     {
@@ -22,5 +24,5 @@ if (class_exists('phpseclib3\File\X509')) {
         }
     }
 } else {
-    throw new \RuntimeException('Cannot find supported phpseclib/phpseclib library');
+    throw new RuntimeException('Cannot find supported phpseclib/phpseclib library');
 }

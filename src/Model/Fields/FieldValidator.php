@@ -6,17 +6,17 @@ class FieldValidator implements FieldTypes
 {
     public function isTooLong($maxLength, $value)
     {
-        return (bool)(strlen($value) > $maxLength);
+        return (bool) (strlen($value) > $maxLength);
     }
 
     public function isTooShort($minLength, $value)
     {
-        return (bool)(strlen($value) < $minLength);
+        return (bool) (strlen($value) < $minLength);
     }
 
     public function isValidPattern($value, $pattern)
     {
-        return ! (1 !== preg_match('/'.$pattern.'/', $value));
+        return !(1 !== preg_match('/'.$pattern.'/', $value));
     }
 
     public function isValidEnum($value, $enum)

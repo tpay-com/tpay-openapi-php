@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8fda2c2df3aca707909ca97ddc1046e5",
+    "content-hash": "b5fc4e0e78707b3d68f0875577856b51",
     "packages": [
         {
             "name": "amphp/amp",
@@ -1375,6 +1375,35 @@
                 "MIT"
             ],
             "description": "Provides an object-oriented API to strings and deals with bytes, UTF-8 code points and grapheme clusters in a unified way"
+        },
+        {
+            "name": "tpay-com/coding-standards",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tpay-com/php-coding-standards.git",
+                "reference": "ea0211bcaa6143690f4dc25a00abc7a0befa359a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tpay-com/php-coding-standards/zipball/ea0211bcaa6143690f4dc25a00abc7a0befa359a",
+                "reference": "ea0211bcaa6143690f4dc25a00abc7a0befa359a"
+            },
+            "require": {
+                "friendsofphp/php-cs-fixer": "^3.22",
+                "kubawerlos/php-cs-fixer-custom-fixers": "^3.16.2",
+                "php": "^7.4 || ^8.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Tpay\\CodingStandards\\": "./src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Tpay.com coding standards library"
         },
         {
             "name": "vimeo/psalm",

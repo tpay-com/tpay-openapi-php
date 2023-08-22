@@ -41,84 +41,52 @@ class BasicPayment extends Objects
         'card_token' => CardToken::class,
     ];
 
-    /**
-     * @var MerchantId
-     */
+    /** @var MerchantId */
     public $id;
 
-    /**
-     * @var TransactionId
-     */
+    /** @var TransactionId */
     public $tr_id;
 
-    /**
-     * @var TransactionDate
-     */
+    /** @var TransactionDate */
     public $tr_date;
 
-    /**
-     * @var Crc
-     */
+    /** @var Crc */
     public $tr_crc;
 
-    /**
-     * @var TransactionAmount
-     */
+    /** @var TransactionAmount */
     public $tr_amount;
 
-    /**
-     * @var Paid
-     */
+    /** @var Paid */
     public $tr_paid;
 
-    /**
-     * @var Description
-     */
+    /** @var Description */
     public $tr_desc;
 
-    /**
-     * @var TransactionStatus
-     */
+    /** @var TransactionStatus */
     public $tr_status;
 
-    /**
-     * @var Error
-     */
+    /** @var Error */
     public $tr_error;
 
-    /**
-     * @var Email
-     */
+    /** @var Email */
     public $tr_email;
 
-    /**
-     * @var Md5sum
-     */
+    /** @var Md5sum */
     public $md5sum;
 
-    /**
-     * @var TestMode
-     */
+    /** @var TestMode */
     public $test_mode;
 
-    /**
-     * @var Wallet
-     */
+    /** @var Wallet */
     public $wallet;
 
-    /**
-     * @var Masterpass
-     */
+    /** @var Masterpass */
     public $masterpass;
 
-    /**
-     * @var TransactionChannel
-     */
+    /** @var TransactionChannel */
     public $tr_channel;
 
-    /**
-     * @var CardToken
-     */
+    /** @var CardToken */
     public $card_token;
 
     public function getRequiredFields()
@@ -147,8 +115,8 @@ class BasicPayment extends Objects
     {
         $notification = [];
         foreach (static::OBJECT_FIELDS as $fieldName => $fieldClass) {
-            if (isset($this->$fieldName) && !is_null($this->$fieldName->getValue())) {
-                $notification[$fieldName] = $this->$fieldName->getValue();
+            if (isset($this->{$fieldName}) && !is_null($this->{$fieldName}->getValue())) {
+                $notification[$fieldName] = $this->{$fieldName}->getValue();
             }
         }
 

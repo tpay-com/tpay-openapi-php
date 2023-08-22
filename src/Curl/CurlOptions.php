@@ -52,7 +52,7 @@ class CurlOptions
      */
     public function setVerifyHost($verifyHost)
     {
-        $this->verifyHost = (int)$verifyHost;
+        $this->verifyHost = (int) $verifyHost;
 
         return $this;
     }

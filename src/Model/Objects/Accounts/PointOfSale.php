@@ -23,44 +23,28 @@ class PointOfSale extends Objects
         'settings' => PointOfSaleSettings::class,
     ];
 
-    /**
-     * @var PosId
-     */
+    /** @var PosId */
     public $posId;
 
-    /**
-     * @var AccountId
-     */
+    /** @var AccountId */
     public $accountId;
 
-    /**
-     * @var FriendlyName
-     */
+    /** @var FriendlyName */
     public $friendlyName;
 
-    /**
-     * @var Name
-     */
+    /** @var Name */
     public $name;
 
-    /**
-     * @var PointOfSaleDate
-     */
+    /** @var PointOfSaleDate */
     public $date;
 
-    /**
-     * @var PointOfSaleSettings
-     */
+    /** @var PointOfSaleSettings */
     public $settings;
 
-    /**
-     * @var Url
-     */
+    /** @var Url */
     public $url;
 
-    /**
-     * @var Description
-     */
+    /** @var Description */
     public $description;
 
     public function getRequiredFields()

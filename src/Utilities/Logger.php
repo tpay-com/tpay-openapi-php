@@ -22,7 +22,7 @@ class Logger
         if (false === static::$loggingEnabled) {
             return false;
         }
-        $text = (string)$text;
+        $text = (string) $text;
         $logFilePath = self::getLogPath();
         $ip = (isset($_SERVER['REMOTE_ADDR'])) ? $_SERVER['REMOTE_ADDR'] : 'Empty server REMOTE_ADDR';
         $logText = PHP_EOL.'===========================';
@@ -51,7 +51,7 @@ class Logger
         if (false === static::$loggingEnabled) {
             return false;
         }
-        $text = (string)$text;
+        $text = (string) $text;
         $logFilePath = self::getLogPath();
         self::checkLogFile($logFilePath);
         file_put_contents($logFilePath, PHP_EOL.$text, FILE_APPEND);

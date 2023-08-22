@@ -21,33 +21,21 @@ class Token extends Objects
         'access_token' => AccessToken::class,
     ];
 
-    /**
-     * @var IssuedAt
-     */
+    /** @var IssuedAt */
     public $issued_at;
 
-    /**
-     * @var Scope
-     */
+    /** @var Scope */
     public $scope;
 
-    /**
-     * @var ExpiresIn
-     */
+    /** @var ExpiresIn */
     public $expires_in;
 
-    /**
-     * @var TokenType
-     */
+    /** @var TokenType */
     public $token_type;
 
-    /**
-     * @var ClientId
-     */
+    /** @var ClientId */
     public $client_id;
 
-    /**
-     * @var AccessToken
-     */
+    /** @var AccessToken */
     public $access_token;
 }

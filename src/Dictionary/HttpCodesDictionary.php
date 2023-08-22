@@ -4,9 +4,7 @@ namespace Tpay\OpenApi\Dictionary;
 
 class HttpCodesDictionary
 {
-    /**
-     * List of http response codes
-     */
+    /** List of http response codes */
     const HTTP_SUCCESS_CODES = [
         200 => 'OK - default successful outcome of the request',
         201 => 'Created - successfully created a new object',

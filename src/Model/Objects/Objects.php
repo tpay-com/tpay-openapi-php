@@ -27,17 +27,6 @@ class Objects implements ObjectsInterface
         return (new ReflectionClass($this))->getShortName();
     }
 
-    protected function injectObjectFields($objectFields)
-    {
-        foreach ($objectFields as $objectVar => $fieldClass) {
-            if (is_array($fieldClass)) {
-                $this->{$objectVar}[] = new $fieldClass[0]();
-                continue;
-            }
-            $this->$objectVar = new $fieldClass();
-        }
-    }
-
     /**
      * @param object $object object name
      * @param array  $values array containing object fields with values
@@ -51,10 +40,10 @@ class Objects implements ObjectsInterface
                 $this->setObjectsInArray($object, $fieldValue, $fieldName);
                 continue;
             }
-            if (property_exists($object, $fieldName) && $this->isField($object->$fieldName)) {
+            if (property_exists($object, $fieldName) && $this->isField($object->{$fieldName})) {
                 $object->{$fieldName}->setValue($fieldValue);
-            } elseif (property_exists($object, $fieldName) && $this->isObject($object->$fieldName)) {
-                $this->setObjectValues($object->$fieldName, $fieldValue);
+            } elseif (property_exists($object, $fieldName) && $this->isObject($object->{$fieldName})) {
+                $this->setObjectValues($object->{$fieldName}, $fieldValue);
             } else {
                 $errorField = $fieldName;
                 if (0 === $errorField) {
@@ -69,19 +58,30 @@ class Objects implements ObjectsInterface
         return $this;
     }
 
+    protected function injectObjectFields($objectFields)
+    {
+        foreach ($objectFields as $objectVar => $fieldClass) {
+            if (is_array($fieldClass)) {
+                $this->{$objectVar}[] = new $fieldClass[0]();
+                continue;
+            }
+            $this->{$objectVar} = new $fieldClass();
+        }
+    }
+
     private function setObjectsInArray($object, $fieldValue, $fieldName)
     {
         foreach ($fieldValue as $field => $value) {
             if (is_array($value)) {
-                if (isset($object->{$fieldName}->$field)) {
-                    $this->setObjectValues($object->{$fieldName}->$field, $value);
+                if (isset($object->{$fieldName}->{$field})) {
+                    $this->setObjectValues($object->{$fieldName}->{$field}, $value);
                 }
-                if (is_array($object->$fieldName)) {
+                if (is_array($object->{$fieldName})) {
                     $this->setObjectValues($object->{$fieldName}[$field], $value);
                 }
             } else {
-                if (isset($object->{$fieldName}->$field) && $this->isField($object->{$fieldName}->$field)) {
-                    $object->{$fieldName}->$field->setValue($value);
+                if (isset($object->{$fieldName}->{$field}) && $this->isField($object->{$fieldName}->{$field})) {
+                    $object->{$fieldName}->{$field}->setValue($value);
                 } else {
                     if (true === $this->strictCheck) {
                         throw new InvalidArgumentException(sprintf('Field %s is not supported', $field));

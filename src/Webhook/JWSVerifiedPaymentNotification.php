@@ -44,25 +44,6 @@ class JWSVerifiedPaymentNotification extends Notification
         return $notification;
     }
 
-    private function checkMd5Validity($id, $transactionId, $amount, $orderId, $merchantSecret, $requestMd5)
-    {
-        if (md5($id.$transactionId.$amount.$orderId.$merchantSecret) !== $requestMd5) {
-            throw new TpayException('MD5 checksum is invalid');
-        }
-    }
-
-    private function checkMd5($notification)
-    {
-        $this->checkMd5Validity(
-            $notification->id->getValue(),
-            $notification->tr_id->getValue(),
-            Util::numberFormat($notification->tr_amount->getValue()),
-            $notification->tr_crc->getValue(),
-            $this->merchantSecret,
-            $notification->md5sum->getValue()
-        );
-    }
-
     protected function checkJwsSignature()
     {
         $jws = isset($_SERVER['HTTP_X_JWS_SIGNATURE']) ? $_SERVER['HTTP_X_JWS_SIGNATURE'] : null;
@@ -110,6 +91,25 @@ class JWSVerifiedPaymentNotification extends Notification
         }
     }
 
+    private function checkMd5Validity($id, $transactionId, $amount, $orderId, $merchantSecret, $requestMd5)
+    {
+        if (md5($id.$transactionId.$amount.$orderId.$merchantSecret) !== $requestMd5) {
+            throw new TpayException('MD5 checksum is invalid');
+        }
+    }
+
+    private function checkMd5($notification)
+    {
+        $this->checkMd5Validity(
+            $notification->id->getValue(),
+            $notification->tr_id->getValue(),
+            Util::numberFormat($notification->tr_amount->getValue()),
+            $notification->tr_crc->getValue(),
+            $this->merchantSecret,
+            $notification->md5sum->getValue()
+        );
+    }
+
     private function getResourcePrefix()
     {
         if ($this->productionMode) {
@@ -126,8 +126,8 @@ class JWSVerifiedPaymentNotification extends Notification
         }
         $requestBody = new BasicPayment();
         foreach ($_POST as $parameter => $value) {
-            if (isset($requestBody->$parameter)) {
-                $_POST[$parameter] = Util::cast($value, $requestBody->$parameter->getType());
+            if (isset($requestBody->{$parameter})) {
+                $_POST[$parameter] = Util::cast($value, $requestBody->{$parameter}->getType());
             }
         }
         $this->Manager

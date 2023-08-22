@@ -15,19 +15,13 @@ class Auth extends Objects
         'scope' => Scope::class,
     ];
 
-    /**
-     * @var ClientId
-     */
+    /** @var ClientId */
     public $client_id;
 
-    /**
-     * @var ClientSecret
-     */
+    /** @var ClientSecret */
     public $client_secret;
 
-    /**
-     * @var Scope
-     */
+    /** @var Scope */
     public $scope;
 
     public function getRequiredFields()

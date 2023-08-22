@@ -16,9 +16,7 @@ class Field implements FieldTypes
     protected $pattern;
     protected $enum;
 
-    /**
-     * @var FieldValidator
-     */
+    /** @var FieldValidator */
     protected $FieldValidator;
 
     private $errors = [];

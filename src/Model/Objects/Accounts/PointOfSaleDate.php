@@ -13,13 +13,9 @@ class PointOfSaleDate extends Objects
         'modification' => Modification::class,
     ];
 
-    /**
-     * @var Create
-     */
+    /** @var Create */
     public $create;
 
-    /**
-     * @var Modification
-     */
+    /** @var Modification */
     public $modification;
 }
