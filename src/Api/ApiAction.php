@@ -21,9 +21,7 @@ class ApiAction
     public $Manager;
     protected $Curl;
 
-    /**
-     * @var Token
-     */
+    /** @var Token */
     protected $Token;
 
     private $productionMode;

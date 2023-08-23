@@ -11,8 +11,6 @@ class BasicAuth extends Objects
         'grant_type' => GrantType::class,
     ];
 
-    /**
-     * @var GrantType
-     */
+    /** @var GrantType */
     public $grant_type;
 }

@@ -33,64 +33,40 @@ class Address extends Objects
         'street' => Street::class,
     ];
 
-    /**
-     * @var City
-     */
+    /** @var City */
     public $city;
 
-    /**
-     * @var Country
-     */
+    /** @var Country */
     public $country;
 
-    /**
-     * @var FriendlyName
-     */
+    /** @var FriendlyName */
     public $friendlyName;
 
-    /**
-     * @var HouseNumber
-     */
+    /** @var HouseNumber */
     public $houseNumber;
 
-    /**
-     * @var IsCorrespondence
-     */
+    /** @var IsCorrespondence */
     public $isCorrespondence;
 
-    /**
-     * @var IsInvoice
-     */
+    /** @var IsInvoice */
     public $isInvoice;
 
-    /**
-     * @var IsMain
-     */
+    /** @var IsMain */
     public $isMain;
 
-    /**
-     * @var Name
-     */
+    /** @var Name */
     public $name;
 
-    /**
-     * @var Phone
-     */
+    /** @var Phone */
     public $phone;
 
-    /**
-     * @var PostalCode
-     */
+    /** @var PostalCode */
     public $postalCode;
 
-    /**
-     * @var RoomNumber
-     */
+    /** @var RoomNumber */
     public $roomNumber;
 
-    /**
-     * @var Street
-     */
+    /** @var Street */
     public $street;
 
     public function getRequiredFields()

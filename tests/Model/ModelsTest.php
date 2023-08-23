@@ -13,6 +13,8 @@ class ModelsTest extends TestCase
      * @coversNothing
      *
      * @dataProvider dataModel
+     *
+     * @param mixed $class
      */
     public function testModel($class)
     {

@@ -14,18 +14,12 @@ class BlikPaymentData extends Objects
         'type' => Type::class,
     ];
 
-    /**
-     * @var BlikToken
-     */
+    /** @var BlikToken */
     public $blikToken;
 
-    /**
-     * @var Alias
-     */
+    /** @var Alias */
     public $aliases;
 
-    /**
-     * @var Type
-     */
+    /** @var Type */
     public $type;
 }

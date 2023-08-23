@@ -13,13 +13,9 @@ class CallbacksNotification extends Objects
         'email' => Email::class,
     ];
 
-    /**
-     * @var Url
-     */
+    /** @var Url */
     public $url;
 
-    /**
-     * @var Email
-     */
+    /** @var Email */
     public $email;
 }

@@ -42,88 +42,54 @@ class Person extends Objects
         'contact' => [PersonContact::class],
     ];
 
-    /**
-     * @var Name
-     */
+    /** @var Name */
     public $name;
 
-    /**
-     * @var Surname
-     */
+    /** @var Surname */
     public $surname;
 
-    /**
-     * @var Nationality
-     */
+    /** @var Nationality */
     public $nationality;
 
-    /**
-     * @var SharesPct
-     */
+    /** @var SharesPct */
     public $sharesPct;
 
-    /**
-     * @var Pesel
-     */
+    /** @var Pesel */
     public $pesel;
 
-    /**
-     * @var IsBeneficiary
-     */
+    /** @var IsBeneficiary */
     public $isBeneficiary;
 
-    /**
-     * @var IsRepresentative
-     */
+    /** @var IsRepresentative */
     public $isRepresentative;
 
-    /**
-     * @var IsContactPerson
-     */
+    /** @var IsContactPerson */
     public $isContactPerson;
 
-    /**
-     * @var IsAuthorizedPerson
-     */
+    /** @var IsAuthorizedPerson */
     public $isAuthorizedPerson;
 
-    /**
-     * @var PepStatement
-     */
+    /** @var PepStatement */
     public $pepStatement;
 
-    /**
-     * @var DateOfBirth
-     */
+    /** @var DateOfBirth */
     public $dateOfBirth;
 
-    /**
-     * @var CountryOfBirth
-     */
+    /** @var CountryOfBirth */
     public $countryOfBirth;
 
-    /**
-     * @var TypeOfDocument
-     */
+    /** @var TypeOfDocument */
     public $typeOfDocument;
 
-    /**
-     * @var SerialNumber
-     */
+    /** @var SerialNumber */
     public $serialNumber;
 
-    /**
-     * @var ExpiryDate
-     */
+    /** @var ExpiryDate */
     public $expiryDate;
 
-    /**
-     * @var IssuingAuthority
-     */
+    /** @var IssuingAuthority */
     public $issuingAuthority;
 
-    /**
-     * @var PersonContact
-     */
+    /** @var PersonContact */
     public $contact;
 }

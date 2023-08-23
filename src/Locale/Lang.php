@@ -26,6 +26,8 @@ class Lang extends Keys
 
     /**
      * Get and print translated string
+     *
+     * @param mixed $key
      */
     public static function lang($key)
     {

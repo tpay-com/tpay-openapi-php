@@ -10,8 +10,6 @@ class Verification extends Objects
         'data' => [VerificationData::class],
     ];
 
-    /**
-     * @var VerificationData
-     */
+    /** @var VerificationData */
     public $data;
 }

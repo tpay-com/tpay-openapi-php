@@ -31,59 +31,37 @@ class Account extends Objects
         'person' => [Person::class],
     ];
 
-    /**
-     * @var OfferCode
-     */
+    /** @var OfferCode */
     public $offerCode;
 
-    /**
-     * @var Email
-     */
+    /** @var Email */
     public $email;
 
-    /**
-     * @var TaxId
-     */
+    /** @var TaxId */
     public $taxId;
 
-    /**
-     * @var Regon
-     */
+    /** @var Regon */
     public $regon;
 
-    /**
-     * @var Krs
-     */
+    /** @var Krs */
     public $krs;
 
-    /**
-     * @var LegalForm
-     */
+    /** @var LegalForm */
     public $legalForm;
 
-    /**
-     * @var CategoryId
-     */
+    /** @var CategoryId */
     public $categoryId;
 
-    /**
-     * @var NotifyByEmail
-     */
+    /** @var NotifyByEmail */
     public $notifyByEmail;
 
-    /**
-     * @var PointOfSale
-     */
+    /** @var PointOfSale */
     public $website;
 
-    /**
-     * @var Address
-     */
+    /** @var Address */
     public $address;
 
-    /**
-     * @var Person
-     */
+    /** @var Person */
     public $person;
 
     public function getRequiredFields()

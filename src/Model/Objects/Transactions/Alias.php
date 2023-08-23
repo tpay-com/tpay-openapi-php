@@ -17,24 +17,16 @@ class Alias extends Objects
         'key' => Key::class,
     ];
 
-    /**
-     * @var Value
-     */
+    /** @var Value */
     public $value;
 
-    /**
-     * @var Type
-     */
+    /** @var Type */
     public $type;
 
-    /**
-     * @var Label
-     */
+    /** @var Label */
     public $label;
 
-    /**
-     * @var Key
-     */
+    /** @var Key */
     public $key;
 
     public function getRequiredFields()

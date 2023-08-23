@@ -7,14 +7,10 @@ use Tpay\OpenApi\Model\Fields\FieldTypes;
 
 class Util
 {
-    /**
-     * Override to set your own path to files required to include in templates.
-     */
+    /** Override to set your own path to files required to include in templates. */
     static $libraryPath;
 
-    /**
-     * Override to set your own templates directory. You can modify the library templates copied to your custom path
-     */
+    /** Override to set your own templates directory. You can modify the library templates copied to your custom path */
     static $customTemplateDirectory;
 
     /**
@@ -68,13 +64,13 @@ class Util
     public static function cast($value, $type)
     {
         if (FieldTypes::INT === $type) {
-            $value = (int)$value;
+            $value = (int) $value;
         } elseif (FieldTypes::NUMBER === $type) {
-            $value = (float)$value;
+            $value = (float) $value;
         } elseif (FieldTypes::STRING === $type) {
-            $value = (string)$value;
+            $value = (string) $value;
         } elseif (FieldTypes::BOOL === $type) {
-            $value = (bool)$value;
+            $value = (bool) $value;
         } else {
             throw new TpayException(sprintf('Undefined variable type %s', $type));
         }

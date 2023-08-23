@@ -13,13 +13,9 @@ class PointOfSaleSettings extends Objects
         'isTestMode' => IsTestMode::class,
     ];
 
-    /**
-     * @var ConfirmationCode
-     */
+    /** @var ConfirmationCode */
     public $confirmationCode;
 
-    /**
-     * @var IsTestMode
-     */
+    /** @var IsTestMode */
     public $isTestMode;
 }

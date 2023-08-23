@@ -10,6 +10,7 @@ class Loader
             $legacyPrefix = 'tpaySDK\\';
             if (0 === strncmp($legacyPrefix, $class, strlen($legacyPrefix))) {
                 require_once __DIR__.'/legacy_classes.php';
+
                 return;
             }
 

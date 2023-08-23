@@ -21,34 +21,22 @@ class PayWithInstantRedirection extends Objects
         'applePayPaymentData' => ApplePayPaymentData::class,
     ];
 
-    /**
-     * @var ChannelId
-     */
+    /** @var ChannelId */
     public $channelId;
 
-    /**
-     * @var Method
-     */
+    /** @var Method */
     public $method;
 
-    /**
-     * @var BlikPaymentData
-     */
+    /** @var BlikPaymentData */
     public $blikPaymentData;
 
-    /**
-     * @var CardPaymentData
-     */
+    /** @var CardPaymentData */
     public $cardPaymentData;
 
-    /**
-     * @var Recursive
-     */
+    /** @var Recursive */
     public $recursive;
 
-    /**
-     * @var ApplePayPaymentData
-     */
+    /** @var ApplePayPaymentData */
     public $applePayPaymentData;
 
     public function getRequiredFields()

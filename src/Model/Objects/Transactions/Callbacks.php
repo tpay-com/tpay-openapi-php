@@ -11,13 +11,9 @@ class Callbacks extends Objects
         'notification' => CallbacksNotification::class,
     ];
 
-    /**
-     * @var CallbacksPayerUrls
-     */
+    /** @var CallbacksPayerUrls */
     public $payerUrls;
 
-    /**
-     * @var CallbacksNotification
-     */
+    /** @var CallbacksNotification */
     public $notification;
 }

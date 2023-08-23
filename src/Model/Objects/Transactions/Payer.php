@@ -23,39 +23,25 @@ class Payer extends Objects
         'country' => Country::class,
     ];
 
-    /**
-     * @var Email
-     */
+    /** @var Email */
     public $email;
 
-    /**
-     * @var Name
-     */
+    /** @var Name */
     public $name;
 
-    /**
-     * @var Phone
-     */
+    /** @var Phone */
     public $phone;
 
-    /**
-     * @var Address
-     */
+    /** @var Address */
     public $address;
 
-    /**
-     * @var PostalCode
-     */
+    /** @var PostalCode */
     public $code;
 
-    /**
-     * @var City
-     */
+    /** @var City */
     public $city;
 
-    /**
-     * @var Country
-     */
+    /** @var Country */
     public $country;
 
     public function getRequiredFields()

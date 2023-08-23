@@ -23,39 +23,25 @@ class Pay extends Objects
         'googlePayPaymentData' => GooglePayPaymentData::class,
     ];
 
-    /**
-     * @var GroupId
-     */
+    /** @var GroupId */
     public $groupId;
 
-    /**
-     * @var Method
-     */
+    /** @var Method */
     public $method;
 
-    /**
-     * @var BlikPaymentData
-     */
+    /** @var BlikPaymentData */
     public $blikPaymentData;
 
-    /**
-     * @var CardPaymentData
-     */
+    /** @var CardPaymentData */
     public $cardPaymentData;
 
-    /**
-     * @var Recursive
-     */
+    /** @var Recursive */
     public $recursive;
 
-    /**
-     * @var ApplePayPaymentData
-     */
+    /** @var ApplePayPaymentData */
     public $applePayPaymentData;
 
-    /**
-     * @var GooglePayPaymentData
-     */
+    /** @var GooglePayPaymentData */
     public $googlePayPaymentData;
 
     public function getRequiredFields()

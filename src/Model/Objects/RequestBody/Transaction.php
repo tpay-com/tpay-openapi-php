@@ -24,44 +24,28 @@ class Transaction extends Objects
         'callbacks' => Callbacks::class,
     ];
 
-    /**
-     * @var Amount
-     */
+    /** @var Amount */
     public $amount;
 
-    /**
-     * @var Description
-     */
+    /** @var Description */
     public $description;
 
-    /**
-     * @var HiddenDescription
-     */
+    /** @var HiddenDescription */
     public $hiddenDescription;
 
-    /**
-     * @var Lang
-     */
+    /** @var Lang */
     public $lang;
 
-    /**
-     * @var Pay
-     */
+    /** @var Pay */
     public $pay;
 
-    /**
-     * @var Verification
-     */
+    /** @var Verification */
     public $verification;
 
-    /**
-     * @var Payer
-     */
+    /** @var Payer */
     public $payer;
 
-    /**
-     * @var Callbacks
-     */
+    /** @var Callbacks */
     public $callbacks;
 
     public function getRequiredFields()

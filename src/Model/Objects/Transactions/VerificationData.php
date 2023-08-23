@@ -15,18 +15,12 @@ class VerificationData extends Objects
         'bankAccountNumber' => AccountNumber::class,
     ];
 
-    /**
-     * @var Name
-     */
+    /** @var Name */
     public $name;
 
-    /**
-     * @var Address
-     */
+    /** @var Address */
     public $address;
 
-    /**
-     * @var AccountNumber
-     */
+    /** @var AccountNumber */
     public $bankAccountNumber;
 }

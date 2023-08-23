@@ -18,29 +18,19 @@ class TpayApi
         'Refunds' => RefundsApi::class,
     ];
 
-    /**
-     * @var AccountsApi
-     */
+    /** @var AccountsApi */
     public $Accounts;
 
-    /**
-     * @var AuthorizationApi
-     */
+    /** @var AuthorizationApi */
     public $Authorization;
 
-    /**
-     * @var TransactionsApi
-     */
+    /** @var TransactionsApi */
     public $Transactions;
 
-    /**
-     * @var RefundsApi
-     */
+    /** @var RefundsApi */
     public $Refunds;
 
-    /**
-     * @var Token
-     */
+    /** @var Token */
     protected $Token;
 
     private $productionMode;
@@ -57,9 +47,7 @@ class TpayApi
         $this->createApiInstances();
     }
 
-    /**
-     * @param mixed $Token Token
-     */
+    /** @param mixed $Token Token */
     public function setCustomToken($Token)
     {
         $this->Token = $Token;
@@ -69,7 +57,7 @@ class TpayApi
     private function createApiInstances()
     {
         foreach (static::TPAY_API as $apiName => $apiClass) {
-            $this->$apiName = new $apiClass($this->Token, $this->productionMode);
+            $this->{$apiName} = new $apiClass($this->Token, $this->productionMode);
         }
     }
 

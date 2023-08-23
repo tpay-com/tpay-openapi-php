@@ -13,13 +13,9 @@ class PersonContact extends Objects
         'contact' => Contact::class,
     ];
 
-    /**
-     * @var Type
-     */
+    /** @var Type */
     public $type;
 
-    /**
-     * @var Contact
-     */
+    /** @var Contact */
     public $contact;
 }
