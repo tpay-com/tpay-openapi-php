@@ -4,6 +4,9 @@ namespace Tpay\OpenApi\Model\Fields\Address;
 
 use Tpay\OpenApi\Model\Fields\Field;
 
+/**
+ * @method getValue(): string
+ */
 class FriendlyName extends Field
 {
     protected $name = __CLASS__;

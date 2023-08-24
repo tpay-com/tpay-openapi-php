@@ -4,6 +4,9 @@ namespace Tpay\OpenApi\Model\Fields\Person;
 
 use Tpay\OpenApi\Model\Fields\Field;
 
+/**
+ * @method getValue(): bool
+ */
 class PepStatement extends Field
 {
     protected $type = self::BOOL;

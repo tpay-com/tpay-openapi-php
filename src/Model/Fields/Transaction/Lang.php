@@ -4,6 +4,9 @@ namespace Tpay\OpenApi\Model\Fields\Transaction;
 
 use Tpay\OpenApi\Model\Fields\Field;
 
+/**
+ * @method getValue(): string
+ */
 class Lang extends Field
 {
     protected $name = __CLASS__;
