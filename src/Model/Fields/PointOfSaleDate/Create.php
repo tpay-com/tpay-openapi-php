@@ -4,6 +4,9 @@ namespace Tpay\OpenApi\Model\Fields\PointOfSaleDate;
 
 use Tpay\OpenApi\Model\Fields\Field;
 
+/**
+ * @method getValue(): string
+ */
 class Create extends Field
 {
     protected $name = __CLASS__;

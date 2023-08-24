@@ -4,6 +4,9 @@ namespace Tpay\OpenApi\Model\Fields\PersonContact;
 
 use Tpay\OpenApi\Model\Fields\Field;
 
+/**
+ * @method getValue(): string
+ */
 class Contact extends Field
 {
     protected $type = self::STRING;

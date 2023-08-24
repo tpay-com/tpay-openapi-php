@@ -4,6 +4,9 @@ namespace Tpay\OpenApi\Model\Fields\Notification;
 
 use Tpay\OpenApi\Model\Fields\Field;
 
+/**
+ * @method getValue(): string
+ */
 class Md5sum extends Field
 {
     protected $name = 'md5sum';

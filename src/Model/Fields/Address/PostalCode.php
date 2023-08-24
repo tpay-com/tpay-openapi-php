@@ -4,6 +4,9 @@ namespace Tpay\OpenApi\Model\Fields\Address;
 
 use Tpay\OpenApi\Model\Fields\Field;
 
+/**
+ * @method getValue(): string
+ */
 class PostalCode extends Field
 {
     protected $name = __CLASS__;
