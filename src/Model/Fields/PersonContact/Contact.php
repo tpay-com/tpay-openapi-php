@@ -5,7 +5,7 @@ namespace Tpay\OpenApi\Model\Fields\PersonContact;
 use Tpay\OpenApi\Model\Fields\Field;
 
 /**
- * @method getValue(): int
+ * @method getValue(): string
  */
 class Contact extends Field
 {

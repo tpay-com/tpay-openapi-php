@@ -5,7 +5,7 @@ namespace Tpay\OpenApi\Model\Fields\BlikPaymentData;
 use Tpay\OpenApi\Model\Fields\Field;
 
 /**
- * @method getValue(): string
+ * @method getValue(): int
  */
 class Type extends Field
 {
