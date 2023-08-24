@@ -1,6 +1,6 @@
 # Tpay OpenAPI library
 
-Biblioteka dla wszystkich metod dostępnych przez OpenAPI [Tpay](https://tpay.com).
+Biblioteka dla wszystkich metod dostępnych przez OpenAPI [Tpay](https://openapi.tpay.com/).
 
 [![Najnowsza stabilna wersja](https://img.shields.io/packagist/v/tpay-com/tpay-openapi-php.svg?label=obecna%20wersja)](https://packagist.org/packages/tpay-com/tpay-openapi-php)
 [![Wersja PHP](https://img.shields.io/packagist/php-v/tpay-com/tpay-openapi-php.svg?label=licencja)](https://php.net)
