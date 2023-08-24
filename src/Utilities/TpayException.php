@@ -6,6 +6,10 @@ use Exception;
 
 class TpayException extends Exception
 {
+    /**
+     * @param string $message
+     * @param int    $code
+     */
     public function __construct($message, $code = 0)
     {
         $message = sprintf('%s in file %s line: %s', $message, $this->getFile(), $this->getLine());

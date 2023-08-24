@@ -4,21 +4,45 @@ namespace Tpay\OpenApi\Model\Fields;
 
 class FieldValidator implements FieldTypes
 {
+    /**
+     * @param int    $maxLength
+     * @param string $value
+     *
+     * @return bool
+     */
     public function isTooLong($maxLength, $value)
     {
         return (bool) (strlen($value) > $maxLength);
     }
 
+    /**
+     * @param int    $minLength
+     * @param string $value
+     *
+     * @return bool
+     */
     public function isTooShort($minLength, $value)
     {
         return (bool) (strlen($value) < $minLength);
     }
 
+    /**
+     * @param string $value
+     * @param string $pattern
+     *
+     * @return bool
+     */
     public function isValidPattern($value, $pattern)
     {
         return !(1 !== preg_match('/'.$pattern.'/', $value));
     }
 
+    /**
+     * @param string $value
+     * @param array  $enum
+     *
+     * @return bool
+     */
     public function isValidEnum($value, $enum)
     {
         if (is_array($enum)) {

@@ -208,6 +208,7 @@ class CurlOptions
         return $this;
     }
 
+    /** @return array<int, bool|int> */
     public function getOptionsArray()
     {
         return [

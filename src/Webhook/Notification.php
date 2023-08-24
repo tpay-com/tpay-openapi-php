@@ -6,6 +6,7 @@ use Tpay\OpenApi\Manager\Manager;
 
 class Notification
 {
+    /** @var Manager */
     protected $Manager;
 
     public function __construct()

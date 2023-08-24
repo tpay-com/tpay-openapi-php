@@ -6,7 +6,10 @@ use Tpay\OpenApi\Utilities\TpayException;
 
 class Keys
 {
+    /** @var array<string, array<string, string>> */
     static $translations = [];
+
+    /** @var array<string> */
     private $keys = [
         // GLOBALS
         'fee_info',

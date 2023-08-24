@@ -2,6 +2,7 @@
 
 namespace Tpay\OpenApi\Curl;
 
+use CurlHandle;
 use Tpay\OpenApi\Dictionary\HttpCodesDictionary;
 use Tpay\OpenApi\Utilities\TpayException;
 
@@ -10,7 +11,7 @@ class Curl extends CurlOptions
     /**
      * Last executed cURL info
      *
-     * @var null|array
+     * @var array
      */
     private $curlInfo;
 
@@ -24,13 +25,20 @@ class Curl extends CurlOptions
     /**
      * Last executed cURL errno
      *
-     * @var string
+     * @var int
      */
     private $curlErrorNumber;
 
+    /** @var string */
     private $url;
+
+    /** @var array */
     private $postData;
+
+    /** @var string */
     private $result;
+
+    /** @var string */
     private $method;
 
     public function __construct()
@@ -40,24 +48,41 @@ class Curl extends CurlOptions
         }
     }
 
-    /** Get last info */
+    /**
+     * Get last info
+     *
+     * @return array
+     */
     public function getCurlLastInfo()
     {
         return $this->curlInfo;
     }
 
-    /** Get last Curl error info */
+    /**
+     * Get last Curl error info
+     *
+     * @return string
+     */
     public function getCurlLastError()
     {
         return $this->curlError;
     }
 
-    /** Get last Curl error number info */
+    /**
+     * Get last Curl error number info
+     *
+     * @return int
+     */
     public function getCurlLastErrorNo()
     {
         return $this->curlErrorNumber;
     }
 
+    /**
+     * @param string $url
+     *
+     * @return $this
+     */
     public function setRequestUrl($url)
     {
         $this->url = $url;
@@ -65,6 +90,11 @@ class Curl extends CurlOptions
         return $this;
     }
 
+    /**
+     * @param array $postData
+     *
+     * @return $this
+     */
     public function setPostData($postData)
     {
         $this->postData = $postData;
@@ -72,6 +102,11 @@ class Curl extends CurlOptions
         return $this;
     }
 
+    /**
+     * @param string $method
+     *
+     * @return $this
+     */
     public function setMethod($method)
     {
         $this->method = $method;
@@ -79,6 +114,7 @@ class Curl extends CurlOptions
         return $this;
     }
 
+    /** @return $this */
     public function sendRequest()
     {
         $ch = $this->init();
@@ -92,6 +128,7 @@ class Curl extends CurlOptions
         return $this;
     }
 
+    /** @return CurlHandle */
     public function init()
     {
         $ch = curl_init();
@@ -105,6 +142,7 @@ class Curl extends CurlOptions
         return $ch;
     }
 
+    /** @return string */
     public function getResult()
     {
         return $this->result;
@@ -125,6 +163,7 @@ class Curl extends CurlOptions
         return 'Not supported response from Tpay server';
     }
 
+    /** @return int */
     public function getHttpResponseCode()
     {
         return (int) $this->curlInfo['http_code'];

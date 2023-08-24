@@ -16,6 +16,11 @@ class ServerValidator
     /** @var array<string> */
     private $secureIP;
 
+    /**
+     * @param bool          $validateServerIP
+     * @param bool          $validateForwardedIP
+     * @param array<string> $secureIP
+     */
     public function __construct($validateServerIP, $validateForwardedIP, array $secureIP)
     {
         $this->validateServerIP = $validateServerIP;
@@ -33,8 +38,8 @@ class ServerValidator
         if (!$this->validateServerIP) {
             return true;
         }
-        $remoteIP = $this->getServerValue(static::REMOTE_ADDRESS);
-        $forwarderIP = $this->getServerValue(static::FORWARDER_ADDRESS);
+        $remoteIP = $this->getServerValue(self::REMOTE_ADDRESS);
+        $forwarderIP = $this->getServerValue(self::FORWARDER_ADDRESS);
         if (is_null($remoteIP) && is_null($forwarderIP)) {
             return false;
         }

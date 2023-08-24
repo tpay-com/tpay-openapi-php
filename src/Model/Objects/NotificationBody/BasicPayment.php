@@ -114,6 +114,10 @@ class BasicPayment extends Objects
     public function getNotificationAssociative()
     {
         $notification = [];
+        /**
+         * @var string $fieldName
+         * @var string $fieldClass
+         */
         foreach (static::OBJECT_FIELDS as $fieldName => $fieldClass) {
             if (isset($this->{$fieldName}) && !is_null($this->{$fieldName}->getValue())) {
                 $notification[$fieldName] = $this->{$fieldName}->getValue();
