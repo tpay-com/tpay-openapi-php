@@ -2,6 +2,7 @@
 
 namespace Tpay\OpenApi\Model\Objects\Transactions;
 
+use Tpay\OpenApi\Model\Fields\Account\TaxId;
 use Tpay\OpenApi\Model\Fields\Address\City;
 use Tpay\OpenApi\Model\Fields\Address\Phone;
 use Tpay\OpenApi\Model\Fields\Address\PostalCode;
@@ -21,6 +22,7 @@ class Payer extends Objects
         'code' => PostalCode::class,
         'city' => City::class,
         'country' => Country::class,
+        'taxId' => TaxId::class,
     ];
 
     /** @var Email */
@@ -43,6 +45,9 @@ class Payer extends Objects
 
     /** @var Country */
     public $country;
+
+    /** @var TaxId */
+    public $taxId;
 
     public function getRequiredFields()
     {

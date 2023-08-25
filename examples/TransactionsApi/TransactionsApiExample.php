@@ -132,6 +132,7 @@ class TransactionsApiExample extends ExamplesConfig
                 'code' => '11-123',
                 'city' => 'New York',
                 'country' => 'US',
+                'taxId' => 'PL3774716081',
             ],
             'lang' => 'en',
             'callbacks' => [
