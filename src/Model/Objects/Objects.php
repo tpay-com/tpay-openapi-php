@@ -17,11 +17,13 @@ class Objects implements ObjectsInterface
         $this->injectObjectFields(static::OBJECT_FIELDS);
     }
 
+    /** @return array<Field|self> */
     public function getRequiredFields()
     {
         return [];
     }
 
+    /** @return string */
     public function getName()
     {
         return (new ReflectionClass($this))->getShortName();
@@ -58,6 +60,7 @@ class Objects implements ObjectsInterface
         return $this;
     }
 
+    /** @param array $objectFields */
     protected function injectObjectFields($objectFields)
     {
         foreach ($objectFields as $objectVar => $fieldClass) {
@@ -69,6 +72,11 @@ class Objects implements ObjectsInterface
         }
     }
 
+    /**
+     * @param object               $object
+     * @param array<string, mixed> $fieldValue
+     * @param string               $fieldName
+     */
     private function setObjectsInArray($object, $fieldValue, $fieldName)
     {
         foreach ($fieldValue as $field => $value) {
@@ -91,11 +99,21 @@ class Objects implements ObjectsInterface
         }
     }
 
+    /**
+     * @param object|string $class
+     *
+     * @return bool
+     */
     private function isField($class)
     {
         return is_subclass_of($class, Field::class);
     }
 
+    /**
+     * @param object|string $class
+     *
+     * @return bool
+     */
     private function isObject($class)
     {
         return is_subclass_of($class, Objects::class);

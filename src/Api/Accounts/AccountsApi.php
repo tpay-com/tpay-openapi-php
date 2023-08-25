@@ -7,6 +7,7 @@ use Tpay\OpenApi\Model\Objects\RequestBody\Account;
 
 class AccountsApi extends ApiAction
 {
+    /** @param mixed $queryFields */
     public function getAccounts($queryFields = [])
     {
         $requestUrl = $this->addQueryFields('/accounts', $queryFields);

@@ -13,12 +13,15 @@ class JWSVerifiedPaymentNotification extends Notification
     const PRODUCTION_PREFIX = 'https://secure.tpay.com';
     const SANDBOX_PREFIX = 'https://secure.sandbox.tpay.com';
 
+    /** @var bool */
     private $productionMode;
+
+    /** @var string */
     private $merchantSecret;
 
     /**
-     * @param mixed $merchantSecret string Merchant notification check secret
-     * @param mixed $productionMode bool is prod or sandbox flag
+     * @param string $merchantSecret string Merchant notification check secret
+     * @param bool   $productionMode bool is prod or sandbox flag
      */
     public function __construct($merchantSecret, $productionMode = true)
     {
@@ -60,8 +63,12 @@ class JWSVerifiedPaymentNotification extends Notification
 
         $headersJson = base64_decode(strtr($headers, '-_', '+/'));
 
+        /** @var array $headersData */
         $headersData = json_decode($headersJson, true);
+
+        /** @var null|string $x5u */
         $x5u = isset($headersData['x5u']) ? $headersData['x5u'] : null;
+
         if (null === $x5u) {
             throw new TpayException('Missing x5u header');
         }
@@ -91,6 +98,16 @@ class JWSVerifiedPaymentNotification extends Notification
         }
     }
 
+    /**
+     * @param int    $id
+     * @param string $transactionId
+     * @param string $amount
+     * @param string $orderId
+     * @param string $merchantSecret
+     * @param string $requestMd5
+     *
+     * @throws TpayException
+     */
     private function checkMd5Validity($id, $transactionId, $amount, $orderId, $merchantSecret, $requestMd5)
     {
         if (md5($id.$transactionId.$amount.$orderId.$merchantSecret) !== $requestMd5) {
@@ -98,6 +115,11 @@ class JWSVerifiedPaymentNotification extends Notification
         }
     }
 
+    /**
+     * @param BasicPayment $notification
+     *
+     * @throws TpayException
+     */
     private function checkMd5($notification)
     {
         $this->checkMd5Validity(
@@ -110,6 +132,7 @@ class JWSVerifiedPaymentNotification extends Notification
         );
     }
 
+    /** @return string */
     private function getResourcePrefix()
     {
         if ($this->productionMode) {
@@ -119,6 +142,7 @@ class JWSVerifiedPaymentNotification extends Notification
         return self::SANDBOX_PREFIX;
     }
 
+    /** @return BasicPayment */
     private function getNotificationObject()
     {
         if (!isset($_POST['tr_id'])) {

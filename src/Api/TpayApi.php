@@ -47,7 +47,7 @@ class TpayApi
         $this->createApiInstances();
     }
 
-    /** @param mixed $Token Token */
+    /** @param Token $Token */
     public function setCustomToken($Token)
     {
         $this->Token = $Token;
@@ -56,6 +56,10 @@ class TpayApi
 
     private function createApiInstances()
     {
+        /**
+         * @var string                  $apiName
+         * @var class-string<ApiAction> $apiClass
+         */
         foreach (static::TPAY_API as $apiName => $apiClass) {
             $this->{$apiName} = new $apiClass($this->Token, $this->productionMode);
         }

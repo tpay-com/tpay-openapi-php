@@ -59,6 +59,7 @@ class Logger
         return true;
     }
 
+    /** @param string $logFilePath */
     private static function checkLogFile($logFilePath)
     {
         if (!file_exists($logFilePath)) {
@@ -70,6 +71,7 @@ class Logger
         }
     }
 
+    /** @return string */
     private static function getLogPath()
     {
         $logFileName = 'log_'.date('Y-m-d').'.php';

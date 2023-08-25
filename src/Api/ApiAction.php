@@ -24,8 +24,13 @@ class ApiAction
     /** @var Token */
     protected $Token;
 
+    /** @var bool */
     private $productionMode;
 
+    /**
+     * @param Token $Token
+     * @param bool  $productionMode
+     */
     public function __construct($Token, $productionMode)
     {
         $this->productionMode = $productionMode;
@@ -47,6 +52,11 @@ class ApiAction
             ->getRequestResult();
     }
 
+    /**
+     * @param bool $associative
+     *
+     * @return array|string
+     */
     public function getRequestResult($associative = true)
     {
         if (true === $associative) {
@@ -61,6 +71,7 @@ class ApiAction
         return $this->Curl->getHttpResponseMessage();
     }
 
+    /** @return int */
     public function getHttpResponseCode()
     {
         return $this->Curl->getHttpResponseCode();
@@ -101,6 +112,12 @@ class ApiAction
         return $this;
     }
 
+    /**
+     * @param string $requestUrl
+     * @param array  $queryFields
+     *
+     * @return string
+     */
     protected function addQueryFields($requestUrl, $queryFields)
     {
         if (is_array($queryFields) && count($queryFields) > 0) {

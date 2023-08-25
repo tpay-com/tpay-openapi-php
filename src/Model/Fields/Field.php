@@ -6,14 +6,21 @@ use InvalidArgumentException;
 
 class Field implements FieldTypes
 {
+    /** @var string */
     protected $name = __CLASS__;
+
+    /** @var string */
     protected $type;
+
     protected $maxLength;
     protected $minLength;
     protected $minimum;
     protected $maximum;
     protected $value;
+
+    /** @var string */
     protected $pattern;
+
     protected $enum;
 
     /** @var FieldValidator */
@@ -31,11 +38,13 @@ class Field implements FieldTypes
         return $this->value;
     }
 
+    /** @return string */
     public function getType()
     {
         return $this->type;
     }
 
+    /** @return string */
     public function getName()
     {
         return $this->name;

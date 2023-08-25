@@ -8,11 +8,7 @@
        findUnusedCode='false'
 >
     <projectFiles>
-        <directory name='../' />
-        <ignoreFiles>
-            <directory name='./' />
-            <directory name='../vendor/' />
-        </ignoreFiles>
+        <directory name='../src' />
     </projectFiles>
 
     <issueHandlers>

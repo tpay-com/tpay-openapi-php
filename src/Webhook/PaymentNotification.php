@@ -4,6 +4,7 @@ namespace Tpay\OpenApi\Webhook;
 
 use Tpay\OpenApi\Dictionary\NotificationsIP;
 use Tpay\OpenApi\Model\Objects\NotificationBody\BasicPayment;
+use Tpay\OpenApi\Model\Objects\Objects;
 use Tpay\OpenApi\Utilities\Logger;
 use Tpay\OpenApi\Utilities\ServerValidator;
 use Tpay\OpenApi\Utilities\TpayException;
@@ -14,9 +15,16 @@ use Tpay\OpenApi\Utilities\Util;
  */
 class PaymentNotification extends Notification
 {
+    /** @var BasicPayment */
     public $requestBody;
+
+    /** @var array<string> */
     protected $secureIP = NotificationsIP::SECURE_IPS;
+
+    /** @var bool */
     protected $validateServerIP = true;
+
+    /** @var bool */
     protected $validateForwardedIP = false;
 
     /**
@@ -35,8 +43,10 @@ class PaymentNotification extends Notification
     public function getNotification($response = 'TRUE', $merchantSecret = '')
     {
         $this->requestBody = $this->getRequestBody();
+
         /** @var BasicPayment $notification */
         $notification = $this->checkNotification($response);
+
         $checkMD5 = $this->isMd5Valid(
             $notification->id->getValue(),
             $notification->tr_id->getValue(),
@@ -90,6 +100,8 @@ class PaymentNotification extends Notification
      *                         If empty, then you have to print it somewhere else to avoid rescheduling notifications
      *
      * @throws TpayException
+     *
+     * @return Objects
      */
     public function checkNotification($response = '')
     {
@@ -114,6 +126,7 @@ class PaymentNotification extends Notification
         return $notification;
     }
 
+    /** @return BasicPayment */
     protected function getRequestBody()
     {
         if (isset($_POST['tr_id'])) {
@@ -122,11 +135,22 @@ class PaymentNotification extends Notification
         throw new TpayException('Not recognised or invalid notification type. POST: '.json_encode($_POST));
     }
 
+    /** @return bool */
     protected function isTpayServer()
     {
         return (new ServerValidator($this->validateServerIP, $this->validateForwardedIP, $this->secureIP))->isValid();
     }
 
+    /**
+     * @param int    $id
+     * @param string $transactionId
+     * @param string $amount
+     * @param string $orderId
+     * @param string $merchantSecret
+     * @param string $requestMd5
+     *
+     * @return bool
+     */
     private function isMd5Valid($id, $transactionId, $amount, $orderId, $merchantSecret, $requestMd5)
     {
         return md5($id.$transactionId.$amount.$orderId.$merchantSecret) === $requestMd5;
