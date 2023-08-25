@@ -1,6 +1,6 @@
 # Tpay OpenAPI library
 
-Biblioteka dla wszystkich metod dostępnych przez OpenAPI [Tpay](https://tpay.com).
+Biblioteka dla wszystkich metod dostępnych przez OpenAPI [Tpay](https://openapi.tpay.com/).
 
 [![Najnowsza stabilna wersja](https://img.shields.io/packagist/v/tpay-com/tpay-openapi-php.svg?label=obecna%20wersja)](https://packagist.org/packages/tpay-com/tpay-openapi-php)
 [![Wersja PHP](https://img.shields.io/packagist/php-v/tpay-com/tpay-openapi-php.svg?label=licencja)](https://php.net)
@@ -39,8 +39,8 @@ Plik [`src/Loader.php`](src/Loader.php) obsługuje ładowanie wszystkich wymagan
 
 Wszystkie metody opisane w [dokumentacji Tpay OpenAPI](https://openapi.tpay.com) można łatwo wykonać, uruchamiając jedną z metod z tej biblioteki, takie jak:
 ```php
-$TpayApi = new TpayApi($clientId, $clientSecret, true, 'read');
-$transactions = $this->TpayApi->Transactions->getTransactions();
+$tpayApi = new TpayApi($clientId, $clientSecret, true, 'read');
+$transactions = $tpayApi->Transactions->getTransactions();
 ```
 
 Wszystkie obecnie dostępne metody API mają przykładowe użycie w katalogu [`Examples`](examples).
