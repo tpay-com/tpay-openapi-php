@@ -2,12 +2,12 @@
 
 namespace Tpay\OpenApi\Model\Objects\Transactions;
 
-use Tpay\OpenApi\Model\Fields\Account\TaxId;
 use Tpay\OpenApi\Model\Fields\Address\City;
 use Tpay\OpenApi\Model\Fields\Address\Phone;
 use Tpay\OpenApi\Model\Fields\Address\PostalCode;
 use Tpay\OpenApi\Model\Fields\Payer\Address;
 use Tpay\OpenApi\Model\Fields\Payer\Name;
+use Tpay\OpenApi\Model\Fields\Payer\TaxId;
 use Tpay\OpenApi\Model\Fields\Person\Email;
 use Tpay\OpenApi\Model\Fields\Transaction\Country;
 use Tpay\OpenApi\Model\Objects\Objects;
