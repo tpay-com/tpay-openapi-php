@@ -13,7 +13,8 @@ use Tpay\Tests\OpenApi\Mock\CurlMock;
  */
 class TransactionsApiTest extends TestCase
 {
-    public function testCreatingTransaction()
+    /** @dataProvider dataCreatingTransaction */
+    public function testCreatingTransaction(array $transactionData)
     {
         $accessToken = $this->createMock(AccessToken::class);
 
@@ -24,7 +25,14 @@ class TransactionsApiTest extends TestCase
 
         CurlMock::createMock('"ok"');
 
-        $result = $transactionsApi->createTransaction([
+        $result = $transactionsApi->createTransaction($transactionData);
+
+        self::assertSame('ok', $result);
+    }
+
+    public static function dataCreatingTransaction()
+    {
+        $transactionData = [
             'amount' => 0.10,
             'description' => 'test transaction',
             'hiddenDescription' => 'order_213',
@@ -36,7 +44,6 @@ class TransactionsApiTest extends TestCase
                 'code' => '11-123',
                 'city' => 'New York',
                 'country' => 'US',
-                'taxId' => 'PL3774716081',
             ],
             'lang' => 'en',
             'callbacks' => [
@@ -49,8 +56,12 @@ class TransactionsApiTest extends TestCase
                     'error' => 'https://example.com/error',
                 ],
             ],
-        ]);
+        ];
 
-        self::assertSame('ok', $result);
+        yield 'without payer.taxId' => [$transactionData];
+
+        $transactionData['payer']['taxId'] = 'PL3774716081';
+
+        yield 'with payer.taxId' => [$transactionData];
     }
 }
