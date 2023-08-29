@@ -1,6 +1,6 @@
 <?php
 
-namespace Tpay\Tests\OpenApi;
+namespace Tpay\OpenApi\Tests;
 
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
@@ -42,6 +42,7 @@ class LegacyNamespaceTest extends TestCase
         }
     }
 
+    /** @return array<string> */
     private static function getLegacyClassNamesFromArray()
     {
         return [
