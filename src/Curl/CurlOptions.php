@@ -4,15 +4,34 @@ namespace Tpay\OpenApi\Curl;
 
 class CurlOptions
 {
+    /** @var array<string> */
     protected $headers = [];
+
+    /** @var int */
     private $verifyHost = 0;
+
+    /** @var int */
     private $timeout = 30;
+
+    /** @var int */
     private $connectTimeout = 15;
+
+    /** @var bool */
     private $verifyPeer = false;
+
+    /** @var bool */
     private $verbose = true;
+
+    /** @var bool */
     private $post = true;
+
+    /** @var bool */
     private $returnTransfer = true;
+
+    /** @var bool */
     private $failOnError = false;
+
+    /** @var bool */
     private $followLocation = false;
 
     /**
@@ -201,6 +220,11 @@ class CurlOptions
         return $this;
     }
 
+    /**
+     * @param array<string> $headers
+     *
+     * @return $this
+     */
     public function setHeader($headers)
     {
         $this->headers = $headers;

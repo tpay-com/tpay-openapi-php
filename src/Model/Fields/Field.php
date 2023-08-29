@@ -12,20 +12,31 @@ class Field implements FieldTypes
     /** @var string */
     protected $type;
 
+    /** @var int */
     protected $maxLength;
+
+    /** @var int */
     protected $minLength;
+
+    /** @var float|int */
     protected $minimum;
+
+    /** @var float|int */
     protected $maximum;
+
+    /** @var bool|int */
     protected $value;
 
     /** @var string */
     protected $pattern;
 
+    /** @var array<string> */
     protected $enum;
 
     /** @var FieldValidator */
     protected $FieldValidator;
 
+    /** @var array<string> */
     private $errors = [];
 
     public function __construct()
@@ -67,6 +78,7 @@ class Field implements FieldTypes
         return $this;
     }
 
+    /** @param string $value */
     public function checkMaxLength($value)
     {
         if ($this->maxLength > 0 && $this->FieldValidator->isTooLong($this->maxLength, $value)) {
@@ -74,6 +86,7 @@ class Field implements FieldTypes
         }
     }
 
+    /** @param string $value */
     public function checkMinLength($value)
     {
         if ($this->minLength > 0 && $this->FieldValidator->isTooShort($this->minLength, $value)) {

@@ -169,6 +169,7 @@ class Curl extends CurlOptions
         return (int) $this->curlInfo['http_code'];
     }
 
+    /** @param CurlHandle $curl */
     private function setCurlMethod($curl)
     {
         switch ($this->method) {

@@ -7,7 +7,7 @@ use Tpay\OpenApi\Model\Objects\RequestBody\Account;
 
 class AccountsApi extends ApiAction
 {
-    /** @param mixed $queryFields */
+    /** @param array $queryFields */
     public function getAccounts($queryFields = [])
     {
         $requestUrl = $this->addQueryFields('/accounts', $queryFields);
@@ -15,6 +15,7 @@ class AccountsApi extends ApiAction
         return $this->run(static::GET, $requestUrl);
     }
 
+    /** @param string $accountId */
     public function getAccountById($accountId)
     {
         return $this->run(static::GET, sprintf('/accounts/%s', $accountId));
@@ -25,6 +26,7 @@ class AccountsApi extends ApiAction
         return $this->run(static::GET, '/accounts/category');
     }
 
+    /** @param string $categoryId */
     public function getCategoryById($categoryId)
     {
         return $this->run(static::GET, sprintf('/accounts/category/%s', $categoryId));
@@ -35,6 +37,7 @@ class AccountsApi extends ApiAction
         return $this->run(static::GET, '/accounts/legalForm');
     }
 
+    /** @param string $legalFormId */
     public function getLegalFormById($legalFormId)
     {
         return $this->run(static::GET, sprintf('/accounts/legalForm/%s', $legalFormId));
@@ -45,16 +48,19 @@ class AccountsApi extends ApiAction
         return $this->run(static::GET, '/accounts/document');
     }
 
+    /** @param string $documentId */
     public function getDocumentById($documentId)
     {
         return $this->run(static::GET, sprintf('/accounts/document/%s', $documentId));
     }
 
+    /** @param string $accountId */
     public function getBalanceByAccountId($accountId)
     {
         return $this->run(static::GET, sprintf('/accounts/%s/balance', $accountId));
     }
 
+    /** @param array $fields */
     public function createAccount($fields)
     {
         return $this->run(static::POST, '/accounts', $fields, new Account());
