@@ -157,7 +157,7 @@ class Curl extends CurlOptions
             return $errorCodesDict[$responseCode];
         }
         if (array_key_exists($responseCode, $successCodesDict)) {
-            return $errorCodesDict[$responseCode];
+            return $successCodesDict[$responseCode];
         }
 
         return 'Not supported response from Tpay server';
