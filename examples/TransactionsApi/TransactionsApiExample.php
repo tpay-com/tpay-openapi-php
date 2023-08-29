@@ -33,7 +33,7 @@ class TransactionsApiExample extends ExamplesConfig
 
     public function getBankGroups()
     {
-        $bankGroups = $this->TpayApi->transactions()()->getBankGroups();
+        $bankGroups = $this->TpayApi->transactions()->getBankGroups();
         var_dump($bankGroups);
 
         return $this;
