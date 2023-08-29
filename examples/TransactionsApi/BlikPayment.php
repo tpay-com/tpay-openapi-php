@@ -26,7 +26,7 @@ class BlikPayment extends ExamplesConfig
     protected function processPayment($blikCode)
     {
         $TpayApi = new TpayApi(static::MERCHANT_CLIENT_ID, static::MERCHANT_CLIENT_SECRET, true, 'read');
-        $transaction = $TpayApi->Transactions->createTransaction($this->getRequestBody());
+        $transaction = $TpayApi->transactions()->createTransaction($this->getRequestBody());
         if (isset($transaction['transactionId'])) {
             $blikPaymentFields = [
                 'groupId' => 150,
@@ -36,7 +36,7 @@ class BlikPayment extends ExamplesConfig
                     'type' => 0,
                 ],
             ];
-            $result = $TpayApi->Transactions
+            $result = $TpayApi->transactions()
                 ->createPaymentByTransactionId($blikPaymentFields, $transaction['transactionId']);
             if (isset($result['result']) && 'success' === $result['result']) {
                 // The BLIK code was valid, now the customer needs to confirm payment on his mobile app

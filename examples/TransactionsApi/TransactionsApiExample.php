@@ -33,7 +33,7 @@ class TransactionsApiExample extends ExamplesConfig
 
     public function getBankGroups()
     {
-        $bankGroups = $this->TpayApi->Transactions->getBankGroups();
+        $bankGroups = $this->TpayApi->transactions()->getBankGroups();
         var_dump($bankGroups);
 
         return $this;
@@ -41,7 +41,7 @@ class TransactionsApiExample extends ExamplesConfig
 
     public function getChannels()
     {
-        $bankGroups = $this->TpayApi->Transactions->getChannels();
+        $bankGroups = $this->TpayApi->transactions()->getChannels();
         var_dump($bankGroups);
 
         return $this;
@@ -49,7 +49,7 @@ class TransactionsApiExample extends ExamplesConfig
 
     public function getTransactions()
     {
-        $transactions = $this->TpayApi->Transactions->getTransactions();
+        $transactions = $this->TpayApi->transactions()->getTransactions();
         var_dump($transactions);
 
         return $this;
@@ -57,7 +57,7 @@ class TransactionsApiExample extends ExamplesConfig
 
     public function getTransactionById($transactionId)
     {
-        $transaction = $this->TpayApi->Transactions->getTransactionById($transactionId);
+        $transaction = $this->TpayApi->transactions()->getTransactionById($transactionId);
         var_dump($transaction);
 
         return $this;
@@ -68,7 +68,7 @@ class TransactionsApiExample extends ExamplesConfig
     {
         $transactionParameters = $this->getTransactionParameters();
         $transactionParameters['pay'] = ['groupId' => $bankGroupId];
-        $newTransaction = $this->TpayApi->Transactions->createTransaction($transactionParameters);
+        $newTransaction = $this->TpayApi->transactions()->createTransaction($transactionParameters);
         var_dump($newTransaction);
 
         return $this;
@@ -79,7 +79,7 @@ class TransactionsApiExample extends ExamplesConfig
     {
         $transactionParameters = $this->getTransactionParameters();
         $transactionParameters['pay'] = ['channelId' => $channelId];
-        $newTransaction = $this->TpayApi->Transactions->createTransactionWithInstantRedirection($transactionParameters);
+        $newTransaction = $this->TpayApi->transactions()->createTransactionWithInstantRedirection($transactionParameters);
         var_dump($newTransaction);
 
         return $this;
@@ -90,7 +90,7 @@ class TransactionsApiExample extends ExamplesConfig
     {
         $transactionParameters = $this->getTransactionParameters();
         $transactionParameters['pay'] = $this->getBlikPaymentParameters();
-        $newTransaction = $this->TpayApi->Transactions->createTransaction($transactionParameters);
+        $newTransaction = $this->TpayApi->transactions()->createTransaction($transactionParameters);
         var_dump($newTransaction);
 
         return $this;
@@ -101,7 +101,7 @@ class TransactionsApiExample extends ExamplesConfig
     {
         $transactionParameters = $this->getTransactionParameters();
         $transactionParameters['pay'] = $this->getNewCardPaymentParameters();
-        $newTransaction = $this->TpayApi->Transactions->createTransaction($transactionParameters);
+        $newTransaction = $this->TpayApi->transactions()->createTransaction($transactionParameters);
         var_dump($newTransaction);
 
         return $this;
@@ -112,7 +112,7 @@ class TransactionsApiExample extends ExamplesConfig
     {
         $transactionParameters = $this->getTransactionParameters();
         $transactionParameters['pay'] = $this->getSavedCardPaymentParameters();
-        $newTransaction = $this->TpayApi->Transactions->createTransaction($transactionParameters);
+        $newTransaction = $this->TpayApi->transactions()->createTransaction($transactionParameters);
         var_dump($newTransaction);
 
         return $this;
