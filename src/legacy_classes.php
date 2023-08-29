@@ -1,6 +1,7 @@
 <?php
 
 namespace tpaySDK {
+    @trigger_error('Using "tpaySDK*" namespace is deprecated and will be removed in 2.0.0', E_USER_DEPRECATED);
     class Loader extends \Tpay\OpenApi\Loader {}
 }
 

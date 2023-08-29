@@ -1,14 +1,37 @@
 <?php
 
-namespace Tpay\OpenApi\Tests;
+namespace Tpay\Tests\OpenApi;
 
 use PHPUnit\Framework\TestCase;
+use RuntimeException;
 
 /**
  * @coversNothing
  */
 class LegacyNamespaceTest extends TestCase
 {
+    /** @runInSeparateProcess */
+    public function testUsingNewNamespaceDoesNotTriggerDeprecation()
+    {
+        $this->addToAssertionCount(1);
+
+        new \Tpay\OpenApi\Model\Fields\Person\Name();
+    }
+
+    /** @runInSeparateProcess */
+    public function testUsingOldNamespaceDoesTriggerDeprecation()
+    {
+        set_error_handler(static function ($errno, $errstr) {
+            restore_error_handler();
+            throw new RuntimeException($errstr);
+        }, E_USER_DEPRECATED);
+
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('Using "tpaySDK*" namespace is deprecated and will be removed in 2.0.0');
+
+        new \tpaySDK\Model\Fields\Person\Name();
+    }
+
     public function testClassesExist()
     {
         foreach (self::getLegacyClassNamesFromArray() as $className) {

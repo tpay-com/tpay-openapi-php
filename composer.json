@@ -28,7 +28,7 @@
         "psr-4": {
             "Tpay\\OpenApi\\": "src/"
         },
-        "files": [
+        "classmap": [
             "src/legacy_classes.php"
         ]
     },
