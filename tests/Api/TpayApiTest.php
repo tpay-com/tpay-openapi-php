@@ -18,7 +18,7 @@ class TpayApiTest extends TestCase
 
         $tpayApi = new TpayApi('123', '');
 
-        CurlMock::expectConsecutiveReturnedTransfers(
+        CurlMock::setConsecutiveReturnedTransfers(
             '{"client_id": "123"}',
             '["transactions"]'
         );

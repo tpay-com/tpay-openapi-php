@@ -5,13 +5,28 @@ namespace Tpay\Tests\OpenApi\Mock {
 
     final class CurlMock
     {
+        /** @var int */
+        private static $returnedHttpCode = 200;
+
         /** @var array<string> */
         private static $returnedTransfers;
 
+        /** @param int $returnedHttpCode */
+        public static function setReturnedHttpCode($returnedHttpCode)
+        {
+            self::$returnedHttpCode = $returnedHttpCode;
+        }
+
         /** @param array<string> $returnedTransfers */
-        public static function expectConsecutiveReturnedTransfers(...$returnedTransfers)
+        public static function setConsecutiveReturnedTransfers(...$returnedTransfers)
         {
             self::$returnedTransfers = $returnedTransfers;
+        }
+
+        /** @return int */
+        public static function getReturnedHttpCode()
+        {
+            return self::$returnedHttpCode;
         }
 
         public static function expectNoCurlExecCall()
@@ -20,7 +35,7 @@ namespace Tpay\Tests\OpenApi\Mock {
         }
 
         /** @return string */
-        public static function getCurlExecResult()
+        public static function getExecResult()
         {
             if ([] === self::$returnedTransfers) {
                 throw new AssertionFailedError('Function "curl_exec" in Tpay\\OpenApi\\Curl\\Curl should not be called!');
@@ -39,11 +54,14 @@ namespace Tpay\OpenApi\Curl {
      */
     function curl_exec()
     {
-        return CurlMock::getCurlExecResult();
+        return CurlMock::getExecResult();
     }
 
+    /**
+     * @return array{http_code: int}
+     */
     function curl_getinfo()
     {
-        return ['http_code' => 200];
+        return ['http_code' => CurlMock::getReturnedHttpCode()];
     }
 }
