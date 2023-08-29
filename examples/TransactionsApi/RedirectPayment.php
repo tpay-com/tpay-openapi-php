@@ -17,7 +17,7 @@ class RedirectPayment extends ExamplesConfig
             throw new TpayException('No payment group Id, unable to create transaction');
         }
         $TpayApi = new TpayApi(static::MERCHANT_CLIENT_ID, static::MERCHANT_CLIENT_SECRET, true, 'read');
-        $result = $TpayApi->Transactions->createTransaction($this->getRequestBody());
+        $result = $TpayApi->transactions()->createTransaction($this->getRequestBody());
         if (isset($result['transactionPaymentUrl'])) {
             header('Location: '.$result['transactionPaymentUrl']);
         } else {

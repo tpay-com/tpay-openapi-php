@@ -23,7 +23,7 @@ class TransactionsApiTest extends TestCase
 
         $transactionsApi = new TransactionsApi($token, false);
 
-        CurlMock::createMock('"ok"');
+        CurlMock::expectConsecutiveReturnedTransfers('"ok"');
 
         $result = $transactionsApi->createTransaction($transactionData);
 

@@ -20,7 +20,7 @@ class RefundsApiExample extends ExamplesConfig
 
     public function getRefunds()
     {
-        $refunds = $this->TpayApi->Refunds->getRefunds();
+        $refunds = $this->TpayApi->refunds()->getRefunds();
         var_dump($refunds);
 
         return $this;
@@ -28,7 +28,7 @@ class RefundsApiExample extends ExamplesConfig
 
     public function getRefundById($refundId)
     {
-        $refund = $this->TpayApi->Refunds->getRefundById($refundId);
+        $refund = $this->TpayApi->refunds()->getRefundById($refundId);
         var_dump($refund);
 
         return $this;

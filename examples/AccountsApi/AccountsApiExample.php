@@ -33,7 +33,7 @@ class AccountsApiExample extends ExamplesConfig
 
     public function getAccounts()
     {
-        $accounts = $this->TpayApi->Accounts->getAccounts();
+        $accounts = $this->TpayApi->accounts()->getAccounts();
         var_dump($accounts);
 
         return $this;
@@ -41,7 +41,7 @@ class AccountsApiExample extends ExamplesConfig
 
     public function getAccountById($accountId)
     {
-        $account = $this->TpayApi->Accounts->getAccountById($accountId);
+        $account = $this->TpayApi->accounts()->getAccountById($accountId);
         var_dump($account);
 
         return $this;
@@ -49,7 +49,7 @@ class AccountsApiExample extends ExamplesConfig
 
     public function getCategories()
     {
-        $categories = $this->TpayApi->Accounts->getCategories();
+        $categories = $this->TpayApi->accounts()->getCategories();
         var_dump($categories);
 
         return $this;
@@ -57,7 +57,7 @@ class AccountsApiExample extends ExamplesConfig
 
     public function getCategoryById($categoryId)
     {
-        $category = $this->TpayApi->Accounts->getCategoryById($categoryId);
+        $category = $this->TpayApi->accounts()->getCategoryById($categoryId);
         var_dump($category);
 
         return $this;
@@ -65,7 +65,7 @@ class AccountsApiExample extends ExamplesConfig
 
     public function getDocuments()
     {
-        $documents = $this->TpayApi->Accounts->getDocuments();
+        $documents = $this->TpayApi->accounts()->getDocuments();
         var_dump($documents);
 
         return $this;
@@ -73,7 +73,7 @@ class AccountsApiExample extends ExamplesConfig
 
     public function getDocumentById($documentId)
     {
-        $document = $this->TpayApi->Accounts->getDocumentById($documentId);
+        $document = $this->TpayApi->accounts()->getDocumentById($documentId);
         var_dump($document);
 
         return $this;
@@ -81,7 +81,7 @@ class AccountsApiExample extends ExamplesConfig
 
     public function getLegalForms()
     {
-        $legalForms = $this->TpayApi->Accounts->getLegalForms();
+        $legalForms = $this->TpayApi->accounts()->getLegalForms();
         var_dump($legalForms);
 
         return $this;
@@ -89,7 +89,7 @@ class AccountsApiExample extends ExamplesConfig
 
     public function getLegalFormById($legalFormId)
     {
-        $legalForm = $this->TpayApi->Accounts->getLegalFormById($legalFormId);
+        $legalForm = $this->TpayApi->accounts()->getLegalFormById($legalFormId);
         var_dump($legalForm);
 
         return $this;
@@ -98,7 +98,7 @@ class AccountsApiExample extends ExamplesConfig
     public function createAccount()
     {
         $accountConfig = $this->getNewAccountConfig();
-        $newAccount = $this->TpayApi->Accounts->createAccount($accountConfig);
+        $newAccount = $this->TpayApi->accounts()->createAccount($accountConfig);
         var_dump($newAccount);
 
         return $this;

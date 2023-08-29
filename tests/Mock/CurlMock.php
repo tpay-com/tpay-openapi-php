@@ -1,21 +1,32 @@
 <?php
 
 namespace Tpay\Tests\OpenApi\Mock {
+    use PHPUnit\Framework\AssertionFailedError;
+
     final class CurlMock
     {
-        /** @var string */
-        private static $returnedTransfer;
+        /** @var array<string> */
+        private static $returnedTransfers;
 
-        /** @param string $returnedTransfer */
-        public static function createMock($returnedTransfer)
+        /** @param array<string> $returnedTransfers */
+        public static function expectConsecutiveReturnedTransfers(...$returnedTransfers)
         {
-            self::$returnedTransfer = $returnedTransfer;
+            self::$returnedTransfers = $returnedTransfers;
+        }
+
+        public static function expectNoCurlExecCall()
+        {
+            self::$returnedTransfers = [];
         }
 
         /** @return string */
-        public static function getReturnedTransfer()
+        public static function getCurlExecResult()
         {
-            return self::$returnedTransfer;
+            if ([] === self::$returnedTransfers) {
+                throw new AssertionFailedError('Function "curl_exec" in Tpay\\OpenApi\\Curl\\Curl should not be called!');
+            }
+
+            return array_shift(self::$returnedTransfers);
         }
     }
 }
@@ -23,9 +34,12 @@ namespace Tpay\Tests\OpenApi\Mock {
 namespace Tpay\OpenApi\Curl {
     use Tpay\Tests\OpenApi\Mock\CurlMock;
 
+    /**
+     * @return string
+     */
     function curl_exec()
     {
-        return CurlMock::getReturnedTransfer();
+        return CurlMock::getCurlExecResult();
     }
 
     function curl_getinfo()

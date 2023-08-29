@@ -77,7 +77,7 @@ class CardGate extends ExamplesConfig
             'method' => 'sale',
         ];
 
-        return $this->TpayApi->Transactions->createPaymentByTransactionId($request, $transaction['transactionId']);
+        return $this->TpayApi->transactions()->createPaymentByTransactionId($request, $transaction['transactionId']);
     }
 
     private function setOrderAsComplete($response)
@@ -114,7 +114,7 @@ class CardGate extends ExamplesConfig
             ],
         ];
 
-        return $this->TpayApi->Transactions->createTransaction($request);
+        return $this->TpayApi->transactions()->createTransaction($request);
     }
 
     private function saveUserCardDetails($cardVendor, $cardShortCode)

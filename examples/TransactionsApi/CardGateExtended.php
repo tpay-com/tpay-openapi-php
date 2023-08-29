@@ -97,7 +97,7 @@ class CardGateExtended extends ExamplesConfig
                 'groupId' => 103,
             ],
         ];
-        $result = $this->TpayApi->Transactions->createTransaction($request);
+        $result = $this->TpayApi->transactions()->createTransaction($request);
         if (!isset($result['transactionId'])) {
             throw new TpayException('Unable to create transaction. Response: '.json_encode($result));
         }
@@ -122,7 +122,7 @@ class CardGateExtended extends ExamplesConfig
             'method' => 'sale',
         ];
 
-        return $this->TpayApi->Transactions->createPaymentByTransactionId($request, $transaction['transactionId']);
+        return $this->TpayApi->transactions()->createPaymentByTransactionId($request, $transaction['transactionId']);
     }
 
     private function processSavedCardPayment($savedCardId)
@@ -166,7 +166,7 @@ class CardGateExtended extends ExamplesConfig
             ],
             'method' => 'sale',
         ];
-        $result = $this->TpayApi->Transactions->createPaymentByTransactionId($request, $transaction['transactionId']);
+        $result = $this->TpayApi->transactions()->createPaymentByTransactionId($request, $transaction['transactionId']);
         if (isset($result['result'], $result['status']) && 'correct' === $result['status']) {
             return $this->setOrderAsComplete($result);
         }

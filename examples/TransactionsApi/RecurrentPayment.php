@@ -37,7 +37,7 @@ class RecurrentPayment extends ExamplesConfig
             ],
         ];
         $TpayApi = new TpayApi(static::MERCHANT_CLIENT_ID, static::MERCHANT_CLIENT_SECRET, true, 'read');
-        $transaction = $TpayApi->Transactions->createTransaction($request);
+        $transaction = $TpayApi->transactions()->createTransaction($request);
         if (
             isset($transaction['result'], $transaction['status'])
             && 'success' === $transaction['result']
