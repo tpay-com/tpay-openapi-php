@@ -13,8 +13,6 @@ class LegacyNamespaceTest extends TestCase
     /** @runInSeparateProcess */
     public function testUsingNewNamespaceDoesNotTriggerDeprecation()
     {
-        $this->expectNotToPerformAssertions();
-
         new \Tpay\OpenApi\Model\Fields\Person\Name();
     }
 
