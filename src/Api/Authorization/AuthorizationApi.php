@@ -7,6 +7,7 @@ use Tpay\OpenApi\Model\Objects\RequestBody\Auth;
 
 class AuthorizationApi extends ApiAction
 {
+    /** @param array $fields */
     public function getNewToken($fields)
     {
         return $this->run(static::POST, '/oauth/auth', $fields, new Auth());

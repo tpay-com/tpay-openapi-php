@@ -56,6 +56,12 @@ class FieldValidator implements FieldTypes
         return true;
     }
 
+    /**
+     * @param string $fieldType
+     * @param mixed  $value
+     *
+     * @return bool
+     */
     public function isValueValidType($fieldType, $value)
     {
         $isValid = true;
