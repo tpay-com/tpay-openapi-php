@@ -62,8 +62,6 @@ class ServerValidator
         if (isset($_SERVER[$name])) {
             return $_SERVER[$name];
         }
-
-        return null;
     }
 
     /**
