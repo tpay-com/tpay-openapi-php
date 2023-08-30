@@ -81,12 +81,12 @@ The log files are created for each day separately.
 
 The logging is enabled by default, but you can disable this feature by command:
 ```php
-Logger::$loggingEnabled = false;
+Logger::disableLogging();
 ```
 
 You can also set your own logging path by this command:
 ```php
-Logger::$customLogPatch = '/my/own/path/Logs/';
+Logger::setLogPath('/my/own/path/Logs/');
 ```
 The logs file names will be assigned automatically.
 

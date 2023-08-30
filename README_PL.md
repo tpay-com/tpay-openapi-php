@@ -81,12 +81,12 @@ Pliki logów tworzone są dla każdego dnia oddzielnie.
 
 Logowanie jest domyślnie włączone, ale możesz wyłączyć tę funkcję za pomocą polecenia:
 ```php
-Logger::$loggingEnabled = false;
+Logger::disableLogging();
 ```
 
 Możesz także ustawić własną ścieżkę logowania za pomocą tego polecenia:
 ```php
-Logger::$customLogPatch = '/my/own/path/Logs/';
+Logger::setLogPath('/my/own/path/Logs/');
 ```
 Nazwy plików dzienników zostaną przypisane automatycznie.
 

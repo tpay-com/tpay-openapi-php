@@ -37,6 +37,20 @@ class LoggerTest extends TestCase
         Logger::log('title', 'text');
     }
 
+    public function testDisablingLogging()
+    {
+        self::assertTrue(Logger::$loggingEnabled);
+        Logger::disableLogging();
+        self::assertFalse(Logger::$loggingEnabled);
+    }
+
+    public function testDisableLogging()
+    {
+        self::assertNull(Logger::$customLogPatch);
+        Logger::setLogPath('/my/own/path/Logs/');
+        self::assertSame('/my/own/path/Logs/', Logger::$customLogPatch);
+    }
+
     public static function assertRegularExpressionMatches($pattern, $string)
     {
         if (method_exists(self::class, 'assertMatchesRegularExpression')) {
