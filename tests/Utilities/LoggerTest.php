@@ -2,7 +2,6 @@
 
 namespace Tpay\Tests\OpenApi\Utilities;
 
-use PHPUnit\Framework\Constraint\RegularExpression;
 use PHPUnit\Framework\TestCase;
 use Tpay\OpenApi\Utilities\Logger;
 
@@ -22,7 +21,16 @@ class LoggerTest extends TestCase
 
         $logContent = file_get_contents($logPath);
 
-        self::assertThat($logContent, new RegularExpression(self::getLogPattern()));
+        self::assertRegularExpressionMatches(self::getLogPattern(), $logContent);
+    }
+
+    public static function assertRegularExpressionMatches($pattern, $string)
+    {
+        if (method_exists(self::class, 'assertMatchesRegularExpression')) {
+            self::assertMatchesRegularExpression($pattern, $string);
+        } else {
+            self::assertRegExp($pattern, $string);
+        }
     }
 
     /** @return string */
