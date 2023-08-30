@@ -88,8 +88,12 @@ Możesz także ustawić własną ścieżkę logowania za pomocą tego polecenia:
 ```php
 Logger::$customLogPatch = '/my/own/path/Logs/';
 ```
-
 Nazwy plików dzienników zostaną przypisane automatycznie.
+
+Możesz zastąpić powyższy system logowania, konfigurując własną implementację `Psr\Log\LoggerInterface` za pomocą:
+```php
+Logger::setLogger($logger);
+```
 
 ## Niestandardowa ścieżka szablonów
 

@@ -88,8 +88,12 @@ You can also set your own logging path by this command:
 ```php
 Logger::$customLogPatch = '/my/own/path/Logs/';
 ```
-
 The logs file names will be assigned automatically.
+
+You can replace the logging system above by setting up your own implementation of `Psr\Log\LoggerInterface` with:
+```php
+Logger::setLogger($logger);
+```
 
 ## Custom templates and static files path
 
