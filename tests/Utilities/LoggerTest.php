@@ -3,6 +3,7 @@
 namespace Tpay\Tests\OpenApi\Utilities;
 
 use PHPUnit\Framework\TestCase;
+use Psr\Log\LoggerInterface;
 use Tpay\OpenApi\Utilities\Logger;
 
 /**
@@ -22,6 +23,18 @@ class LoggerTest extends TestCase
         $logContent = file_get_contents($logPath);
 
         self::assertRegularExpressionMatches(self::getLogPattern(), $logContent);
+    }
+
+    public function testLoggingWithPsrLogger()
+    {
+        $logger = $this->createMock(LoggerInterface::class);
+        $logger->expects(self::once())
+            ->method('info')
+            ->with(self::matchesRegularExpression(self::getLogPattern()));
+
+        Logger::setLogger($logger);
+
+        Logger::log('title', 'text');
     }
 
     public static function assertRegularExpressionMatches($pattern, $string)

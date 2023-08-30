@@ -2,10 +2,33 @@
 
 namespace Tpay\OpenApi\Utilities;
 
+use Psr\Log\LoggerInterface;
+
 class Logger
 {
+    /** @var bool */
     static $loggingEnabled = true;
+
+    /** @var null|string */
     static $customLogPatch;
+
+    /** @var null|LoggerInterface */
+    private static $logger;
+
+    public static function setLogger(LoggerInterface $logger)
+    {
+        self::$logger = $logger;
+    }
+
+    /** @return FileLogger|LoggerInterface */
+    public static function getLogger()
+    {
+        if (null === self::$logger) {
+            return new FileLogger(self::$customLogPatch);
+        }
+
+        return self::$logger;
+    }
 
     /**
      * Save text to log file
@@ -22,8 +45,8 @@ class Logger
         if (false === static::$loggingEnabled) {
             return false;
         }
+
         $text = (string) $text;
-        $logFilePath = self::getLogPath();
         $ip = (isset($_SERVER['REMOTE_ADDR'])) ? $_SERVER['REMOTE_ADDR'] : 'Empty server REMOTE_ADDR';
         $logText = PHP_EOL.'===========================';
         $logText .= PHP_EOL.$title;
@@ -33,8 +56,8 @@ class Logger
         $logText .= PHP_EOL;
         $logText .= $text;
         $logText .= PHP_EOL;
-        self::checkLogFile($logFilePath);
-        file_put_contents($logFilePath, $logText, FILE_APPEND);
+
+        self::getLogger()->info($logText);
 
         return true;
     }
@@ -51,36 +74,9 @@ class Logger
         if (false === static::$loggingEnabled) {
             return false;
         }
-        $text = (string) $text;
-        $logFilePath = self::getLogPath();
-        self::checkLogFile($logFilePath);
-        file_put_contents($logFilePath, PHP_EOL.$text, FILE_APPEND);
+
+        self::getLogger()->info((string) $text);
 
         return true;
-    }
-
-    /** @param string $logFilePath */
-    private static function checkLogFile($logFilePath)
-    {
-        if (!file_exists($logFilePath)) {
-            file_put_contents($logFilePath, '<?php exit; ?> '.PHP_EOL);
-            chmod($logFilePath, 0644);
-        }
-        if (!file_exists($logFilePath) || !is_writable($logFilePath)) {
-            throw new TpayException('Unable to create or write the log file');
-        }
-    }
-
-    /** @return string */
-    private static function getLogPath()
-    {
-        $logFileName = 'log_'.date('Y-m-d').'.php';
-        if (!empty(static::$customLogPatch)) {
-            $logPath = static::$customLogPatch.$logFileName;
-        } else {
-            $logPath = dirname(__FILE__).'/../Logs/'.$logFileName;
-        }
-
-        return $logPath;
     }
 }
