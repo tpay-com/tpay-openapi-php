@@ -59,7 +59,7 @@ class Keys
         $this->checkKeysTranslations();
     }
 
-    public static function initializeTranslations()
+    protected static function initializeTranslations()
     {
         static::$translations = [
             'pl' => (new Polish())->translations,
