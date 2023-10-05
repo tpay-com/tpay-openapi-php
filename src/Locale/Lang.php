@@ -17,6 +17,10 @@ class Lang extends Keys
      */
     public static function setLang($lang)
     {
+        if (empty(static::$translations)) {
+            self::initializeTranslations();
+        }
+
         if (array_key_exists($lang, static::$translations)) {
             static::$currentLanguage = $lang;
         } else {

@@ -55,12 +55,18 @@ class Keys
 
     public function __construct()
     {
+        self::initializeTranslations();
+        $this->checkKeysTranslations();
+    }
+
+    public static function initializeTranslations()
+    {
         static::$translations = [
             'pl' => (new Polish())->translations,
             'en' => (new English())->translations,
         ];
-        $this->checkKeysTranslations();
     }
+
 
     private function checkKeysTranslations()
     {
