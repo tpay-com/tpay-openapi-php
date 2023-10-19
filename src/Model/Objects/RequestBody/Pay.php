@@ -28,6 +28,9 @@ class Pay extends Objects
     /** @var GroupId */
     public $groupId;
 
+    /** @var ChannelId */
+    public $channelId;
+
     /** @var Method */
     public $method;
 
