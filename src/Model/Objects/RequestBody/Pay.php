@@ -5,6 +5,7 @@ namespace Tpay\OpenApi\Model\Objects\RequestBody;
 use Tpay\OpenApi\Model\Fields\Pay\ApplePayPaymentData;
 use Tpay\OpenApi\Model\Fields\Pay\GooglePayPaymentData;
 use Tpay\OpenApi\Model\Fields\Pay\Method;
+use Tpay\OpenApi\Model\Identifiers\ChannelId;
 use Tpay\OpenApi\Model\Identifiers\GroupId;
 use Tpay\OpenApi\Model\Objects\Objects;
 use Tpay\OpenApi\Model\Objects\Transactions\BlikPaymentData;
@@ -15,6 +16,7 @@ class Pay extends Objects
 {
     const OBJECT_FIELDS = [
         'groupId' => GroupId::class,
+        'channelId' => ChannelId::class,
         'method' => Method::class,
         'blikPaymentData' => BlikPaymentData::class,
         'cardPaymentData' => CardPaymentData::class,
@@ -25,6 +27,9 @@ class Pay extends Objects
 
     /** @var GroupId */
     public $groupId;
+
+    /** @var ChannelId */
+    public $channelId;
 
     /** @var Method */
     public $method;
