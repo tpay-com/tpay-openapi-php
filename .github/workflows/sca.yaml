@@ -1,0 +1,36 @@
+name: Static code analysis
+
+on:
+  pull_request:
+  push:
+
+jobs:
+  analyse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.2
+          extensions: none, curl, dom, mbstring, simplexml, tokenizer, xml, xmlwriter
+          coverage: none
+
+      - run: composer update --no-progress --classmap-authoritative
+
+      - run: composer validate --strict
+
+      - working-directory: .dev-tools
+        run: composer install
+
+      - working-directory: .dev-tools
+        run: composer normalize --diff --dry-run --indent-size=4 --indent-style=space ../composer.json
+
+      - working-directory: .dev-tools
+        run: ./vendor/bin/php-cs-fixer fix -vvv --diff --dry-run
+
+      - working-directory: .dev-tools
+        run: ./vendor/bin/phpstan
+
+      - working-directory: .dev-tools
+        run: ./vendor/bin/psalm --no-progress --shepherd

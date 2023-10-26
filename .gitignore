@@ -1,6 +1,4 @@
-.idea
-.sonar
-sonar-project.properties
-Logs/*
-!Logs/.gitkeep
-.scannerwork
+/.dev-tools/vendor/
+/.dev-tools/.php-cs-fixer.cache
+/vendor/
+/composer.lock
