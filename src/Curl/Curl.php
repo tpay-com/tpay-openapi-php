@@ -128,6 +128,23 @@ class Curl extends CurlOptions
         return $this;
     }
 
+    /** @return false|resource */
+    public function download()
+    {
+        $ch = $this->init();
+        $fp = tmpfile();
+        curl_setopt($ch, CURLOPT_FILE, $fp);
+        $curlRes = curl_exec($ch);
+        $this->curlInfo = curl_getinfo($ch);
+        $this->curlError = curl_error($ch);
+        $this->curlErrorNumber = curl_errno($ch);
+        curl_close($ch);
+        $this->result = $curlRes;
+        fseek($fp, 0);
+
+        return $fp;
+    }
+
     /** @return CurlHandle */
     public function init()
     {
