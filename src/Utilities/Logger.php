@@ -73,44 +73,21 @@ class Logger
      *
      * @return bool
      */
-    public static function log($title, $text)
+    public static function log($title, $text, $logLevel = 'info')
     {
         $logger = self::getLogger();
         if ($logger instanceof NullLogger) {
             return false;
         }
-
-        $text = (string) $text;
         $ip = (isset($_SERVER['REMOTE_ADDR'])) ? $_SERVER['REMOTE_ADDR'] : 'Empty server REMOTE_ADDR';
-        $logText = PHP_EOL.'===========================';
-        $logText .= PHP_EOL.$title;
-        $logText .= PHP_EOL.'===========================';
-        $logText .= PHP_EOL.date('Y-m-d H:i:s');
-        $logText .= PHP_EOL.'ip: '.$ip;
-        $logText .= PHP_EOL;
-        $logText .= $text;
-        $logText .= PHP_EOL;
-
-        $logger->info($logText);
-
-        return true;
-    }
-
-    /**
-     * Save one line to log file
-     *
-     * @param string $text text to save
-     *
-     * @return bool
-     */
-    public static function logLine($text)
-    {
-        $logger = self::getLogger();
-        if ($logger instanceof NullLogger) {
-            return false;
-        }
-
-        $logger->info((string) $text);
+        $content = [
+            'IP' => $ip,
+            'title' => $title,
+            'date' => date('Y-m-d H:i:s'),
+            'message' => $text,
+            'logLevel' => $logLevel
+        ];
+        $logger->log($logLevel, json_encode($content));
 
         return true;
     }

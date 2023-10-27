@@ -55,7 +55,7 @@ class PaymentNotification extends Notification
             $merchantSecret,
             $notification->md5sum->getValue()
         );
-        Logger::logLine('Check MD5: '.(int) $checkMD5);
+
         if (false === $checkMD5) {
             throw new TpayException('MD5 checksum is invalid');
         }
