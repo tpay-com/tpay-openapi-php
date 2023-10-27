@@ -67,7 +67,6 @@ class Keys
         ];
     }
 
-
     private function checkKeysTranslations()
     {
         foreach ($this->keys as $key) {
