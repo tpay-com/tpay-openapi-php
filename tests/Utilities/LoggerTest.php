@@ -22,15 +22,15 @@ class LoggerTest extends TestCase
 
         $logContent = file_get_contents($logPath);
 
-        self::assertRegularExpressionMatches(self::getLogPattern(), $logContent);
+        self::assertRegularExpressionMatches(self::getLogFilePattern(), $logContent);
     }
 
     public function testLoggingWithPsrLogger()
     {
         $logger = $this->createMock(LoggerInterface::class);
         $logger->expects(self::once())
-            ->method('info')
-            ->with(self::matchesRegularExpression(self::getLogPattern()));
+            ->method('log')
+            ->with('info', self::matchesRegularExpression(self::getLogPattern()));
 
         Logger::setLogger($logger);
 
@@ -62,6 +62,12 @@ class LoggerTest extends TestCase
 
     /** @return string */
     private static function getLogPattern()
+    {
+        return '/\{"ip":"Empty server.*/i';
+    }
+
+    /** @return string */
+    private static function getLogFilePattern()
     {
         return '/
 ===========================

@@ -81,7 +81,7 @@ class Logger
         }
         $ip = (isset($_SERVER['REMOTE_ADDR'])) ? $_SERVER['REMOTE_ADDR'] : 'Empty server REMOTE_ADDR';
         $content = [
-            'IP' => $ip,
+            'ip' => $ip,
             'title' => $title,
             'date' => date('Y-m-d H:i:s'),
             'message' => $text,

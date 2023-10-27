@@ -22,7 +22,7 @@ class FileLogger
     /** @param string $message */
     protected function info($message)
     {
-        $content = json_decode($message);
+        $content = json_decode($message, true);
         $logText = PHP_EOL . '===========================';
         $logText .= PHP_EOL . $content['title'];
         $logText .= PHP_EOL . '===========================';
