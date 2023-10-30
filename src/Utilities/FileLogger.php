@@ -2,6 +2,8 @@
 
 namespace Tpay\OpenApi\Utilities;
 
+use Exception;
+
 class FileLogger
 {
     /** @var null|string */
@@ -13,12 +15,27 @@ class FileLogger
         $this->logFilePath = $logFilePath;
     }
 
-    /** @param string $message */
-    public function info($message)
+    public function log($level, $message, array $context = [])
     {
+        $this->info($message);
+    }
+
+    /** @param string $message */
+    protected function info($message)
+    {
+        $content = json_decode($message, true);
+        $logText = PHP_EOL.'===========================';
+        $logText .= PHP_EOL.$content['title'];
+        $logText .= PHP_EOL.'===========================';
+        $logText .= PHP_EOL.$content['date'];
+        $logText .= PHP_EOL.'ip: '.$content['ip'];
+        $logText .= PHP_EOL;
+        $logText .= $content['message'];
+        $logText .= PHP_EOL;
+
         $logFilePath = $this->getLogPath();
         self::checkLogFile($logFilePath);
-        file_put_contents($logFilePath, $message, FILE_APPEND);
+        file_put_contents($logFilePath, $logText, FILE_APPEND);
     }
 
     /** @return string */
@@ -42,7 +59,7 @@ class FileLogger
             chmod($logFilePath, 0644);
         }
         if (!file_exists($logFilePath) || !is_writable($logFilePath)) {
-            throw new TpayException('Unable to create or write the log file');
+            throw new Exception('Unable to create or write the log file');
         }
     }
 }
