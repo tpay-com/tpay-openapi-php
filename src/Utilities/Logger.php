@@ -66,8 +66,9 @@ class Logger
     /**
      * Save text to log file
      *
-     * @param string $title action name
-     * @param string $text  text to save
+     * @param string $title    action name
+     * @param string $text     text to save
+     * @param mixed  $logLevel
      *
      * @throws TpayException
      *
@@ -85,7 +86,7 @@ class Logger
             'title' => $title,
             'date' => date('Y-m-d H:i:s'),
             'message' => $text,
-            'logLevel' => $logLevel
+            'logLevel' => $logLevel,
         ];
         $logger->log($logLevel, json_encode($content));
 
