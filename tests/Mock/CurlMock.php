@@ -64,4 +64,16 @@ namespace Tpay\OpenApi\Curl {
     {
         return ['http_code' => CurlMock::getReturnedHttpCode()];
     }
+
+    /**
+     * @return false|resource
+     */
+    function tmpfile()
+    {
+        $fp = \tmpfile();
+        \fwrite($fp, CurlMock::getExecResult());
+        \fseek($fp, 0);
+
+        return $fp;
+    }
 }

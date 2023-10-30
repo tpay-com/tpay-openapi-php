@@ -6,6 +6,7 @@ use RuntimeException;
 use Tpay\OpenApi\Api\Accounts\AccountsApi;
 use Tpay\OpenApi\Api\Authorization\AuthorizationApi;
 use Tpay\OpenApi\Api\Refunds\RefundsApi;
+use Tpay\OpenApi\Api\Reports\ReportsApi;
 use Tpay\OpenApi\Api\Transactions\TransactionsApi;
 use Tpay\OpenApi\Model\Objects\Authorization\Token;
 use Tpay\OpenApi\Utilities\TpayException;
@@ -18,6 +19,7 @@ class TpayApi
         'Authorization' => AuthorizationApi::class,
         'Transactions' => TransactionsApi::class,
         'Refunds' => RefundsApi::class,
+        'Reports' => ReportsApi::class,
     ];
 
     /** @var null|AccountsApi */
@@ -28,6 +30,9 @@ class TpayApi
 
     /** @var null|RefundsApi */
     private $refunds;
+
+    /** @var null|ReportsApi */
+    private $reports;
 
     /** @var null|TransactionsApi */
     private $transactions;
@@ -124,6 +129,17 @@ class TpayApi
         }
 
         return $this->refunds;
+    }
+
+    /** @return ReportsApi */
+    public function reports()
+    {
+        $this->authorize();
+        if (null === $this->reports) {
+            $this->reports = new ReportsApi($this->token, $this->productionMode);
+        }
+
+        return $this->reports;
     }
 
     /** @return TransactionsApi */

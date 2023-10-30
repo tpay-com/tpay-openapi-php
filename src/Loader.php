@@ -14,7 +14,7 @@ class Loader
                 return;
             }
 
-            $prefix = 'Tpay\\';
+            $prefix = 'Tpay\\OpenApi\\';
             if (0 === strncmp($prefix, $class, strlen($prefix))) {
                 $relativeClass = substr($class, strlen($prefix));
                 $file = __DIR__.'/'.str_replace('\\', '/', $relativeClass).'.php';

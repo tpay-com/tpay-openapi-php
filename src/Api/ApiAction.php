@@ -52,6 +52,47 @@ class ApiAction
             ->getRequestResult();
     }
 
+    public function download($requestMethod, $apiMethod, $fields = [], $requestBody = null, $headers = [])
+    {
+        if (is_array($fields) && count($fields) > 0) {
+            $this->Manager
+                ->setRequestBody($requestBody)
+                ->setFields($fields);
+        }
+
+        $requestUrl = sprintf(
+            '%s%s',
+            true === $this->productionMode ? static::TPAY_API_URL_PRODUCTION : static::TPAY_API_URL_SANDBOX,
+            $apiMethod
+        );
+        if (is_string($this->Token->access_token->getValue()) && '/oauth/auth' !== $apiMethod) {
+            $headers[] = sprintf('Authorization: Bearer %s', $this->Token->access_token->getValue());
+        }
+        if (!empty($fields)) {
+            $headers[] = 'Content-Type: application/json';
+        }
+        Logger::log(
+            'Outgoing request',
+            vsprintf(
+                "URL: %s \n Method: %s \n Fields: %s \n Headers: %s",
+                [$requestUrl, $requestMethod, json_encode($fields), json_encode($headers)]
+            )
+        );
+        $fp = $this->Curl
+            ->setRequestUrl($requestUrl)
+            ->setPostData($fields)
+            ->setMethod($requestMethod)
+            ->setHeader($headers)
+            ->download();
+        Logger::log(
+            'Request response',
+            sprintf("Fields: %s \n HTTP code: %s", json_encode($this->getRequestResult()), $this->getHttpResponseCode())
+        );
+        $this->checkResponse();
+
+        return $fp;
+    }
+
     /**
      * @param bool $associative
      *
