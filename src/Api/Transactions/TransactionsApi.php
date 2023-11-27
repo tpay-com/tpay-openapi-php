@@ -82,7 +82,6 @@ class TransactionsApi extends ApiAction
         return $this->run(static::POST, sprintf('/transactions/%s/pay', $transactionId), $fields, new PayWithInstantRedirection());
     }
 
-
     /**
      * @param array  $fields
      * @param string $transactionId
