@@ -27,6 +27,8 @@ class ApiAction
     /** @var bool */
     private $productionMode;
 
+    private $clientName = 'tpay-com/tpay-openapi-php:1.6.3';
+
     /**
      * @param Token $Token
      * @param bool  $productionMode
@@ -118,6 +120,16 @@ class ApiAction
         return $this->Curl->getHttpResponseCode();
     }
 
+    public function setClientName($clientName)
+    {
+        $this->clientName = $clientName;
+    }
+
+    public function getClientName()
+    {
+        return $this->clientName;
+    }
+
     protected function sendRequest($apiMethod, $requestMethod, $fields = [], $headers = [])
     {
         $requestUrl = sprintf(
@@ -131,6 +143,11 @@ class ApiAction
         if (!empty($fields)) {
             $headers[] = 'Content-Type: application/json';
         }
+
+        if ($this->clientName) {
+            $headers[] = 'X-Client-Source: '.$this->clientName;
+        }
+
         Logger::log(
             'Outgoing request',
             vsprintf(
