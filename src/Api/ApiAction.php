@@ -31,7 +31,7 @@ class ApiAction
 
     /**
      * @param Token $Token
-     * @param bool $productionMode
+     * @param bool  $productionMode
      */
     public function __construct($Token, $productionMode)
     {
@@ -104,7 +104,7 @@ class ApiAction
         }
 
         if ($this->clientName) {
-            $headers[] = 'X-Client-Source: ' . $this->clientName;
+            $headers[] = 'X-Client-Source: '.$this->clientName;
         }
 
         Logger::log(
@@ -131,14 +131,14 @@ class ApiAction
 
     /**
      * @param string $requestUrl
-     * @param array $queryFields
+     * @param array  $queryFields
      *
      * @return string
      */
     protected function addQueryFields($requestUrl, $queryFields)
     {
         if (is_array($queryFields) && count($queryFields) > 0) {
-            $requestUrl .= '?' . http_build_query($queryFields);
+            $requestUrl .= '?'.http_build_query($queryFields);
         }
 
         return $requestUrl;
