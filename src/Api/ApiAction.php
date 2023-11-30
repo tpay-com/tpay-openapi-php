@@ -146,7 +146,7 @@ class ApiAction
         }
 
         if ($this->clientName) {
-            $headers[] = 'X-Client-Source: '.$this->clientName;
+            // @phpcs:ignore $headers[] = 'X-Client-Source: '.$this->clientName;
         }
 
         Logger::log(
