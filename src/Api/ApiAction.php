@@ -39,7 +39,7 @@ class ApiAction
         $this->Token = $Token;
         $this->Curl = new Curl();
         $this->Manager = new Manager();
-        $this->clientName = 'tpay-com/tpay-openapi-php:1.6.3|PHP:'.phpversion();
+        $this->clientName = 'tpay-com/tpay-openapi-php:1.6.6|PHP:'.phpversion();
     }
 
     public function run($requestMethod, $apiMethod, $fields = [], $requestBody = null, $headers = [])
