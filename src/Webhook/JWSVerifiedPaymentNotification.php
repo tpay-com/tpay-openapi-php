@@ -174,7 +174,7 @@ class JWSVerifiedPaymentNotification extends Notification
      * @return bool|string
      * @throws TpayException
      */
-    function fallbackGetContents ($url) {
+    private function fallbackGetContents ($url) {
         if (!function_exists('curl_init')){
             throw TpayException::curlNotAvailable();
         }
