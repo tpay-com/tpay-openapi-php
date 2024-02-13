@@ -80,11 +80,11 @@ class JWSVerifiedPaymentNotification extends Notification
         }
 
         $certificate = file_get_contents($x5u);
-        $trusted = file_get_contents(sprintf("%s/x509/tpay-jws-root.pem", $this->getResourcePrefix()));
+        $trusted = file_get_contents(sprintf('%s/x509/tpay-jws-root.pem', $this->getResourcePrefix()));
 
         if (empty($certificate) || empty($trusted)) {
             $certificate = $this->fallbackGetContents($x5u);
-            $trusted = $this->fallbackGetContents(sprintf("%s/x509/tpay-jws-root.pem", $this->getResourcePrefix()));
+            $trusted = $this->fallbackGetContents(sprintf('%s/x509/tpay-jws-root.pem', $this->getResourcePrefix()));
         }
 
         $x509 = new X509();
@@ -171,11 +171,14 @@ class JWSVerifiedPaymentNotification extends Notification
 
     /**
      * @param string $url
-     * @return bool|string
+     *
      * @throws TpayException
+     *
+     * @return bool|string
      */
-    private function fallbackGetContents ($url) {
-        if (!function_exists('curl_init')){
+    private function fallbackGetContents($url)
+    {
+        if (!function_exists('curl_init')) {
             throw TpayException::curlNotAvailable();
         }
 

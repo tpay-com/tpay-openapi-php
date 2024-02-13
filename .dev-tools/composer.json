@@ -8,6 +8,14 @@
         "tpay-com/coding-standards": "^1.0.1",
         "vimeo/psalm": "^5.15.0"
     },
+    "scripts": {
+        "sast": [
+            "composer normalize --diff --dry-run --indent-size=4 --indent-style=space ../composer.json",
+            "./vendor/bin/php-cs-fixer fix -vvv --diff --dry-run",
+            "./vendor/bin/phpstan",
+            "./vendor/bin/psalm --no-progress --shepherd"
+        ]
+    },
     "config": {
         "allow-plugins": {
             "ergebnis/composer-normalize": true,
