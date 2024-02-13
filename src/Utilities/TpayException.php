@@ -23,4 +23,9 @@ class TpayException extends Exception
 
         return $this->message;
     }
+
+    public static function curlNotAvailable()
+    {
+        return new self('Curl not available');
+    }
 }
