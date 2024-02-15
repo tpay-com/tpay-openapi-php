@@ -21,7 +21,7 @@ class TpayException extends Exception
         );
         $this->message = sprintf('%s : %s', $code, $message);
 
-        return $this->message;
+        parent::__construct($message, $code);
     }
 
     public static function curlNotAvailable()
