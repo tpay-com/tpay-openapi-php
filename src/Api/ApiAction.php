@@ -2,6 +2,7 @@
 
 namespace Tpay\OpenApi\Api;
 
+use RuntimeException;
 use Tpay\OpenApi\Curl\Curl;
 use Tpay\OpenApi\Dictionary\HttpCodesDictionary;
 use Tpay\OpenApi\Manager\Manager;
@@ -24,6 +25,9 @@ class ApiAction
     /** @var Token */
     protected $Token;
 
+    /** @var string */
+    protected $apiUrl;
+
     /** @var bool */
     private $productionMode;
 
@@ -39,7 +43,22 @@ class ApiAction
         $this->Token = $Token;
         $this->Curl = new Curl();
         $this->Manager = new Manager();
-        $this->clientName = 'tpay-com/tpay-openapi-php:1.6.6|PHP:'.phpversion();
+        $this->clientName = 'tpay-com/tpay-openapi-php:1.6.8|PHP:'.phpversion();
+        $this->apiUrl = true === $this->productionMode
+            ? ApiAction::TPAY_API_URL_PRODUCTION
+            : ApiAction::TPAY_API_URL_SANDBOX;
+    }
+
+    /** @param string $apiUrl */
+    public function overrideApiUrl($apiUrl)
+    {
+        if (!filter_var($apiUrl, FILTER_VALIDATE_URL)) {
+            throw new RuntimeException(sprintf('Invalid URL provided: %s', $apiUrl));
+        }
+
+        $this->apiUrl = $apiUrl;
+
+        return $this;
     }
 
     public function run($requestMethod, $apiMethod, $fields = [], $requestBody = null, $headers = [])
@@ -65,7 +84,7 @@ class ApiAction
 
         $requestUrl = sprintf(
             '%s%s',
-            true === $this->productionMode ? static::TPAY_API_URL_PRODUCTION : static::TPAY_API_URL_SANDBOX,
+            $this->apiUrl,
             $apiMethod
         );
         if (is_string($this->Token->access_token->getValue()) && '/oauth/auth' !== $apiMethod) {
@@ -135,7 +154,7 @@ class ApiAction
     {
         $requestUrl = sprintf(
             '%s%s',
-            true === $this->productionMode ? static::TPAY_API_URL_PRODUCTION : static::TPAY_API_URL_SANDBOX,
+            $this->apiUrl,
             $apiMethod
         );
         if (is_string($this->Token->access_token->getValue()) && '/oauth/auth' !== $apiMethod) {
