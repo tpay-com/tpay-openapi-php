@@ -16,7 +16,7 @@ jobs:
           extensions: none, curl, dom, mbstring, simplexml, tokenizer, xml, xmlwriter
           coverage: none
 
-      - run: composer update --no-progress --classmap-authoritative
+      - run: composer install --no-dev --no-progress --classmap-authoritative
 
       - run: composer validate --strict
 

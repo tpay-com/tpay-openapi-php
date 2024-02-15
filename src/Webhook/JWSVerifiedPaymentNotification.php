@@ -74,16 +74,23 @@ class JWSVerifiedPaymentNotification extends Notification
         }
 
         $prefix = $this->getResourcePrefix();
+
         if (substr($x5u, 0, strlen($prefix)) !== $prefix) {
             throw new TpayException('Wrong x5u url');
         }
 
         $certificate = file_get_contents($x5u);
-        $trusted = file_get_contents($this->getResourcePrefix().'/x509/tpay-jws-root.pem');
+        $trusted = file_get_contents(sprintf('%s/x509/tpay-jws-root.pem', $this->getResourcePrefix()));
+
+        if (empty($certificate) || empty($trusted)) {
+            $certificate = $this->fallbackGetContents($x5u);
+            $trusted = $this->fallbackGetContents(sprintf('%s/x509/tpay-jws-root.pem', $this->getResourcePrefix()));
+        }
 
         $x509 = new X509();
         $x509->loadX509($certificate);
         $x509->loadCA($trusted);
+
         if (!$x509->validateSignature()) {
             throw new TpayException('Signing certificate is not signed by Tpay CA certificate');
         }
@@ -93,6 +100,7 @@ class JWSVerifiedPaymentNotification extends Notification
         $decodedSignature = base64_decode(strtr($signature, '-_', '+/'));
         $publicKey = $x509->getPublicKey();
         $publicKey = $x509->withSettings($publicKey, 'sha256', RSA::SIGNATURE_PKCS1);
+
         if (!$publicKey->verify($headers.'.'.$payload, $decodedSignature)) {
             throw new TpayException('FALSE - Invalid JWS signature');
         }
@@ -159,5 +167,27 @@ class JWSVerifiedPaymentNotification extends Notification
             ->setFields($_POST, false);
 
         return $this->Manager->getRequestBody();
+    }
+
+    /**
+     * @param string $url
+     *
+     * @throws TpayException
+     *
+     * @return bool|string
+     */
+    private function fallbackGetContents($url)
+    {
+        if (!function_exists('curl_init')) {
+            throw TpayException::curlNotAvailable();
+        }
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $result = curl_exec($ch);
+        curl_close($ch);
+
+        return $result;
     }
 }
