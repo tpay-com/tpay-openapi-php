@@ -43,7 +43,7 @@ class ApiAction
         $this->Token = $Token;
         $this->Curl = new Curl();
         $this->Manager = new Manager();
-        $this->clientName = 'tpay-com/tpay-openapi-php:1.6.8|PHP:'.phpversion();
+        $this->clientName = 'tpay-com/tpay-openapi-php:1.7.0|PHP:'.phpversion();
         $this->apiUrl = true === $this->productionMode
             ? ApiAction::TPAY_API_URL_PRODUCTION
             : ApiAction::TPAY_API_URL_SANDBOX;
