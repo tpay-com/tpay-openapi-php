@@ -242,7 +242,6 @@ class CurlOptions
             CURLOPT_SSL_VERIFYPEER => $this->verifyPeer,
             CURLOPT_TIMEOUT => $this->timeout,
             CURLOPT_VERBOSE => $this->verbose,
-            CURLOPT_POST => $this->post,
             CURLOPT_RETURNTRANSFER => $this->returnTransfer,
             CURLOPT_FAILONERROR => $this->failOnError,
         ];
