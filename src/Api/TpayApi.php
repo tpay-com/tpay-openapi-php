@@ -56,10 +56,10 @@ class TpayApi
     private $apiUrl;
 
     /**
-     * @param string      $clientId
-     * @param string      $clientSecret
-     * @param bool        $productionMode
-     * @param string      $scope
+     * @param string $clientId
+     * @param string $clientSecret
+     * @param bool $productionMode
+     * @param string $scope
      * @param null|string $apiUrlOverride
      */
     public function __construct($clientId, $clientSecret, $productionMode = false, $scope = 'read', $apiUrlOverride = null)
@@ -96,10 +96,14 @@ class TpayApi
         );
 
         switch ($propertyName) {
-            case 'Accounts': return $this->accounts();
-            case 'Authorization': return $this->authorization();
-            case 'Refunds': return $this->refunds();
-            case 'Transactions': return $this->transactions();
+            case 'Accounts':
+                return $this->accounts();
+            case 'Authorization':
+                return $this->authorization();
+            case 'Refunds':
+                return $this->refunds();
+            case 'Transactions':
+                return $this->transactions();
         }
 
         throw new RuntimeException(sprintf('Property %s::%s does not exist!', __CLASS__, $propertyName));
@@ -109,6 +113,11 @@ class TpayApi
     public function setCustomToken($token)
     {
         $this->token = $token;
+    }
+
+    public function getToken()
+    {
+        return $this->token;
     }
 
     /** @return AccountsApi */
