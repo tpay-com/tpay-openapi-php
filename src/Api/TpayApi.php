@@ -56,10 +56,10 @@ class TpayApi
     private $apiUrl;
 
     /**
-     * @param string $clientId
-     * @param string $clientSecret
-     * @param bool $productionMode
-     * @param string $scope
+     * @param string      $clientId
+     * @param string      $clientSecret
+     * @param bool        $productionMode
+     * @param string      $scope
      * @param null|string $apiUrlOverride
      */
     public function __construct($clientId, $clientSecret, $productionMode = false, $scope = 'read', $apiUrlOverride = null)
