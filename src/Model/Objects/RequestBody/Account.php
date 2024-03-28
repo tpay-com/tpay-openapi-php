@@ -4,6 +4,7 @@ namespace Tpay\OpenApi\Model\Objects\RequestBody;
 
 use Tpay\OpenApi\Model\Fields\Account\Krs;
 use Tpay\OpenApi\Model\Fields\Account\LegalForm;
+use Tpay\OpenApi\Model\Fields\Account\MerchantApiConsent;
 use Tpay\OpenApi\Model\Fields\Account\NotifyByEmail;
 use Tpay\OpenApi\Model\Fields\Account\OfferCode;
 use Tpay\OpenApi\Model\Fields\Account\Regon;
@@ -25,6 +26,7 @@ class Account extends Objects
         'krs' => Krs::class,
         'legalForm' => LegalForm::class,
         'categoryId' => CategoryId::class,
+        'merchantApiConsent' => MerchantApiConsent::class,
         'notifyByEmail' => NotifyByEmail::class,
         'website' => [PointOfSale::class],
         'address' => [Address::class],
@@ -51,6 +53,9 @@ class Account extends Objects
 
     /** @var CategoryId */
     public $categoryId;
+
+    /** @var MerchantApiConsent */
+    public $merchantApiConsent;
 
     /** @var NotifyByEmail */
     public $notifyByEmail;
