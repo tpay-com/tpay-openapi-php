@@ -5,10 +5,7 @@ namespace Tpay\Example\ReportsApi;
 use Tpay\Example\ExamplesConfig;
 use Tpay\OpenApi\Api\TpayApi;
 
-require_once '../ExamplesConfig.php';
-require_once '../../src/Loader.php';
-
-class ReportsApiExample extends ExamplesConfig
+final class ReportsApiExample extends ExamplesConfig
 {
     private $TpayApi;
 

@@ -7,10 +7,7 @@ use Tpay\OpenApi\Model\Objects\NotificationBody\BasicPayment;
 use Tpay\OpenApi\Utilities\TpayException;
 use Tpay\OpenApi\Webhook\JWSVerifiedPaymentNotification;
 
-require_once '../ExamplesConfig.php';
-require_once '../../src/Loader.php';
-
-class PaymentNotificationExample extends ExamplesConfig
+final class PaymentNotificationExample extends ExamplesConfig
 {
     /**
      * Returns validated object with set parameters

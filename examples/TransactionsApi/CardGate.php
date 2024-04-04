@@ -9,10 +9,7 @@ use Tpay\OpenApi\Model\Fields\FieldTypes;
 use Tpay\OpenApi\Utilities\TpayException;
 use Tpay\OpenApi\Utilities\Util;
 
-require_once '../ExamplesConfig.php';
-require_once '../../src/Loader.php';
-
-class CardGate extends ExamplesConfig
+final class CardGate extends ExamplesConfig
 {
     private $TpayApi;
 
@@ -74,7 +71,7 @@ class CardGate extends ExamplesConfig
                 'card' => $cardData,
                 'save' => 'on' === $saveCard,
             ],
-            'method' => 'sale',
+            'method' => 'pay_by_link',
         ];
 
         return $this->TpayApi->transactions()->createPaymentByTransactionId($request, $transaction['transactionId']);

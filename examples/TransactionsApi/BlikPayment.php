@@ -7,10 +7,7 @@ use Tpay\OpenApi\Api\TpayApi;
 use Tpay\OpenApi\Forms\PaymentForms;
 use Tpay\OpenApi\Utilities\TpayException;
 
-require_once '../ExamplesConfig.php';
-require_once '../../src/Loader.php';
-
-class BlikPayment extends ExamplesConfig
+final class BlikPayment extends ExamplesConfig
 {
     public function __construct()
     {

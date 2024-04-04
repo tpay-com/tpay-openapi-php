@@ -27,7 +27,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Tpay\\OpenApi\\": "src/"
+            "Tpay\\OpenApi\\": "src/",
+            "Tpay\\Example\\": "examples/"
         },
         "classmap": [
             "src/legacy_classes.php"

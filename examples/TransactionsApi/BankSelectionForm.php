@@ -7,10 +7,7 @@ use Tpay\OpenApi\Api\TpayApi;
 use Tpay\OpenApi\Forms\PaymentForms;
 use Tpay\OpenApi\Utilities\TpayException;
 
-require_once '../ExamplesConfig.php';
-require_once '../../src/Loader.php';
-
-class BankSelectionForm extends ExamplesConfig
+final class BankSelectionForm extends ExamplesConfig
 {
     public function getBankForm()
     {

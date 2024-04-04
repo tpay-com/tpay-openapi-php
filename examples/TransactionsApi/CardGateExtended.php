@@ -10,10 +10,7 @@ use Tpay\OpenApi\Utilities\Logger;
 use Tpay\OpenApi\Utilities\TpayException;
 use Tpay\OpenApi\Utilities\Util;
 
-require_once '../ExamplesConfig.php';
-require_once '../../src/Loader.php';
-
-class CardGateExtended extends ExamplesConfig
+final class CardGateExtended extends ExamplesConfig
 {
     private $TpayApi;
 
@@ -119,7 +116,7 @@ class CardGateExtended extends ExamplesConfig
                 'card' => $cardData,
                 'save' => 'on' === $saveCard,
             ],
-            'method' => 'sale',
+            'method' => 'pay_by_link',
         ];
 
         return $this->TpayApi->transactions()->createPaymentByTransactionId($request, $transaction['transactionId']);
@@ -167,7 +164,7 @@ class CardGateExtended extends ExamplesConfig
             'method' => 'sale',
         ];
         $result = $this->TpayApi->transactions()->createPaymentByTransactionId($request, $transaction['transactionId']);
-        if (isset($result['result'], $result['status']) && 'correct' === $result['status']) {
+        if (isset($result['result'], $result['status']) && 'success' === $result['status'] && isset($result['payments']['status']) && 'correct' === $result['payments']['status']) {
             return $this->setOrderAsComplete($result);
         }
 

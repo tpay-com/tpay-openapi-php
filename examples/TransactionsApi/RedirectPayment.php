@@ -6,10 +6,7 @@ use Tpay\Example\ExamplesConfig;
 use Tpay\OpenApi\Api\TpayApi;
 use Tpay\OpenApi\Utilities\TpayException;
 
-require_once '../ExamplesConfig.php';
-require_once '../../src/Loader.php';
-
-class RedirectPayment extends ExamplesConfig
+final class RedirectPayment extends ExamplesConfig
 {
     public function processTransaction()
     {
