@@ -32,7 +32,7 @@ class Account extends Objects
         'website' => [PointOfSale::class],
         'address' => [Address::class],
         'person' => [Person::class],
-        'bankAccount' => BankAccount::class
+        'bankAccount' => BankAccount::class,
     ];
 
     /** @var OfferCode */
