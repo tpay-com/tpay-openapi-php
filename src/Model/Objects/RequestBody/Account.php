@@ -12,6 +12,7 @@ use Tpay\OpenApi\Model\Fields\Account\TaxId;
 use Tpay\OpenApi\Model\Fields\Person\Email;
 use Tpay\OpenApi\Model\Identifiers\CategoryId;
 use Tpay\OpenApi\Model\Objects\Accounts\Address;
+use Tpay\OpenApi\Model\Objects\Accounts\BankAccount;
 use Tpay\OpenApi\Model\Objects\Accounts\Person;
 use Tpay\OpenApi\Model\Objects\Accounts\PointOfSale;
 use Tpay\OpenApi\Model\Objects\Objects;
@@ -31,6 +32,7 @@ class Account extends Objects
         'website' => [PointOfSale::class],
         'address' => [Address::class],
         'person' => [Person::class],
+        'bankAccount' => BankAccount::class
     ];
 
     /** @var OfferCode */
@@ -68,6 +70,9 @@ class Account extends Objects
 
     /** @var Person */
     public $person;
+
+    /** @var BankAccount */
+    public $bankAccount;
 
     public function getRequiredFields()
     {
