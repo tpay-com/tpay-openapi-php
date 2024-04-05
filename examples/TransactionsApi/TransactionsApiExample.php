@@ -12,7 +12,7 @@ final class TransactionsApiExample extends ExamplesConfig
     public function __construct()
     {
         parent::__construct();
-        $this->TpayApi = new TpayApi(static::MERCHANT_CLIENT_ID, static::MERCHANT_CLIENT_SECRET, true, 'read');
+        $this->TpayApi = new TpayApi(self::MERCHANT_CLIENT_ID, self::MERCHANT_CLIENT_SECRET, true, 'read');
     }
 
     public function runAllExamples()

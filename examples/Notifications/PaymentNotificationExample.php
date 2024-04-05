@@ -18,7 +18,7 @@ final class PaymentNotificationExample extends ExamplesConfig
     {
         // if isProd == false -> use sandbox credentials.
         $isProd = true;
-        $NotificationWebhook = new JWSVerifiedPaymentNotification(static::MERCHANT_CONFIRMATION_CODE, $isProd);
+        $NotificationWebhook = new JWSVerifiedPaymentNotification(self::MERCHANT_CONFIRMATION_CODE, $isProd);
 
         return $NotificationWebhook->getNotification();
     }

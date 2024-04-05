@@ -16,7 +16,7 @@ final class CardGate extends ExamplesConfig
     public function __construct()
     {
         parent::__construct();
-        $this->TpayApi = new TpayApi(static::MERCHANT_CLIENT_ID, static::MERCHANT_CLIENT_SECRET, true, 'read');
+        $this->TpayApi = new TpayApi(self::MERCHANT_CLIENT_ID, self::MERCHANT_CLIENT_SECRET, true, 'read');
     }
 
     public function init()
@@ -24,7 +24,7 @@ final class CardGate extends ExamplesConfig
         if (empty($_POST)) {
             $PaymentForms = new PaymentForms('en');
             // Show new payment form
-            echo $PaymentForms->getOnSiteCardForm(static::MERCHANT_RSA_KEY, 'CardGate.php', true, false);
+            echo $PaymentForms->getOnSiteCardForm(self::MERCHANT_RSA_KEY, 'CardGate.php', true, false);
         } else {
             $this->processNewCardPayment();
         }

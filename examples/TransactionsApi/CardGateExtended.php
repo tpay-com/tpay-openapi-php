@@ -17,7 +17,7 @@ final class CardGateExtended extends ExamplesConfig
     public function __construct()
     {
         parent::__construct();
-        $this->TpayApi = new TpayApi(static::MERCHANT_CLIENT_ID, static::MERCHANT_CLIENT_SECRET, true, 'read');
+        $this->TpayApi = new TpayApi(self::MERCHANT_CLIENT_ID, self::MERCHANT_CLIENT_SECRET, true, 'read');
     }
 
     public function init()
@@ -31,7 +31,7 @@ final class CardGateExtended extends ExamplesConfig
             $userCards = $this->getUserSavedCards($this->getCurrentUserId());
             // Show new payment form
             echo (new PaymentForms('en'))
-                ->getOnSiteCardForm(static::MERCHANT_RSA_KEY, 'CardGateExtended.php', true, false, $userCards);
+                ->getOnSiteCardForm(self::MERCHANT_RSA_KEY, 'CardGateExtended.php', true, false, $userCards);
         }
     }
 

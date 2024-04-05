@@ -22,7 +22,7 @@ final class BlikPayment extends ExamplesConfig
 
     protected function processPayment($blikCode)
     {
-        $TpayApi = new TpayApi(static::MERCHANT_CLIENT_ID, static::MERCHANT_CLIENT_SECRET, true, 'read');
+        $TpayApi = new TpayApi(self::MERCHANT_CLIENT_ID, self::MERCHANT_CLIENT_SECRET, true, 'read');
         $transaction = $TpayApi->transactions()->createTransaction($this->getRequestBody());
         if (isset($transaction['transactionId'])) {
             $blikPaymentFields = [
