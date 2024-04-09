@@ -10,17 +10,14 @@ use Tpay\OpenApi\Utilities\Logger;
 use Tpay\OpenApi\Utilities\TpayException;
 use Tpay\OpenApi\Utilities\Util;
 
-require_once '../ExamplesConfig.php';
-require_once '../../src/Loader.php';
-
-class CardGateExtended extends ExamplesConfig
+final class CardGateExtended extends ExamplesConfig
 {
     private $TpayApi;
 
     public function __construct()
     {
         parent::__construct();
-        $this->TpayApi = new TpayApi(static::MERCHANT_CLIENT_ID, static::MERCHANT_CLIENT_SECRET, true, 'read');
+        $this->TpayApi = new TpayApi(self::MERCHANT_CLIENT_ID, self::MERCHANT_CLIENT_SECRET, true, 'read');
     }
 
     public function init()
@@ -34,7 +31,7 @@ class CardGateExtended extends ExamplesConfig
             $userCards = $this->getUserSavedCards($this->getCurrentUserId());
             // Show new payment form
             echo (new PaymentForms('en'))
-                ->getOnSiteCardForm(static::MERCHANT_RSA_KEY, 'CardGateExtended.php', true, false, $userCards);
+                ->getOnSiteCardForm(self::MERCHANT_RSA_KEY, 'CardGateExtended.php', true, false, $userCards);
         }
     }
 
@@ -119,7 +116,7 @@ class CardGateExtended extends ExamplesConfig
                 'card' => $cardData,
                 'save' => 'on' === $saveCard,
             ],
-            'method' => 'sale',
+            'method' => 'pay_by_link',
         ];
 
         return $this->TpayApi->transactions()->createPaymentByTransactionId($request, $transaction['transactionId']);
@@ -167,7 +164,7 @@ class CardGateExtended extends ExamplesConfig
             'method' => 'sale',
         ];
         $result = $this->TpayApi->transactions()->createPaymentByTransactionId($request, $transaction['transactionId']);
-        if (isset($result['result'], $result['status']) && 'correct' === $result['status']) {
+        if (isset($result['result'], $result['status']) && 'success' === $result['status'] && isset($result['payments']['status']) && 'correct' === $result['payments']['status']) {
             return $this->setOrderAsComplete($result);
         }
 

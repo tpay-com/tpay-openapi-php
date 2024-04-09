@@ -6,10 +6,7 @@ use Tpay\Example\ExamplesConfig;
 use Tpay\OpenApi\Api\TpayApi;
 use Tpay\OpenApi\Utilities\TpayException;
 
-require_once '../ExamplesConfig.php';
-require_once '../../src/Loader.php';
-
-class RecurrentPayment extends ExamplesConfig
+final class RecurrentPayment extends ExamplesConfig
 {
     public function processPayment(
         $saleDescription,
@@ -36,7 +33,7 @@ class RecurrentPayment extends ExamplesConfig
                 ],
             ],
         ];
-        $TpayApi = new TpayApi(static::MERCHANT_CLIENT_ID, static::MERCHANT_CLIENT_SECRET, true, 'read');
+        $TpayApi = new TpayApi(self::MERCHANT_CLIENT_ID, self::MERCHANT_CLIENT_SECRET, true, 'read');
         $transaction = $TpayApi->transactions()->createTransaction($request);
         if (
             isset($transaction['result'], $transaction['status'])

@@ -6,17 +6,14 @@ use Tpay\Example\ExamplesConfig;
 use Tpay\OpenApi\Api\TpayApi;
 use Tpay\OpenApi\Utilities\TpayException;
 
-require_once '../ExamplesConfig.php';
-require_once '../../src/Loader.php';
-
-class RedirectPayment extends ExamplesConfig
+final class RedirectPayment extends ExamplesConfig
 {
     public function processTransaction()
     {
         if (!isset($_POST['groupId'])) {
             throw new TpayException('No payment group Id, unable to create transaction');
         }
-        $TpayApi = new TpayApi(static::MERCHANT_CLIENT_ID, static::MERCHANT_CLIENT_SECRET, true, 'read');
+        $TpayApi = new TpayApi(self::MERCHANT_CLIENT_ID, self::MERCHANT_CLIENT_SECRET, true, 'read');
         $result = $TpayApi->transactions()->createTransaction($this->getRequestBody());
         if (isset($result['transactionPaymentUrl'])) {
             header('Location: '.$result['transactionPaymentUrl']);

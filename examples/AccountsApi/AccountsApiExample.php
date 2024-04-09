@@ -5,17 +5,14 @@ namespace Tpay\Example\AccountsApi;
 use Tpay\Example\ExamplesConfig;
 use Tpay\OpenApi\Api\TpayApi;
 
-require_once '../ExamplesConfig.php';
-require_once '../../src/Loader.php';
-
-class AccountsApiExample extends ExamplesConfig
+final class AccountsApiExample extends ExamplesConfig
 {
     private $TpayApi;
 
     public function __construct()
     {
         parent::__construct();
-        $this->TpayApi = new TpayApi(static::PARTNER_CLIENT_ID, static::PARTNER_CLIENT_SECRET, true, 'read');
+        $this->TpayApi = new TpayApi(self::PARTNER_CLIENT_ID, self::PARTNER_CLIENT_SECRET, true, 'read');
     }
 
     public function runAllExamples()

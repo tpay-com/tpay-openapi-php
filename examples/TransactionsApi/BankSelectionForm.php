@@ -7,10 +7,7 @@ use Tpay\OpenApi\Api\TpayApi;
 use Tpay\OpenApi\Forms\PaymentForms;
 use Tpay\OpenApi\Utilities\TpayException;
 
-require_once '../ExamplesConfig.php';
-require_once '../../src/Loader.php';
-
-class BankSelectionForm extends ExamplesConfig
+final class BankSelectionForm extends ExamplesConfig
 {
     public function getBankForm()
     {
@@ -27,7 +24,7 @@ class BankSelectionForm extends ExamplesConfig
 
     protected function getBanksList($onlineOnly = false)
     {
-        $TpayApi = new TpayApi(static::MERCHANT_CLIENT_ID, static::MERCHANT_CLIENT_SECRET, true, 'read');
+        $TpayApi = new TpayApi(self::MERCHANT_CLIENT_ID, self::MERCHANT_CLIENT_SECRET, true, 'read');
         $result = $TpayApi->transactions()->getBankGroups($onlineOnly);
         if (!isset($result['result']) || 'success' !== $result['result']) {
             throw new TpayException('Unable to get banks list. Response: '.json_encode($result));
