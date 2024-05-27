@@ -32,7 +32,7 @@ class Util
     public static function parseTemplate($templateFileName, $data = [])
     {
         if (is_null(static::$libraryPath)) {
-            $data['static_files_url'] = $_SERVER['REQUEST_URI'].'/../../../';
+            $data['static_files_url'] = '/src/';
         } else {
             $data['static_files_url'] = static::$libraryPath;
         }
