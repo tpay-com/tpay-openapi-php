@@ -55,7 +55,7 @@ class TpayApi
     /** @var string */
     private $apiUrl;
 
-    /** @var string|null */
+    /** @var null|string */
     private $clientName;
 
     /**
