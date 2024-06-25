@@ -27,7 +27,7 @@ jobs:
 
       - run: zip -ur tpay-openapi-php vendor/
 
-      - run: mkdir sdk && unzip tpay-openapi-php.zip -d plugin
+      - run: mkdir sdk && unzip tpay-openapi-php.zip -d sdk
 
       - uses: actions/upload-artifact@v4
         id: plugin-upload
