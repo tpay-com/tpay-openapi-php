@@ -142,7 +142,7 @@ class ApiAction
 
     public function setClientName($clientName)
     {
-        $this->clientName = $clientName;
+        $this->clientName = substr($clientName, 0, 255);
     }
 
     public function getClientName()
