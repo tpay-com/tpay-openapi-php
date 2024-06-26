@@ -55,14 +55,18 @@ class TpayApi
     /** @var string */
     private $apiUrl;
 
+    /** @var null|string */
+    private $clientName;
+
     /**
      * @param string      $clientId
      * @param string      $clientSecret
      * @param bool        $productionMode
      * @param string      $scope
      * @param null|string $apiUrlOverride
+     * @param null|string $clientName
      */
-    public function __construct($clientId, $clientSecret, $productionMode = false, $scope = 'read', $apiUrlOverride = null)
+    public function __construct($clientId, $clientSecret, $productionMode = false, $scope = 'read', $apiUrlOverride = null, $clientName = null)
     {
         $this->clientId = $clientId;
         $this->clientSecret = $clientSecret;
@@ -71,6 +75,7 @@ class TpayApi
         $this->apiUrl = true === $this->productionMode
             ? ApiAction::TPAY_API_URL_PRODUCTION
             : ApiAction::TPAY_API_URL_SANDBOX;
+        $this->clientName = $clientName;
         if (null !== $apiUrlOverride) {
             if (!filter_var($apiUrlOverride, FILTER_VALIDATE_URL)) {
                 throw new RuntimeException(sprintf('Invalid URL provided: %s', $apiUrlOverride));
@@ -127,6 +132,10 @@ class TpayApi
         if (null === $this->accounts) {
             $this->accounts = (new AccountsApi($this->token, $this->productionMode))
                 ->overrideApiUrl($this->apiUrl);
+
+            if ($this->clientName) {
+                $this->accounts->setClientName($this->clientName);
+            }
         }
 
         return $this->accounts;
@@ -139,6 +148,10 @@ class TpayApi
         if (null === $this->authorization) {
             $this->authorization = (new AuthorizationApi($this->token, $this->productionMode))
                 ->overrideApiUrl($this->apiUrl);
+
+            if ($this->clientName) {
+                $this->authorization->setClientName($this->clientName);
+            }
         }
 
         return $this->authorization;
@@ -151,6 +164,10 @@ class TpayApi
         if (null === $this->refunds) {
             $this->refunds = (new RefundsApi($this->token, $this->productionMode))
                 ->overrideApiUrl($this->apiUrl);
+
+            if ($this->clientName) {
+                $this->refunds->setClientName($this->clientName);
+            }
         }
 
         return $this->refunds;
@@ -163,6 +180,10 @@ class TpayApi
         if (null === $this->reports) {
             $this->reports = (new ReportsApi($this->token, $this->productionMode))
                 ->overrideApiUrl($this->apiUrl);
+
+            if ($this->clientName) {
+                $this->reports->setClientName($this->clientName);
+            }
         }
 
         return $this->reports;
@@ -175,6 +196,10 @@ class TpayApi
         if (null === $this->transactions) {
             $this->transactions = (new TransactionsApi($this->token, $this->productionMode))
                 ->overrideApiUrl($this->apiUrl);
+
+            if ($this->clientName) {
+                $this->transactions->setClientName($this->clientName);
+            }
         }
 
         return $this->transactions;
@@ -190,6 +215,11 @@ class TpayApi
         }
 
         $authApi = (new AuthorizationApi(new Token(), $this->productionMode))->overrideApiUrl($this->apiUrl);
+
+        if ($this->clientName) {
+            $authApi->setClientName($this->clientName);
+        }
+
         $fields = [
             'client_id' => $this->clientId,
             'client_secret' => $this->clientSecret,
