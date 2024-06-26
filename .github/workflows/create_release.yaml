@@ -20,6 +20,10 @@ jobs:
           extensions: none, curl, dom, mbstring, simplexml, tokenizer, xml, xmlwriter, json
           coverage: none
 
+      - run: composer install --no-dev
+
+      - run: chmod 777 -R vendor
+
       - run: git archive --output=tpay-openapi-php.zip HEAD
 
       - run: zip -ur tpay-openapi-php.zip vendor/
