@@ -3,6 +3,10 @@
 namespace Tpay\OpenApi\Webhook;
 
 use Tpay\OpenApi\Model\Objects\NotificationBody\BasicPayment;
+use Tpay\OpenApi\Model\Objects\NotificationBody\MarketplaceTransaction;
+use Tpay\OpenApi\Model\Objects\NotificationBody\Tokenization;
+use Tpay\OpenApi\Model\Objects\NotificationBody\TokenUpdate;
+use Tpay\OpenApi\Model\Objects\Objects;
 use Tpay\OpenApi\Utilities\phpseclib\Crypt\RSA;
 use Tpay\OpenApi\Utilities\phpseclib\File\X509;
 use Tpay\OpenApi\Utilities\TpayException;
@@ -21,7 +25,7 @@ class JWSVerifiedPaymentNotification extends Notification
 
     /**
      * @param string $merchantSecret string Merchant notification check secret
-     * @param bool   $productionMode bool is prod or sandbox flag
+     * @param bool $productionMode bool is prod or sandbox flag
      */
     public function __construct($merchantSecret, $productionMode = true)
     {
@@ -34,14 +38,16 @@ class JWSVerifiedPaymentNotification extends Notification
      * Get checked notification object.
      * If exception occurs it means that something went wrong with notification verification process.
      *
+     * @return Objects|BasicPayment|MarketplaceTransaction|Tokenization|TokenUpdate
      * @throws TpayException
      *
-     * @return BasicPayment
      */
     public function getNotification()
     {
         $notification = $this->getNotificationObject();
-        $this->checkMd5($notification);
+        if ($notification instanceof BasicPayment::class) {
+            $this->checkMd5($notification);
+        }
         $this->checkJwsSignature();
 
         return $notification;
@@ -101,13 +107,13 @@ class JWSVerifiedPaymentNotification extends Notification
         $publicKey = $x509->getPublicKey();
         $publicKey = $x509->withSettings($publicKey, 'sha256', RSA::SIGNATURE_PKCS1);
 
-        if (!$publicKey->verify($headers.'.'.$payload, $decodedSignature)) {
+        if (!$publicKey->verify($headers . '.' . $payload, $decodedSignature)) {
             throw new TpayException('FALSE - Invalid JWS signature');
         }
     }
 
     /**
-     * @param int    $id
+     * @param int $id
      * @param string $transactionId
      * @param string $amount
      * @param string $orderId
@@ -118,7 +124,7 @@ class JWSVerifiedPaymentNotification extends Notification
      */
     private function checkMd5Validity($id, $transactionId, $amount, $orderId, $merchantSecret, $requestMd5)
     {
-        if (md5($id.$transactionId.$amount.$orderId.$merchantSecret) !== $requestMd5) {
+        if (md5($id . $transactionId . $amount . $orderId . $merchantSecret) !== $requestMd5) {
             throw new TpayException('MD5 checksum is invalid');
         }
     }
@@ -150,16 +156,45 @@ class JWSVerifiedPaymentNotification extends Notification
         return self::SANDBOX_PREFIX;
     }
 
-    /** @return BasicPayment */
+    /** @return Objects|BasicPayment|MarketplaceTransaction|Tokenization|TokenUpdate */
     private function getNotificationObject()
     {
-        if (!isset($_POST['tr_id'])) {
-            throw new TpayException('Not recognised or invalid notification type. POST: '.json_encode($_POST));
+        if (empty($_POST)) {
+            $body = file_get_contents('php://input');
+            $jsonData = json_decode($body, true);
+            if (is_null($jsonData)) {
+                throw new TpayException('Invalid JSON body. Json Error: ' . json_last_error_msg() . ' Body: ' . $body);
+            }
+            if (!isset($jsonData['type'])) {
+                throw new TpayException('Not recognised or invalid notification type. JSON: ' . $body);
+            }
+            switch ($jsonData['type']) {
+                case 'tokenization':
+                    $requestBody = new Tokenization();
+                    break;
+                case 'token_update':
+                    $requestBody = new TokenUpdate();
+                    break;
+                case 'marketplace_transaction':
+                    $requestBody = new MarketplaceTransaction();
+                    break;
+                default:
+                    throw new TpayException('Not recognised or invalid notification type. JSON: ' . $body);
+            }
+            if (!isset($jsonData['data'])) {
+                throw new TpayException('Not recognised or invalid notification type. JSON: ' . $body);
+            }
+            $source = $jsonData['data'];
+        } else {
+            if (!isset($_POST['tr_id'])) {
+                throw new TpayException('Not recognised or invalid notification type. POST: ' . json_encode($_POST));
+            }
+            $source = $_POST;
+            $requestBody = new BasicPayment();
         }
-        $requestBody = new BasicPayment();
-        foreach ($_POST as $parameter => $value) {
+        foreach ($source as $parameter => $value) {
             if (isset($requestBody->{$parameter})) {
-                $_POST[$parameter] = Util::cast($value, $requestBody->{$parameter}->getType());
+                $source[$parameter] = Util::cast($value, $requestBody->{$parameter}->getType());
             }
         }
         $this->Manager
@@ -172,9 +207,9 @@ class JWSVerifiedPaymentNotification extends Notification
     /**
      * @param string $url
      *
+     * @return bool|string
      * @throws TpayException
      *
-     * @return bool|string
      */
     private function fallbackGetContents($url)
     {
