@@ -8,7 +8,7 @@ use Tpay\OpenApi\Model\Objects\Objects;
 class TokenUpdate extends Objects
 {
     const OBJECT_FIELDS = [
-        'token' => Token::class
+        'token' => Token::class,
     ];
 
     /** @var Token */
