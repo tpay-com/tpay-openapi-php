@@ -2,16 +2,21 @@
 
 namespace Tpay\OpenApi\Model\Objects\NotificationBody;
 
+use Tpay\OpenApi\Model\Fields\Notification\CardBrand;
+use Tpay\OpenApi\Model\Fields\Notification\CardExpiryDate;
 use Tpay\OpenApi\Model\Fields\Notification\CardToken;
 use Tpay\OpenApi\Model\Fields\Notification\Crc;
 use Tpay\OpenApi\Model\Fields\Notification\Description;
 use Tpay\OpenApi\Model\Fields\Notification\Email;
 use Tpay\OpenApi\Model\Fields\Notification\Error;
+use Tpay\OpenApi\Model\Fields\Notification\InitialTransactionId;
 use Tpay\OpenApi\Model\Fields\Notification\Masterpass;
 use Tpay\OpenApi\Model\Fields\Notification\Md5sum;
 use Tpay\OpenApi\Model\Fields\Notification\MerchantId;
 use Tpay\OpenApi\Model\Fields\Notification\Paid;
 use Tpay\OpenApi\Model\Fields\Notification\TestMode;
+use Tpay\OpenApi\Model\Fields\Notification\Tokenization\CardTail;
+use Tpay\OpenApi\Model\Fields\Notification\TokenValue;
 use Tpay\OpenApi\Model\Fields\Notification\TransactionAmount;
 use Tpay\OpenApi\Model\Fields\Notification\TransactionChannel;
 use Tpay\OpenApi\Model\Fields\Notification\TransactionDate;
@@ -39,6 +44,11 @@ class BasicPayment extends Objects
         'masterpass' => Masterpass::class,
         'tr_channel' => TransactionChannel::class,
         'card_token' => CardToken::class,
+        'tokenPaymentData_tokenValue' => TokenValue::class,
+        'tokenPaymentData_initialTransactionId' => InitialTransactionId::class,
+        'tokenPaymentData_cardExpiryDate' => CardExpiryDate::class,
+        'tokenPaymentData_cardBrand' => CardBrand::class,
+        'tokenPaymentData_cardTail' => CardTail::class,
     ];
 
     /** @var MerchantId */
@@ -88,6 +98,21 @@ class BasicPayment extends Objects
 
     /** @var CardToken */
     public $card_token;
+
+    /** @var TokenValue */
+    public $tokenPaymentData_tokenValue;
+
+    /** @var InitialTransactionId */
+    public $tokenPaymentData_initialTransactionId;
+
+    /** @var CardExpiryDate */
+    public $tokenPaymentData_cardExpiryDate;
+
+    /** @var CardBrand */
+    public $tokenPaymentData_cardBrand;
+
+    /** @var CardTail */
+    public $tokenPaymentData_cardTail;
 
     public function getRequiredFields()
     {

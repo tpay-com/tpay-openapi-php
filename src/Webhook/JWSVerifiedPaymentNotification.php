@@ -7,8 +7,9 @@ use Tpay\OpenApi\Model\Objects\NotificationBody\MarketplaceTransaction;
 use Tpay\OpenApi\Model\Objects\NotificationBody\Tokenization;
 use Tpay\OpenApi\Model\Objects\NotificationBody\TokenUpdate;
 use Tpay\OpenApi\Model\Objects\Objects;
+use Tpay\OpenApi\Utilities\CertificateProvider;
 use Tpay\OpenApi\Utilities\phpseclib\Crypt\RSA;
-use Tpay\OpenApi\Utilities\phpseclib\File\X509;
+use Tpay\OpenApi\Utilities\RequestParser;
 use Tpay\OpenApi\Utilities\TpayException;
 use Tpay\OpenApi\Utilities\Util;
 
@@ -23,14 +24,24 @@ class JWSVerifiedPaymentNotification extends Notification
     /** @var string */
     private $merchantSecret;
 
+    /** @var RequestParser */
+    private $requestParser;
+
+    /** @var CertificateProvider */
+    private $certificateProvider;
+
     /**
-     * @param string $merchantSecret string Merchant notification check secret
-     * @param bool   $productionMode bool is prod or sandbox flag
+     * @param string                   $merchantSecret      string Merchant notification check secret
+     * @param bool                     $productionMode      bool is prod or sandbox flag
+     * @param null|RequestParser       $requestParser
+     * @param null|CertificateProvider $certificateProvider
      */
-    public function __construct($merchantSecret, $productionMode = true)
+    public function __construct($merchantSecret, $productionMode = true, $requestParser = null, $certificateProvider = null)
     {
         $this->productionMode = $productionMode;
         $this->merchantSecret = $merchantSecret;
+        $this->requestParser = null === $requestParser ? new RequestParser() : $requestParser;
+        $this->certificateProvider = null === $certificateProvider ? new CertificateProvider() : $certificateProvider;
         parent::__construct();
     }
 
@@ -55,10 +66,7 @@ class JWSVerifiedPaymentNotification extends Notification
 
     protected function checkJwsSignature()
     {
-        $jws = isset($_SERVER['HTTP_X_JWS_SIGNATURE']) ? $_SERVER['HTTP_X_JWS_SIGNATURE'] : null;
-        if (null === $jws) {
-            throw new TpayException('Missing JSW header');
-        }
+        $jws = $this->requestParser->getSignature();
 
         $jwsData = explode('.', $jws);
         $headers = isset($jwsData[0]) ? $jwsData[0] : null;
@@ -85,23 +93,10 @@ class JWSVerifiedPaymentNotification extends Notification
             throw new TpayException('Wrong x5u url');
         }
 
-        $certificate = file_get_contents($x5u);
-        $trusted = file_get_contents(sprintf('%s/x509/tpay-jws-root.pem', $this->getResourcePrefix()));
+        $rootCa = sprintf('%s/x509/tpay-jws-root.pem', $prefix);
+        $x509 = $this->certificateProvider->provide($x5u, $rootCa);
 
-        if (empty($certificate) || empty($trusted)) {
-            $certificate = $this->fallbackGetContents($x5u);
-            $trusted = $this->fallbackGetContents(sprintf('%s/x509/tpay-jws-root.pem', $this->getResourcePrefix()));
-        }
-
-        $x509 = new X509();
-        $x509->loadX509($certificate);
-        $x509->loadCA($trusted);
-
-        if (!$x509->validateSignature()) {
-            throw new TpayException('Signing certificate is not signed by Tpay CA certificate');
-        }
-
-        $body = file_get_contents('php://input');
+        $body = $this->requestParser->getPayload();
         $payload = str_replace('=', '', strtr(base64_encode($body), '+/', '-_'));
         $decodedSignature = base64_decode(strtr($signature, '-_', '+/'));
         $publicKey = $x509->getPublicKey();
@@ -156,17 +151,17 @@ class JWSVerifiedPaymentNotification extends Notification
         return self::SANDBOX_PREFIX;
     }
 
-    /** @return BasicPayment|MarketplaceTransaction|Objects|Tokenization|TokenUpdate */
+    /**
+     * @throws TpayException
+     *
+     * @return BasicPayment|MarketplaceTransaction|Objects|Tokenization|TokenUpdate
+     */
     private function getNotificationObject()
     {
-        if (empty($_POST)) {
-            $body = file_get_contents('php://input');
-            $jsonData = json_decode($body, true);
-            if (is_null($jsonData)) {
-                throw new TpayException('Invalid JSON body. Json Error: '.json_last_error_msg().' Body: '.$body);
-            }
+        if ('application/json' === $this->requestParser->getContentType()) {
+            $jsonData = $this->requestParser->getParsedContent();
             if (!isset($jsonData['type'])) {
-                throw new TpayException('Not recognised or invalid notification type. JSON: '.$body);
+                throw new TpayException('Not recognised or invalid notification type. JSON: '.json_encode($jsonData));
             }
             switch ($jsonData['type']) {
                 case 'tokenization':
@@ -179,17 +174,17 @@ class JWSVerifiedPaymentNotification extends Notification
                     $requestBody = new MarketplaceTransaction();
                     break;
                 default:
-                    throw new TpayException('Not recognised or invalid notification type. JSON: '.$body);
+                    throw new TpayException('Not recognised or invalid notification type. JSON: '.json_encode($jsonData));
             }
             if (!isset($jsonData['data'])) {
-                throw new TpayException('Not recognised or invalid notification type. JSON: '.$body);
+                throw new TpayException('Not recognised or invalid notification type. JSON: '.json_encode($jsonData));
             }
             $source = $jsonData['data'];
         } else {
-            if (!isset($_POST['tr_id'])) {
-                throw new TpayException('Not recognised or invalid notification type. POST: '.json_encode($_POST));
+            $source = $this->requestParser->getParsedContent();
+            if (!isset($source['tr_id'])) {
+                throw new TpayException('Not recognised or invalid notification type. POST: '.json_encode($source));
             }
-            $source = $_POST;
             $requestBody = new BasicPayment();
         }
         foreach ($source as $parameter => $value) {
@@ -199,30 +194,8 @@ class JWSVerifiedPaymentNotification extends Notification
         }
         $this->Manager
             ->setRequestBody($requestBody)
-            ->setFields($_POST, false);
+            ->setFields($source, false);
 
         return $this->Manager->getRequestBody();
-    }
-
-    /**
-     * @param string $url
-     *
-     * @throws TpayException
-     *
-     * @return bool|string
-     */
-    private function fallbackGetContents($url)
-    {
-        if (!function_exists('curl_init')) {
-            throw TpayException::curlNotAvailable();
-        }
-
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $result = curl_exec($ch);
-        curl_close($ch);
-
-        return $result;
     }
 }
