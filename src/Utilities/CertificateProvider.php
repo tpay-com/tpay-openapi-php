@@ -8,6 +8,7 @@ class CertificateProvider
 {
     /**
      * @param string $certificatePath
+     * @param string $rootCa
      *
      * @throws TpayException
      *
