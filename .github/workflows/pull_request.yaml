@@ -5,6 +5,7 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
 
 jobs:
   check:
@@ -32,16 +33,10 @@ jobs:
       - uses: actions/upload-artifact@v4
         id: plugin-upload
         with:
-          name: 'tpay-woocommerce'
+          name: 'tpay-openapi-php'
           path: 'sdk/'
 
-      - uses: actions/github-script@v6
+      - uses: mshick/add-pr-comment@v2
         with:
-          github-token: ${{ secrets.TOKEN }}
-          script: |
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: 'Tpay OpenAPI SDK - ${{ steps.plugin-upload.outputs.artifact-url }}'
-            })
+          message: |
+            Tpay OpenAPI SDK - ${{ steps.plugin-upload.outputs.artifact-url }}
