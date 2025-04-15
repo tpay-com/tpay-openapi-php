@@ -23,7 +23,7 @@ class ExamplesConfig
         error_reporting(E_ALL);
         $this->loadLibrary();
         if (self::MERCHANT_CLIENT_ID === '--put--your--client--id--here') {
-            die('Please fill your API credentials in file: ' . __DIR__);
+            die('Please fill your API credentials in file: '.__DIR__);
         }
     }
 
