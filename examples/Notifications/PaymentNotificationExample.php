@@ -27,15 +27,21 @@ final class PaymentNotificationExample extends ExamplesConfig
 try {
     // if there is no exception - notification is checked and ready to use.
     $notification = (new PaymentNotificationExample())->getVerifiedNotification();
-    var_dump($notification->tr_id->getValue());
-    // The above example will check the notification and print the value of received tr_id field
-    // You can access any notification field by $notification->fieldName
+    if ($notification instanceof BasicPayment) {
+        var_dump($notification->tr_id->getValue());
+        // The above example will check the notification and print the value of received tr_id field
+        // You can access any notification field by $notification->fieldName
 
-    $notificationArray = $notification->getNotificationAssociative();
-    var_dump($notificationArray);
-    // The above method will get the notification as an associative array and print its contents.
-    // You can access notification field value by $notificationArray['fieldName']
-    exit('TRUE');
+        $notificationArray = $notification->getNotificationAssociative();
+        var_dump($notificationArray);
+        // The above method will get the notification as an associative array and print its contents.
+        // You can access notification field value by $notificationArray['fieldName']
+        exit('TRUE');
+    }
+
+    // Ignore and silence other notification types if not expected
+    http_response_code(404);
+    exit('FALSE');
 } catch (TpayException $exception) {
     // handle your exception here
     exit('FALSE');
