@@ -31,7 +31,7 @@ jobs:
       - run: mkdir sdk && unzip tpay-openapi-php.zip -d sdk
 
       - uses: actions/upload-artifact@v4
-        id: plugin-upload
+        id: sdk-upload
         with:
           name: 'tpay-openapi-php'
           path: 'sdk/'
@@ -40,3 +40,4 @@ jobs:
         with:
           message: |
             Tpay OpenAPI SDK - ${{ steps.plugin-upload.outputs.artifact-url }}
+
