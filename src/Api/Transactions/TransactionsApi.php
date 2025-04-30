@@ -115,4 +115,15 @@ class TransactionsApi extends ApiAction
     {
         return $this->run(static::POST, sprintf('/transactions/%s/refunds', $transactionId), $fields, new Refund());
     }
+
+    /**
+     * Cancels a transaction with the specified ID
+     *
+     * @param string $transactionId The unique identifier of the transaction to cancel
+     * @return mixed The API response for the canceled transaction
+     */
+    public function cancelTransactionById($transactionId)
+    {
+        return $this->run(static::POST, sprintf('/transactions/%s/cancel', $transactionId));
+    }
 }
