@@ -65,4 +65,14 @@ class AccountsApi extends ApiAction
     {
         return $this->run(static::POST, '/accounts', $fields, new Account());
     }
+
+    public function getMcc()
+    {
+        return $this->run(static::GET, '/accounts/mcc');
+    }
+
+    public function getPos()
+    {
+        return $this->run(static::GET, '/accounts/pos');
+    }
 }

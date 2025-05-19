@@ -3,6 +3,7 @@
 namespace Tpay\OpenApi\Api\Transactions;
 
 use Tpay\OpenApi\Api\ApiAction;
+use Tpay\OpenApi\Model\Objects\RequestBody\InitApplePay;
 use Tpay\OpenApi\Model\Objects\RequestBody\Pay;
 use Tpay\OpenApi\Model\Objects\RequestBody\PayWithInstantRedirection;
 use Tpay\OpenApi\Model\Objects\RequestBody\Refund;
@@ -23,6 +24,12 @@ class TransactionsApi extends ApiAction
     public function getTransactionById($transactionId)
     {
         return $this->run(static::GET, sprintf('/transactions/%s', $transactionId));
+    }
+
+    /** @param string $transactionId */
+    public function getTransactionQrCode($transactionId)
+    {
+        return $this->run(static::GET, sprintf('/transactions/%s/qr', $transactionId));
     }
 
     /**
@@ -89,5 +96,19 @@ class TransactionsApi extends ApiAction
     public function createRefundByTransactionId($fields, $transactionId)
     {
         return $this->run(static::POST, sprintf('/transactions/%s/refunds', $transactionId), $fields, new Refund());
+    }
+
+    /** @param array $fields */
+    public function cancelTransaction($fields)
+    {
+        return $this->run(static::POST, '/transactions/%s/pay', $fields);
+    }
+
+    /**
+     * @param array  $fields
+     */
+    public function initApplePay($fields)
+    {
+        return $this->run(static::POST, '/wallet/applepay/init', $fields, new InitApplePay());
     }
 }
