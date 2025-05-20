@@ -4,6 +4,7 @@ namespace Tpay\OpenApi\Model\Objects\Transactions;
 
 use Tpay\OpenApi\Model\Fields\BlikPaymentData\BlikToken;
 use Tpay\OpenApi\Model\Fields\BlikPaymentData\Type;
+use Tpay\OpenApi\Model\Fields\Boolean;
 use Tpay\OpenApi\Model\Objects\Objects;
 
 class BlikPaymentData extends Objects
@@ -12,6 +13,7 @@ class BlikPaymentData extends Objects
         'blikToken' => BlikToken::class,
         'aliases' => Alias::class,
         'type' => Type::class,
+        'refuseNoPayId' => Boolean::class
     ];
 
     /** @var BlikToken */
@@ -22,4 +24,7 @@ class BlikPaymentData extends Objects
 
     /** @var Type */
     public $type;
+
+    /** @var Boolean */
+    public $refuseNoPayId;
 }
