@@ -9,7 +9,6 @@ use Tpay\OpenApi\Model\Fields\Transaction\Lang;
 use Tpay\OpenApi\Model\Objects\Objects;
 use Tpay\OpenApi\Model\Objects\Transactions\Callbacks;
 use Tpay\OpenApi\Model\Objects\Transactions\Payer;
-use Tpay\OpenApi\Model\Objects\Transactions\Verification;
 
 class TransactionWithInstantRedirection extends Objects
 {
