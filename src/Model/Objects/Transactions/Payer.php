@@ -53,6 +53,12 @@ class Payer extends Objects
     /** @var TaxId */
     public $taxId;
 
+    /** @var IP */
+    public $ip;
+
+    /** @var UserAgent */
+    public $userAgent;
+
     public function getRequiredFields()
     {
         return [

@@ -6,6 +6,7 @@ use PHPUnit\Framework\TestCase;
 use Tpay\OpenApi\Api\Transactions\TransactionsApi;
 use Tpay\OpenApi\Model\Fields\Token\AccessToken;
 use Tpay\OpenApi\Model\Objects\Authorization\Token;
+use Tpay\OpenApi\Model\Objects\RequestBody\Transaction;
 use Tpay\Tests\OpenApi\Mock\CurlMock;
 
 /**

@@ -202,7 +202,6 @@ class LegacyNamespaceTest extends TestCase
             'tpaySDK\\Model\\Objects\\Transactions\\CardPaymentData',
             'tpaySDK\\Model\\Objects\\Transactions\\Payer',
             'tpaySDK\\Model\\Objects\\Transactions\\Recursive',
-            'tpaySDK\\Model\\Objects\\Transactions\\Verification',
             'tpaySDK\\Model\\Objects\\Transactions\\VerificationData',
             'tpaySDK\\Utilities\\Logger',
             'tpaySDK\\Utilities\\ServerValidator',

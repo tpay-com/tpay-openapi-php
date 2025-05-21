@@ -57,7 +57,7 @@ class Pay extends Objects
     public $googlePayPaymentData;
 
     /** @var CardOnFile */
-    public $cardOnFile;
+    public $cof;
 
     public function getRequiredFields()
     {
