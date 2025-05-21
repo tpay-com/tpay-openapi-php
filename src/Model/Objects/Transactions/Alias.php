@@ -6,7 +6,6 @@ use Tpay\OpenApi\Model\Fields\Alias\Key;
 use Tpay\OpenApi\Model\Fields\Alias\Label;
 use Tpay\OpenApi\Model\Fields\Alias\Type;
 use Tpay\OpenApi\Model\Fields\Alias\Value;
-use Tpay\OpenApi\Model\Fields\BlikPaymentData\NoDelay;
 use Tpay\OpenApi\Model\Fields\Boolean;
 use Tpay\OpenApi\Model\Objects\Objects;
 use Tpay\OpenApi\Model\Objects\Transactions\Alias\Autopayment;
@@ -37,7 +36,7 @@ class Alias extends Objects
     /** @var Autopayment */
     public $autopayment;
 
-    /** @var Boolean */
+    /** @var \Tpay\OpenApi\Model\Fields\Boolean */
     public $noDelay;
 
     public function getRequiredFields()
