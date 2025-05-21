@@ -9,7 +9,7 @@ use Tpay\OpenApi\Model\Objects\Objects;
 
 class BlikPaymentData extends Objects
 {
-    public const OBJECT_FIELDS = [
+    const OBJECT_FIELDS = [
         'blikToken' => BlikToken::class,
         'aliases' => Alias::class,
         'type' => Type::class,

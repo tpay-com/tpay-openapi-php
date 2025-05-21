@@ -22,7 +22,7 @@ use Tpay\OpenApi\Model\Objects\Objects;
 
 class BasicPayment extends Objects
 {
-    public const OBJECT_FIELDS = [
+    const OBJECT_FIELDS = [
         'id' => MerchantId::class,
         'tr_id' => TransactionId::class,
         'tr_date' => TransactionDate::class,

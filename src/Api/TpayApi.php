@@ -14,7 +14,7 @@ use Tpay\OpenApi\Utilities\TpayException;
 class TpayApi
 {
     /** @deprecated will be removed in 2.0.0 */
-    public const TPAY_API = [
+    const TPAY_API = [
         'Accounts' => AccountsApi::class,
         'Authorization' => AuthorizationApi::class,
         'Transactions' => TransactionsApi::class,

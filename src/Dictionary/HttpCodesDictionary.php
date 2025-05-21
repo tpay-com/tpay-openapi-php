@@ -5,13 +5,13 @@ namespace Tpay\OpenApi\Dictionary;
 class HttpCodesDictionary
 {
     /** List of http response codes */
-    public const HTTP_SUCCESS_CODES = [
+    const HTTP_SUCCESS_CODES = [
         200 => 'OK - default successful outcome of the request',
         201 => 'Created - successfully created a new object',
         202 => 'Accepted - successfully created a new object, but requires further action',
     ];
 
-    public const HTTP_ERROR_CODES = [
+    const HTTP_ERROR_CODES = [
         400 => 'Bad Request - request could not be accepted, either due to missing required parameters or one of the
          parameters not passing through validation',
         401 => 'Unatuhorized - authorization failed, the request has not been applied because it lacks valid

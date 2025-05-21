@@ -10,7 +10,7 @@ use Tpay\OpenApi\Model\Objects\Objects;
 
 class TokenPaymentData extends Objects
 {
-    public const OBJECT_FIELDS = [
+    const OBJECT_FIELDS = [
         'tokenPaymentData' => TokenPaymentData::class,
         'cardExpiryData' => CardExpiryDate::class,
         'initialTransactionId' => InitialTransactionId::class,

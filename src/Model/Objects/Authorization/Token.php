@@ -12,7 +12,7 @@ use Tpay\OpenApi\Model\Objects\Objects;
 
 class Token extends Objects
 {
-    public const OBJECT_FIELDS = [
+    const OBJECT_FIELDS = [
         'issued_at' => IssuedAt::class,
         'scope' => Scope::class,
         'expires_in' => ExpiresIn::class,

@@ -4,8 +4,8 @@ namespace Tpay\OpenApi\Utilities;
 
 class ServerValidator
 {
-    public const REMOTE_ADDRESS = 'REMOTE_ADDR';
-    public const FORWARDER_ADDRESS = 'HTTP_X_FORWARDED_FOR';
+    const REMOTE_ADDRESS = 'REMOTE_ADDR';
+    const FORWARDER_ADDRESS = 'HTTP_X_FORWARDED_FOR';
 
     /** @var bool */
     private $validateForwardedIP;

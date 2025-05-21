@@ -10,8 +10,8 @@ use Tpay\OpenApi\Utilities\Util;
 
 class JWSVerifiedPaymentNotification extends Notification
 {
-    public const PRODUCTION_PREFIX = 'https://secure.tpay.com';
-    public const SANDBOX_PREFIX = 'https://secure.sandbox.tpay.com';
+    const PRODUCTION_PREFIX = 'https://secure.tpay.com';
+    const SANDBOX_PREFIX = 'https://secure.sandbox.tpay.com';
 
     /** @var bool */
     private $productionMode;

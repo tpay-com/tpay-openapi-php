@@ -11,7 +11,7 @@ use Tpay\OpenApi\Model\Objects\Objects;
 
 class CardPaymentData extends Objects
 {
-    public const OBJECT_FIELDS = [
+    const OBJECT_FIELDS = [
         'card' => Card::class,
         'token' => Token::class,
         'preauthorizedToken' => PreauthorizedToken::class,

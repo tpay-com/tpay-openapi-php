@@ -12,7 +12,7 @@ use Tpay\OpenApi\Model\Objects\Transactions\Payer;
 
 class Transaction extends Objects
 {
-    public const OBJECT_FIELDS = [
+    const OBJECT_FIELDS = [
         'amount' => Amount::class,
         'description' => Description::class,
         'hiddenDescription' => HiddenDescription::class,

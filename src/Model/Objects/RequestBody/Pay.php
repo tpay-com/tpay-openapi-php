@@ -16,7 +16,7 @@ use Tpay\OpenApi\Model\Objects\Transactions\TokenPaymentData;
 
 class Pay extends Objects
 {
-    public const OBJECT_FIELDS = [
+    const OBJECT_FIELDS = [
         'groupId' => GroupId::class,
         'channelId' => ChannelId::class,
         'method' => Method::class,

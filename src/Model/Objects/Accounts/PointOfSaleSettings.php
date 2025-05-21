@@ -8,7 +8,7 @@ use Tpay\OpenApi\Model\Objects\Objects;
 
 class PointOfSaleSettings extends Objects
 {
-    public const OBJECT_FIELDS = [
+    const OBJECT_FIELDS = [
         'confirmationCode' => ConfirmationCode::class,
         'isTestMode' => IsTestMode::class,
     ];

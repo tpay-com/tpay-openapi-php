@@ -9,7 +9,7 @@ use Tpay\OpenApi\Model\Objects\Objects;
 
 class Auth extends Objects
 {
-    public const OBJECT_FIELDS = [
+    const OBJECT_FIELDS = [
         'client_id' => ClientId::class,
         'client_secret' => ClientSecret::class,
         'scope' => Scope::class,

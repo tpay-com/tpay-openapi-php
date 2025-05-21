@@ -4,7 +4,7 @@ namespace Tpay\OpenApi\Dictionary;
 
 class NotificationsIP
 {
-    public const SECURE_IPS = [
+    const SECURE_IPS = [
         '176.119.38.175',
         '195.149.229.109',
         '148.251.96.163',

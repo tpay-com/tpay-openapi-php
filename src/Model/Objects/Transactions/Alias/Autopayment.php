@@ -12,7 +12,7 @@ use Tpay\OpenApi\Model\Objects\Objects;
 
 class Autopayment extends Objects
 {
-    public const OBJECT_FIELDS = [
+    const OBJECT_FIELDS = [
         'model' => Model::class,
         'frequency' => Frequency::class,
         'singleLimitAmount' => SingleLimitAmount::class,

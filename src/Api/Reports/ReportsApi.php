@@ -6,8 +6,8 @@ use Tpay\OpenApi\Api\ApiAction;
 
 class ReportsApi extends ApiAction
 {
-    public const SORT_ASC = 'ASC';
-    public const SORT_DESC = 'DESC';
+    const SORT_ASC = 'ASC';
+    const SORT_DESC = 'DESC';
 
     public function getReports($page = 1, $pageSize = 20, $sortDirection = self::SORT_ASC)
     {

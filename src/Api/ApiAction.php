@@ -12,12 +12,12 @@ use Tpay\OpenApi\Utilities\TpayException;
 
 class ApiAction
 {
-    public const TPAY_API_URL_PRODUCTION = 'https://api.tpay.com';
-    public const TPAY_API_URL_SANDBOX = 'https://openapi.sandbox.tpay.com';
-    public const GET = 'GET';
-    public const POST = 'POST';
-    public const DELETE = 'DELETE';
-    public const PUT = 'PUT';
+    const TPAY_API_URL_PRODUCTION = 'https://api.tpay.com';
+    const TPAY_API_URL_SANDBOX = 'https://openapi.sandbox.tpay.com';
+    const GET = 'GET';
+    const POST = 'POST';
+    const DELETE = 'DELETE';
+    const PUT = 'PUT';
 
     public $Manager;
     protected $Curl;

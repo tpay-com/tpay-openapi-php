@@ -12,7 +12,7 @@ use Tpay\OpenApi\Model\Objects\Transactions\Recursive;
 
 class PayWithInstantRedirection extends Objects
 {
-    public const OBJECT_FIELDS = [
+    const OBJECT_FIELDS = [
         'channelId' => ChannelId::class,
         'method' => Method::class,
         'blikPaymentData' => BlikPaymentData::class,
