@@ -19,7 +19,6 @@ class TransactionWithInstantRedirection extends Objects
         'hiddenDescription' => HiddenDescription::class,
         'lang' => Lang::class,
         'pay' => PayWithInstantRedirection::class,
-        'verification' => Verification::class,
         'payer' => Payer::class,
         'callbacks' => Callbacks::class,
     ];
