@@ -2,7 +2,6 @@
 
 namespace Tpay\Example;
 
-use Tpay\OpenApi\Loader;
 use Tpay\OpenApi\Utilities\Util;
 
 class ExamplesConfig
