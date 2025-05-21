@@ -13,5 +13,5 @@ class CardExpiryDate extends Field
     protected $type = self::STRING;
     protected $minLength = 4;
     protected $maxLength = 4;
-    protected $pattern = '/^[0-9]+$/';
+    protected $pattern = '^[0-9]+$';
 }

@@ -11,5 +11,5 @@ class Frequency extends Field
 {
     protected $name = __CLASS__;
     protected $type = self::STRING;
-    protected $pattern = '/^[0-9]+[DWMY]+$/';
+    protected $pattern = '^[0-9]+[DWMY]+$';
 }

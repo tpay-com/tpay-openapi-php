@@ -37,7 +37,7 @@ class Alias extends Objects
     /** @var Autopayment */
     public $autopayment;
 
-    /** @var NoDelay */
+    /** @var Boolean */
     public $noDelay;
 
     public function getRequiredFields()

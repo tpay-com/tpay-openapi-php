@@ -11,5 +11,5 @@ class RocText extends Field
 {
     protected $name = __CLASS__;
     protected $type = self::STRING;
-    protected $pattern = '/[A-Za-z0-9]+/';
+    protected $pattern = '^[A-Za-z0-9]+$';
 }
