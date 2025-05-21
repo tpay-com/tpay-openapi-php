@@ -33,10 +33,11 @@ jobs:
       - uses: actions/upload-artifact@v4
         id: sdk-upload
         with:
-          name: 'tpay-openapi'
+          name: 'tpay-openapi-php'
           path: 'sdk/'
 
       - uses: mshick/add-pr-comment@v2
         with:
           message: |
-            Tpay Open API SDK - ${{ steps.sdk-upload.outputs.artifact-url }}
+            Tpay OpenAPI SDK - ${{ steps.plugin-upload.outputs.artifact-url }}
+

@@ -26,10 +26,29 @@ class TransactionsApi extends ApiAction
         return $this->run(static::GET, sprintf('/transactions/%s', $transactionId));
     }
 
-    /** @param string $transactionId */
-    public function getTransactionQrCode($transactionId)
+    public function getTransactionQR($transactionId, $size = 'M', $logoPath = null, $desiredType = 'image/png')
     {
-        return $this->run(static::GET, sprintf('/transactions/%s/qr', $transactionId));
+        $image = null;
+        $imageType = null;
+        if (null !== $logoPath && file_exists($logoPath) && is_readable($logoPath)) {
+            $image = base64_encode(file_get_contents($logoPath));
+            $imageType = mime_content_type($logoPath);
+        }
+
+        $fields = [
+            'size' => $size,
+            'logo' => $image,
+            'logoType' => $imageType,
+            'outputType' => $desiredType,
+        ];
+
+        return $this
+            ->sendRequest(
+                sprintf('/transactions/%s/qr', $transactionId),
+                static::POST,
+                $fields
+            )
+            ->getRequestResult(false);
     }
 
     /**
