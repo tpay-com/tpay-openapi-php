@@ -38,9 +38,6 @@ class TransactionWithInstantRedirection extends Objects
     /** @var PayWithInstantRedirection */
     public $pay;
 
-    /** @var Verification */
-    public $verification;
-
     /** @var Payer */
     public $payer;
 
