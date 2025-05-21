@@ -58,8 +58,9 @@ class TpayApi
 
     /** @var null|string */
     private $clientName;
+
     /** @var CacheItemPoolInterface */
-    private $cache = null;
+    private $cache;
 
     /**
      * @param string      $clientId
