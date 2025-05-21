@@ -104,9 +104,7 @@ class TransactionsApi extends ApiAction
         return $this->run(static::POST, '/transactions/%s/pay', $fields);
     }
 
-    /**
-     * @param array  $fields
-     */
+    /** @param array  $fields */
     public function initApplePay($fields)
     {
         return $this->run(static::POST, '/wallet/applepay/init', $fields, new InitApplePay());

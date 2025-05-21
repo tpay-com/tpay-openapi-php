@@ -13,7 +13,7 @@ use Tpay\OpenApi\Model\Objects\Objects;
 
 class BankAccount extends Objects
 {
-    const OBJECT_FIELDS = [
+    public const OBJECT_FIELDS = [
         'accountNo' => AccountNo::class,
         'bankName' => BankName::class,
         'ownerName' => OwnerName::class,

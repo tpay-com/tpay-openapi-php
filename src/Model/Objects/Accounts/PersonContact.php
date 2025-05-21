@@ -8,7 +8,7 @@ use Tpay\OpenApi\Model\Objects\Objects;
 
 class PersonContact extends Objects
 {
-    const OBJECT_FIELDS = [
+    public const OBJECT_FIELDS = [
         'type' => Type::class,
         'contact' => Contact::class,
     ];

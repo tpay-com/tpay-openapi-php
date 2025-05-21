@@ -7,7 +7,7 @@ use Tpay\OpenApi\Model\Objects\Objects;
 
 class BasicAuth extends Objects
 {
-    const OBJECT_FIELDS = [
+    public const OBJECT_FIELDS = [
         'grant_type' => GrantType::class,
     ];
 

@@ -12,12 +12,12 @@ use Tpay\OpenApi\Utilities\TpayException;
 
 class ApiAction
 {
-    const TPAY_API_URL_PRODUCTION = 'https://api.tpay.com';
-    const TPAY_API_URL_SANDBOX = 'https://openapi.sandbox.tpay.com';
-    const GET = 'GET';
-    const POST = 'POST';
-    const DELETE = 'DELETE';
-    const PUT = 'PUT';
+    public const TPAY_API_URL_PRODUCTION = 'https://api.tpay.com';
+    public const TPAY_API_URL_SANDBOX = 'https://openapi.sandbox.tpay.com';
+    public const GET = 'GET';
+    public const POST = 'POST';
+    public const DELETE = 'DELETE';
+    public const PUT = 'PUT';
 
     public $Manager;
     protected $Curl;
@@ -35,7 +35,7 @@ class ApiAction
 
     /**
      * @param Token $Token
-     * @param bool $productionMode
+     * @param bool  $productionMode
      */
     public function __construct($Token, $productionMode)
     {
@@ -43,7 +43,7 @@ class ApiAction
         $this->Token = $Token;
         $this->Curl = new Curl();
         $this->Manager = new Manager();
-        $this->clientName = 'tpay-com/tpay-openapi-php:1.7.1|PHP:' . phpversion();
+        $this->clientName = 'tpay-com/tpay-openapi-php:1.7.1|PHP:'.phpversion();
         $this->apiUrl = true === $this->productionMode
             ? ApiAction::TPAY_API_URL_PRODUCTION
             : ApiAction::TPAY_API_URL_SANDBOX;
@@ -165,10 +165,10 @@ class ApiAction
         }
 
         if ($this->clientName) {
-            $headers[] = 'X-Client-Source: ' . $this->clientName;
+            $headers[] = 'X-Client-Source: '.$this->clientName;
         }
 
-        $headers[] = 'User-Agent: tpay.com PHP SDK Client/' . gethostname() . '/' . $this->clientName;
+        $headers[] = 'User-Agent: tpay.com PHP SDK Client/'.gethostname().'/'.$this->clientName;
 
         Logger::log(
             'Outgoing request',
@@ -194,14 +194,14 @@ class ApiAction
 
     /**
      * @param string $requestUrl
-     * @param array $queryFields
+     * @param array  $queryFields
      *
      * @return string
      */
     protected function addQueryFields($requestUrl, $queryFields)
     {
         if (is_array($queryFields) && count($queryFields) > 0) {
-            $requestUrl .= '?' . http_build_query($queryFields);
+            $requestUrl .= '?'.http_build_query($queryFields);
         }
 
         return $requestUrl;

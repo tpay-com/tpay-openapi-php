@@ -8,7 +8,7 @@ use Tpay\OpenApi\Model\Objects\Objects;
 
 class CallbacksNotification extends Objects
 {
-    const OBJECT_FIELDS = [
+    public const OBJECT_FIELDS = [
         'url' => Url::class,
         'email' => Email::class,
     ];

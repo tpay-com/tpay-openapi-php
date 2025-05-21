@@ -10,7 +10,7 @@ use Tpay\OpenApi\Model\Objects\Objects;
 
 class Recursive extends Objects
 {
-    const OBJECT_FIELDS = [
+    public const OBJECT_FIELDS = [
         'period' => Period::class,
         'quantity' => Quantity::class,
         'type' => Type::class,

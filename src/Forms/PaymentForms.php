@@ -6,8 +6,8 @@ use Tpay\OpenApi\Utilities\Util;
 
 class PaymentForms
 {
-    const PAYMENT_FORM = 'paymentForm';
-    const TPAY_TERMS_OF_SERVICE_URL = 'https://secure.tpay.com/regulamin.pdf';
+    public const PAYMENT_FORM = 'paymentForm';
+    public const TPAY_TERMS_OF_SERVICE_URL = 'https://secure.tpay.com/regulamin.pdf';
 
     /** @param string $language */
     public function __construct($language = 'en')

@@ -9,11 +9,10 @@ use Tpay\OpenApi\Model\Fields\Transaction\Lang;
 use Tpay\OpenApi\Model\Objects\Objects;
 use Tpay\OpenApi\Model\Objects\Transactions\Callbacks;
 use Tpay\OpenApi\Model\Objects\Transactions\Payer;
-use Tpay\OpenApi\Model\Objects\Transactions\Verification;
 
 class Transaction extends Objects
 {
-    const OBJECT_FIELDS = [
+    public const OBJECT_FIELDS = [
         'amount' => Amount::class,
         'description' => Description::class,
         'hiddenDescription' => HiddenDescription::class,

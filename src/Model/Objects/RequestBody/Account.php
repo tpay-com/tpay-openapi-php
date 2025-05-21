@@ -19,7 +19,7 @@ use Tpay\OpenApi\Model\Objects\Objects;
 
 class Account extends Objects
 {
-    const OBJECT_FIELDS = [
+    public const OBJECT_FIELDS = [
         'offerCode' => OfferCode::class,
         'email' => Email::class,
         'taxId' => TaxId::class,

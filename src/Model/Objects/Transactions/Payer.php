@@ -16,7 +16,7 @@ use Tpay\OpenApi\Model\Objects\Objects;
 
 class Payer extends Objects
 {
-    const OBJECT_FIELDS = [
+    public const OBJECT_FIELDS = [
         'email' => Email::class,
         'name' => Name::class,
         'phone' => Phone::class,
@@ -25,8 +25,8 @@ class Payer extends Objects
         'city' => City::class,
         'country' => Country::class,
         'taxId' => TaxId::class,
-        'ip'=> IP::class,
-        'userAgent' => UserAgent::class
+        'ip' => IP::class,
+        'userAgent' => UserAgent::class,
     ];
 
     /** @var Email */

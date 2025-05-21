@@ -7,7 +7,7 @@ use Tpay\OpenApi\Model\Objects\Objects;
 
 class CallbacksPayerUrls extends Objects
 {
-    const OBJECT_FIELDS = [
+    public const OBJECT_FIELDS = [
         'success' => Url::class,
         'error' => Url::class,
     ];

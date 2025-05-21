@@ -13,13 +13,13 @@ use Tpay\OpenApi\Model\Objects\Transactions\Alias\Autopayment;
 
 class Alias extends Objects
 {
-    const OBJECT_FIELDS = [
+    public const OBJECT_FIELDS = [
         'value' => Value::class,
         'type' => Type::class,
         'label' => Label::class,
         'key' => Key::class,
         'autopayment' => Autopayment::class,
-        'noDelay' => Boolean::class
+        'noDelay' => Boolean::class,
     ];
 
     /** @var Value */
@@ -33,6 +33,7 @@ class Alias extends Objects
 
     /** @var Key */
     public $key;
+
     /** @var Autopayment */
     public $autopayment;
 

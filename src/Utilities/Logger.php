@@ -14,7 +14,7 @@ class Logger
      *
      * @var bool
      */
-    static $loggingEnabled = true;
+    public static $loggingEnabled = true;
 
     /**
      * @deprecated
@@ -23,7 +23,7 @@ class Logger
      *
      * @var null|string
      */
-    static $customLogPatch;
+    public static $customLogPatch;
 
     /** @var null|string */
     private static $customLogPath;

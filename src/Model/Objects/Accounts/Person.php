@@ -22,7 +22,7 @@ use Tpay\OpenApi\Model\Objects\Objects;
 
 class Person extends Objects
 {
-    const OBJECT_FIELDS = [
+    public const OBJECT_FIELDS = [
         'name' => Name::class,
         'surname' => Surname::class,
         'nationality' => Nationality::class,

@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Tpay\OpenApi\Model\Objects\Transactions\Alias;
 
 use Tpay\OpenApi\Model\Fields\BlikPaymentData\Autopayment\Currency;
@@ -13,7 +12,7 @@ use Tpay\OpenApi\Model\Objects\Objects;
 
 class Autopayment extends Objects
 {
-    const OBJECT_FIELDS = [
+    public const OBJECT_FIELDS = [
         'model' => Model::class,
         'frequency' => Frequency::class,
         'singleLimitAmount' => SingleLimitAmount::class,
@@ -22,5 +21,4 @@ class Autopayment extends Objects
         'initDate' => Date::class,
         'expirationDate' => Date::class,
     ];
-
 }

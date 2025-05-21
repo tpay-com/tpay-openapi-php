@@ -8,7 +8,7 @@ use Tpay\OpenApi\Model\Objects\Objects;
 
 class PointOfSaleDate extends Objects
 {
-    const OBJECT_FIELDS = [
+    public const OBJECT_FIELDS = [
         'create' => Create::class,
         'modification' => Modification::class,
     ];

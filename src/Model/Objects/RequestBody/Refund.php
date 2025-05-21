@@ -7,7 +7,7 @@ use Tpay\OpenApi\Model\Objects\Objects;
 
 class Refund extends Objects
 {
-    const OBJECT_FIELDS = [
+    public const OBJECT_FIELDS = [
         'amount' => Amount::class,
     ];
 

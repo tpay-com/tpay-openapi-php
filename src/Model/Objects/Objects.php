@@ -8,7 +8,7 @@ use Tpay\OpenApi\Model\Fields\Field;
 
 class Objects implements ObjectsInterface
 {
-    const OBJECT_FIELDS = [];
+    public const OBJECT_FIELDS = [];
 
     public $strictCheck = true;
 

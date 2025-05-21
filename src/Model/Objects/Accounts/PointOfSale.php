@@ -12,7 +12,7 @@ use Tpay\OpenApi\Model\Objects\Objects;
 
 class PointOfSale extends Objects
 {
-    const OBJECT_FIELDS = [
+    public const OBJECT_FIELDS = [
         'posId' => PosId::class,
         'accountId' => AccountId::class,
         'name' => Name::class,

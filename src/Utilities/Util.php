@@ -12,14 +12,14 @@ class Util
      *
      * @var null|string
      */
-    static $libraryPath;
+    public static $libraryPath;
 
     /**
      * Override to set your own templates directory. You can modify the library templates copied to your custom path
      *
      * @var null|string
      */
-    static $customTemplateDirectory;
+    public static $customTemplateDirectory;
 
     /**
      * Parse template file

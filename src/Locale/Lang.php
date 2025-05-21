@@ -6,7 +6,7 @@ use Tpay\OpenApi\Utilities\TpayException;
 
 class Lang extends Keys
 {
-    static $currentLanguage = 'en';
+    public static $currentLanguage = 'en';
 
     /**
      * Change current language

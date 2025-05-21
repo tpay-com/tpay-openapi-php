@@ -9,11 +9,11 @@ use Tpay\OpenApi\Model\Objects\Objects;
 
 class BlikPaymentData extends Objects
 {
-    const OBJECT_FIELDS = [
+    public const OBJECT_FIELDS = [
         'blikToken' => BlikToken::class,
         'aliases' => Alias::class,
         'type' => Type::class,
-        'refuseNoPayId' => Boolean::class
+        'refuseNoPayId' => Boolean::class,
     ];
 
     /** @var BlikToken */
@@ -25,6 +25,6 @@ class BlikPaymentData extends Objects
     /** @var Type */
     public $type;
 
-    /** @var Boolean */
+    /** @var bool */
     public $refuseNoPayId;
 }

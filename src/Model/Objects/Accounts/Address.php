@@ -18,7 +18,7 @@ use Tpay\OpenApi\Model\Objects\Objects;
 
 class Address extends Objects
 {
-    const OBJECT_FIELDS = [
+    public const OBJECT_FIELDS = [
         'city' => City::class,
         'country' => Country::class,
         'friendlyName' => FriendlyName::class,

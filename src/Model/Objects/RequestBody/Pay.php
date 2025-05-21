@@ -16,7 +16,7 @@ use Tpay\OpenApi\Model\Objects\Transactions\TokenPaymentData;
 
 class Pay extends Objects
 {
-    const OBJECT_FIELDS = [
+    public const OBJECT_FIELDS = [
         'groupId' => GroupId::class,
         'channelId' => ChannelId::class,
         'method' => Method::class,
@@ -26,7 +26,7 @@ class Pay extends Objects
         'recursive' => Recursive::class,
         'applePayPaymentData' => ApplePayPaymentData::class,
         'googlePayPaymentData' => GooglePayPaymentData::class,
-        'cof' => CardOnFile::class
+        'cof' => CardOnFile::class,
     ];
 
     /** @var GroupId */
@@ -46,6 +46,7 @@ class Pay extends Objects
 
     /** @var TokenPaymentData */
     public $tokenPaymentData;
+
     /** @var Recursive */
     public $recursive;
 
