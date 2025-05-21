@@ -44,7 +44,7 @@ class TransactionsApiTest extends TestCase
         $result = $transactionsApi->initApplePay([
             'domainName' => 'secure.tpay.com',
             'displayName' => 'https://openapi.tpay.com/#/wallet',
-            'validationUrl' => 'https://apple-pay-gateway-cert.apple.com/paymentservices/startSession'
+            'validationUrl' => 'https://apple-pay-gateway-cert.apple.com/paymentservices/startSession',
         ]);
 
         self::assertSame('ok', $result);
@@ -109,9 +109,9 @@ class TransactionsApiTest extends TestCase
                         'currency' => 'PLN',
                         'initDate' => '2025-05-21T14:39:27.388Z',
                         'expirationDate' => '2025-05-21T14:39:27.388Z',
-                    ]
-                ]
-            ]
+                    ],
+                ],
+            ],
         ];
 
         yield 'with pay (blik)' => [$transactionData];
@@ -124,7 +124,7 @@ class TransactionsApiTest extends TestCase
                 'save' => true,
                 'rocText' => 'RocText1',
             ],
-            'cof' => 'unscheduled'
+            'cof' => 'unscheduled',
         ];
 
         yield 'with pay (cardPaymentData.card)' => [$transactionData];
@@ -135,7 +135,7 @@ class TransactionsApiTest extends TestCase
             'cardPaymentData' => [
                 'token' => 't59c2810d59285e3e0ee9d1f1eda1c2f4c554e24',
                 'rocText' => 'TEST123',
-            ]
+            ],
         ];
 
         yield 'with pay (cardPaymentData.token)' => [$transactionData];
@@ -149,7 +149,7 @@ class TransactionsApiTest extends TestCase
                 'initialTransactionId' => '123',
                 'cardBrand' => 'VI',
                 'rocText' => 'abc123',
-            ]
+            ],
         ];
 
         yield 'with pay (tokenPaymentData)' => [$transactionData];
