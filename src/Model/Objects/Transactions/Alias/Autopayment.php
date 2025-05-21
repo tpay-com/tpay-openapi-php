@@ -25,16 +25,22 @@ class Autopayment extends Objects
 
     /** @var Model */
     public $model;
+
     /** @var Frequency */
     public $frequency;
+
     /** @var SingleLimitAmount */
     public $singleLimitAmount;
+
     /** @var TotalLimitAmount */
     public $totalLimitAmount;
+
     /** @var Currency */
     public $currency;
+
     /** @var Date */
     public $initDate;
+
     /** @var ExpirationDate */
     public $expirationDate;
 
