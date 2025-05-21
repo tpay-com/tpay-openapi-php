@@ -58,16 +58,14 @@ class TpayApi
 
     /** @var null|string */
     private $clientName;
-    /**
-     * @var CacheItemPoolInterface
-     */
+    /** @var CacheItemPoolInterface */
     private $cache = null;
 
     /**
-     * @param string $clientId
-     * @param string $clientSecret
-     * @param bool $productionMode
-     * @param string $scope
+     * @param string      $clientId
+     * @param string      $clientSecret
+     * @param bool        $productionMode
+     * @param string      $scope
      * @param null|string $apiUrlOverride
      * @param null|string $clientName
      */
@@ -228,7 +226,7 @@ class TpayApi
             'client_secret' => $this->clientSecret,
             'scope' => $this->scope,
         ];
-        $cacheKey = sha1(json_encode($fields) . $this->apiUrl);
+        $cacheKey = sha1(json_encode($fields).$this->apiUrl);
 
         if ($this->cache) {
             $cacheItem = $this->cache->getItem($cacheKey);
