@@ -42,9 +42,9 @@ class TransactionsApiTest extends TestCase
         CurlMock::setConsecutiveReturnedTransfers('"ok"');
 
         $result = $transactionsApi->initApplePay([
-            "domainName" => "secure.tpay.com",
-            "displayName" => "https://openapi.tpay.com/#/wallet",
-            "validationUrl" => "https://apple-pay-gateway-cert.apple.com/paymentservices/startSession"
+            'domainName' => 'secure.tpay.com',
+            'displayName' => 'https://openapi.tpay.com/#/wallet',
+            'validationUrl' => 'https://apple-pay-gateway-cert.apple.com/paymentservices/startSession'
         ]);
 
         self::assertSame('ok', $result);
@@ -86,7 +86,7 @@ class TransactionsApiTest extends TestCase
 
         $transactionData['pay'] = [
             'groupId' => 150,
-            'method' => 'pay_by_link'
+            'method' => 'pay_by_link',
         ];
 
         yield 'with pay' => [$transactionData];
@@ -122,7 +122,7 @@ class TransactionsApiTest extends TestCase
             'cardPaymentData' => [
                 'card' => 'VEJUfiiBqj8huhZfi84UWBHFwyVJCeanbF6zJDtWwoW9ugQB+x7MzESIgic1Bw7YBW1Yc1i49UeR+IhmXsFQiWh6aS35KyG1q\n2RrVN+NWYJDQEvvDpISyYdCghFjjLCXL2Fkp5KeLfUTWkKOMeisr/b3/Gbup37XA7DTYX8gn4Es/KO0PdiI/brO+S5+YrX4/UcQOT+eosL7r7rSSJfe8KaT\n8GywyoaWl8S41Cw1B41ddkGKvDOSIbbatALi3TdjJrHe7SkVmYSZNbkb9ri1RBw9ceX2QVGeO4CKKido29ySgWm64Gqfk4pgGBFqqUc8/ThwCI3n+FCmtWx\nntCovtw==',
                 'save' => true,
-                'rocText' => 'RocText1'
+                'rocText' => 'RocText1',
             ],
             'cof' => 'unscheduled'
         ];
@@ -134,7 +134,7 @@ class TransactionsApiTest extends TestCase
             'method' => 'pay_by_link',
             'cardPaymentData' => [
                 'token' => 't59c2810d59285e3e0ee9d1f1eda1c2f4c554e24',
-                'rocText' => 'TEST123'
+                'rocText' => 'TEST123',
             ]
         ];
 
@@ -148,7 +148,7 @@ class TransactionsApiTest extends TestCase
                 'cardExpiryDate' => '2808',
                 'initialTransactionId' => '123',
                 'cardBrand' => 'VI',
-                'rocText' => 'abc123'
+                'rocText' => 'abc123',
             ]
         ];
 
@@ -157,7 +157,7 @@ class TransactionsApiTest extends TestCase
         $transactionData['pay'] = [
             'groupId' => 150,
             'method' => 'pay_by_link',
-            'applePayPaymentData' => 'ewogICJkYXRhIjogInh4eHgiLAogICJzaWduYXR1cmUiOiAieHh4eCIsCiAgImhlYWRlciI6IHsKICAgICJwdWJsaWNLZXlIY\nXNoIjogInh4eHgiLAogICAgImVwaGVtZXJhbFB1YmxpY0tleSI6ICJ4eHh4IiwKICAgICJ0cmFuc2FjdGlvbklkIjogInh4eHgiCiAgfSwKICAidmVyc2lv\nbiI6ICJFQ192MSIKfQo'
+            'applePayPaymentData' => 'ewogICJkYXRhIjogInh4eHgiLAogICJzaWduYXR1cmUiOiAieHh4eCIsCiAgImhlYWRlciI6IHsKICAgICJwdWJsaWNLZXlIY\nXNoIjogInh4eHgiLAogICAgImVwaGVtZXJhbFB1YmxpY0tleSI6ICJ4eHh4IiwKICAgICJ0cmFuc2FjdGlvbklkIjogInh4eHgiCiAgfSwKICAidmVyc2lv\nbiI6ICJFQ192MSIKfQo',
         ];
 
         yield 'with pay (applePay)' => [$transactionData];
