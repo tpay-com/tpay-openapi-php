@@ -43,5 +43,4 @@ class Autopayment extends Objects
 
     /** @var ExpirationDate */
     public $expirationDate;
-
 }
