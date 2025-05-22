@@ -40,7 +40,7 @@ jobs:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
 
-      - run: composer update --no-progress --classmap-authoritative
+      - run: composer update --no-progress --no-cache --classmap-authoritative
 
       - run: ./vendor/bin/parallel-lint . --exclude ./vendor
 
