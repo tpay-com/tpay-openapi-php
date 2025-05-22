@@ -8,7 +8,6 @@ use Psr\SimpleCache\CacheInterface;
 class Cache
 {
     private $cacheItemPool;
-
     private $cache;
 
     public function __construct(?CacheItemPoolInterface $cacheItemPool = null, ?CacheInterface $cache = null)
