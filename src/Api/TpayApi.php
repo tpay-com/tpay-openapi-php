@@ -52,10 +52,7 @@ class TpayApi
     /** @var null|string */
     private $clientName;
 
-    /** @var CacheItemPoolInterface */
-    private $cachePool;
-
-    /** @var CacheInterface */
+    /** @var Cache */
     private $cache;
 
     public function __construct(
