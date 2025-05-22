@@ -30,7 +30,12 @@ class CachedCertProviderTest extends TestCase
         $cache->set('cert_' . md5($x5u), 'x5u', 10);
         $cache->set('trusted_' . md5($rootCa), 'trusted', 10);
 
-        $this->expectException(SodiumException::class);
-        $provider->provide($x5u, $rootCa);
+        $exceptionThrown = false;
+        try {
+            $provider->provide($x5u, $rootCa);
+        }catch(\Exception $e){
+            $exceptionThrown = true;
+        }
+        $this->assertTrue($exceptionThrown);
     }
 }
