@@ -17,8 +17,8 @@
     "require": {
         "php": ">=5.6.0",
         "ext-curl": "*",
-        "ext-json": "*",
         "ext-fileinfo": "*",
+        "ext-json": "*",
         "phpseclib/phpseclib": "^2 || ^3",
         "psr/cache": "^1 || ^2 || ^3",
         "psr/log": "^1 || ^2 || ^3",
