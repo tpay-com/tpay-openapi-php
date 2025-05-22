@@ -17,6 +17,7 @@ class CacheCertificateProvider implements CertificateProvider
     /**
      * @param string $certificatePath
      * @param string $rootCa
+     *
      * @throws TpayException
      *
      * @return X509
@@ -55,6 +56,7 @@ class CacheCertificateProvider implements CertificateProvider
 
     /**
      * @param string $url
+     *
      * @throws TpayException
      *
      * @return bool|string

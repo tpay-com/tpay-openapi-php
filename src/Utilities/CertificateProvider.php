@@ -10,9 +10,9 @@ interface CertificateProvider
      * @param string $certificatePath
      * @param string $rootCa
      *
-     * @return X509
      * @throws TpayException
      *
+     * @return X509
      */
     public function provide($certificatePath, $rootCa);
 }

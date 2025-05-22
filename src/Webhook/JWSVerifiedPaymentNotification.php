@@ -41,7 +41,8 @@ class JWSVerifiedPaymentNotification extends Notification
         CertificateProvider $certificateProvider,
         string $merchantSecret,
         bool $productionMode = true,
-        $requestParser = null) {
+        RequestParser $requestParser = null
+    ) {
         $this->productionMode = $productionMode;
         $this->merchantSecret = $merchantSecret;
         $this->requestParser = null === $requestParser ? new RequestParser() : $requestParser;
