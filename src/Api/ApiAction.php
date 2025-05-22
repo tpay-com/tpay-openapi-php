@@ -33,11 +33,7 @@ class ApiAction
 
     private $clientName;
 
-    /**
-     * @param Token $Token
-     * @param bool  $productionMode
-     */
-    public function __construct($Token, $productionMode)
+    public function __construct(Token $Token, bool $productionMode)
     {
         $this->productionMode = $productionMode;
         $this->Token = $Token;

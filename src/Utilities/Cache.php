@@ -7,11 +7,11 @@ use Psr\SimpleCache\CacheInterface;
 
 class Cache
 {
-    private $cacheItemPool = null;
+    private $cacheItemPool;
 
-    private $cache = null;
+    private $cache;
 
-    public function __construct(CacheItemPoolInterface $cacheItemPool = null, CacheInterface $cache = null)
+    public function __construct(?CacheItemPoolInterface $cacheItemPool = null, ?CacheInterface $cache = null)
     {
         $this->cacheItemPool = $cacheItemPool;
         $this->cache = $cache;

@@ -10,7 +10,6 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - php-version: '7.0'
           - php-version: '7.1'
           - php-version: '7.2'
           - php-version: '7.3'
