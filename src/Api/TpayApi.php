@@ -3,6 +3,7 @@
 namespace Tpay\OpenApi\Api;
 
 use Psr\Cache\CacheItemPoolInterface;
+use Psr\SimpleCache\CacheInterface;
 use RuntimeException;
 use Tpay\OpenApi\Api\Accounts\AccountsApi;
 use Tpay\OpenApi\Api\Authorization\AuthorizationApi;
@@ -10,6 +11,7 @@ use Tpay\OpenApi\Api\Refunds\RefundsApi;
 use Tpay\OpenApi\Api\Reports\ReportsApi;
 use Tpay\OpenApi\Api\Transactions\TransactionsApi;
 use Tpay\OpenApi\Model\Objects\Authorization\Token;
+use Tpay\OpenApi\Utilities\Cache;
 use Tpay\OpenApi\Utilities\TpayException;
 
 class TpayApi
@@ -60,17 +62,21 @@ class TpayApi
     private $clientName;
 
     /** @var CacheItemPoolInterface */
+    private $cachePool;
+
+    /** @var CacheInterface */
     private $cache;
 
     /**
-     * @param string      $clientId
-     * @param string      $clientSecret
-     * @param bool        $productionMode
-     * @param string      $scope
+     * @param string $clientId
+     * @param string $clientSecret
+     * @param bool $productionMode
+     * @param string $scope
      * @param null|string $apiUrlOverride
      * @param null|string $clientName
      */
     public function __construct(
+        Cache $cache,
         $clientId,
         $clientSecret,
         $productionMode = false,
@@ -92,47 +98,13 @@ class TpayApi
             }
             $this->apiUrl = $apiUrlOverride;
         }
-    }
-
-    /**
-     * @param string $propertyName
-     *
-     * @return AccountsApi|AuthorizationApi|RefundsApi|TransactionsApi
-     */
-    public function __get($propertyName)
-    {
-        @trigger_error(
-            sprintf(
-                'Using property "%s" is deprecated and will be removed in 2.0.0. Call the method "%s()".',
-                $propertyName,
-                lcfirst($propertyName)
-            ),
-            E_USER_DEPRECATED
-        );
-
-        switch ($propertyName) {
-            case 'Accounts':
-                return $this->accounts();
-            case 'Authorization':
-                return $this->authorization();
-            case 'Refunds':
-                return $this->refunds();
-            case 'Transactions':
-                return $this->transactions();
-        }
-
-        throw new RuntimeException(sprintf('Property %s::%s does not exist!', __CLASS__, $propertyName));
+        $this->cache = $cache;
     }
 
     /** @param Token $token */
     public function setCustomToken($token)
     {
         $this->token = $token;
-    }
-
-    public function setCache(CacheItemPoolInterface $cacheItemPool)
-    {
-        $this->cache = $cacheItemPool;
     }
 
     public function getToken()
@@ -227,14 +199,9 @@ class TpayApi
             'client_secret' => $this->clientSecret,
             'scope' => $this->scope,
         ];
-        $cacheKey = sha1(json_encode($fields).$this->apiUrl);
+        $cacheKey = sha1(json_encode($fields) . $this->apiUrl);
 
-        if ($this->cache) {
-            $cacheItem = $this->cache->getItem($cacheKey);
-            if ($cacheItem->isHit()) {
-                $this->token = $cacheItem->get();
-            }
-        }
+        $this->token = $this->cache->get($cacheKey);
 
         if (
             $this->token instanceof Token
@@ -263,11 +230,6 @@ class TpayApi
 
         $this->token = new Token();
         $this->token->setObjectValues($this->token, $authApi->getRequestResult());
-        if ($this->cache) {
-            $item = $this->cache->getItem($cacheKey);
-            $item->set($this->token);
-            $item->expiresAfter(7100);
-            $this->cache->save($item);
-        }
+        $this->cache->set($cacheKey, $this->token, 7100);
     }
 }

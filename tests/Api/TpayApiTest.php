@@ -2,9 +2,12 @@
 
 namespace Tpay\Tests\OpenApi\Api;
 
+use Doctrine\Common\Cache\ArrayCache;
 use PHPUnit\Framework\TestCase;
+use PSX\Cache\SimpleCache;
 use RuntimeException;
 use Tpay\OpenApi\Api\TpayApi;
+use Tpay\OpenApi\Utilities\Cache;
 use Tpay\Tests\OpenApi\Mock\CurlMock;
 
 /**
@@ -16,7 +19,7 @@ class TpayApiTest extends TestCase
     {
         CurlMock::expectNoCurlExecCall();
 
-        $tpayApi = new TpayApi('123', '');
+        $tpayApi = new TpayApi(new Cache(null, new SimpleCache(new ArrayCache())), '123', '');
 
         CurlMock::setConsecutiveReturnedTransfers(
             '{"client_id": "123"}',
@@ -26,20 +29,5 @@ class TpayApiTest extends TestCase
         $result = $tpayApi->transactions()->getTransactions([]);
 
         self::assertSame(['transactions'], $result);
-    }
-
-    public function testUsingPropertyTriggersDeprecation()
-    {
-        $tpayApi = new TpayApi('123', '');
-
-        set_error_handler(static function ($errno, $errstr) {
-            restore_error_handler();
-            throw new RuntimeException($errstr);
-        }, E_USER_DEPRECATED);
-
-        $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage('Using property "Transactions" is deprecated and will be removed in 2.0.0. Call the method "transactions()"');
-
-        $tpayApi->Transactions->getTransactions([]);
     }
 }

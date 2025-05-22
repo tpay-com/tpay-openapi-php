@@ -38,7 +38,7 @@ class JWSVerifiedPaymentNotificationTest extends TestCase
         $requestMock = new RequestParserMock($contentType, $data, $payload, $signature);
         $certificateMock = $this->getCertificateMock();
 
-        $notification = new JWSVerifiedPaymentNotification($secret, $productionMode, $requestMock, $certificateMock);
+        $notification = new JWSVerifiedPaymentNotification($certificateMock, $secret, $productionMode, $requestMock);
 
         $notificationObject = $notification->getNotification();
 
@@ -63,7 +63,7 @@ class JWSVerifiedPaymentNotificationTest extends TestCase
         $requestMock = new RequestParserMock($contentType, $data, $payload, $signature);
         $certificateMock = $this->getCertificateMock();
 
-        $notification = new JWSVerifiedPaymentNotification($secret, $productionMode, $requestMock, $certificateMock);
+        $notification = new JWSVerifiedPaymentNotification($certificateMock, $secret, $productionMode, $requestMock, $certificateMock);
 
         $notification->getNotification();
     }

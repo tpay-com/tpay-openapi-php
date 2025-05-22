@@ -2,9 +2,10 @@
 
 namespace Tpay\Tests\OpenApi\Mock;
 
+use Tpay\OpenApi\Utilities\CertificateProvider;
 use Tpay\OpenApi\Utilities\phpseclib\File\X509;
 
-class CertificateProviderMock
+class CertificateProviderMock implements CertificateProvider
 {
     private $publicKey;
     private $x509;

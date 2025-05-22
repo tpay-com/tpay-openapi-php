@@ -39,9 +39,11 @@ Plik [`src/Loader.php`](src/Loader.php) obsługuje ładowanie wszystkich wymagan
 
 Wszystkie metody opisane w [dokumentacji Tpay OpenAPI](https://openapi.tpay.com) można łatwo wykonać, uruchamiając jedną z metod z tej biblioteki, takie jak:
 ```php
-$tpayApi = new TpayApi($clientId, $clientSecret, true, 'read');
+$cache = new Cache(/** Tutaj powinieneś przekazać w argumencie swoją implementację cache zgodną z PSR6 lub PSR16 */);
+$tpayApi = new TpayApi($cache,'12345-132123', '456');
 $transactions = $tpayApi->Transactions->getTransactions();
 ```
+
 
 Wszystkie obecnie dostępne metody API mają przykładowe użycie w katalogu [`Examples`](examples).
 

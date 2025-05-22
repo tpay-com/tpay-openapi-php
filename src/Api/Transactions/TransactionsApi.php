@@ -53,7 +53,7 @@ class TransactionsApi extends ApiAction
 
     /**
      * @param string $transactionId
-     * @param array  $queryFields
+     * @param array $queryFields
      */
     public function getRefundsByTransactionId($transactionId, $queryFields = [])
     {
@@ -91,7 +91,7 @@ class TransactionsApi extends ApiAction
     }
 
     /**
-     * @param array  $fields
+     * @param array $fields
      * @param string $transactionId
      */
     public function createPaymentByTransactionId($fields, $transactionId)
@@ -100,16 +100,21 @@ class TransactionsApi extends ApiAction
     }
 
     /**
-     * @param array  $fields
+     * @param array $fields
      * @param string $transactionId
      */
     public function createInstantPaymentByTransactionId($fields, $transactionId)
     {
-        return $this->run(static::POST, sprintf('/transactions/%s/pay', $transactionId), $fields, new PayWithInstantRedirection());
+        return $this->run(
+            static::POST,
+            sprintf('/transactions/%s/pay', $transactionId),
+            $fields,
+            new PayWithInstantRedirection()
+        );
     }
 
     /**
-     * @param array  $fields
+     * @param array $fields
      * @param string $transactionId
      */
     public function createRefundByTransactionId($fields, $transactionId)
@@ -117,13 +122,13 @@ class TransactionsApi extends ApiAction
         return $this->run(static::POST, sprintf('/transactions/%s/refunds', $transactionId), $fields, new Refund());
     }
 
-    /** @param array $fields */
-    public function cancelTransaction($fields)
+    /** @param string $transactionId */
+    public function cancelTransaction($transactionId)
     {
-        return $this->run(static::POST, '/transactions/%s/pay', $fields);
+        return $this->run(static::POST, sprintf('/transactions/%s/pay', $transactionId));
     }
 
-    /** @param array  $fields */
+    /** @param array $fields */
     public function initApplePay($fields)
     {
         return $this->run(static::POST, '/wallet/applepay/init', $fields, new InitApplePay());
