@@ -6,8 +6,10 @@ use Tpay\OpenApi\Model\Fields\Address\City;
 use Tpay\OpenApi\Model\Fields\Address\Phone;
 use Tpay\OpenApi\Model\Fields\Address\PostalCode;
 use Tpay\OpenApi\Model\Fields\Payer\Address;
+use Tpay\OpenApi\Model\Fields\Payer\IP;
 use Tpay\OpenApi\Model\Fields\Payer\Name;
 use Tpay\OpenApi\Model\Fields\Payer\TaxId;
+use Tpay\OpenApi\Model\Fields\Payer\UserAgent;
 use Tpay\OpenApi\Model\Fields\Person\Email;
 use Tpay\OpenApi\Model\Fields\Transaction\Country;
 use Tpay\OpenApi\Model\Objects\Objects;
@@ -23,6 +25,8 @@ class Payer extends Objects
         'city' => City::class,
         'country' => Country::class,
         'taxId' => TaxId::class,
+        'ip' => IP::class,
+        'userAgent' => UserAgent::class,
     ];
 
     /** @var Email */
@@ -48,6 +52,12 @@ class Payer extends Objects
 
     /** @var TaxId */
     public $taxId;
+
+    /** @var IP */
+    public $ip;
+
+    /** @var UserAgent */
+    public $userAgent;
 
     public function getRequiredFields()
     {

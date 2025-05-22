@@ -9,7 +9,6 @@ use Tpay\OpenApi\Model\Fields\Transaction\Lang;
 use Tpay\OpenApi\Model\Objects\Objects;
 use Tpay\OpenApi\Model\Objects\Transactions\Callbacks;
 use Tpay\OpenApi\Model\Objects\Transactions\Payer;
-use Tpay\OpenApi\Model\Objects\Transactions\Verification;
 
 class Transaction extends Objects
 {
@@ -19,7 +18,6 @@ class Transaction extends Objects
         'hiddenDescription' => HiddenDescription::class,
         'lang' => Lang::class,
         'pay' => Pay::class,
-        'verification' => Verification::class,
         'payer' => Payer::class,
         'callbacks' => Callbacks::class,
     ];
@@ -38,9 +36,6 @@ class Transaction extends Objects
 
     /** @var Pay */
     public $pay;
-
-    /** @var Verification */
-    public $verification;
 
     /** @var Payer */
     public $payer;

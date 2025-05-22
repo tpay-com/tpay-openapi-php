@@ -2,6 +2,7 @@
 
 namespace Tpay\OpenApi\Api;
 
+use Psr\Cache\CacheItemPoolInterface;
 use RuntimeException;
 use Tpay\OpenApi\Api\Accounts\AccountsApi;
 use Tpay\OpenApi\Api\Authorization\AuthorizationApi;
@@ -58,6 +59,9 @@ class TpayApi
     /** @var null|string */
     private $clientName;
 
+    /** @var CacheItemPoolInterface */
+    private $cache;
+
     /**
      * @param string      $clientId
      * @param string      $clientSecret
@@ -66,8 +70,14 @@ class TpayApi
      * @param null|string $apiUrlOverride
      * @param null|string $clientName
      */
-    public function __construct($clientId, $clientSecret, $productionMode = false, $scope = 'read', $apiUrlOverride = null, $clientName = null)
-    {
+    public function __construct(
+        $clientId,
+        $clientSecret,
+        $productionMode = false,
+        $scope = 'read',
+        $apiUrlOverride = null,
+        $clientName = null
+    ) {
         $this->clientId = $clientId;
         $this->clientSecret = $clientSecret;
         $this->productionMode = $productionMode;
@@ -118,6 +128,11 @@ class TpayApi
     public function setCustomToken($token)
     {
         $this->token = $token;
+    }
+
+    public function setCache(CacheItemPoolInterface $cacheItemPool)
+    {
+        $this->cache = $cacheItemPool;
     }
 
     public function getToken()
@@ -207,6 +222,20 @@ class TpayApi
 
     private function authorize()
     {
+        $fields = [
+            'client_id' => $this->clientId,
+            'client_secret' => $this->clientSecret,
+            'scope' => $this->scope,
+        ];
+        $cacheKey = sha1(json_encode($fields).$this->apiUrl);
+
+        if ($this->cache) {
+            $cacheItem = $this->cache->getItem($cacheKey);
+            if ($cacheItem->isHit()) {
+                $this->token = $cacheItem->get();
+            }
+        }
+
         if (
             $this->token instanceof Token
             && time() <= $this->token->issued_at->getValue() + $this->token->expires_in->getValue()
@@ -220,11 +249,6 @@ class TpayApi
             $authApi->setClientName($this->clientName);
         }
 
-        $fields = [
-            'client_id' => $this->clientId,
-            'client_secret' => $this->clientSecret,
-            'scope' => $this->scope,
-        ];
         $authApi->getNewToken($fields);
 
         if (200 !== $authApi->getHttpResponseCode()) {
@@ -239,5 +263,11 @@ class TpayApi
 
         $this->token = new Token();
         $this->token->setObjectValues($this->token, $authApi->getRequestResult());
+        if ($this->cache) {
+            $item = $this->cache->getItem($cacheKey);
+            $item->set($this->token);
+            $item->expiresAfter(7100);
+            $this->cache->save($item);
+        }
     }
 }

@@ -4,6 +4,7 @@ namespace Tpay\OpenApi\Model\Objects\Transactions;
 
 use Tpay\OpenApi\Model\Fields\CardPaymentData\Card;
 use Tpay\OpenApi\Model\Fields\CardPaymentData\PreauthorizedToken;
+use Tpay\OpenApi\Model\Fields\CardPaymentData\RocText;
 use Tpay\OpenApi\Model\Fields\CardPaymentData\Save;
 use Tpay\OpenApi\Model\Fields\CardPaymentData\Token;
 use Tpay\OpenApi\Model\Objects\Objects;
@@ -15,6 +16,7 @@ class CardPaymentData extends Objects
         'token' => Token::class,
         'preauthorizedToken' => PreauthorizedToken::class,
         'save' => Save::class,
+        'rocText' => RocText::class,
     ];
 
     /** @var Card */
@@ -28,4 +30,7 @@ class CardPaymentData extends Objects
 
     /** @var Save */
     public $save;
+
+    /** @var RocText */
+    public $rocText;
 }

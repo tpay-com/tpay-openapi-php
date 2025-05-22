@@ -168,6 +168,8 @@ class ApiAction
             $headers[] = 'X-Client-Source: '.$this->clientName;
         }
 
+        $headers[] = 'User-Agent: tpay.com PHP SDK Client/'.gethostname().'/'.$this->clientName;
+
         Logger::log(
             'Outgoing request',
             vsprintf(

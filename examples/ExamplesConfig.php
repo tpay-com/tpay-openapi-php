@@ -2,7 +2,6 @@
 
 namespace Tpay\Example;
 
-use Tpay\OpenApi\Loader;
 use Tpay\OpenApi\Utilities\Util;
 
 class ExamplesConfig
@@ -21,15 +20,11 @@ class ExamplesConfig
         ini_set('display_errors', 1);
         ini_set('display_startup_errors', 1);
         error_reporting(E_ALL);
-        $this->loadLibrary();
+
+        require_once 'vendor/autoload.php';
+
         if (self::MERCHANT_CLIENT_ID === '--put--your--client--id--here') {
             exit('Please fill your API credentials in file: '.__DIR__);
         }
-    }
-
-    private function loadLibrary()
-    {
-        $Loader = new Loader();
-        $Loader->loadDependencies();
     }
 }

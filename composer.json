@@ -19,6 +19,7 @@
         "ext-curl": "*",
         "ext-json": "*",
         "phpseclib/phpseclib": "^2 || ^3",
+        "psr/cache": "^1 || ^2 || ^3",
         "psr/log": "^1 || ^2 || ^3"
     },
     "require-dev": {
@@ -30,10 +31,7 @@
         "psr-4": {
             "Tpay\\Example\\": "examples/",
             "Tpay\\OpenApi\\": "src/"
-        },
-        "classmap": [
-            "src/legacy_classes.php"
-        ]
+        }
     },
     "autoload-dev": {
         "psr-4": {
