@@ -33,7 +33,7 @@ class CacheTest extends TestCase
                     'token_type' => 'Bearer',
                     'expires_in' => 7200,
                     'client_id' => '12345-132123',
-                    'access_token' => '01G6WAPZFNNX4CXBPKQH5MYD4H1857b07a64af14'
+                    'access_token' => '01G6WAPZFNNX4CXBPKQH5MYD4H1857b07a64af14',
                 ]
             )
         );
@@ -58,7 +58,6 @@ class CacheTest extends TestCase
         $cache = new SimpleCache(new ArrayCache());
         $tpayApi = new TpayApi(new Cache(null, $cache), '12345-132123', '456');
 
-
         CurlMock::setReturnedHttpCode(200);
         CurlMock::setConsecutiveReturnedTransfers(
             json_encode(
@@ -68,7 +67,7 @@ class CacheTest extends TestCase
                     'token_type' => 'Bearer',
                     'expires_in' => 7200,
                     'client_id' => '12345-132123',
-                    'access_token' => '01G6WAPZFNNX4CXBPKQH5MYD4H1857b07a64af14'
+                    'access_token' => '01G6WAPZFNNX4CXBPKQH5MYD4H1857b07a64af14',
                 ]
             )
         );

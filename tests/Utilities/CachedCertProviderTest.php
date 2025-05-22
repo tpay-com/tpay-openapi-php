@@ -24,8 +24,8 @@ class CachedCertProviderTest extends TestCase
         $provider = new CacheCertificateProvider($cache);
         $provider->provide($x5u, $rootCa);
 
-        $this->assertTrue(strpos($cache->get('cert_'.md5($x5u)), 'CERTIFICATE')>0);
-        $this->assertTrue(strpos($cache->get('trusted_'.md5($rootCa)), 'CERTIFICATE')>0);
+        $this->assertTrue(strpos($cache->get('cert_'.md5($x5u)), 'CERTIFICATE') > 0);
+        $this->assertTrue(strpos($cache->get('trusted_'.md5($rootCa)), 'CERTIFICATE') > 0);
 
         $cache->set('cert_'.md5($x5u), 'x5u', 10);
         $cache->set('trusted_'.md5($rootCa), 'trusted', 10);
@@ -33,7 +33,7 @@ class CachedCertProviderTest extends TestCase
         $exceptionThrown = false;
         try {
             $provider->provide($x5u, $rootCa);
-        }catch(Exception $e){
+        } catch (Exception $e) {
             $exceptionThrown = true;
         }
         $this->assertTrue($exceptionThrown);

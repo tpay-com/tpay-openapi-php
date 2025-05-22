@@ -5,7 +5,6 @@ namespace Tpay\Tests\OpenApi\Api;
 use Doctrine\Common\Cache\ArrayCache;
 use PHPUnit\Framework\TestCase;
 use PSX\Cache\SimpleCache;
-use RuntimeException;
 use Tpay\OpenApi\Api\TpayApi;
 use Tpay\OpenApi\Utilities\Cache;
 use Tpay\Tests\OpenApi\Mock\CurlMock;

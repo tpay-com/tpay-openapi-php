@@ -16,15 +16,6 @@ use Tpay\OpenApi\Utilities\TpayException;
 
 class TpayApi
 {
-    /** @deprecated will be removed in 2.0.0 */
-    const TPAY_API = [
-        'Accounts' => AccountsApi::class,
-        'Authorization' => AuthorizationApi::class,
-        'Transactions' => TransactionsApi::class,
-        'Refunds' => RefundsApi::class,
-        'Reports' => ReportsApi::class,
-    ];
-
     /** @var null|AccountsApi */
     private $accounts;
 
@@ -67,27 +58,18 @@ class TpayApi
     /** @var CacheInterface */
     private $cache;
 
-    /**
-     * @param string $clientId
-     * @param string $clientSecret
-     * @param bool $productionMode
-     * @param string $scope
-     * @param null|string $apiUrlOverride
-     * @param null|string $clientName
-     */
     public function __construct(
         Cache $cache,
-        $clientId,
-        $clientSecret,
-        $productionMode = false,
-        $scope = 'read',
-        $apiUrlOverride = null,
-        $clientName = null
+        string $clientId,
+        string $clientSecret,
+        bool $productionMode = false,
+        string $apiUrlOverride = null,
+        string $clientName = null
     ) {
         $this->clientId = $clientId;
         $this->clientSecret = $clientSecret;
         $this->productionMode = $productionMode;
-        $this->scope = $scope;
+        $this->scope = 'read';
         $this->apiUrl = true === $this->productionMode
             ? ApiAction::TPAY_API_URL_PRODUCTION
             : ApiAction::TPAY_API_URL_SANDBOX;
