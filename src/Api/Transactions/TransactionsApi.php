@@ -53,7 +53,7 @@ class TransactionsApi extends ApiAction
 
     /**
      * @param string $transactionId
-     * @param array $queryFields
+     * @param array  $queryFields
      */
     public function getRefundsByTransactionId($transactionId, $queryFields = [])
     {
