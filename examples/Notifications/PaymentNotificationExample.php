@@ -2,8 +2,12 @@
 
 namespace Tpay\Example\Notifications;
 
+use Doctrine\Common\Cache\FilesystemCache;
+use PSX\Cache\SimpleCache;
 use Tpay\Example\ExamplesConfig;
 use Tpay\OpenApi\Model\Objects\NotificationBody\BasicPayment;
+use Tpay\OpenApi\Utilities\Cache;
+use Tpay\OpenApi\Utilities\CacheCertificateProvider;
 use Tpay\OpenApi\Utilities\TpayException;
 use Tpay\OpenApi\Webhook\JWSVerifiedPaymentNotification;
 
@@ -18,7 +22,9 @@ final class PaymentNotificationExample extends ExamplesConfig
     {
         // if isProd == false -> use sandbox credentials.
         $isProd = true;
-        $NotificationWebhook = new JWSVerifiedPaymentNotification(self::MERCHANT_CONFIRMATION_CODE, $isProd);
+        $cache = new Cache(null, new SimpleCache(new FilesystemCache(__DIR__.'/cache/')));
+        $provider = new CacheCertificateProvider($cache);
+        $NotificationWebhook = new JWSVerifiedPaymentNotification($provider, self::MERCHANT_CONFIRMATION_CODE, $isProd);
 
         return $NotificationWebhook->getNotification();
     }
