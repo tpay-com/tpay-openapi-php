@@ -125,7 +125,7 @@ class TransactionsApi extends ApiAction
     /** @param string $transactionId */
     public function cancelTransaction($transactionId)
     {
-        return $this->run(static::POST, sprintf('/transactions/%s/pay', $transactionId));
+        return $this->run(static::POST, sprintf('/transactions/%s/cancel', $transactionId));
     }
 
     /** @param array $fields */

@@ -2,8 +2,11 @@
 
 namespace Tpay\Example\TransactionsApi;
 
+use Doctrine\Common\Cache\FilesystemCache;
+use PSX\Cache\SimpleCache;
 use Tpay\Example\ExamplesConfig;
 use Tpay\OpenApi\Api\TpayApi;
+use Tpay\OpenApi\Utilities\Cache;
 use Tpay\OpenApi\Utilities\TpayException;
 
 final class RedirectPayment extends ExamplesConfig
@@ -13,7 +16,8 @@ final class RedirectPayment extends ExamplesConfig
         if (!isset($_POST['groupId'])) {
             throw new TpayException('No payment group Id, unable to create transaction');
         }
-        $TpayApi = new TpayApi(self::MERCHANT_CLIENT_ID, self::MERCHANT_CLIENT_SECRET, true, 'read');
+        $cache = new Cache(null, new SimpleCache(new FilesystemCache(__DIR__.'/cache/')));
+        $TpayApi = new TpayApi($cache, self::MERCHANT_CLIENT_ID, self::MERCHANT_CLIENT_SECRET, true, 'read');
         $result = $TpayApi->transactions()->createTransaction($this->getRequestBody());
         if (isset($result['transactionPaymentUrl'])) {
             header('Location: '.$result['transactionPaymentUrl']);

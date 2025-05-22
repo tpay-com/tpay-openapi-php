@@ -2,8 +2,11 @@
 
 namespace Tpay\Example\RefundsApi;
 
+use Doctrine\Common\Cache\FilesystemCache;
+use PSX\Cache\SimpleCache;
 use Tpay\Example\ExamplesConfig;
 use Tpay\OpenApi\Api\TpayApi;
+use Tpay\OpenApi\Utilities\Cache;
 
 final class RefundsApiExample extends ExamplesConfig
 {
@@ -12,7 +15,9 @@ final class RefundsApiExample extends ExamplesConfig
     public function __construct()
     {
         parent::__construct();
-        $this->TpayApi = new TpayApi(self::MERCHANT_CLIENT_ID, self::MERCHANT_CLIENT_SECRET, true, 'read');
+        //You can inject any of your PSR6 or PSR16 cache implementation
+        $cache = new Cache(null, new SimpleCache(new FilesystemCache(__DIR__.'/cache/')));
+        $this->TpayApi = new TpayApi($cache, self::MERCHANT_CLIENT_ID, self::MERCHANT_CLIENT_SECRET, true, 'read');
     }
 
     public function getRefunds()
