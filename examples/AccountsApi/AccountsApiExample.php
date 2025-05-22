@@ -2,8 +2,11 @@
 
 namespace Tpay\Example\AccountsApi;
 
+use Doctrine\Common\Cache\FilesystemCache;
+use PSX\Cache\SimpleCache;
 use Tpay\Example\ExamplesConfig;
 use Tpay\OpenApi\Api\TpayApi;
+use Tpay\OpenApi\Utilities\Cache;
 
 final class AccountsApiExample extends ExamplesConfig
 {
@@ -12,7 +15,8 @@ final class AccountsApiExample extends ExamplesConfig
     public function __construct()
     {
         parent::__construct();
-        $this->TpayApi = new TpayApi(self::PARTNER_CLIENT_ID, self::PARTNER_CLIENT_SECRET, true, 'read');
+        $cache = new Cache(null, new SimpleCache(new FilesystemCache(__DIR__.'/cache/')));
+        $this->TpayApi = new TpayApi($cache, self::PARTNER_CLIENT_ID, self::PARTNER_CLIENT_SECRET, true, 'read');
     }
 
     public function runAllExamples()

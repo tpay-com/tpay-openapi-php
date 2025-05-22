@@ -2,10 +2,13 @@
 
 namespace Tpay\Example\TransactionsApi;
 
+use Doctrine\Common\Cache\FilesystemCache;
+use PSX\Cache\SimpleCache;
 use Tpay\Example\ExamplesConfig;
 use Tpay\OpenApi\Api\TpayApi;
 use Tpay\OpenApi\Forms\PaymentForms;
 use Tpay\OpenApi\Model\Fields\FieldTypes;
+use Tpay\OpenApi\Utilities\Cache;
 use Tpay\OpenApi\Utilities\Logger;
 use Tpay\OpenApi\Utilities\TpayException;
 use Tpay\OpenApi\Utilities\Util;
@@ -17,7 +20,8 @@ final class CardGateExtended extends ExamplesConfig
     public function __construct()
     {
         parent::__construct();
-        $this->TpayApi = new TpayApi(self::MERCHANT_CLIENT_ID, self::MERCHANT_CLIENT_SECRET, true, 'read');
+        $cache = new Cache(null, new SimpleCache(new FilesystemCache(__DIR__.'/cache/')));
+        $this->TpayApi = new TpayApi($cache, self::MERCHANT_CLIENT_ID, self::MERCHANT_CLIENT_SECRET, true, 'read');
     }
 
     public function init()
