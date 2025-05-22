@@ -32,12 +32,16 @@ class JWSVerifiedPaymentNotification extends Notification
     private $certificateProvider;
 
     /**
-     * @param CertificateProvider       $certificateProvider
-     * @param string                   $merchantSecret      string Merchant notification check secret
-     * @param bool                     $productionMode      bool is prod or sandbox flag
-     * @param null|RequestParser       $requestParser
+     * @param CertificateProvider $certificateProvider
+     * @param string              $merchantSecret      string Merchant notification check secret
+     * @param bool                $productionMode      bool is prod or sandbox flag
+     * @param null|RequestParser  $requestParser
      */
-    public function __construct(CertificateProvider  $certificateProvider, $merchantSecret, $productionMode = true, $requestParser = null)
+    public function __construct(
+        CertificateProvider  $certificateProvider,
+        string $merchantSecret,
+        bool $productionMode = true,
+        $requestParser = null)
     {
         $this->productionMode = $productionMode;
         $this->merchantSecret = $merchantSecret;

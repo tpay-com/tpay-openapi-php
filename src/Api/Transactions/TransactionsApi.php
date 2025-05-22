@@ -91,7 +91,7 @@ class TransactionsApi extends ApiAction
     }
 
     /**
-     * @param array $fields
+     * @param array  $fields
      * @param string $transactionId
      */
     public function createPaymentByTransactionId($fields, $transactionId)
@@ -100,7 +100,7 @@ class TransactionsApi extends ApiAction
     }
 
     /**
-     * @param array $fields
+     * @param array  $fields
      * @param string $transactionId
      */
     public function createInstantPaymentByTransactionId($fields, $transactionId)
@@ -114,7 +114,7 @@ class TransactionsApi extends ApiAction
     }
 
     /**
-     * @param array $fields
+     * @param array  $fields
      * @param string $transactionId
      */
     public function createRefundByTransactionId($fields, $transactionId)

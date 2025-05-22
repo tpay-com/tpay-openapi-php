@@ -58,13 +58,21 @@ class TpayApi
     /** @var CacheInterface */
     private $cache;
 
+    /**
+     * @param Cache       $cache
+     * @param string      $clientId
+     * @param string      $clientSecret
+     * @param bool        $productionMode
+     * @param string|null $apiUrlOverride
+     * @param string|null $clientName
+     */
     public function __construct(
         Cache $cache,
         string $clientId,
         string $clientSecret,
         bool $productionMode = false,
-        string $apiUrlOverride = null,
-        string $clientName = null
+        $apiUrlOverride = null,
+        $clientName = null
     ) {
         $this->clientId = $clientId;
         $this->clientSecret = $clientSecret;
