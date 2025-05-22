@@ -28,12 +28,12 @@ class CacheTest extends TestCase
         CurlMock::setConsecutiveReturnedTransfers(
             json_encode(
                 [
-                    "issued_at" => time(),
-                    "scope" => "read",
-                    "token_type" => "Bearer",
-                    "expires_in" => 7200,
-                    "client_id" => "12345-132123",
-                    "access_token" => "01G6WAPZFNNX4CXBPKQH5MYD4H1857b07a64af14"
+                    'issued_at' => time(),
+                    'scope' => 'read',
+                    'token_type' => 'Bearer',
+                    'expires_in' => 7200,
+                    'client_id' => '12345-132123',
+                    'access_token' => '01G6WAPZFNNX4CXBPKQH5MYD4H1857b07a64af14'
                 ]
             )
         );
@@ -44,7 +44,7 @@ class CacheTest extends TestCase
             'client_secret' => '456',
             'scope' => 'read',
         ];
-        $cacheKey = sha1(json_encode($fields) . 'https://openapi.sandbox.tpay.com');
+        $cacheKey = sha1(json_encode($fields).'https://openapi.sandbox.tpay.com');
 
         self::assertTrue($pool->getItem($cacheKey)->isHit());
         self::assertInstanceOf(Token::class, $pool->getItem($cacheKey)->get());
@@ -63,12 +63,12 @@ class CacheTest extends TestCase
         CurlMock::setConsecutiveReturnedTransfers(
             json_encode(
                 [
-                    "issued_at" => time(),
-                    "scope" => "read",
-                    "token_type" => "Bearer",
-                    "expires_in" => 7200,
-                    "client_id" => "12345-132123",
-                    "access_token" => "01G6WAPZFNNX4CXBPKQH5MYD4H1857b07a64af14"
+                    'issued_at' => time(),
+                    'scope' => 'read',
+                    'token_type' => 'Bearer',
+                    'expires_in' => 7200,
+                    'client_id' => '12345-132123',
+                    'access_token' => '01G6WAPZFNNX4CXBPKQH5MYD4H1857b07a64af14'
                 ]
             )
         );
@@ -79,7 +79,7 @@ class CacheTest extends TestCase
             'client_secret' => '456',
             'scope' => 'read',
         ];
-        $cacheKey = sha1(json_encode($fields) . 'https://openapi.sandbox.tpay.com');
+        $cacheKey = sha1(json_encode($fields).'https://openapi.sandbox.tpay.com');
 
         self::assertInstanceOf(Token::class, $cache->get($cacheKey));
     }

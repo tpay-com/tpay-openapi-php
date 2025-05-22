@@ -199,7 +199,7 @@ class TpayApi
             'client_secret' => $this->clientSecret,
             'scope' => $this->scope,
         ];
-        $cacheKey = sha1(json_encode($fields) . $this->apiUrl);
+        $cacheKey = sha1(json_encode($fields).$this->apiUrl);
 
         $this->token = $this->cache->get($cacheKey);
 

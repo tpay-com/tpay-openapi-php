@@ -26,15 +26,15 @@ class CacheCertificateProvider implements CertificateProvider
      */
     public function provide($certificatePath, $rootCa)
     {
-        $certificate = $this->cache->get('cert_' . md5($certificatePath));
+        $certificate = $this->cache->get('cert_'.md5($certificatePath));
         if (!$certificate) {
             $certificate = $this->getFile($certificatePath);
-            $this->cache->set('cert_' . md5($certificatePath), $certificate, 7200);
+            $this->cache->set('cert_'.md5($certificatePath), $certificate, 7200);
         }
-        $trusted = $this->cache->get('trusted_' . md5($certificatePath));
+        $trusted = $this->cache->get('trusted_'.md5($certificatePath));
         if (!$trusted) {
             $trusted = $this->getFile($rootCa);
-            $this->cache->set('trusted_' . md5($rootCa), $trusted, 7200);
+            $this->cache->set('trusted_'.md5($rootCa), $trusted, 7200);
         }
 
         $x509 = new X509();
@@ -42,8 +42,8 @@ class CacheCertificateProvider implements CertificateProvider
         $x509->loadCA($trusted);
 
         if (!$x509->validateSignature()) {
-            $this->cache->delete('cert_' . md5($certificatePath));
-            $this->cache->delete('trusted_' . md5($rootCa));
+            $this->cache->delete('cert_'.md5($certificatePath));
+            $this->cache->delete('trusted_'.md5($rootCa));
             throw new TpayException('Signing certificate is not signed by Tpay CA certificate');
         }
 
@@ -52,8 +52,8 @@ class CacheCertificateProvider implements CertificateProvider
 
     public function clearCachedCerts($certificatePath, $rootCa)
     {
-        $this->cache->delete('cert_' . md5($certificatePath));
-        $this->cache->delete('trusted_' . md5($rootCa));
+        $this->cache->delete('cert_'.md5($certificatePath));
+        $this->cache->delete('trusted_'.md5($rootCa));
     }
 
     /**
