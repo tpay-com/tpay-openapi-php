@@ -105,7 +105,12 @@ class TransactionsApi extends ApiAction
      */
     public function createInstantPaymentByTransactionId($fields, $transactionId)
     {
-        return $this->run(static::POST, sprintf('/transactions/%s/pay', $transactionId), $fields, new PayWithInstantRedirection());
+        return $this->run(
+            static::POST,
+            sprintf('/transactions/%s/pay', $transactionId),
+            $fields,
+            new PayWithInstantRedirection()
+        );
     }
 
     /**
@@ -117,13 +122,13 @@ class TransactionsApi extends ApiAction
         return $this->run(static::POST, sprintf('/transactions/%s/refunds', $transactionId), $fields, new Refund());
     }
 
-    /** @param array $fields */
-    public function cancelTransaction($fields)
+    /** @param string $transactionId */
+    public function cancelTransaction($transactionId)
     {
-        return $this->run(static::POST, '/transactions/%s/pay', $fields);
+        return $this->run(static::POST, sprintf('/transactions/%s/pay', $transactionId));
     }
 
-    /** @param array  $fields */
+    /** @param array $fields */
     public function initApplePay($fields)
     {
         return $this->run(static::POST, '/wallet/applepay/init', $fields, new InitApplePay());

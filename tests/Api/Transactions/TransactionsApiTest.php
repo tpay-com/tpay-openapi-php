@@ -50,6 +50,22 @@ class TransactionsApiTest extends TestCase
         self::assertSame('ok', $result);
     }
 
+    public function testCancelTransaction()
+    {
+        $accessToken = $this->createMock(AccessToken::class);
+
+        $token = $this->createMock(Token::class);
+        $token->access_token = $accessToken;
+
+        $transactionsApi = new TransactionsApi($token, false);
+
+        CurlMock::setConsecutiveReturnedTransfers('"ok"');
+
+        $result = $transactionsApi->cancelTransaction('ta_ABC');
+
+        self::assertSame('ok', $result);
+    }
+
     public static function dataCreatingTransaction()
     {
         $transactionData = [

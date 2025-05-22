@@ -39,19 +39,8 @@ The [`src/Loader.php`](src/Loader.php) file handles all required class loading, 
 
 All methods described in [Tpay OpenAPI documentation](https://openapi.tpay.com) can be easily executed by running one of the library methods like:
 ```php
-$cache = /*Your Cache Implementation. Preferably PSR\Cache implementation, because it will be used in future by this library. */;
-$tpayApiKey = $cache->get('example_YOUR_TPAY_API_TOKEN_KEY');
-
-$tpayApi = new TpayApi($clientId, $clientSecret, true, 'read');
-//if your cache returned a token, set it to TpayApi
-if($tpayApiKey !== null){
-    $tpayApiKey->setCustomToken(unserialize($tpayApiKey));
-} else {
-    //if not, get new token and cache it for given time
-    //as you can notice, we slightly shorten token validity time to avoid using almost invalid token
-    $tpayApi->authorization();
-    $cache->set('example_YOUR_TPAY_API_TOKEN_KEY', serialize($tpayApi->getToken()), $tpayApiKey->getToken()->expires_in->getValue() - 10);
-}
+$cache = new Cache(/** here you can inject your PSR6 or PSR16 cache storage object */);
+$tpayApi = new TpayApi($cache,'12345-132123', '456');
 $transactions = $tpayApi->Transactions->getTransactions();
 ```
 ##### Credentials

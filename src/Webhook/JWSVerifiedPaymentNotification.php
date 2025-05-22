@@ -7,6 +7,7 @@ use Tpay\OpenApi\Model\Objects\NotificationBody\MarketplaceTransaction;
 use Tpay\OpenApi\Model\Objects\NotificationBody\Tokenization;
 use Tpay\OpenApi\Model\Objects\NotificationBody\TokenUpdate;
 use Tpay\OpenApi\Model\Objects\Objects;
+use Tpay\OpenApi\Utilities\CacheCertificateProvider;
 use Tpay\OpenApi\Utilities\CertificateProvider;
 use Tpay\OpenApi\Utilities\phpseclib\Crypt\RSA;
 use Tpay\OpenApi\Utilities\RequestParser;
@@ -31,17 +32,19 @@ class JWSVerifiedPaymentNotification extends Notification
     private $certificateProvider;
 
     /**
-     * @param string                   $merchantSecret      string Merchant notification check secret
-     * @param bool                     $productionMode      bool is prod or sandbox flag
-     * @param null|RequestParser       $requestParser
-     * @param null|CertificateProvider $certificateProvider
+     * @param string $merchantSecret string Merchant notification check secret
+     * @param bool   $productionMode true for prod or false for sandbox environment
      */
-    public function __construct($merchantSecret, $productionMode = true, $requestParser = null, $certificateProvider = null)
-    {
+    public function __construct(
+        CertificateProvider $certificateProvider,
+        string $merchantSecret,
+        ?bool $productionMode = true,
+        ?RequestParser $requestParser = null
+    ) {
         $this->productionMode = $productionMode;
         $this->merchantSecret = $merchantSecret;
         $this->requestParser = null === $requestParser ? new RequestParser() : $requestParser;
-        $this->certificateProvider = null === $certificateProvider ? new CertificateProvider() : $certificateProvider;
+        $this->certificateProvider = $certificateProvider;
         parent::__construct();
     }
 
@@ -103,6 +106,9 @@ class JWSVerifiedPaymentNotification extends Notification
         $publicKey = $x509->withSettings($publicKey, 'sha256', RSA::SIGNATURE_PKCS1);
 
         if (!$publicKey->verify($headers.'.'.$payload, $decodedSignature)) {
+            if ($this->certificateProvider instanceof CacheCertificateProvider) {
+                $this->certificateProvider->clearCachedCerts($x5u, $rootCa);
+            }
             throw new TpayException('FALSE - Invalid JWS signature');
         }
     }

@@ -16,8 +16,8 @@ jobs:
 
       - uses: shivammathur/setup-php@v2
         with:
-          php-version: 5.6
-          extensions: none, curl, dom, mbstring, simplexml, tokenizer, xml, xmlwriter, json
+          php-version: 7.1
+          extensions: none, curl, dom, mbstring, simplexml, tokenizer, xml, xmlwriter, json, fileinfo
           coverage: none
 
       - run: composer install --no-dev

@@ -2,7 +2,6 @@
 
 namespace Tpay\OpenApi\Api;
 
-use Psr\Cache\CacheItemPoolInterface;
 use RuntimeException;
 use Tpay\OpenApi\Api\Accounts\AccountsApi;
 use Tpay\OpenApi\Api\Authorization\AuthorizationApi;
@@ -10,19 +9,11 @@ use Tpay\OpenApi\Api\Refunds\RefundsApi;
 use Tpay\OpenApi\Api\Reports\ReportsApi;
 use Tpay\OpenApi\Api\Transactions\TransactionsApi;
 use Tpay\OpenApi\Model\Objects\Authorization\Token;
+use Tpay\OpenApi\Utilities\Cache;
 use Tpay\OpenApi\Utilities\TpayException;
 
 class TpayApi
 {
-    /** @deprecated will be removed in 2.0.0 */
-    const TPAY_API = [
-        'Accounts' => AccountsApi::class,
-        'Authorization' => AuthorizationApi::class,
-        'Transactions' => TransactionsApi::class,
-        'Refunds' => RefundsApi::class,
-        'Reports' => ReportsApi::class,
-    ];
-
     /** @var null|AccountsApi */
     private $accounts;
 
@@ -59,29 +50,21 @@ class TpayApi
     /** @var null|string */
     private $clientName;
 
-    /** @var CacheItemPoolInterface */
+    /** @var Cache */
     private $cache;
 
-    /**
-     * @param string      $clientId
-     * @param string      $clientSecret
-     * @param bool        $productionMode
-     * @param string      $scope
-     * @param null|string $apiUrlOverride
-     * @param null|string $clientName
-     */
     public function __construct(
-        $clientId,
-        $clientSecret,
-        $productionMode = false,
-        $scope = 'read',
-        $apiUrlOverride = null,
-        $clientName = null
+        Cache $cache,
+        string $clientId,
+        string $clientSecret,
+        bool $productionMode = false,
+        ?string $apiUrlOverride = null,
+        ?string $clientName = null
     ) {
         $this->clientId = $clientId;
         $this->clientSecret = $clientSecret;
         $this->productionMode = $productionMode;
-        $this->scope = $scope;
+        $this->scope = 'read';
         $this->apiUrl = true === $this->productionMode
             ? ApiAction::TPAY_API_URL_PRODUCTION
             : ApiAction::TPAY_API_URL_SANDBOX;
@@ -92,47 +75,13 @@ class TpayApi
             }
             $this->apiUrl = $apiUrlOverride;
         }
-    }
-
-    /**
-     * @param string $propertyName
-     *
-     * @return AccountsApi|AuthorizationApi|RefundsApi|TransactionsApi
-     */
-    public function __get($propertyName)
-    {
-        @trigger_error(
-            sprintf(
-                'Using property "%s" is deprecated and will be removed in 2.0.0. Call the method "%s()".',
-                $propertyName,
-                lcfirst($propertyName)
-            ),
-            E_USER_DEPRECATED
-        );
-
-        switch ($propertyName) {
-            case 'Accounts':
-                return $this->accounts();
-            case 'Authorization':
-                return $this->authorization();
-            case 'Refunds':
-                return $this->refunds();
-            case 'Transactions':
-                return $this->transactions();
-        }
-
-        throw new RuntimeException(sprintf('Property %s::%s does not exist!', __CLASS__, $propertyName));
+        $this->cache = $cache;
     }
 
     /** @param Token $token */
     public function setCustomToken($token)
     {
         $this->token = $token;
-    }
-
-    public function setCache(CacheItemPoolInterface $cacheItemPool)
-    {
-        $this->cache = $cacheItemPool;
     }
 
     public function getToken()
@@ -229,12 +178,7 @@ class TpayApi
         ];
         $cacheKey = sha1(json_encode($fields).$this->apiUrl);
 
-        if ($this->cache) {
-            $cacheItem = $this->cache->getItem($cacheKey);
-            if ($cacheItem->isHit()) {
-                $this->token = $cacheItem->get();
-            }
-        }
+        $this->token = $this->cache->get($cacheKey);
 
         if (
             $this->token instanceof Token
@@ -263,11 +207,6 @@ class TpayApi
 
         $this->token = new Token();
         $this->token->setObjectValues($this->token, $authApi->getRequestResult());
-        if ($this->cache) {
-            $item = $this->cache->getItem($cacheKey);
-            $item->set($this->token);
-            $item->expiresAfter(7100);
-            $this->cache->save($item);
-        }
+        $this->cache->set($cacheKey, $this->token, 7100);
     }
 }
