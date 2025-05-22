@@ -2,7 +2,6 @@
 
 namespace Tpay\Example\TransactionsApi;
 
-use Doctrine\Common\Cache\ArrayCache;
 use Doctrine\Common\Cache\FilesystemCache;
 use PSX\Cache\SimpleCache;
 use Tpay\Example\ExamplesConfig;
