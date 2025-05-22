@@ -63,8 +63,8 @@ class TpayApi
      * @param string      $clientId
      * @param string      $clientSecret
      * @param bool        $productionMode
-     * @param string|null $apiUrlOverride
-     * @param string|null $clientName
+     * @param null|string $apiUrlOverride
+     * @param null|string $clientName
      */
     public function __construct(
         Cache $cache,

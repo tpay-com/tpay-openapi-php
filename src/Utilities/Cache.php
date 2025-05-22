@@ -7,14 +7,9 @@ use Psr\SimpleCache\CacheInterface;
 
 class Cache
 {
-    /**
-     * @var CacheItemPoolInterface
-     */
-    private $cacheItemPool;
-    /**
-     * @var CacheInterface
-     */
-    private $cache;
+    private $cacheItemPool = null;
+
+    private $cache = null;
 
     public function __construct(CacheItemPoolInterface $cacheItemPool = null, CacheInterface $cache = null)
     {
@@ -54,8 +49,6 @@ class Cache
                 return $cacheItem->get();
             }
         }
-
-        return null;
     }
 
     public function delete($key)

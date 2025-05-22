@@ -6,9 +6,7 @@ use Tpay\OpenApi\Utilities\phpseclib\File\X509;
 
 class CacheCertificateProvider implements CertificateProvider
 {
-    /**
-     * @var Cache
-     */
+    /** @var Cache */
     private $cache;
 
     public function __construct(Cache $cache)
@@ -19,10 +17,9 @@ class CacheCertificateProvider implements CertificateProvider
     /**
      * @param string $certificatePath
      * @param string $rootCa
-     *
-     * @return X509
      * @throws TpayException
      *
+     * @return X509
      */
     public function provide($certificatePath, $rootCa)
     {
@@ -58,10 +55,9 @@ class CacheCertificateProvider implements CertificateProvider
 
     /**
      * @param string $url
-     *
-     * @return bool|string
      * @throws TpayException
      *
+     * @return bool|string
      */
     private function getFile($url)
     {

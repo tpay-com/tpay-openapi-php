@@ -33,16 +33,15 @@ class JWSVerifiedPaymentNotification extends Notification
 
     /**
      * @param CertificateProvider $certificateProvider
-     * @param string              $merchantSecret      string Merchant notification check secret
-     * @param bool                $productionMode      bool is prod or sandbox flag
+     * @param string              $merchantSecret string Merchant notification check secret
+     * @param bool                $productionMode bool is prod or sandbox flag
      * @param null|RequestParser  $requestParser
      */
     public function __construct(
-        CertificateProvider  $certificateProvider,
+        CertificateProvider $certificateProvider,
         string $merchantSecret,
         bool $productionMode = true,
-        $requestParser = null)
-    {
+        $requestParser = null) {
         $this->productionMode = $productionMode;
         $this->merchantSecret = $merchantSecret;
         $this->requestParser = null === $requestParser ? new RequestParser() : $requestParser;
@@ -108,7 +107,7 @@ class JWSVerifiedPaymentNotification extends Notification
         $publicKey = $x509->withSettings($publicKey, 'sha256', RSA::SIGNATURE_PKCS1);
 
         if (!$publicKey->verify($headers.'.'.$payload, $decodedSignature)) {
-            if($this->certificateProvider instanceof CacheCertificateProvider){
+            if ($this->certificateProvider instanceof CacheCertificateProvider) {
                 $this->certificateProvider->clearCachedCerts($x5u, $rootCa);
             }
             throw new TpayException('FALSE - Invalid JWS signature');
