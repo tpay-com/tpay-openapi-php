@@ -15,3 +15,5 @@ $config->setFinder(
         ->ignoreDotFiles(false)
         ->in(__DIR__ . '/..')
 );
+
+return $config;
