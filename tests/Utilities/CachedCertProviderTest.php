@@ -5,14 +5,9 @@ namespace Tpay\Tests\OpenApi\Utilities;
 use Doctrine\Common\Cache\ArrayCache;
 use PHPUnit\Framework\TestCase;
 use PSX\Cache\Pool;
-use PSX\Cache\SimpleCache;
 use SodiumException;
-use Tpay\OpenApi\Api\TpayApi;
-use Tpay\OpenApi\Model\Objects\Authorization\Token;
 use Tpay\OpenApi\Utilities\Cache;
 use Tpay\OpenApi\Utilities\CacheCertificateProvider;
-use Tpay\OpenApi\Utilities\TpayException;
-use Tpay\Tests\OpenApi\Mock\CurlMock;
 
 /**
  * @covers \Tpay\OpenApi\Utilities\Logger
@@ -29,8 +24,8 @@ class CachedCertProviderTest extends TestCase
         $provider = new CacheCertificateProvider($cache);
         $provider->provide($x5u, $rootCa);
 
-        $this->assertStringContainsString('CERTIFICATE', $cache->get('cert_' . md5($x5u)));
-        $this->assertStringContainsString('CERTIFICATE', $cache->get('trusted_' . md5($rootCa)));
+        $this->assertTrue(strpos($cache->get('cert_' . md5($x5u), 'CERTIFICATE')));
+        $this->assertTrue(strpos($cache->get('trusted_' . md5($rootCa), 'CERTIFICATE')));
 
         $cache->set('cert_' . md5($x5u), 'x5u', 10);
         $cache->set('trusted_' . md5($rootCa), 'trusted', 10);
