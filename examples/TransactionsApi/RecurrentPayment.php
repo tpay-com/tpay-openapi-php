@@ -37,7 +37,7 @@ final class RecurrentPayment extends ExamplesConfig
                 ],
             ],
         ];
-        //You can inject any of your PSR6 or PSR16 cache implementation
+        // You can inject any of your PSR6 or PSR16 cache implementation
         $cache = new Cache(null, new SimpleCache(new FilesystemCache(__DIR__.'/cache/')));
         $TpayApi = new TpayApi($cache, self::MERCHANT_CLIENT_ID, self::MERCHANT_CLIENT_SECRET, true, 'read');
         $transaction = $TpayApi->transactions()->createTransaction($request);

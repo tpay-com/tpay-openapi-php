@@ -15,7 +15,7 @@ final class RefundsApiExample extends ExamplesConfig
     public function __construct()
     {
         parent::__construct();
-        //You can inject any of your PSR6 or PSR16 cache implementation
+        // You can inject any of your PSR6 or PSR16 cache implementation
         $cache = new Cache(null, new SimpleCache(new FilesystemCache(__DIR__.'/cache/')));
         $this->TpayApi = new TpayApi($cache, self::MERCHANT_CLIENT_ID, self::MERCHANT_CLIENT_SECRET, true, 'read');
     }
