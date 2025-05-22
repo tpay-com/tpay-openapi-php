@@ -2,8 +2,6 @@
 
 namespace Tpay\OpenApi\Api;
 
-use Psr\Cache\CacheItemPoolInterface;
-use Psr\SimpleCache\CacheInterface;
 use RuntimeException;
 use Tpay\OpenApi\Api\Accounts\AccountsApi;
 use Tpay\OpenApi\Api\Authorization\AuthorizationApi;
