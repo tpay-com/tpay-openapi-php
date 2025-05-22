@@ -59,10 +59,6 @@ class TpayApi
     private $cache;
 
     /**
-     * @param Cache       $cache
-     * @param string      $clientId
-     * @param string      $clientSecret
-     * @param bool        $productionMode
      * @param null|string $apiUrlOverride
      * @param null|string $clientName
      */

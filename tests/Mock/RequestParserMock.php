@@ -5,7 +5,7 @@ namespace Tpay\Tests\OpenApi\Mock;
 use Tpay\OpenApi\Utilities\RequestParser;
 use Tpay\OpenApi\Utilities\TpayException;
 
-class RequestParserMock extends  RequestParser
+class RequestParserMock extends RequestParser
 {
     private $contentType;
     private $data;
