@@ -20,7 +20,7 @@ class CurlOptions
     private $verifyPeer = false;
 
     /** @var bool */
-    private $verbose = true;
+    private $verbose = false;
 
     /** @var bool */
     private $post = true;

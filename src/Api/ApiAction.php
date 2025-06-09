@@ -146,6 +146,16 @@ class ApiAction
         return $this->clientName;
     }
 
+    public function enableVerbose()
+    {
+        $this->Curl->enableVerbose();
+    }
+
+    public function disableVerbose()
+    {
+        $this->Curl->disableVerbose();
+    }
+
     protected function sendRequest($apiMethod, $requestMethod, $fields = [], $headers = [])
     {
         $requestUrl = sprintf(
