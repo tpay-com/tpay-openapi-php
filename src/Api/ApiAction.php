@@ -215,4 +215,14 @@ class ApiAction
             throw new TpayException(sprintf('Unknown error response code %s', $responseCode));
         }
     }
+
+    public function enableVerbose()
+    {
+        $this->Curl->enableVerbose();
+    }
+
+    public function disableVerbose()
+    {
+        $this->Curl->disableVerbose();
+    }
 }
