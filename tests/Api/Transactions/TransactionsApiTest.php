@@ -177,5 +177,14 @@ class TransactionsApiTest extends TestCase
         ];
 
         yield 'with pay (applePay)' => [$transactionData];
+
+        unset($transactionData['pay']);
+
+        $transactionData['collect'] = [
+            'account' => 'CHANGE_THIS_TO_VALID_ACCOUNT_NUMBER',
+            'receiver' => 'CHANGE_THIS_TO_VALID_RECEIVER_NAME',
+        ];
+
+        yield 'with collect' => [$transactionData];
     }
 }

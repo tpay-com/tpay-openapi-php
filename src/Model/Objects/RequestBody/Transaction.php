@@ -8,6 +8,7 @@ use Tpay\OpenApi\Model\Fields\Transaction\HiddenDescription;
 use Tpay\OpenApi\Model\Fields\Transaction\Lang;
 use Tpay\OpenApi\Model\Objects\Objects;
 use Tpay\OpenApi\Model\Objects\Transactions\Callbacks;
+use Tpay\OpenApi\Model\Objects\Transactions\Collect;
 use Tpay\OpenApi\Model\Objects\Transactions\Payer;
 
 class Transaction extends Objects
@@ -20,6 +21,7 @@ class Transaction extends Objects
         'pay' => Pay::class,
         'payer' => Payer::class,
         'callbacks' => Callbacks::class,
+        'collect' => Collect::class,
     ];
 
     /** @var Amount */
@@ -42,6 +44,9 @@ class Transaction extends Objects
 
     /** @var Callbacks */
     public $callbacks;
+
+    /** @var Collect */
+    public $collect;
 
     public function getRequiredFields()
     {
