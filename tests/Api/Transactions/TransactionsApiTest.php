@@ -181,8 +181,8 @@ class TransactionsApiTest extends TestCase
         unset($transactionData['pay']);
 
         $transactionData['collect'] = [
-            'account' => 'CHANGE_THIS_TO_VALID_ACCOUNT_NUMBER',
-            'receiver' => 'CHANGE_THIS_TO_VALID_RECEIVER_NAME',
+            'account' => 'PL12345678901234567890123456',
+            'receiver' => 'John Doe',
         ];
 
         yield 'with collect' => [$transactionData];

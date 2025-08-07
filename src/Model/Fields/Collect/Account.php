@@ -8,6 +8,7 @@ class Account extends Field
 {
     protected $name = __CLASS__;
     protected $type = self::STRING;
-    protected $minLength = 1;
-    protected $maxLength = 255;
+    protected $minLength = 28;
+    protected $maxLength = 28;
+    protected $pattern = '^PL\d{26}$';
 }

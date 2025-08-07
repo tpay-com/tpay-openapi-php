@@ -8,7 +8,6 @@ class Receiver extends Field
 {
     protected $name = __CLASS__;
     protected $type = self::STRING;
-    protected $minLength = 28;
-    protected $maxLength = 28;
-    protected $pattern = '^PL\d{26}$';
+    protected $minLength = 3;
+    protected $maxLength = 70;
 }
