@@ -37,7 +37,7 @@ class FieldTest extends TestCase
         $field->setValue($valueToSet);
     }
 
-    private function validValueProvider()
+    public function validValueProvider()
     {
         return [
             [
