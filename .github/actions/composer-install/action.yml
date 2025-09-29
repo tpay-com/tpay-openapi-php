@@ -1,0 +1,22 @@
+name: Composer Install
+description: "Install composer dependencies with cache"
+
+runs:
+  using: composite
+  steps:
+    - name: Get Composer cache dir
+      id: composer-cache
+      shell: bash
+      run: echo "dir=$(composer config cache-dir)" >> $GITHUB_OUTPUT
+
+    - name: Cache Composer dependencies
+      uses: actions/cache@v3
+      with:
+        path: ${{ steps.composer-cache.outputs.dir }}
+        key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-composer-
+
+    - name: Install dependencies
+      shell: bash
+      run: composer install --no-progress --prefer-dist --classmap-authoritative
