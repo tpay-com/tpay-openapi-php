@@ -11,6 +11,6 @@ class Url extends Field
 {
     protected $name = __CLASS__;
     protected $type = self::STRING;
-    protected $maxLength = 255;
+    protected $maxLength = 3072;
     protected $pattern = 'http.*';
 }
