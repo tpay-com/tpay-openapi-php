@@ -51,42 +51,42 @@ class FieldTest extends TestCase
     public function validValueProvider()
     {
         return [
-            [
+            'No conditions' => [
                 'property' => null,
                 'propertyValue' => null,
                 'value' => 123,
             ],
-            [
+            'Max length' => [
                 'property' => 'maxLength',
                 'propertyValue' => 10,
                 'value' => 'test123',
             ],
-            [
+            'Min length' => [
                 'property' => 'minLength',
                 'propertyValue' => 3,
                 'value' => 'test123',
             ],
-            [
+            'Min value' => [
                 'property' => 'minimum',
                 'propertyValue' => 5,
                 'value' => 6,
             ],
-            [
+            'Max value' => [
                 'property' => 'maximum',
                 'propertyValue' => 12,
                 'value' => 10,
             ],
-            [
+            'Enum value' => [
                 'property' => 'enum',
                 'propertyValue' => ['one', 'two'],
                 'value' => 'one',
             ],
-            [
+            'Type' => [
                 'property' => 'type',
                 'propertyValue' => 'integer',
                 'value' => 10,
             ],
-            [
+            'Ipv4' => [
                 'property' => 'pattern',
                 'propertyValue' => '^([0-9]{1,3}\.){3}[0-9]{1,3}$',
                 'value' => '127.0.0.1',
@@ -97,46 +97,46 @@ class FieldTest extends TestCase
     public function invalidValueProvider()
     {
         return [
-            [
+            'Over max length' => [
                 'property' => 'maxLength',
                 'propertyValue' => 10,
                 'value' => 'test123test123',
                 'expectedMessage' => 'Value of field Tpay\OpenApi\Model\Fields\Field is too long. Max allowed 10',
             ],
-            [
+            'Under min length' =>[
                 'property' => 'minLength',
                 'propertyValue' => 3,
                 'value' => 'te',
                 'expectedMessage' => 'Value of field Tpay\OpenApi\Model\Fields\Field is too short. Min required 3',
             ],
-            [
+            'Under minimum value' => [
                 'property' => 'minimum',
                 'propertyValue' => 5,
                 'value' => 3,
                 'expectedMessage' => 'Value of field Tpay\OpenApi\Model\Fields\Field is too low. Min required 5',
             ],
-            [
+            'Over max value' => [
                 'property' => 'maximum',
                 'propertyValue' => 5,
                 'value' => 10,
                 'expectedMessage' => 'Value of field Tpay\OpenApi\Model\Fields\Field exceeds the limit. Max allowed 5',
             ],
-            [
+            'Wrong enum value' => [
                 'property' => 'enum',
                 'propertyValue' => ['one', 'two'],
                 'value' => 'three',
                 'expectedMessage' => 'Value of field Tpay\OpenApi\Model\Fields\Field is invalid. Should be one of Array',
             ],
-            [
+            'Wrong type' => [
                 'property' => 'type',
                 'propertyValue' => 'integer',
                 'value' => '',
                 'expectedMessage' => 'Value type of field Tpay\OpenApi\Model\Fields\Field is invalid. Should be integer type',
             ],
-            [
+            'Ipv6' =>[
                 'property' => 'pattern',
                 'propertyValue' => '^([0-9]{1,3}\.){3}[0-9]{1,3}$',
-                'value' => 'te.st.12.3',
+                'value' => '::1',
                 'expectedMessage' => 'Value of field Tpay\OpenApi\Model\Fields\Field is invalid. Should match ^([0-9]{1,3}\.){3}[0-9]{1,3}$ pattern',
             ],
         ];
