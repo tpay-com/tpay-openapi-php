@@ -1,24 +1,16 @@
-name: Continuous integration
+name: Tests
 
 on:
   push:
 
 jobs:
-  check:
-    name: PHP ${{ matrix.php-version }}
+  lint:
+    name: Lint (PHP ${{ matrix.php-version }})
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        include:
-          - php-version: '7.1'
-          - php-version: '7.2'
-          - php-version: '7.3'
-          - php-version: '7.4'
-          - php-version: '8.0'
-          - php-version: '8.1'
-          - php-version: '8.2'
-          - php-version: '8.3'
-    runs-on: ubuntu-latest
+        php-version: &php-versions ['7.1', '7.2', '7.3', '7.4', '8.0', '8.1', '8.2', '8.3']
 
     steps:
       - uses: actions/checkout@v3
@@ -26,20 +18,31 @@ jobs:
       - uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-version }}
-          extensions: none, curl, dom, json, mbstring, tokenizer, xml, xmlwriter, fileinfo
+          extensions: curl, dom, json, mbstring, tokenizer, xml, xmlwriter, fileinfo
           coverage: none
 
-      - id: composer-cache
-        shell: bash
-        run: echo "dir=$(composer config cache-dir)" >> $GITHUB_OUTPUT
-
-      - uses: actions/cache@v3
-        with:
-          path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-
-      - run: composer update --no-progress --no-cache --classmap-authoritative
+      - uses: ./.github/actions/composer-install
 
       - run: ./vendor/bin/parallel-lint . --exclude ./vendor
+
+
+  phpunit:
+    name: Unit test (PHP ${{ matrix.php-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php-version: *php-versions
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          extensions: curl, dom, json, mbstring, tokenizer, xml, xmlwriter, fileinfo
+          coverage: none
+
+      - uses: ./.github/actions/composer-install
 
       - run: ./vendor/bin/phpunit
