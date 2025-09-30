@@ -1,4 +1,4 @@
-name: Continuous integration
+name: Tests
 
 on:
   push:
@@ -26,8 +26,8 @@ jobs:
       - run: ./vendor/bin/parallel-lint . --exclude ./vendor
 
 
-  tests:
-    name: Tests (PHP ${{ matrix.php-version }})
+  phpunit:
+    name: Unit test (PHP ${{ matrix.php-version }})
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
