@@ -103,7 +103,7 @@ class FieldTest extends TestCase
                 'value' => 'test123test123',
                 'expectedMessage' => 'Value of field Tpay\OpenApi\Model\Fields\Field is too long. Max allowed 10',
             ],
-            'Under min length' =>[
+            'Under min length' => [
                 'property' => 'minLength',
                 'propertyValue' => 3,
                 'value' => 'te',
@@ -133,7 +133,7 @@ class FieldTest extends TestCase
                 'value' => '',
                 'expectedMessage' => 'Value type of field Tpay\OpenApi\Model\Fields\Field is invalid. Should be integer type',
             ],
-            'Ipv6' =>[
+            'Ipv6' => [
                 'property' => 'pattern',
                 'propertyValue' => '^([0-9]{1,3}\.){3}[0-9]{1,3}$',
                 'value' => '::1',
