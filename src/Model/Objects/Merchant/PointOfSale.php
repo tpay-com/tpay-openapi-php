@@ -1,6 +1,6 @@
 <?php
 
-namespace Tpay\OpenApi\Model\Objects\Accounts;
+namespace Tpay\OpenApi\Model\Objects\Merchant;
 
 use Tpay\OpenApi\Model\Objects\Common\PointOfSaleFields;
 use Tpay\OpenApi\Model\Objects\Common\PointOfSalePropertiesTrait;
@@ -10,22 +10,12 @@ class PointOfSale extends Objects
 {
     use PointOfSalePropertiesTrait;
 
-    const OBJECT_FIELDS = PointOfSaleFields::COMMON_FIELDS + [
-        'date' => PointOfSaleDate::class,
-        'settings' => PointOfSaleSettings::class,
-    ];
-
-    /** @var PointOfSaleDate */
-    public $date;
-
-    /** @var PointOfSaleSettings */
-    public $settings;
+    const OBJECT_FIELDS = PointOfSaleFields::COMMON_FIELDS;
 
     public function getRequiredFields()
     {
         return [
             $this->name,
-            $this->description,
             $this->url,
         ];
     }
