@@ -28,7 +28,6 @@ class AddressFields
         'name' => Name::class,
         'phone' => Phone::class,
         'postalCode' => PostalCode::class,
-        'roomNumber' => RoomNumber::class,
         'street' => Street::class,
     ];
 }
