@@ -18,7 +18,7 @@ class ModelsTest extends TestCase
      */
     public function testModel($class)
     {
-        self::assertTrue(class_exists($class) || interface_exists($class));
+        self::assertTrue(class_exists($class) || interface_exists($class) || trait_exists($class));
 
         if (class_exists($class)) {
             new $class();
