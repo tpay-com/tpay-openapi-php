@@ -70,9 +70,7 @@ class AccountsApi extends ApiAction
         return $this->run(static::POST, '/accounts', $fields, new Account());
     }
 
-    /**
-     * @param array $fields
-     */
+    /** @param array $fields */
     public function createMerchant($fields)
     {
         return $this->run(static::POST, '/v1/accounts/merchant', $fields, new Account());

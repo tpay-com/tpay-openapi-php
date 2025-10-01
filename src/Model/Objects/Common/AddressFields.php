@@ -12,7 +12,6 @@ use Tpay\OpenApi\Model\Fields\Address\IsMain;
 use Tpay\OpenApi\Model\Fields\Address\Name;
 use Tpay\OpenApi\Model\Fields\Address\Phone;
 use Tpay\OpenApi\Model\Fields\Address\PostalCode;
-use Tpay\OpenApi\Model\Fields\Address\RoomNumber;
 use Tpay\OpenApi\Model\Fields\Address\Street;
 
 class AddressFields

@@ -2,7 +2,6 @@
 
 namespace Tpay\OpenApi\Model\Objects\Merchant;
 
-
 use Tpay\OpenApi\Model\Fields\Person\Name;
 use Tpay\OpenApi\Model\Fields\Person\Surname;
 use Tpay\OpenApi\Model\Fields\PersonContact\Email;
