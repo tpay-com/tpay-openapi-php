@@ -32,13 +32,6 @@ class AccountsApiTest extends TestCase
         $transactionsApi->createMerchant($merchantData);
     }
 
-    public function testXX()
-    {
-        $transactionsApi = $this->createAccountsApiWithCurlMock('error');
-
-        $transactionsApi->createAccount([]);
-    }
-
     public function validMerchantData()
     {
         yield 'One Address' => [
