@@ -68,6 +68,8 @@ class AccountsApi extends ApiAction
      */
     public function createAccount($fields)
     {
+        trigger_error(sprintf('Method %s is deprecated.', __METHOD__), E_USER_DEPRECATED);
+
         return $this->run(static::POST, '/accounts', $fields, new Account());
     }
 

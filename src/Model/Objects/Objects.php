@@ -5,6 +5,14 @@ namespace Tpay\OpenApi\Model\Objects;
 use InvalidArgumentException;
 use ReflectionClass;
 use Tpay\OpenApi\Model\Fields\Field;
+use Tpay\OpenApi\Model\Objects\Accounts\Address as AccountAddress;
+use Tpay\OpenApi\Model\Objects\Accounts\Person;
+use Tpay\OpenApi\Model\Objects\Accounts\PointOfSale as AccountPointOfSale;
+use Tpay\OpenApi\Model\Objects\Merchant\Address as MerchantAddress;
+use Tpay\OpenApi\Model\Objects\Merchant\ContactPerson;
+use Tpay\OpenApi\Model\Objects\Merchant\PointOfSale as MerchantPointOfSale;
+use Tpay\OpenApi\Model\Objects\RequestBody\Account;
+use Tpay\OpenApi\Model\Objects\RequestBody\Merchant;
 
 class Objects implements ObjectsInterface
 {
@@ -87,8 +95,7 @@ class Objects implements ObjectsInterface
                 }
                 if (is_array($object->{$fieldName})) {
                     if (!isset($object->{$fieldName}[$field])) {
-                        $objectClass = get_class($object->{$fieldName}[0]);
-                        $object->{$fieldName}[] = new $objectClass();
+                        $object->{$fieldName}[] = $this->setArrayFields($object, $fieldName);
                     }
 
                     $this->setObjectValues($object->{$fieldName}[$field], $value);
@@ -103,6 +110,36 @@ class Objects implements ObjectsInterface
                 }
             }
         }
+    }
+
+    private function setArrayFields($object, $fieldName)
+    {
+        if ($object instanceof Merchant) {
+            switch ($fieldName) {
+                case 'address':
+                    return new MerchantAddress();
+                case 'website':
+                    return new MerchantPointOfSale();
+                case 'contactPerson':
+                    return new ContactPerson();
+                case 'default':
+                    throw new InvalidArgumentException(sprintf('Field %s as array is not supported', $fieldName));
+            }
+        }
+        if ($object instanceof Account) {
+            switch ($fieldName) {
+                case 'address':
+                    return new AccountAddress();
+                case 'website':
+                    return new AccountPointOfSale();
+                case 'person':
+                    return new Person();
+                case 'default':
+                    throw new InvalidArgumentException(sprintf('Field %s as array is not supported', $fieldName));
+            }
+        }
+
+        throw new InvalidArgumentException(sprintf('Field %s as array is not supported', $fieldName));
     }
 
     /**
