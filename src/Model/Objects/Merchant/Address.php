@@ -75,11 +75,4 @@ class Address extends Objects
             $this->country,
         ];
     }
-
-    public function getUniqueFields()
-    {
-        return [
-            'isMain' => true
-        ];
-    }
 }

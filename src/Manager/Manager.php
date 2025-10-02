@@ -4,7 +4,6 @@ namespace Tpay\OpenApi\Manager;
 
 use Tpay\OpenApi\Model\Objects\Objects;
 use Tpay\OpenApi\Model\Objects\ObjectsValidator;
-use Tpay\OpenApi\Model\Objects\RequestBody\Merchant;
 
 class Manager
 {

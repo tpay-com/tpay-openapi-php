@@ -7,9 +7,7 @@ use UnexpectedValueException;
 
 class ObjectsValidator
 {
-    /**
-     * @param Objects $objectClass
-     */
+    /** @param Objects $objectClass */
     public function checkUniqueFields($objectClass)
     {
         foreach ($objectClass::UNIQUE_FIELDS as $collectionName => $fieldRules) {
@@ -55,8 +53,8 @@ class ObjectsValidator
 
     /**
      * @param array<Objects> $objects
-     * @param mixed $fieldName
-     * @param mixed $uniqueValue
+     * @param mixed          $fieldName
+     * @param mixed          $uniqueValue
      *
      * @throws UnexpectedValueException
      */

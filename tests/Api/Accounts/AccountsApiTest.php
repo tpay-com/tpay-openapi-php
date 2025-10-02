@@ -58,9 +58,9 @@ class AccountsApiTest extends TestCase
                     [
                         'name' => 'www.example.com',
                         'url' => 'https://www.example.com',
-                    ]
-                ]
-            ]
+                    ],
+                ],
+            ],
         ];
 
         yield 'Different Addresses' => [
@@ -105,9 +105,9 @@ class AccountsApiTest extends TestCase
                     [
                         'name' => 'www.example.com',
                         'url' => 'https://www.example.com',
-                    ]
-                ]
-            ]
+                    ],
+                ],
+            ],
         ];
 
         yield 'Many websites' => [
@@ -140,9 +140,9 @@ class AccountsApiTest extends TestCase
                     [
                         'name' => 'www.example3.com',
                         'url' => 'https://www.example3.com',
-                    ]
-                ]
-            ]
+                    ],
+                ],
+            ],
         ];
     }
 
@@ -171,8 +171,8 @@ class AccountsApiTest extends TestCase
                     [
                         'name' => 'www.example.com',
                         'url' => 'https://www.example.com',
-                    ]
-                ]
+                    ],
+                ],
             ],
             'exception' => UnexpectedValueException::class,
             'exceptionMessage' => 'Field "Tpay\OpenApi\Model\Fields\Account\OfferCode" is required in object Merchant',
@@ -200,7 +200,7 @@ class AccountsApiTest extends TestCase
                         'name' => 'www.example.com',
                         'url' => 'https://www.example.com',
                     ],
-                ]
+                ],
             ],
             'exception' => UnexpectedValueException::class,
             'exceptionMessage' => 'Field "Tpay\OpenApi\Model\Fields\Person\Email" is required in object Merchant',
@@ -228,7 +228,7 @@ class AccountsApiTest extends TestCase
                         'name' => 'www.example.com',
                         'url' => 'https://www.example.com',
                     ],
-                ]
+                ],
             ],
             'exception' => UnexpectedValueException::class,
             'exceptionMessage' => 'Field "Tpay\OpenApi\Model\Fields\Account\LegalForm" is required in object Merchant',
@@ -256,7 +256,7 @@ class AccountsApiTest extends TestCase
                         'name' => 'www.example.com',
                         'url' => 'https://www.example.com',
                     ],
-                ]
+                ],
             ],
             'exception' => UnexpectedValueException::class,
             'exceptionMessage' => 'Field "Tpay\OpenApi\Model\Identifiers\CategoryId" is required in object Merchant',
@@ -276,7 +276,7 @@ class AccountsApiTest extends TestCase
                         'name' => 'www.example.com',
                         'url' => 'https://www.example.com',
                     ],
-                ]
+                ],
             ],
             'exception' => UnexpectedValueException::class,
             'exceptionMessage' => 'Field "Tpay\OpenApi\Model\Fields\Address\Name" is required in object Address',
@@ -294,7 +294,7 @@ class AccountsApiTest extends TestCase
                         'name' => 'www.example.com',
                         'url' => 'https://www.example.com',
                     ],
-                ]
+                ],
             ],
             'exception' => UnexpectedValueException::class,
             'exceptionMessage' => 'Field "Tpay\OpenApi\Model\Fields\Address\Name" is required in object Address',
@@ -319,8 +319,7 @@ class AccountsApiTest extends TestCase
                     ],
                 ],
                 'website' => [
-
-                ]
+                ],
             ],
             'exception' => UnexpectedValueException::class,
             'exceptionMessage' => 'Field "Tpay\OpenApi\Model\Fields\PointOfSale\Name" is required in object PointOfSale',
@@ -371,7 +370,7 @@ class AccountsApiTest extends TestCase
                         'name' => 'www.example1.com',
                         'url' => 'https://www.example1.com',
                     ],
-                ]
+                ],
             ],
             'exception' => UnexpectedValueException::class,
             'exceptionMessage' => 'Field "Tpay\OpenApi\Model\Fields\Address\Street" is required in object Address',
@@ -399,7 +398,7 @@ class AccountsApiTest extends TestCase
                         'name' => 'www.example1.com',
                         'url' => 'https://www.example1.com',
                     ],
-                ]
+                ],
             ],
             'exception' => UnexpectedValueException::class,
             'exceptionMessage' => 'Field "Tpay\OpenApi\Model\Fields\Address\HouseNumber" is required in object Address',
@@ -427,7 +426,7 @@ class AccountsApiTest extends TestCase
                         'name' => 'www.example1.com',
                         'url' => 'https://www.example1.com',
                     ],
-                ]
+                ],
             ],
             'exception' => UnexpectedValueException::class,
             'exceptionMessage' => 'Field "Tpay\OpenApi\Model\Fields\Address\PostalCode" is required in object Address',
@@ -455,7 +454,7 @@ class AccountsApiTest extends TestCase
                         'name' => 'www.example1.com',
                         'url' => 'https://www.example1.com',
                     ],
-                ]
+                ],
             ],
             'exception' => UnexpectedValueException::class,
             'exceptionMessage' => 'Field "Tpay\OpenApi\Model\Fields\Address\City" is required in object Address',
@@ -483,7 +482,7 @@ class AccountsApiTest extends TestCase
                         'name' => 'www.example1.com',
                         'url' => 'https://www.example1.com',
                     ],
-                ]
+                ],
             ],
             'exception' => UnexpectedValueException::class,
             'exceptionMessage' => 'Field "Tpay\OpenApi\Model\Fields\Address\Country" is required in object Address',
@@ -512,7 +511,7 @@ class AccountsApiTest extends TestCase
                         'name' => 'www.example1.com',
                         'url' => 'https://www.example1.com',
                     ],
-                ]
+                ],
             ],
             'exception' => InvalidArgumentException::class,
             'exceptionMessage' => 'Value of field Tpay\OpenApi\Model\Fields\Address\Country is too long. Max allowed 2',
@@ -541,7 +540,7 @@ class AccountsApiTest extends TestCase
                         'name' => 'www.example1.com',
                         'url' => 'https://www.example1.com',
                     ],
-                ]
+                ],
             ],
             'exception' => InvalidArgumentException::class,
             'exceptionMessage' => 'Value of field Tpay\OpenApi\Model\Fields\Address\Country is too short. Min required 2',
@@ -579,7 +578,7 @@ class AccountsApiTest extends TestCase
                         'name' => 'www.example1.com',
                         'url' => 'https://www.example1.com',
                     ],
-                ]
+                ],
             ],
             'exception' => UnexpectedValueException::class,
             'exceptionMessage' => 'Field "isMain" with value "true" must be unique across Address objects',

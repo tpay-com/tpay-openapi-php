@@ -9,7 +9,6 @@ use Tpay\OpenApi\Model\Fields\Field;
 class Objects implements ObjectsInterface
 {
     const OBJECT_FIELDS = [];
-
     const UNIQUE_FIELDS = [];
 
     public $strictCheck = true;
