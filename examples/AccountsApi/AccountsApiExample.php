@@ -105,6 +105,15 @@ final class AccountsApiExample extends ExamplesConfig
         return $this;
     }
 
+    public function createMerchant()
+    {
+        $merchantConfig = $this->getNewMerchantConfig();
+        $newMerchant = $this->TpayApi->accounts()->createMerchant($merchantConfig);
+        var_dump($newMerchant);
+
+        return $this;
+    }
+
     private function getNewAccountConfig()
     {
         $offerCode = 'PTON8';
@@ -146,6 +155,40 @@ final class AccountsApiExample extends ExamplesConfig
             'address' => [$address1],
             'person' => [$person],
             'notifyByEmail' => true,
+        ];
+    }
+
+    private function getNewMerchantConfig()
+    {
+        $offerCode = 'PTON8';
+        $pos = [
+            'name' => 'Przykladowe Zakupy Online',
+            'url' => 'https://przykladowezakupy.pl',
+        ];
+        $address1 = [
+            'name' => 'Example Sp. z o.o.',
+            'street' => 'Ul. Jelenia',
+            'houseNumber' => '123',
+            'postalCode' => '54-134',
+            'city' => 'Warszawa',
+            'country' => 'PL',
+        ];
+        $contactPerson = [
+            'name' => 'Jan',
+            'surname' => 'Kowalski',
+            'phone' => '(0) 111222333',
+            'email' => 'jan.kowalski@example.com',
+        ];
+
+        return [
+            'offerCode' => $offerCode,
+            'email' => 'merchant@example.com',
+            'taxId' => '7773061579',
+            'legalForm' => 3,
+            'categoryId' => 62,
+            'website' => [$pos],
+            'address' => [$address1],
+            'person' => [$contactPerson],
         ];
     }
 }
