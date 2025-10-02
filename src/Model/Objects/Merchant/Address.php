@@ -5,7 +5,6 @@ namespace Tpay\OpenApi\Model\Objects\Merchant;
 use Tpay\OpenApi\Model\Fields\Address\City;
 use Tpay\OpenApi\Model\Fields\Address\Country;
 use Tpay\OpenApi\Model\Fields\Address\FlatNumber;
-use Tpay\OpenApi\Model\Fields\Address\FriendlyName;
 use Tpay\OpenApi\Model\Fields\Address\HouseNumber;
 use Tpay\OpenApi\Model\Fields\Address\IsCorrespondence;
 use Tpay\OpenApi\Model\Fields\Address\IsInvoice;
@@ -21,7 +20,6 @@ class Address extends Objects
     const OBJECT_FIELDS = [
         'city' => City::class,
         'country' => Country::class,
-        'friendlyName' => FriendlyName::class,
         'houseNumber' => HouseNumber::class,
         'flatNumber' => FlatNumber::class,
         'isCorrespondence' => IsCorrespondence::class,
@@ -38,9 +36,6 @@ class Address extends Objects
 
     /** @var Country */
     public $country;
-
-    /** @var FriendlyName */
-    public $friendlyName;
 
     /** @var HouseNumber */
     public $houseNumber;
@@ -72,13 +67,19 @@ class Address extends Objects
     public function getRequiredFields()
     {
         return [
-            $this->friendlyName,
             $this->name,
             $this->street,
             $this->houseNumber,
             $this->postalCode,
             $this->city,
             $this->country,
+        ];
+    }
+
+    public function getUniqueFields()
+    {
+        return [
+            'isMain' => true
         ];
     }
 }

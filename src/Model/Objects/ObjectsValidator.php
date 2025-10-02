@@ -10,6 +10,59 @@ class ObjectsValidator
     /**
      * @param Objects $objectClass
      *
+     * @return void
+     */
+    public function checkUniqueFields($objectClass)
+    {
+        foreach ($objectClass::UNIQUE_FIELDS as $collectionName => $fieldRules) {
+            $collection = isset($objectClass->{$collectionName}) ? $objectClass->{$collectionName} : [];
+
+            foreach ($fieldRules as $fieldName => $uniqueValue) {
+                $this->validateUniqueField($collection, $fieldName, $uniqueValue);
+            }
+        }
+    }
+
+    /**
+     * @param Objects[] $objects
+     *
+     * @throws UnexpectedValueException
+     *
+     * @return void
+     */
+    private function validateUniqueField(array $objects, $fieldName, $uniqueValue)
+    {
+        $count = 0;
+
+        foreach ($objects as $object) {
+            if (!$object instanceof Objects) {
+                continue;
+            }
+
+            if (!property_exists($object, $fieldName)) {
+                continue;
+            }
+
+            $field = $object->{$fieldName};
+
+            if ($field instanceof Field && $field->getValue() === $uniqueValue) {
+                $count++;
+            }
+
+            if ($count > 1) {
+                throw new UnexpectedValueException(sprintf(
+                    'Field "%s" with value "%s" must be unique across %s objects',
+                    $fieldName,
+                    var_export($uniqueValue, true),
+                    $object->getName()
+                ));
+            }
+        }
+    }
+
+    /**
+     * @param Objects $objectClass
+     *
      * @throws UnexpectedValueException
      *
      * @return bool

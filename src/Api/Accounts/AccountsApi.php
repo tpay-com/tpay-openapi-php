@@ -4,6 +4,7 @@ namespace Tpay\OpenApi\Api\Accounts;
 
 use Tpay\OpenApi\Api\ApiAction;
 use Tpay\OpenApi\Model\Objects\RequestBody\Account;
+use Tpay\OpenApi\Model\Objects\RequestBody\Merchant;
 
 class AccountsApi extends ApiAction
 {
@@ -73,7 +74,7 @@ class AccountsApi extends ApiAction
     /** @param array $fields */
     public function createMerchant($fields)
     {
-        return $this->run(static::POST, '/v1/accounts/merchant', $fields, new Account());
+        return $this->run(static::POST, '/v1/accounts/merchant', $fields, new Merchant());
     }
 
     public function getMcc()

@@ -4,6 +4,7 @@ namespace Tpay\OpenApi\Manager;
 
 use Tpay\OpenApi\Model\Objects\Objects;
 use Tpay\OpenApi\Model\Objects\ObjectsValidator;
+use Tpay\OpenApi\Model\Objects\RequestBody\Merchant;
 
 class Manager
 {
@@ -29,6 +30,10 @@ class Manager
         $this->requestBody->strictCheck = $strictCheck;
         $this->requestBody->setObjectValues($this->requestBody, $fields);
         $this->ObjectsValidator->isSetRequiredFields($this->requestBody);
+        if ($this->requestBody instanceof Merchant) {
+            $this->ObjectsValidator->checkUniqueFields($this->requestBody);
+
+        }
 
         return $this;
     }

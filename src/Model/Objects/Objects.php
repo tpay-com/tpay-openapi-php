@@ -10,6 +10,8 @@ class Objects implements ObjectsInterface
 {
     const OBJECT_FIELDS = [];
 
+    const UNIQUE_FIELDS = [];
+
     public $strictCheck = true;
 
     public function __construct()
@@ -85,6 +87,11 @@ class Objects implements ObjectsInterface
                     $this->setObjectValues($object->{$fieldName}->{$field}, $value);
                 }
                 if (is_array($object->{$fieldName})) {
+                    if (!isset($object->{$fieldName}[$field])) {
+                        $objectClass = get_class($object->{$fieldName}[0]);
+                        $object->{$fieldName}[] = new $objectClass();
+                    }
+
                     $this->setObjectValues($object->{$fieldName}[$field], $value);
                 }
             } else {

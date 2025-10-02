@@ -31,6 +31,10 @@ class Merchant extends Objects
         'merchantApiConsent' => MerchantApiConsent::class,
     ];
 
+    const UNIQUE_FIELDS = [
+        'address' => ['isMain' => true],
+    ];
+
     /** @var OfferCode */
     public $offerCode;
 
