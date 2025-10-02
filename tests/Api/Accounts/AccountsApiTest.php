@@ -32,20 +32,6 @@ class AccountsApiTest extends TestCase
         $transactionsApi->createMerchant($merchantData);
     }
 
-    private function createAccountsApiWithCurlMock($response)
-    {
-        $accessToken = $this->createMock(AccessToken::class);
-
-        $token = $this->createMock(Token::class);
-        $token->access_token = $accessToken;
-
-        $transactionsApi = new AccountsApi($token, false);
-
-        CurlMock::setConsecutiveReturnedTransfers(json_encode($response));
-
-        return $transactionsApi;
-    }
-
     public function validMerchantData()
     {
         yield 'One Address' => [
@@ -189,7 +175,7 @@ class AccountsApiTest extends TestCase
                 ]
             ],
             'exception' => UnexpectedValueException::class,
-            'exceptionMessage' => 'Field "Tpay\OpenApi\Model\Fields\Account\OfferCode" is required in object Merchant'
+            'exceptionMessage' => 'Field "Tpay\OpenApi\Model\Fields\Account\OfferCode" is required in object Merchant',
         ];
 
         yield 'No email address' => [
@@ -217,7 +203,7 @@ class AccountsApiTest extends TestCase
                 ]
             ],
             'exception' => UnexpectedValueException::class,
-            'exceptionMessage' => 'Field "Tpay\OpenApi\Model\Fields\Person\Email" is required in object Merchant'
+            'exceptionMessage' => 'Field "Tpay\OpenApi\Model\Fields\Person\Email" is required in object Merchant',
         ];
 
         yield 'No legalForm' => [
@@ -245,7 +231,7 @@ class AccountsApiTest extends TestCase
                 ]
             ],
             'exception' => UnexpectedValueException::class,
-            'exceptionMessage' => 'Field "Tpay\OpenApi\Model\Fields\Account\LegalForm" is required in object Merchant'
+            'exceptionMessage' => 'Field "Tpay\OpenApi\Model\Fields\Account\LegalForm" is required in object Merchant',
         ];
 
         yield 'No categoryId' => [
@@ -273,7 +259,7 @@ class AccountsApiTest extends TestCase
                 ]
             ],
             'exception' => UnexpectedValueException::class,
-            'exceptionMessage' => 'Field "Tpay\OpenApi\Model\Identifiers\CategoryId" is required in object Merchant'
+            'exceptionMessage' => 'Field "Tpay\OpenApi\Model\Identifiers\CategoryId" is required in object Merchant',
         ];
 
         yield 'Empty address' => [
@@ -293,7 +279,7 @@ class AccountsApiTest extends TestCase
                 ]
             ],
             'exception' => UnexpectedValueException::class,
-            'exceptionMessage' => 'Field "Tpay\OpenApi\Model\Fields\Address\Name" is required in object Address'
+            'exceptionMessage' => 'Field "Tpay\OpenApi\Model\Fields\Address\Name" is required in object Address',
         ];
 
         yield 'No address' => [
@@ -311,7 +297,7 @@ class AccountsApiTest extends TestCase
                 ]
             ],
             'exception' => UnexpectedValueException::class,
-            'exceptionMessage' => 'Field "Tpay\OpenApi\Model\Fields\Address\Name" is required in object Address'
+            'exceptionMessage' => 'Field "Tpay\OpenApi\Model\Fields\Address\Name" is required in object Address',
         ];
 
         yield 'Empty website' => [
@@ -337,7 +323,7 @@ class AccountsApiTest extends TestCase
                 ]
             ],
             'exception' => UnexpectedValueException::class,
-            'exceptionMessage' => 'Field "Tpay\OpenApi\Model\Fields\PointOfSale\Name" is required in object PointOfSale'
+            'exceptionMessage' => 'Field "Tpay\OpenApi\Model\Fields\PointOfSale\Name" is required in object PointOfSale',
         ];
 
         yield 'No website' => [
@@ -360,7 +346,7 @@ class AccountsApiTest extends TestCase
                 ],
             ],
             'exception' => UnexpectedValueException::class,
-            'exceptionMessage' => 'Field "Tpay\OpenApi\Model\Fields\PointOfSale\Name" is required in object PointOfSale'
+            'exceptionMessage' => 'Field "Tpay\OpenApi\Model\Fields\PointOfSale\Name" is required in object PointOfSale',
         ];
 
         yield 'No street in address' => [
@@ -388,7 +374,7 @@ class AccountsApiTest extends TestCase
                 ]
             ],
             'exception' => UnexpectedValueException::class,
-            'exceptionMessage' => 'Field "Tpay\OpenApi\Model\Fields\Address\Street" is required in object Address'
+            'exceptionMessage' => 'Field "Tpay\OpenApi\Model\Fields\Address\Street" is required in object Address',
         ];
 
         yield 'No house number in address' => [
@@ -416,7 +402,7 @@ class AccountsApiTest extends TestCase
                 ]
             ],
             'exception' => UnexpectedValueException::class,
-            'exceptionMessage' => 'Field "Tpay\OpenApi\Model\Fields\Address\HouseNumber" is required in object Address'
+            'exceptionMessage' => 'Field "Tpay\OpenApi\Model\Fields\Address\HouseNumber" is required in object Address',
         ];
 
         yield 'No postal code in address' => [
@@ -444,7 +430,7 @@ class AccountsApiTest extends TestCase
                 ]
             ],
             'exception' => UnexpectedValueException::class,
-            'exceptionMessage' => 'Field "Tpay\OpenApi\Model\Fields\Address\PostalCode" is required in object Address'
+            'exceptionMessage' => 'Field "Tpay\OpenApi\Model\Fields\Address\PostalCode" is required in object Address',
         ];
 
         yield 'No city in address' => [
@@ -472,7 +458,7 @@ class AccountsApiTest extends TestCase
                 ]
             ],
             'exception' => UnexpectedValueException::class,
-            'exceptionMessage' => 'Field "Tpay\OpenApi\Model\Fields\Address\City" is required in object Address'
+            'exceptionMessage' => 'Field "Tpay\OpenApi\Model\Fields\Address\City" is required in object Address',
         ];
 
         yield 'No country in address' => [
@@ -500,7 +486,7 @@ class AccountsApiTest extends TestCase
                 ]
             ],
             'exception' => UnexpectedValueException::class,
-            'exceptionMessage' => 'Field "Tpay\OpenApi\Model\Fields\Address\Country" is required in object Address'
+            'exceptionMessage' => 'Field "Tpay\OpenApi\Model\Fields\Address\Country" is required in object Address',
         ];
 
         yield 'Too long country in address' => [
@@ -529,7 +515,7 @@ class AccountsApiTest extends TestCase
                 ]
             ],
             'exception' => InvalidArgumentException::class,
-            'exceptionMessage' => 'Value of field Tpay\OpenApi\Model\Fields\Address\Country is too long. Max allowed 2'
+            'exceptionMessage' => 'Value of field Tpay\OpenApi\Model\Fields\Address\Country is too long. Max allowed 2',
         ];
 
         yield 'Too short country in address' => [
@@ -558,7 +544,7 @@ class AccountsApiTest extends TestCase
                 ]
             ],
             'exception' => InvalidArgumentException::class,
-            'exceptionMessage' => 'Value of field Tpay\OpenApi\Model\Fields\Address\Country is too short. Min required 2'
+            'exceptionMessage' => 'Value of field Tpay\OpenApi\Model\Fields\Address\Country is too short. Min required 2',
         ];
 
         yield 'Multi main addresses' => [
@@ -596,7 +582,21 @@ class AccountsApiTest extends TestCase
                 ]
             ],
             'exception' => UnexpectedValueException::class,
-            'exceptionMessage' => 'Field "isMain" with value "true" must be unique across Address objects'
+            'exceptionMessage' => 'Field "isMain" with value "true" must be unique across Address objects',
         ];
+    }
+
+    private function createAccountsApiWithCurlMock($response)
+    {
+        $accessToken = $this->createMock(AccessToken::class);
+
+        $token = $this->createMock(Token::class);
+        $token->access_token = $accessToken;
+
+        $transactionsApi = new AccountsApi($token, false);
+
+        CurlMock::setConsecutiveReturnedTransfers(json_encode($response));
+
+        return $transactionsApi;
     }
 }

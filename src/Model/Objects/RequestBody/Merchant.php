@@ -30,7 +30,6 @@ class Merchant extends Objects
         'contactPerson' => [ContactPerson::class],
         'merchantApiConsent' => MerchantApiConsent::class,
     ];
-
     const UNIQUE_FIELDS = [
         'address' => ['isMain' => true],
     ];
