@@ -173,6 +173,9 @@ final class AccountsApiExample extends ExamplesConfig
             'postalCode' => '54-134',
             'city' => 'Warszawa',
             'country' => 'PL',
+            'isInvoice' => true,
+            'isMain' => true,
+            'isCorrespondence' => true,
         ];
         $contactPerson = [
             'name' => 'Jan',
@@ -189,7 +192,7 @@ final class AccountsApiExample extends ExamplesConfig
             'categoryId' => 62,
             'website' => [$pos],
             'address' => [$address1],
-            'person' => [$contactPerson],
+            'contactPerson' => [$contactPerson],
         ];
     }
 }
