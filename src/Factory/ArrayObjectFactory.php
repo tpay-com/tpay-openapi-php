@@ -33,6 +33,8 @@ class ArrayObjectFactory
                     return new MerchantPointOfSale();
                 case 'contactPerson':
                     return new ContactPerson();
+                default:
+                    throw new InvalidArgumentException(sprintf('Unsupported field "%s" in %s', $fieldName, $parentObject->getName()));
             }
         }
 
@@ -44,6 +46,8 @@ class ArrayObjectFactory
                     return new AccountPointOfSale();
                 case 'person':
                     return new Person();
+                default:
+                    throw new InvalidArgumentException(sprintf('Unsupported field "%s" in %s', $fieldName, $parentObject->getName()));
             }
         }
 

@@ -22,6 +22,7 @@ final class AccountsApiExample extends ExamplesConfig
     public function runAllExamples()
     {
         $this
+            ->createMerchant()
             ->createAccount()
             ->getAccounts()
             ->getCategories()
