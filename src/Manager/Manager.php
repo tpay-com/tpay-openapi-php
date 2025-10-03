@@ -29,6 +29,7 @@ class Manager
         $this->requestBody->strictCheck = $strictCheck;
         $this->requestBody->setObjectValues($this->requestBody, $fields);
         $this->ObjectsValidator->isSetRequiredFields($this->requestBody);
+        $this->ObjectsValidator->checkUniqueFields($this->requestBody);
 
         return $this;
     }

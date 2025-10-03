@@ -35,17 +35,17 @@ class PointOfSale extends Objects
     /** @var Name */
     public $name;
 
-    /** @var PointOfSaleDate */
-    public $date;
-
-    /** @var PointOfSaleSettings */
-    public $settings;
-
     /** @var Url */
     public $url;
 
     /** @var Description */
     public $description;
+
+    /** @var PointOfSaleDate */
+    public $date;
+
+    /** @var PointOfSaleSettings */
+    public $settings;
 
     public function getRequiredFields()
     {

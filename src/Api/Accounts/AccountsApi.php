@@ -4,6 +4,7 @@ namespace Tpay\OpenApi\Api\Accounts;
 
 use Tpay\OpenApi\Api\ApiAction;
 use Tpay\OpenApi\Model\Objects\RequestBody\Account;
+use Tpay\OpenApi\Model\Objects\RequestBody\Merchant;
 
 class AccountsApi extends ApiAction
 {
@@ -60,10 +61,22 @@ class AccountsApi extends ApiAction
         return $this->run(static::GET, sprintf('/accounts/%s/balance', $accountId));
     }
 
-    /** @param array $fields */
+    /**
+     * @deprecated Use createMerchant() instead
+     *
+     * @param array $fields
+     */
     public function createAccount($fields)
     {
+        trigger_error(sprintf('Method %s is deprecated.', __METHOD__), E_USER_DEPRECATED);
+
         return $this->run(static::POST, '/accounts', $fields, new Account());
+    }
+
+    /** @param array $fields */
+    public function createMerchant($fields)
+    {
+        return $this->run(static::POST, '/v1/accounts/merchant', $fields, new Merchant());
     }
 
     public function getMcc()

@@ -4,17 +4,23 @@ namespace Tpay\OpenApi\Model\Objects;
 
 use InvalidArgumentException;
 use ReflectionClass;
+use Tpay\OpenApi\Factory\ArrayObjectFactory;
 use Tpay\OpenApi\Model\Fields\Field;
 
 class Objects implements ObjectsInterface
 {
     const OBJECT_FIELDS = [];
+    const UNIQUE_FIELDS = [];
 
     public $strictCheck = true;
+
+    /** @var ArrayObjectFactory */
+    private $factory;
 
     public function __construct()
     {
         $this->injectObjectFields(static::OBJECT_FIELDS);
+        $this->factory = new ArrayObjectFactory();
     }
 
     /** @return array<Field|self> */
@@ -85,6 +91,10 @@ class Objects implements ObjectsInterface
                     $this->setObjectValues($object->{$fieldName}->{$field}, $value);
                 }
                 if (is_array($object->{$fieldName})) {
+                    if (!isset($object->{$fieldName}[$field])) {
+                        $object->{$fieldName}[] = $this->factory->create($fieldName, $object);
+                    }
+
                     $this->setObjectValues($object->{$fieldName}[$field], $value);
                 }
             } else {
