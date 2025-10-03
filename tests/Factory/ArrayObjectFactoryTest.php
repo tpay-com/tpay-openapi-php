@@ -83,14 +83,14 @@ class ArrayObjectFactoryTest extends TestCase
             'fieldName' => 'email',
             'object' => new Merchant(),
             'exception' => InvalidArgumentException::class,
-            'exceptionMessage' => 'Field email as array is not supported in Merchant object',
+            'exceptionMessage' => 'Unsupported field "email" in Merchant',
         ];
 
         yield 'account non array field' => [
             'fieldName' => 'taxId',
             'object' => new Account(),
             'exception' => InvalidArgumentException::class,
-            'exceptionMessage' => 'Field taxId as array is not supported in Account object',
+            'exceptionMessage' => 'Unsupported field "taxId" in Account',
         ];
 
         yield 'unsupported object' => [
