@@ -11,6 +11,6 @@ class UserAgent extends Field
 {
     protected $name = __CLASS__;
     protected $type = self::STRING;
-    protected $minLength = 3;
-    protected $maxLength = 600;
+    protected $minLength = 0;
+    protected $maxLength = 255;
 }
