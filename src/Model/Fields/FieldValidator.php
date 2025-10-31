@@ -12,7 +12,7 @@ class FieldValidator implements FieldTypes
      */
     public function isTooLong($maxLength, $value)
     {
-        return (bool) (strlen($value) > $maxLength);
+        return (bool) (strlen((string) $value) > $maxLength);
     }
 
     /**
@@ -23,7 +23,7 @@ class FieldValidator implements FieldTypes
      */
     public function isTooShort($minLength, $value)
     {
-        return (bool) (strlen($value) < $minLength);
+        return (bool) (strlen((string) $value) < $minLength);
     }
 
     /**
