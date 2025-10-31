@@ -18,9 +18,10 @@ class IP extends Field
     protected function initValidators()
     {
         $this->addValidator(function ($value) {
-            if (filter_var($value, FILTER_VALIDATE_IP) === false) {
+            if (false === filter_var($value, FILTER_VALIDATE_IP)) {
                 return new FieldValidationResult(false, 'Invalid IP address.');
             }
+
             return new FieldValidationResult(true);
         });
     }

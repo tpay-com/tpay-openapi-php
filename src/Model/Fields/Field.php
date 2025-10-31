@@ -36,11 +36,11 @@ class Field implements FieldTypes
     /** @var FieldValidator */
     protected $FieldValidator;
 
-    /** @var array<string> */
-    private $errors = [];
-
     /** @var array<callable> */
     protected $customValidators = [];
+
+    /** @var array<string> */
+    private $errors = [];
 
     public function __construct()
     {

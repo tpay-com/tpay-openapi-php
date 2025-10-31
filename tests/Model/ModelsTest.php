@@ -43,7 +43,7 @@ class ModelsTest extends TestCase
             );
             $className = str_replace('/', '\\', $className);
 
-            if ($className === FieldValidationResult::class) {
+            if (FieldValidationResult::class === $className) {
                 continue;
             }
 

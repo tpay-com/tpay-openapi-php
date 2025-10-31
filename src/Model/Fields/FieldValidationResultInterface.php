@@ -4,13 +4,9 @@ namespace Tpay\OpenApi\Model\Fields;
 
 interface FieldValidationResultInterface
 {
-    /**
-     * @return bool
-     */
+    /**@return bool */
     public function isValid();
 
-    /**
-     * @return string|null
-     */
+    /** @return null|string */
     public function getMessage();
 }
