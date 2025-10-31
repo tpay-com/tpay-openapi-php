@@ -39,9 +39,13 @@ class Field implements FieldTypes
     /** @var array<string> */
     private $errors = [];
 
+    /** @var array<callable> */
+    protected $customValidators = [];
+
     public function __construct()
     {
         $this->FieldValidator = new FieldValidator();
+        $this->initValidators();
     }
 
     public function getValue()
@@ -61,6 +65,11 @@ class Field implements FieldTypes
         return $this->name;
     }
 
+    public function addValidator(callable $callback)
+    {
+        $this->customValidators[] = $callback;
+    }
+
     public function setValue($value)
     {
         $this->checkMaximum($value);
@@ -69,6 +78,9 @@ class Field implements FieldTypes
         $this->checkMinLength($value);
         if (!is_null($value)) {
             $this->checkValue($value);
+        }
+        if (!empty($this->customValidators)) {
+            $this->checkCustomValidators($value);
         }
         if (!empty($this->errors)) {
             throw new InvalidArgumentException(print_r($this->errors, true));
@@ -134,6 +146,29 @@ class Field implements FieldTypes
                 $this->name,
                 $this->type
             );
+        }
+    }
+
+    protected function initValidators() {}
+
+    private function checkCustomValidators($value)
+    {
+        foreach ($this->customValidators as $validator) {
+            $result = $validator($value, $this);
+
+            if (!$result instanceof FieldValidationResultInterface) {
+                throw new InvalidArgumentException(
+                    'Custom validator must return an instance of FieldValidationResultInterface.'
+                );
+            }
+
+            if (!$result->isValid()) {
+                $this->errors[] = sprintf(
+                    'Validation failed for field %s: %s',
+                    $this->name,
+                    (string) $result->getMessage()
+                );
+            }
         }
     }
 }

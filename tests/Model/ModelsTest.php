@@ -6,6 +6,7 @@ use PHPUnit\Framework\TestCase;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use SplFileInfo;
+use Tpay\OpenApi\Model\Fields\FieldValidationResult;
 
 class ModelsTest extends TestCase
 {
@@ -41,6 +42,10 @@ class ModelsTest extends TestCase
                 -4
             );
             $className = str_replace('/', '\\', $className);
+
+            if ($className === FieldValidationResult::class) {
+                continue;
+            }
 
             yield $className => [$className];
         }
