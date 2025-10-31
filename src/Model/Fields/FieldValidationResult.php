@@ -7,7 +7,7 @@ class FieldValidationResult implements FieldValidationResultInterface
     /** @var bool */
     private $valid;
 
-    /** @var null|string  */
+    /** @var null|string */
     private $message;
 
     public function __construct($valid, $message = null)
@@ -22,7 +22,7 @@ class FieldValidationResult implements FieldValidationResultInterface
         return $this->valid;
     }
 
-    /** @return string|null */
+    /** @return null|string */
     public function getMessage()
     {
         return $this->message;
