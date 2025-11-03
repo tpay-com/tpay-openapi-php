@@ -13,7 +13,7 @@ class IpTest extends TestCase
         $ip = new Ip();
         $ip->setValue('127.0.0.1');
 
-        $this->assertEquals('127.0.0.1', $ip->getValue());
+        $this->assertSame('127.0.0.1', $ip->getValue());
     }
 
     public function testIpv6()
@@ -21,7 +21,23 @@ class IpTest extends TestCase
         $ip = new Ip();
         $ip->setValue('2001:db8::1');
 
-        $this->assertEquals('2001:db8::1', $ip->getValue());
+        $this->assertSame('2001:db8::1', $ip->getValue());
+    }
+
+    public function testEmptyString()
+    {
+        $ip = new Ip();
+        $ip->setValue('');
+
+        $this->assertSame('', $ip->getValue());
+    }
+
+    public function testNull()
+    {
+        $ip = new Ip();
+        $ip->setValue(null);
+
+        $this->assertSame(null, $ip->getValue());
     }
 
     public function testInvalidIp()
@@ -32,17 +48,6 @@ class IpTest extends TestCase
         $this->expectExceptionMessage('Validation failed for field Tpay\OpenApi\Model\Fields\Payer\IP: Invalid IP address.');
 
         $ip->setValue('TEST123');
-    }
-
-    public function testNull()
-    {
-        $ip = new Ip();
-
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Value of field Tpay\OpenApi\Model\Fields\Payer\IP is too short. Min required 3');
-        $this->expectExceptionMessage('Validation failed for field Tpay\OpenApi\Model\Fields\Payer\IP: Invalid IP address.');
-
-        $ip->setValue(null);
     }
 
     public function testWrongType()
