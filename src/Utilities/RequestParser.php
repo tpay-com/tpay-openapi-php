@@ -7,7 +7,7 @@ class RequestParser
     /** @return string */
     public function getContentType()
     {
-        return $_SERVER['CONTENT_TYPE'];
+        return $_SERVER['CONTENT_TYPE'] ?: '';
     }
 
     /**
