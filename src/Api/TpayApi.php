@@ -185,6 +185,8 @@ class TpayApi
                 $this->collect->setClientName($this->clientName);
             }
         }
+
+        return $this->collect;
     }
 
     private function authorize()

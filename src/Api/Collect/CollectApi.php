@@ -11,7 +11,7 @@ class CollectApi extends ApiAction
     {
         $requestUrl = $this->addQueryFields('/collect/bank-accounts', ['page' => $page, 'limit' => $limit]);
 
-        return $this->sendRequest(static::GET, $requestUrl);
+        return $this->run(static::GET, $requestUrl);
     }
 
     public function addBankAccount($accountNumber, $ownerName, $additionalInformation)

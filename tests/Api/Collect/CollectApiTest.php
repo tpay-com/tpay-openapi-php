@@ -46,14 +46,14 @@ class CollectApiTest extends TestCase
 
         yield 'Min length owner name' => [
             'accountNumber' => 'PL00000000000000000000000000',
-            'ownerName' => 'Jan',
-            'additionalInformation' => 'Inf',
+            'ownerName' => '',
+            'additionalInformation' => '',
         ];
 
         yield 'Max length owner name' => [
             'accountNumber' => 'PL99999999999999999999999999',
-            'ownerName' => str_repeat('A', 70),
-            'additionalInformation' => str_repeat('B', 70),
+            'ownerName' => str_repeat('A', 1000),
+            'additionalInformation' => str_repeat('B', 1000),
         ];
     }
 
@@ -91,36 +91,20 @@ class CollectApiTest extends TestCase
             'exceptionMessage' => 'Value of field Tpay\OpenApi\Model\Fields\Collect\AccountNumber is too long. Max allowed 28',
         ];
 
-        yield 'Owner name too short' => [
-            'accountNumber' => 'PL12345678901234567890123456',
-            'ownerName' => 'Ja',
-            'additionalInformation' => 'Konto firmowe',
-            'exception' => InvalidArgumentException::class,
-            'exceptionMessage' => 'Value of field Tpay\OpenApi\Model\Fields\Collect\OwnerName is too short. Min required 3',
-        ];
-
         yield 'Owner name too long' => [
             'accountNumber' => 'PL12345678901234567890123456',
-            'ownerName' => str_repeat('A', 71),
+            'ownerName' => str_repeat('A', 1001),
             'additionalInformation' => 'Konto firmowe',
             'exception' => InvalidArgumentException::class,
-            'exceptionMessage' => 'Value of field Tpay\OpenApi\Model\Fields\Collect\OwnerName is too long. Max allowed 70',
-        ];
-
-        yield 'Additional information too short' => [
-            'accountNumber' => 'PL12345678901234567890123456',
-            'ownerName' => 'Jan Kowalski',
-            'additionalInformation' => 'Ko',
-            'exception' => InvalidArgumentException::class,
-            'exceptionMessage' => 'Value of field Tpay\OpenApi\Model\Fields\Collect\AdditionalInformation is too short. Min required 3',
+            'exceptionMessage' => 'Value of field Tpay\OpenApi\Model\Fields\Collect\OwnerName is too long. Max allowed 1000',
         ];
 
         yield 'Additional information too long' => [
             'accountNumber' => 'PL12345678901234567890123456',
             'ownerName' => 'Jan Kowalski',
-            'additionalInformation' => str_repeat('X', 71),
+            'additionalInformation' => str_repeat('X', 1001),
             'exception' => InvalidArgumentException::class,
-            'exceptionMessage' => 'Value of field Tpay\OpenApi\Model\Fields\Collect\AdditionalInformation is too long. Max allowed 70',
+            'exceptionMessage' => 'Value of field Tpay\OpenApi\Model\Fields\Collect\AdditionalInformation is too long. Max allowed 1000',
         ];
     }
 
