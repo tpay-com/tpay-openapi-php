@@ -8,7 +8,6 @@ use Tpay\OpenApi\Api\Collect\CollectApi;
 use Tpay\OpenApi\Model\Fields\Token\AccessToken;
 use Tpay\OpenApi\Model\Objects\Authorization\Token;
 use Tpay\Tests\OpenApi\Mock\CurlMock;
-use UnexpectedValueException;
 
 /**
  * @covers \Tpay\OpenApi\Api\Collect\CollectApi

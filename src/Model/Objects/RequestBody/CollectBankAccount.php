@@ -16,9 +16,7 @@ class CollectBankAccount extends Objects
     ];
 
     public $accountNumber;
-
     public $ownerName;
-
     public $additionalInformation;
 
     public function getRequiredFields()
