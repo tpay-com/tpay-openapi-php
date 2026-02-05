@@ -181,7 +181,7 @@ class JWSVerifiedPaymentNotification extends Notification
                     break;
                 default:
                     throw new TpayException(
-                        'Not recognised or invalid notification type: ' . $source['type']
+                        'Not recognised or invalid notification type: '.$source['type']
                     );
             }
             if (!isset($source['data'])) {
@@ -190,7 +190,7 @@ class JWSVerifiedPaymentNotification extends Notification
             $source = $source['data'];
         } else {
             throw new TpayException(
-                'Cannot determine notification type. POST payload: ' . json_encode($source)
+                'Cannot determine notification type. POST payload: '.json_encode($source)
             );
         }
 

@@ -20,13 +20,13 @@ class RequestParser
      */
     public function getParsedContent()
     {
-        if (strpos($this->getContentType(), 'application/json') !== false) {
+        if (false !== strpos($this->getContentType(), 'application/json')) {
             $body = $this->getRawBody();
             $jsonData = json_decode($body, true);
 
             if (is_null($jsonData)) {
                 throw new TpayException(
-                    'Invalid JSON body. Json Error: ' . json_last_error_msg() . ' Body: ' . $body
+                    'Invalid JSON body. Json Error: '.json_last_error_msg().' Body: '.$body
                 );
             }
 
@@ -59,7 +59,7 @@ class RequestParser
 
     private function getRawBody()
     {
-        if ($this->rawBody === null) {
+        if (null === $this->rawBody) {
             $this->rawBody = file_get_contents('php://input');
         }
 
