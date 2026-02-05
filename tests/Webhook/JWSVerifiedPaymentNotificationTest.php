@@ -87,6 +87,9 @@ JSON;
         $data = json_decode($payload, true);
         $result[] = ['application/json', $data, $payload, $this->sign($payload, true), 'x', true, Tokenization::class, 'tokenizationId', 'TO-1234-890123456789012345678901234567890123456789012345678901234'];
 
+        $payload = http_build_query($data);
+        $result[] = ['application/x-www-form-urlencoded', $data, $payload, $this->sign($payload, true), 'x', true, Tokenization::class, 'tokenizationId', 'TO-1234-890123456789012345678901234567890123456789012345678901234'];
+
         $payload = <<<'JSON'
 {
   "type": "token_update",
@@ -97,6 +100,9 @@ JSON;
 JSON;
         $data = json_decode($payload, true);
         $result[] = ['application/json', $data, $payload, $this->sign($payload, true), 'x', true, TokenUpdate::class, 'token', '1234567890123456789012345678901234567890123456789012345678901234'];
+
+        $payload = http_build_query($data);
+        $result[] = ['application/x-www-form-urlencoded', $data, $payload, $this->sign($payload, true), 'x', true, TokenUpdate::class, 'token', '1234567890123456789012345678901234567890123456789012345678901234'];
 
         $payload = <<<'JSON'
 {
@@ -117,6 +123,9 @@ JSON;
 JSON;
         $data = json_decode($payload, true);
         $result[] = ['application/json', $data, $payload, $this->sign($payload, true), 'x', true, MarketplaceTransaction::class, 'transactionId', 'TO-1234-890123456789012345678901234567890123456789012345678901234'];
+
+        $payload = http_build_query($data);
+        $result[] = ['application/x-www-form-urlencoded', $data, $payload, $this->sign($payload, true), 'x', true, MarketplaceTransaction::class, 'transactionId', 'TO-1234-890123456789012345678901234567890123456789012345678901234'];
 
         $id = '12345';
         $tr_id = 'TR-1234-89012345678901234567890';
@@ -203,20 +212,32 @@ JSON;
         $data = json_decode($payload, true);
         $result[] = ['application/json', $data, $payload, 'x', 'x', true, Tokenization::class, 'tokenizationId', 'TO-1234-890123456789012345678901234567890123456789012345678901234'];
 
+        $result[] = ['application/x-www-form-urlencoded', $data, $payload, 'x', 'x', true, Tokenization::class, 'tokenizationId', 'TO-1234-890123456789012345678901234567890123456789012345678901234'];
+
         // invalid signature (malformed token)
         $result[] = ['application/json', $data, $payload, 'fdsafsdfafdasfadsf', 'x', true, Tokenization::class, 'tokenizationId', 'TO-1234-890123456789012345678901234567890123456789012345678901234'];
+
+        $result[] = ['application/x-www-form-urlencoded', $data, $payload, 'fdsafsdfafdasfadsf', 'x', true, Tokenization::class, 'tokenizationId', 'TO-1234-890123456789012345678901234567890123456789012345678901234'];
 
         // invalid signature (payload difference)
         $result[] = ['application/json', $data, $payload, $this->sign($payload.'4324324324234', true), 'x', true, Tokenization::class, 'tokenizationId', 'TO-1234-890123456789012345678901234567890123456789012345678901234'];
 
+        $result[] = ['application/x-www-form-urlencoded', $data, $payload, $this->sign($payload.'4324324324234', true), 'x', true, Tokenization::class, 'tokenizationId', 'TO-1234-890123456789012345678901234567890123456789012345678901234'];
+
         // invalid signature (invalid algorithm)
         $result[] = ['application/json', $data, $payload, $this->encode(json_encode(['alg' => 'none'])).'..fadsfdasfdsf', 'x', true, Tokenization::class, 'tokenizationId', 'TO-1234-890123456789012345678901234567890123456789012345678901234'];
+
+        $result[] = ['application/x-www-form-urlencoded', $data, $payload, $this->encode(json_encode(['alg' => 'none'])).'..fadsfdasfdsf', 'x', true, Tokenization::class, 'tokenizationId', 'TO-1234-890123456789012345678901234567890123456789012345678901234'];
 
         // invalid signature (not trusted signature URL)
         $result[] = ['application/json', $data, $payload, $this->encode(json_encode(['alg' => 'RS256', 'x5u' => 'https://example.com/hostile.pem'])).'..fadsfdasfdsf', 'x', true, Tokenization::class, 'tokenizationId', 'TO-1234-890123456789012345678901234567890123456789012345678901234'];
 
+        $result[] = ['application/x-www-form-urlencoded', $data, $payload, $this->encode(json_encode(['alg' => 'RS256', 'x5u' => 'https://example.com/hostile.pem'])).'..fadsfdasfdsf', 'x', true, Tokenization::class, 'tokenizationId', 'TO-1234-890123456789012345678901234567890123456789012345678901234'];
+
         // invalid signature (prod certificate in sandbox environment)
         $result[] = ['application/json', $data, $payload, $this->sign($payload, true), 'x', false, Tokenization::class, 'tokenizationId', 'TO-1234-890123456789012345678901234567890123456789012345678901234'];
+
+        $result[] = ['application/x-www-form-urlencoded', $data, $payload, $this->sign($payload, true), 'x', false, Tokenization::class, 'tokenizationId', 'TO-1234-890123456789012345678901234567890123456789012345678901234'];
 
         // invalid md5sum
         $id = '12345';

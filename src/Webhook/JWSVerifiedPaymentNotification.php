@@ -164,12 +164,12 @@ class JWSVerifiedPaymentNotification extends Notification
      */
     private function getNotificationObject()
     {
-        if ('application/json' === $this->requestParser->getContentType()) {
-            $jsonData = $this->requestParser->getParsedContent();
-            if (!isset($jsonData['type'])) {
-                throw new TpayException('Not recognised or invalid notification type. JSON: '.json_encode($jsonData));
-            }
-            switch ($jsonData['type']) {
+        $source = $this->requestParser->getParsedContent();
+
+        if (isset($source['tr_id'])) {
+            $requestBody = new BasicPayment();
+        } elseif (isset($source['type'])) {
+            switch ($source['type']) {
                 case 'tokenization':
                     $requestBody = new Tokenization();
                     break;
@@ -180,24 +180,29 @@ class JWSVerifiedPaymentNotification extends Notification
                     $requestBody = new MarketplaceTransaction();
                     break;
                 default:
-                    throw new TpayException('Not recognised or invalid notification type. JSON: '.json_encode($jsonData));
+                    throw new TpayException(
+                        'Not recognised or invalid notification type: ' . $source['type']
+                    );
             }
-            if (!isset($jsonData['data'])) {
-                throw new TpayException('Not recognised or invalid notification type. JSON: '.json_encode($jsonData));
+            if (!isset($source['data'])) {
+                throw new TpayException('Not recognised or invalid notification type: '.json_encode($source));
             }
-            $source = $jsonData['data'];
+            $source = $source['data'];
         } else {
-            $source = $this->requestParser->getParsedContent();
-            if (!isset($source['tr_id'])) {
-                throw new TpayException('Not recognised or invalid notification type. POST: '.json_encode($source));
-            }
-            $requestBody = new BasicPayment();
+            throw new TpayException(
+                'Cannot determine notification type. POST payload: ' . json_encode($source)
+            );
         }
+
         foreach ($source as $parameter => $value) {
             if (isset($requestBody->{$parameter})) {
-                $source[$parameter] = Util::cast($value, $requestBody->{$parameter}->getType());
+                $source[$parameter] = Util::cast(
+                    $value,
+                    $requestBody->{$parameter}->getType()
+                );
             }
         }
+
         $this->Manager
             ->setRequestBody($requestBody)
             ->setFields($source, false);

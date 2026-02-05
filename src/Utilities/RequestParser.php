@@ -4,10 +4,13 @@ namespace Tpay\OpenApi\Utilities;
 
 class RequestParser
 {
+    /** @var string|null */
+    private $rawBody;
+
     /** @return string */
     public function getContentType()
     {
-        return $_SERVER['CONTENT_TYPE'] ?: '';
+        return isset($_SERVER['CONTENT_TYPE']) ? $_SERVER['CONTENT_TYPE'] : '';
     }
 
     /**
@@ -17,11 +20,14 @@ class RequestParser
      */
     public function getParsedContent()
     {
-        if ('application/json' === $this->getContentType()) {
-            $body = file_get_contents('php://input');
+        if (strpos($this->getContentType(), 'application/json') !== false) {
+            $body = $this->getRawBody();
             $jsonData = json_decode($body, true);
+
             if (is_null($jsonData)) {
-                throw new TpayException('Invalid JSON body. Json Error: '.json_last_error_msg().' Body: '.$body);
+                throw new TpayException(
+                    'Invalid JSON body. Json Error: ' . json_last_error_msg() . ' Body: ' . $body
+                );
             }
 
             return $jsonData;
@@ -33,7 +39,7 @@ class RequestParser
     /** @return string */
     public function getPayload()
     {
-        return file_get_contents('php://input');
+        return $this->getRawBody();
     }
 
     /**
@@ -49,5 +55,14 @@ class RequestParser
         }
 
         return $jws;
+    }
+
+    private function getRawBody()
+    {
+        if ($this->rawBody === null) {
+            $this->rawBody = file_get_contents('php://input');
+        }
+
+        return $this->rawBody;
     }
 }
