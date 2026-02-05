@@ -4,7 +4,7 @@ namespace Tpay\OpenApi\Utilities;
 
 class RequestParser
 {
-    /** @var string|null */
+    /** @var null|string */
     private $rawBody;
 
     /** @return string */
