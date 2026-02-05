@@ -4,11 +4,6 @@ description: "Install composer dependencies with cache"
 runs:
   using: composite
   steps:
-    - name: Configure Composer PHP platform
-      shell: bash
-      run: |
-        composer config platform.php "${{ matrix.php-version }}"
-
     - name: Get Composer cache dir
       id: composer-cache
       shell: bash
