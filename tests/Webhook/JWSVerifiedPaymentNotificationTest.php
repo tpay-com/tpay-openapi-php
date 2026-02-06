@@ -27,15 +27,15 @@ class JWSVerifiedPaymentNotificationTest extends TestCase
     /**
      * @dataProvider positiveValidationProvider
      *
-     * @param mixed $contentType
-     * @param mixed $data
-     * @param mixed $payload
-     * @param mixed $signature
-     * @param mixed $secret
-     * @param mixed $productionMode
-     * @param mixed $expectedClass
-     * @param mixed $fieldName
-     * @param mixed $fieldValue
+     * @param mixed      $contentType
+     * @param mixed      $data
+     * @param mixed      $payload
+     * @param mixed      $signature
+     * @param mixed      $secret
+     * @param mixed      $productionMode
+     * @param mixed      $expectedClass
+     * @param mixed      $fieldName
+     * @param mixed      $fieldValue
      * @param null|mixed $expectedItemClass
      */
     public function testPositiveValidationCases($contentType, $data, $payload, $signature, $secret, $productionMode, $expectedClass, $fieldName, $fieldValue, $expectedItemClass = null)
