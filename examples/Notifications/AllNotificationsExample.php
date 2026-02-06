@@ -91,7 +91,7 @@ try {
         // correlate this value with the payer/user of your system for subsequent payment handling
         // You can access any notification field by $notification->fieldName
 
-        //$blikAliasRegisteredProcessor->process($notification)
+        // $blikAliasRegisteredProcessor->process($notification)
         exit('{"result":true}');
     }
 
@@ -102,7 +102,7 @@ try {
         // The above example will check the notification and return the value of deleted token
         // You can access any notification field by $notification->fieldName
 
-        //$blikAliasRegisteredProcessor->process($notification)
+        // $blikAliasRegisteredProcessor->process($notification)
         exit('{"result":true}');
     }
 
