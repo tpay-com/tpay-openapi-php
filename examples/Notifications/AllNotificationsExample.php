@@ -96,7 +96,7 @@ try {
     }
 
     if ($notification instanceof BlikAliasUnregister) {
-        // Notification about successful blik alias registered
+        // Notification about successful blik alias unregistered
 
         $value = $notification->value->getValue();
         // The above example will check the notification and return the value of deleted token
