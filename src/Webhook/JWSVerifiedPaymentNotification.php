@@ -216,7 +216,11 @@ class JWSVerifiedPaymentNotification extends Notification
         return $this->Manager->getRequestBody();
     }
 
-    /** @return array
+    /**
+     * @param mixed $sourceData
+     *
+     * @return array
+     *
      * @throws TpayException
      */
     private function getSourceData($sourceData)
