@@ -4,6 +4,8 @@ namespace Tpay\Tests\OpenApi\Webhook;
 
 use PHPUnit\Framework\TestCase;
 use Tpay\OpenApi\Model\Objects\NotificationBody\BasicPayment;
+use Tpay\OpenApi\Model\Objects\NotificationBody\BlikAlias\BlikAliasRegisterItem;
+use Tpay\OpenApi\Model\Objects\NotificationBody\BlikAlias\BlikAliasUnregisterItem;
 use Tpay\OpenApi\Model\Objects\NotificationBody\BlikAliasRegister;
 use Tpay\OpenApi\Model\Objects\NotificationBody\BlikAliasUnregister;
 use Tpay\OpenApi\Model\Objects\NotificationBody\MarketplaceTransaction;
@@ -35,7 +37,7 @@ class JWSVerifiedPaymentNotificationTest extends TestCase
      * @param mixed $fieldName
      * @param mixed $fieldValue
      */
-    public function testPositiveValidationCases($contentType, $data, $payload, $signature, $secret, $productionMode, $expectedClass, $fieldName, $fieldValue)
+    public function testPositiveValidationCases($contentType, $data, $payload, $signature, $secret, $productionMode, $expectedClass, $fieldName, $fieldValue, $expectedItemClass = null)
     {
         $requestMock = new RequestParserMock($contentType, $data, $payload, $signature);
         $certificateMock = $this->getCertificateMock();
@@ -45,7 +47,14 @@ class JWSVerifiedPaymentNotificationTest extends TestCase
         $notificationObject = $notification->getNotification();
 
         $this->assertInstanceOf($expectedClass, $notificationObject);
-        $this->assertEquals($notificationObject->{$fieldName}->getValue(), $fieldValue);
+
+        $field = $notificationObject->{$fieldName};
+        if (is_array($field)) {
+            $this->assertInstanceOf($expectedItemClass, $field[0]);
+            $this->assertEquals($fieldValue, $field[0]->toArray());
+        } else {
+            $this->assertEquals($field->getValue(), $fieldValue);
+        }
     }
 
     /**
@@ -190,34 +199,40 @@ JSON;
 
         $payload = <<<'JSON'
 {
+  "id": "1010",
   "event": "ALIAS_REGISTER",
-  "msg_value": {
-    "value": "user_unique_alias_123",
-    "type": "UID",
-    "expirationDate": "2024-12-10 09:27:59"
-  }
+  "msg_value": [
+    {
+      "value": "user_unique_alias_123",
+      "type": "UID",
+      "expirationDate": "2024-12-10 09:27:59"
+    }
+  ]
 }
 JSON;
         $data = json_decode($payload, true);
-        $result[] = ['application/json', $data, $payload, $this->sign($payload, true), 'x', true, BlikAliasRegister::class, 'value', 'user_unique_alias_123'];
+        $result[] = ['application/json', $data, $payload, $this->sign($payload, true), 'x', true, BlikAliasRegister::class, 'msg_value', ['value' => 'user_unique_alias_123', 'type' => 'UID', 'expirationDate' => '2024-12-10 09:27:59'], BlikAliasRegisterItem::class];
 
         $payload = http_build_query($data);
-        $result[] = ['application/x-www-form-urlencoded', $data, $payload, $this->sign($payload, true), 'x', true, BlikAliasRegister::class, 'value', 'user_unique_alias_123'];
+        $result[] = ['application/x-www-form-urlencoded', $data, $payload, $this->sign($payload, true), 'x', true, BlikAliasRegister::class, 'msg_value', ['value' => 'user_unique_alias_123', 'type' => 'UID', 'expirationDate' => '2024-12-10 09:27:59'], BlikAliasRegisterItem::class];
 
         $payload = <<<'JSON'
 {
+  "id": "1010",
   "event": "ALIAS_UNREGISTER",
-  "msg_value": {
-    "value": "user_unique_alias_456",
-    "type": "UID"
-  }
+  "msg_value": [
+    {
+      "value": "user_unique_alias_456",
+      "type": "UID"
+    }
+  ]
 }
 JSON;
         $data = json_decode($payload, true);
-        $result[] = ['application/json', $data, $payload, $this->sign($payload, true), 'x', true, BlikAliasUnregister::class, 'value', 'user_unique_alias_456'];
+        $result[] = ['application/json', $data, $payload, $this->sign($payload, true), 'x', true, BlikAliasUnregister::class, 'msg_value', ['value' => 'user_unique_alias_456', 'type' => 'UID'], BlikAliasUnregisterItem::class];
 
         $payload = http_build_query($data);
-        $result[] = ['application/x-www-form-urlencoded', $data, $payload, $this->sign($payload, true), 'x', true, BlikAliasUnregister::class, 'value', 'user_unique_alias_456'];
+        $result[] = ['application/x-www-form-urlencoded', $data, $payload, $this->sign($payload, true), 'x', true, BlikAliasUnregister::class, 'msg_value', ['value' => 'user_unique_alias_456', 'type' => 'UID',], BlikAliasUnregisterItem::class];
 
         return $result;
     }

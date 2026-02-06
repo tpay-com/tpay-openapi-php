@@ -4,8 +4,8 @@ namespace Tpay\OpenApi\Model\Fields\Notification\BlikAlias;
 
 use Tpay\OpenApi\Model\Fields\Field;
 
-class Type extends Field
+class Id extends Field
 {
     protected $name = __CLASS__;
-    protected $type = self::STRING;
+    protected $type = self::INT;
 }
