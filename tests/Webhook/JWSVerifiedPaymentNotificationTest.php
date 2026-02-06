@@ -4,6 +4,8 @@ namespace Tpay\Tests\OpenApi\Webhook;
 
 use PHPUnit\Framework\TestCase;
 use Tpay\OpenApi\Model\Objects\NotificationBody\BasicPayment;
+use Tpay\OpenApi\Model\Objects\NotificationBody\BlikAliasRegister;
+use Tpay\OpenApi\Model\Objects\NotificationBody\BlikAliasUnregister;
 use Tpay\OpenApi\Model\Objects\NotificationBody\MarketplaceTransaction;
 use Tpay\OpenApi\Model\Objects\NotificationBody\Tokenization;
 use Tpay\OpenApi\Model\Objects\NotificationBody\TokenUpdate;
@@ -185,6 +187,37 @@ JSON;
         ];
         $payload = http_build_query($data);
         $result[] = ['application/x-www-form-urlencoded', $data, $payload, $this->sign($payload, true), self::CORRECT_CODE, true, BasicPayment::class, 'tokenPaymentData_tokenValue', '1234567890123456'];
+
+        $payload = <<<'JSON'
+{
+  "type": "ALIAS_REGISTER",
+  "msg_value": {
+    "value": "user_unique_alias_123",
+    "type": "UID",
+    "expirationDate": "2024-12-10 09:27:59"
+  }
+}
+JSON;
+        $data = json_decode($payload, true);
+        $result[] = ['application/json', $data, $payload, $this->sign($payload, true), 'x', true, BlikAliasRegister::class, 'value', 'user_unique_alias_123'];
+
+        $payload = http_build_query($data);
+        $result[] = ['application/x-www-form-urlencoded', $data, $payload, $this->sign($payload, true), 'x', true, BlikAliasRegister::class, 'value', 'user_unique_alias_123'];
+
+        $payload = <<<'JSON'
+{
+  "type": "ALIAS_UNREGISTER",
+  "msg_value": {
+    "value": "user_unique_alias_456",
+    "type": "UID"
+  }
+}
+JSON;
+        $data = json_decode($payload, true);
+        $result[] = ['application/json', $data, $payload, $this->sign($payload, true), 'x', true, BlikAliasUnregister::class, 'value', 'user_unique_alias_456'];
+
+        $payload = http_build_query($data);
+        $result[] = ['application/x-www-form-urlencoded', $data, $payload, $this->sign($payload, true), 'x', true, BlikAliasUnregister::class, 'value', 'user_unique_alias_456'];
 
         return $result;
     }
