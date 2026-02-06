@@ -2,7 +2,10 @@
 
 namespace Tpay\OpenApi\Webhook;
 
+use Tpay\OpenApi\Model\Fields\Field;
 use Tpay\OpenApi\Model\Objects\NotificationBody\BasicPayment;
+use Tpay\OpenApi\Model\Objects\NotificationBody\BlikAliasRegister;
+use Tpay\OpenApi\Model\Objects\NotificationBody\BlikAliasUnregister;
 use Tpay\OpenApi\Model\Objects\NotificationBody\MarketplaceTransaction;
 use Tpay\OpenApi\Model\Objects\NotificationBody\Tokenization;
 use Tpay\OpenApi\Model\Objects\NotificationBody\TokenUpdate;
@@ -164,12 +167,12 @@ class JWSVerifiedPaymentNotification extends Notification
      */
     private function getNotificationObject()
     {
-        if ('application/json' === $this->requestParser->getContentType()) {
-            $jsonData = $this->requestParser->getParsedContent();
-            if (!isset($jsonData['type'])) {
-                throw new TpayException('Not recognised or invalid notification type. JSON: '.json_encode($jsonData));
-            }
-            switch ($jsonData['type']) {
+        $source = $this->requestParser->getParsedContent();
+
+        if (isset($source['tr_id'])) {
+            $requestBody = new BasicPayment();
+        } elseif (isset($source['type'])) {
+            switch ($source['type']) {
                 case 'tokenization':
                     $requestBody = new Tokenization();
                     break;
@@ -180,28 +183,83 @@ class JWSVerifiedPaymentNotification extends Notification
                     $requestBody = new MarketplaceTransaction();
                     break;
                 default:
-                    throw new TpayException('Not recognised or invalid notification type. JSON: '.json_encode($jsonData));
+                    throw new TpayException(
+                        'Not recognised or invalid notification type: '.$source['type']
+                    );
             }
-            if (!isset($jsonData['data'])) {
-                throw new TpayException('Not recognised or invalid notification type. JSON: '.json_encode($jsonData));
+
+            if (!isset($source['data'])) {
+                throw new TpayException('Not recognised or invalid notification type: '.json_encode($source));
             }
-            $source = $jsonData['data'];
+
+            $source = $source['data'];
+        } elseif (isset($source['event'])) {
+            switch ($source['event']) {
+                case 'ALIAS_REGISTER':
+                    $requestBody = new BlikAliasRegister();
+                    break;
+                case 'ALIAS_UNREGISTER':
+                    $requestBody = new BlikAliasUnregister();
+                    break;
+                default:
+                    throw new TpayException(
+                        'Not recognised or invalid notification event: '.$source['event']
+                    );
+            }
+            if (!isset($source['msg_value']) || !is_array($source['msg_value'])) {
+                throw new TpayException('Not recognised or invalid notification event: '.json_encode($source));
+            }
         } else {
-            $source = $this->requestParser->getParsedContent();
-            if (!isset($source['tr_id'])) {
-                throw new TpayException('Not recognised or invalid notification type. POST: '.json_encode($source));
-            }
-            $requestBody = new BasicPayment();
+            throw new TpayException(
+                'Cannot determine notification type. POST payload: '.json_encode($source)
+            );
         }
-        foreach ($source as $parameter => $value) {
-            if (isset($requestBody->{$parameter})) {
-                $source[$parameter] = Util::cast($value, $requestBody->{$parameter}->getType());
-            }
-        }
+
+        $source = $this->castRequestBody($source, $requestBody);
+
         $this->Manager
             ->setRequestBody($requestBody)
             ->setFields($source, false);
 
         return $this->Manager->getRequestBody();
+    }
+
+    private function castRequestBody($source, $requestBody)
+    {
+        $fields = [];
+        $definitions = $requestBody::OBJECT_FIELDS;
+
+        foreach ($source as $parameter => $value) {
+            if (!isset($definitions[$parameter])) {
+                continue;
+            }
+
+            $definition = $definitions[$parameter];
+
+            if (is_array($definition) && is_array($value)) {
+                $objectClass = $definition[0];
+                $items = [];
+
+                foreach ($value as $item) {
+                    $object = new $objectClass();
+                    $items[] = $this->castRequestBody($item, $object);
+                }
+
+                $fields[$parameter] = $items;
+                continue;
+            }
+
+            if (is_string($definition)) {
+                /** @var Field $field */
+                $field = new $definition();
+
+                $fields[$parameter] = Util::cast(
+                    $value,
+                    $field->getType()
+                );
+            }
+        }
+
+        return $fields;
     }
 }

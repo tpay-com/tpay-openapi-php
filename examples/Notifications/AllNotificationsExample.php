@@ -6,6 +6,8 @@ use Doctrine\Common\Cache\FilesystemCache;
 use PSX\Cache\SimpleCache;
 use Tpay\Example\ExamplesConfig;
 use Tpay\OpenApi\Model\Objects\NotificationBody\BasicPayment;
+use Tpay\OpenApi\Model\Objects\NotificationBody\BlikAliasRegister;
+use Tpay\OpenApi\Model\Objects\NotificationBody\BlikAliasUnregister;
 use Tpay\OpenApi\Model\Objects\NotificationBody\MarketplaceTransaction;
 use Tpay\OpenApi\Model\Objects\NotificationBody\Tokenization;
 use Tpay\OpenApi\Model\Objects\NotificationBody\TokenUpdate;
@@ -80,6 +82,28 @@ try {
 
         // $marketplaceTransactionProcessor->process($notification)
         exit('{"result":true}');
+    }
+    if ($notification instanceof BlikAliasRegister) {
+        // Notification about successful blik alias registered
+
+        $value = $notification->value->getValue();
+        // The above example will check the notification and return the value for future transactions,
+        // correlate this value with the payer/user of your system for subsequent payment handling
+        // You can access any notification field by $notification->fieldName
+
+        // $blikAliasRegisteredProcessor->process($notification)
+        exit('TRUE');
+    }
+
+    if ($notification instanceof BlikAliasUnregister) {
+        // Notification about successful blik alias unregistered
+
+        $value = $notification->value->getValue();
+        // The above example will check the notification and return the value of deleted token
+        // You can access any notification field by $notification->fieldName
+
+        // $blikAliasRegisteredProcessor->process($notification)
+        exit('TRUE');
     }
 
     // Ignore and silence other notification types if not expected
