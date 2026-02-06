@@ -9,8 +9,6 @@ use Tpay\OpenApi\Model\Objects\Accounts\PointOfSale as AccountPointOfSale;
 use Tpay\OpenApi\Model\Objects\Merchant\Address as MerchantAddress;
 use Tpay\OpenApi\Model\Objects\Merchant\ContactPerson;
 use Tpay\OpenApi\Model\Objects\Merchant\PointOfSale as MerchantPointOfSale;
-use Tpay\OpenApi\Model\Objects\NotificationBody\BlikAlias;
-use Tpay\OpenApi\Model\Objects\NotificationBody\BlikAliasRegister;
 use Tpay\OpenApi\Model\Objects\Objects;
 use Tpay\OpenApi\Model\Objects\RequestBody\Account;
 use Tpay\OpenApi\Model\Objects\RequestBody\Merchant;
@@ -48,15 +46,6 @@ class ArrayObjectFactory
                     return new AccountPointOfSale();
                 case 'person':
                     return new Person();
-                default:
-                    throw new InvalidArgumentException(sprintf('Unsupported field "%s" in %s', $fieldName, $parentObject->getName()));
-            }
-        }
-
-        if ($parentObject instanceof BlikAliasRegister) {
-            switch ($fieldName) {
-                case 'msg_value':
-                    return new BlikAlias();
                 default:
                     throw new InvalidArgumentException(sprintf('Unsupported field "%s" in %s', $fieldName, $parentObject->getName()));
             }

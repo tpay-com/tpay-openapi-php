@@ -2,7 +2,6 @@
 
 namespace Tpay\OpenApi\Webhook;
 
-use Tpay\OpenApi\Factory\ArrayObjectFactory;
 use Tpay\OpenApi\Model\Fields\Field;
 use Tpay\OpenApi\Model\Objects\NotificationBody\BasicPayment;
 use Tpay\OpenApi\Model\Objects\NotificationBody\BlikAliasRegister;
@@ -35,9 +34,6 @@ class JWSVerifiedPaymentNotification extends Notification
     /** @var CertificateProvider */
     private $certificateProvider;
 
-    /** @var ArrayObjectFactory */
-    private $factory;
-
     /**
      * @param string $merchantSecret string Merchant notification check secret
      * @param bool   $productionMode true for prod or false for sandbox environment
@@ -52,7 +48,6 @@ class JWSVerifiedPaymentNotification extends Notification
         $this->merchantSecret = $merchantSecret;
         $this->requestParser = null === $requestParser ? new RequestParser() : $requestParser;
         $this->certificateProvider = $certificateProvider;
-        $this->factory = new ArrayObjectFactory();
         parent::__construct();
     }
 
