@@ -219,9 +219,9 @@ class JWSVerifiedPaymentNotification extends Notification
     /**
      * @param mixed $sourceData
      *
-     * @return array
-     *
      * @throws TpayException
+     *
+     * @return array
      */
     private function getSourceData($sourceData)
     {
