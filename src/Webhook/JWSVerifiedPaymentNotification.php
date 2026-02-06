@@ -181,6 +181,19 @@ class JWSVerifiedPaymentNotification extends Notification
                 case 'marketplace_transaction':
                     $requestBody = new MarketplaceTransaction();
                     break;
+                default:
+                    throw new TpayException(
+                        'Not recognised or invalid notification type: '.$source['type']
+                    );
+            }
+
+            if (!isset($source['data'])) {
+                throw new TpayException('Not recognised or invalid notification type: '.json_encode($source));
+            }
+
+            $source = $source['data'];
+        } elseif (isset($source['event'])) {
+            switch ($source['event']) {
                 case 'ALIAS_REGISTER':
                     $requestBody = new BlikAliasRegister();
                     break;
@@ -189,11 +202,14 @@ class JWSVerifiedPaymentNotification extends Notification
                     break;
                 default:
                     throw new TpayException(
-                        'Not recognised or invalid notification type: '.$source['type']
+                        'Not recognised or invalid notification event: '.$source['event']
                     );
             }
+            if (!isset($source['msg_value'])) {
+                throw new TpayException('Not recognised or invalid notification event: '.json_encode($source));
+            }
 
-            $source = $this->getSourceData($source);
+            $source = $source['msg_value'];
         } else {
             throw new TpayException(
                 'Cannot determine notification type. POST payload: '.json_encode($source)
@@ -214,24 +230,5 @@ class JWSVerifiedPaymentNotification extends Notification
             ->setFields($source, false);
 
         return $this->Manager->getRequestBody();
-    }
-
-    /**
-     * @param mixed $sourceData
-     *
-     * @throws TpayException
-     *
-     * @return array
-     */
-    private function getSourceData($sourceData)
-    {
-        if (isset($sourceData['data'])) {
-            return $sourceData['data'];
-        }
-        if (isset($sourceData['msg_value'])) {
-            return $sourceData['msg_value'];
-        }
-
-        throw new TpayException('Not recognised or invalid notification type: '.json_encode($sourceData));
     }
 }

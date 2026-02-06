@@ -190,7 +190,7 @@ JSON;
 
         $payload = <<<'JSON'
 {
-  "type": "ALIAS_REGISTER",
+  "event": "ALIAS_REGISTER",
   "msg_value": {
     "value": "user_unique_alias_123",
     "type": "UID",
@@ -206,7 +206,7 @@ JSON;
 
         $payload = <<<'JSON'
 {
-  "type": "ALIAS_UNREGISTER",
+  "event": "ALIAS_UNREGISTER",
   "msg_value": {
     "value": "user_unique_alias_456",
     "type": "UID"
