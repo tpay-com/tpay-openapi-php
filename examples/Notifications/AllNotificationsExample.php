@@ -92,7 +92,7 @@ try {
         // You can access any notification field by $notification->fieldName
 
         // $blikAliasRegisteredProcessor->process($notification)
-        exit('{"result":true}');
+        exit('TRUE');
     }
 
     if ($notification instanceof BlikAliasUnregister) {
@@ -103,7 +103,7 @@ try {
         // You can access any notification field by $notification->fieldName
 
         // $blikAliasRegisteredProcessor->process($notification)
-        exit('{"result":true}');
+        exit('TRUE');
     }
 
     // Ignore and silence other notification types if not expected
