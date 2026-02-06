@@ -36,6 +36,7 @@ class JWSVerifiedPaymentNotificationTest extends TestCase
      * @param mixed $expectedClass
      * @param mixed $fieldName
      * @param mixed $fieldValue
+     * @param null|mixed $expectedItemClass
      */
     public function testPositiveValidationCases($contentType, $data, $payload, $signature, $secret, $productionMode, $expectedClass, $fieldName, $fieldValue, $expectedItemClass = null)
     {
@@ -232,7 +233,7 @@ JSON;
         $result[] = ['application/json', $data, $payload, $this->sign($payload, true), 'x', true, BlikAliasUnregister::class, 'msg_value', ['value' => 'user_unique_alias_456', 'type' => 'UID'], BlikAliasUnregisterItem::class];
 
         $payload = http_build_query($data);
-        $result[] = ['application/x-www-form-urlencoded', $data, $payload, $this->sign($payload, true), 'x', true, BlikAliasUnregister::class, 'msg_value', ['value' => 'user_unique_alias_456', 'type' => 'UID',], BlikAliasUnregisterItem::class];
+        $result[] = ['application/x-www-form-urlencoded', $data, $payload, $this->sign($payload, true), 'x', true, BlikAliasUnregister::class, 'msg_value', ['value' => 'user_unique_alias_456', 'type' => 'UID'], BlikAliasUnregisterItem::class];
 
         return $result;
     }

@@ -23,7 +23,7 @@ class BlikAliasUnregister extends Objects
     /** @var Event */
     public $event;
 
-    /** @var BlikAliasUnregisterItem[] */
+    /** @var array<BlikAliasUnregisterItem> */
     public $msg_value;
 
     /** @var Md5sum */

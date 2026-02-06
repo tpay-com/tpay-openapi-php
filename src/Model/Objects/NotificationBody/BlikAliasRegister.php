@@ -23,7 +23,7 @@ class BlikAliasRegister extends Objects
     /** @var Event */
     public $event;
 
-    /** @var BlikAliasRegisterItem[] */
+    /** @var array<BlikAliasRegisterItem> */
     public $msg_value;
 
     /** @var Md5sum */
