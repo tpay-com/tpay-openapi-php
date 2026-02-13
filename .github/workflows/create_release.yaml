@@ -14,9 +14,8 @@ jobs:
       - name: Checkout source
         uses: actions/checkout@v3
 
-      - name: Inject version into SdkVersion.php
-        run: |
-          sed -i "s/const VERSION = '.*';/const VERSION = '${{ github.event.inputs.version }}';/" src/SdkVersion.php
+      - name: Check version
+        run: if [ $(grep ${{ github.event.inputs.version }} src/SdkVersion.php -c) != 1 ]; then exit 1; fi
 
       - uses: shivammathur/setup-php@v2
         with:
