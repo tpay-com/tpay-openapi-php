@@ -7,6 +7,7 @@ use Tpay\OpenApi\Curl\Curl;
 use Tpay\OpenApi\Dictionary\HttpCodesDictionary;
 use Tpay\OpenApi\Manager\Manager;
 use Tpay\OpenApi\Model\Objects\Authorization\Token;
+use Tpay\OpenApi\SdkVersion;
 use Tpay\OpenApi\Utilities\Logger;
 use Tpay\OpenApi\Utilities\TpayException;
 
@@ -39,7 +40,9 @@ class ApiAction
         $this->Token = $Token;
         $this->Curl = new Curl();
         $this->Manager = new Manager();
-        $this->clientName = 'tpay-com/tpay-openapi-php:2.3.0|PHP:'.phpversion();
+        $this->clientName
+            = 'tpay-com/tpay-openapi-php:'.SdkVersion::VERSION
+            .'|PHP:'.phpversion();
         $this->apiUrl = true === $this->productionMode
             ? ApiAction::TPAY_API_URL_PRODUCTION
             : ApiAction::TPAY_API_URL_SANDBOX;
