@@ -11,6 +11,6 @@ class Address extends Field
 {
     protected $name = __CLASS__;
     protected $type = self::STRING;
-    protected $minLength = 2;
+    protected $minLength = 3;
     protected $maxLength = 255;
 }
