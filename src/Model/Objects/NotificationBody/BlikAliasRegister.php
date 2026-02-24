@@ -2,13 +2,9 @@
 
 namespace Tpay\OpenApi\Model\Objects\NotificationBody;
 
-use Tpay\OpenApi\Model\Fields\Notification\BlikAlias\Event;
 use Tpay\OpenApi\Model\Fields\Notification\BlikAlias\ExpirationDate;
-use Tpay\OpenApi\Model\Fields\Notification\BlikAlias\Id;
 use Tpay\OpenApi\Model\Fields\Notification\BlikAlias\Type;
 use Tpay\OpenApi\Model\Fields\Notification\BlikAlias\Value;
-use Tpay\OpenApi\Model\Fields\Notification\Md5sum;
-use Tpay\OpenApi\Model\Objects\NotificationBody\BlikAlias\BlikAliasRegisterItem;
 use Tpay\OpenApi\Model\Objects\Objects;
 
 class BlikAliasRegister extends Objects

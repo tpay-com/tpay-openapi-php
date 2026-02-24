@@ -4,8 +4,6 @@ namespace Tpay\Tests\OpenApi\Webhook;
 
 use PHPUnit\Framework\TestCase;
 use Tpay\OpenApi\Model\Objects\NotificationBody\BasicPayment;
-use Tpay\OpenApi\Model\Objects\NotificationBody\BlikAlias\BlikAliasRegisterItem;
-use Tpay\OpenApi\Model\Objects\NotificationBody\BlikAlias\BlikAliasUnregisterItem;
 use Tpay\OpenApi\Model\Objects\NotificationBody\BlikAliasRegister;
 use Tpay\OpenApi\Model\Objects\NotificationBody\BlikAliasUnregister;
 use Tpay\OpenApi\Model\Objects\NotificationBody\MarketplaceTransaction;
@@ -27,16 +25,15 @@ class JWSVerifiedPaymentNotificationTest extends TestCase
     /**
      * @dataProvider positiveValidationProvider
      *
-     * @param mixed      $contentType
-     * @param mixed      $data
-     * @param mixed      $payload
-     * @param mixed      $signature
-     * @param mixed      $secret
-     * @param mixed      $productionMode
-     * @param mixed      $expectedClass
-     * @param mixed      $fieldName
-     * @param mixed      $fieldValue
-     * @param null|mixed $expectedItemClass
+     * @param mixed $contentType
+     * @param mixed $data
+     * @param mixed $payload
+     * @param mixed $signature
+     * @param mixed $secret
+     * @param mixed $productionMode
+     * @param mixed $expectedClass
+     * @param mixed $fieldName
+     * @param mixed $fieldValue
      */
     public function testPositiveValidationCases($contentType, $data, $payload, $signature, $secret, $productionMode, $expectedClass, $fieldName, $fieldValue)
     {
@@ -224,7 +221,7 @@ JSON;
         $result[] = ['application/json', $data, $payload, $this->sign($payload, true), 'x', true, BlikAliasUnregister::class, 'value', 'user_unique_alias_456'];
 
         $payload = http_build_query($data);
-        $result[] = ['application/x-www-form-urlencoded', $data, $payload, $this->sign($payload, true), 'x', true, BlikAliasUnregister::class,'value', 'user_unique_alias_456'];
+        $result[] = ['application/x-www-form-urlencoded', $data, $payload, $this->sign($payload, true), 'x', true, BlikAliasUnregister::class, 'value', 'user_unique_alias_456'];
 
         return $result;
     }
