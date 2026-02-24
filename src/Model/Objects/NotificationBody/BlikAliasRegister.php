@@ -3,7 +3,10 @@
 namespace Tpay\OpenApi\Model\Objects\NotificationBody;
 
 use Tpay\OpenApi\Model\Fields\Notification\BlikAlias\Event;
+use Tpay\OpenApi\Model\Fields\Notification\BlikAlias\ExpirationDate;
 use Tpay\OpenApi\Model\Fields\Notification\BlikAlias\Id;
+use Tpay\OpenApi\Model\Fields\Notification\BlikAlias\Type;
+use Tpay\OpenApi\Model\Fields\Notification\BlikAlias\Value;
 use Tpay\OpenApi\Model\Fields\Notification\Md5sum;
 use Tpay\OpenApi\Model\Objects\NotificationBody\BlikAlias\BlikAliasRegisterItem;
 use Tpay\OpenApi\Model\Objects\Objects;
@@ -11,30 +14,35 @@ use Tpay\OpenApi\Model\Objects\Objects;
 class BlikAliasRegister extends Objects
 {
     const OBJECT_FIELDS = [
-        'id' => Id::class,
-        'event' => Event::class,
-        'msg_value' => [BlikAliasRegisterItem::class],
-        'md5sum' => Md5sum::class,
+        'value' => Value::class,
+        'type' => Type::class,
+        'expirationDate' => ExpirationDate::class,
     ];
 
-    /** @var Id */
-    public $id;
+    /** @var Value */
+    public $value;
 
-    /** @var Event */
-    public $event;
+    /** @var Type */
+    public $type;
 
-    /** @var BlikAliasRegisterItem */
-    public $msg_value;
-
-    /** @var Md5sum */
-    public $md5sum;
+    /** @var ExpirationDate */
+    public $expirationDate;
 
     public function getRequiredFields()
     {
         return [
-            $this->id,
-            $this->event,
-            $this->msg_value,
+            $this->value,
+            $this->type,
+            $this->expirationDate,
+        ];
+    }
+
+    public function toArray()
+    {
+        return [
+            'value' => $this->value->getValue(),
+            'type' => $this->type->getValue(),
+            'expirationDate' => $this->expirationDate->getValue(),
         ];
     }
 }

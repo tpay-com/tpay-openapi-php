@@ -209,6 +209,7 @@ class JWSVerifiedPaymentNotification extends Notification
             if (!isset($source['msg_value']) || !is_array($source['msg_value'])) {
                 throw new TpayException('Not recognised or invalid notification event: '.json_encode($source));
             }
+            $source = $source['msg_value'];
         } else {
             throw new TpayException(
                 'Cannot determine notification type. POST payload: '.json_encode($source)
@@ -236,28 +237,13 @@ class JWSVerifiedPaymentNotification extends Notification
 
             $definition = $definitions[$parameter];
 
-            if (is_array($definition) && is_array($value)) {
-                $objectClass = $definition[0];
-                $items = [];
+            /** @var Field $field */
+            $field = new $definition();
 
-                foreach ($value as $item) {
-                    $object = new $objectClass();
-                    $items[] = $this->castRequestBody($item, $object);
-                }
-
-                $fields[$parameter] = $items;
-                continue;
-            }
-
-            if (is_string($definition)) {
-                /** @var Field $field */
-                $field = new $definition();
-
-                $fields[$parameter] = Util::cast(
-                    $value,
-                    $field->getType()
-                );
-            }
+            $fields[$parameter] = Util::cast(
+                $value,
+                $field->getType()
+            );
         }
 
         return $fields;
