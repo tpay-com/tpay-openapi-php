@@ -4,6 +4,8 @@ namespace Tpay\Tests\OpenApi\Webhook;
 
 use PHPUnit\Framework\TestCase;
 use Tpay\OpenApi\Model\Objects\NotificationBody\BasicPayment;
+use Tpay\OpenApi\Model\Objects\NotificationBody\BlikAliasRegister;
+use Tpay\OpenApi\Model\Objects\NotificationBody\BlikAliasUnregister;
 use Tpay\OpenApi\Model\Objects\NotificationBody\MarketplaceTransaction;
 use Tpay\OpenApi\Model\Objects\NotificationBody\Tokenization;
 use Tpay\OpenApi\Model\Objects\NotificationBody\TokenUpdate;
@@ -43,7 +45,9 @@ class JWSVerifiedPaymentNotificationTest extends TestCase
         $notificationObject = $notification->getNotification();
 
         $this->assertInstanceOf($expectedClass, $notificationObject);
-        $this->assertEquals($notificationObject->{$fieldName}->getValue(), $fieldValue);
+
+        $field = $notificationObject->{$fieldName};
+        $this->assertEquals($field->getValue(), $fieldValue);
     }
 
     /**
@@ -87,6 +91,9 @@ JSON;
         $data = json_decode($payload, true);
         $result[] = ['application/json', $data, $payload, $this->sign($payload, true), 'x', true, Tokenization::class, 'tokenizationId', 'TO-1234-890123456789012345678901234567890123456789012345678901234'];
 
+        $payload = http_build_query($data);
+        $result[] = ['application/x-www-form-urlencoded', $data, $payload, $this->sign($payload, true), 'x', true, Tokenization::class, 'tokenizationId', 'TO-1234-890123456789012345678901234567890123456789012345678901234'];
+
         $payload = <<<'JSON'
 {
   "type": "token_update",
@@ -97,6 +104,9 @@ JSON;
 JSON;
         $data = json_decode($payload, true);
         $result[] = ['application/json', $data, $payload, $this->sign($payload, true), 'x', true, TokenUpdate::class, 'token', '1234567890123456789012345678901234567890123456789012345678901234'];
+
+        $payload = http_build_query($data);
+        $result[] = ['application/x-www-form-urlencoded', $data, $payload, $this->sign($payload, true), 'x', true, TokenUpdate::class, 'token', '1234567890123456789012345678901234567890123456789012345678901234'];
 
         $payload = <<<'JSON'
 {
@@ -117,6 +127,9 @@ JSON;
 JSON;
         $data = json_decode($payload, true);
         $result[] = ['application/json', $data, $payload, $this->sign($payload, true), 'x', true, MarketplaceTransaction::class, 'transactionId', 'TO-1234-890123456789012345678901234567890123456789012345678901234'];
+
+        $payload = http_build_query($data);
+        $result[] = ['application/x-www-form-urlencoded', $data, $payload, $this->sign($payload, true), 'x', true, MarketplaceTransaction::class, 'transactionId', 'TO-1234-890123456789012345678901234567890123456789012345678901234'];
 
         $id = '12345';
         $tr_id = 'TR-1234-89012345678901234567890';
@@ -177,6 +190,39 @@ JSON;
         $payload = http_build_query($data);
         $result[] = ['application/x-www-form-urlencoded', $data, $payload, $this->sign($payload, true), self::CORRECT_CODE, true, BasicPayment::class, 'tokenPaymentData_tokenValue', '1234567890123456'];
 
+        $payload = <<<'JSON'
+{
+  "id": "1010",
+  "event": "ALIAS_REGISTER",
+  "msg_value": {
+    "value": "user_unique_alias_123",
+    "type": "UID",
+    "expirationDate": "2024-12-10 09:27:59"
+  }
+}
+JSON;
+        $data = json_decode($payload, true);
+        $result[] = ['application/json', $data, $payload, $this->sign($payload, true), 'x', true, BlikAliasRegister::class, 'value', 'user_unique_alias_123'];
+
+        $payload = http_build_query($data);
+        $result[] = ['application/x-www-form-urlencoded', $data, $payload, $this->sign($payload, true), 'x', true, BlikAliasRegister::class, 'value', 'user_unique_alias_123'];
+
+        $payload = <<<'JSON'
+{
+  "id": "1010",
+  "event": "ALIAS_UNREGISTER",
+  "msg_value":   {
+      "value": "user_unique_alias_456",
+      "type": "UID"
+  }
+}
+JSON;
+        $data = json_decode($payload, true);
+        $result[] = ['application/json', $data, $payload, $this->sign($payload, true), 'x', true, BlikAliasUnregister::class, 'value', 'user_unique_alias_456'];
+
+        $payload = http_build_query($data);
+        $result[] = ['application/x-www-form-urlencoded', $data, $payload, $this->sign($payload, true), 'x', true, BlikAliasUnregister::class, 'value', 'user_unique_alias_456'];
+
         return $result;
     }
 
@@ -203,20 +249,32 @@ JSON;
         $data = json_decode($payload, true);
         $result[] = ['application/json', $data, $payload, 'x', 'x', true, Tokenization::class, 'tokenizationId', 'TO-1234-890123456789012345678901234567890123456789012345678901234'];
 
+        $result[] = ['application/x-www-form-urlencoded', $data, $payload, 'x', 'x', true, Tokenization::class, 'tokenizationId', 'TO-1234-890123456789012345678901234567890123456789012345678901234'];
+
         // invalid signature (malformed token)
         $result[] = ['application/json', $data, $payload, 'fdsafsdfafdasfadsf', 'x', true, Tokenization::class, 'tokenizationId', 'TO-1234-890123456789012345678901234567890123456789012345678901234'];
+
+        $result[] = ['application/x-www-form-urlencoded', $data, $payload, 'fdsafsdfafdasfadsf', 'x', true, Tokenization::class, 'tokenizationId', 'TO-1234-890123456789012345678901234567890123456789012345678901234'];
 
         // invalid signature (payload difference)
         $result[] = ['application/json', $data, $payload, $this->sign($payload.'4324324324234', true), 'x', true, Tokenization::class, 'tokenizationId', 'TO-1234-890123456789012345678901234567890123456789012345678901234'];
 
+        $result[] = ['application/x-www-form-urlencoded', $data, $payload, $this->sign($payload.'4324324324234', true), 'x', true, Tokenization::class, 'tokenizationId', 'TO-1234-890123456789012345678901234567890123456789012345678901234'];
+
         // invalid signature (invalid algorithm)
         $result[] = ['application/json', $data, $payload, $this->encode(json_encode(['alg' => 'none'])).'..fadsfdasfdsf', 'x', true, Tokenization::class, 'tokenizationId', 'TO-1234-890123456789012345678901234567890123456789012345678901234'];
+
+        $result[] = ['application/x-www-form-urlencoded', $data, $payload, $this->encode(json_encode(['alg' => 'none'])).'..fadsfdasfdsf', 'x', true, Tokenization::class, 'tokenizationId', 'TO-1234-890123456789012345678901234567890123456789012345678901234'];
 
         // invalid signature (not trusted signature URL)
         $result[] = ['application/json', $data, $payload, $this->encode(json_encode(['alg' => 'RS256', 'x5u' => 'https://example.com/hostile.pem'])).'..fadsfdasfdsf', 'x', true, Tokenization::class, 'tokenizationId', 'TO-1234-890123456789012345678901234567890123456789012345678901234'];
 
+        $result[] = ['application/x-www-form-urlencoded', $data, $payload, $this->encode(json_encode(['alg' => 'RS256', 'x5u' => 'https://example.com/hostile.pem'])).'..fadsfdasfdsf', 'x', true, Tokenization::class, 'tokenizationId', 'TO-1234-890123456789012345678901234567890123456789012345678901234'];
+
         // invalid signature (prod certificate in sandbox environment)
         $result[] = ['application/json', $data, $payload, $this->sign($payload, true), 'x', false, Tokenization::class, 'tokenizationId', 'TO-1234-890123456789012345678901234567890123456789012345678901234'];
+
+        $result[] = ['application/x-www-form-urlencoded', $data, $payload, $this->sign($payload, true), 'x', false, Tokenization::class, 'tokenizationId', 'TO-1234-890123456789012345678901234567890123456789012345678901234'];
 
         // invalid md5sum
         $id = '12345';
