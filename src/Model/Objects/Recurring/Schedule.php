@@ -2,12 +2,12 @@
 
 namespace Tpay\OpenApi\Model\Objects\Recurring;
 
-use Tpay\OpenApi\Model\Fields\Recurring\Amount;
-use Tpay\OpenApi\Model\Fields\Recurring\ChargeCount;
-use Tpay\OpenApi\Model\Fields\Recurring\Currency;
-use Tpay\OpenApi\Model\Fields\Recurring\FirstChargeDate;
-use Tpay\OpenApi\Model\Fields\Recurring\Interval;
-use Tpay\OpenApi\Model\Fields\Recurring\IntervalType;
+use Tpay\OpenApi\Model\Fields\Recurring\Schedule\Amount;
+use Tpay\OpenApi\Model\Fields\Recurring\Schedule\ChargeCount;
+use Tpay\OpenApi\Model\Fields\Recurring\Schedule\Currency;
+use Tpay\OpenApi\Model\Fields\Recurring\Schedule\FirstChargeDate;
+use Tpay\OpenApi\Model\Fields\Recurring\Schedule\Interval;
+use Tpay\OpenApi\Model\Fields\Recurring\Schedule\IntervalType;
 use Tpay\OpenApi\Model\Objects\Objects;
 
 class Schedule extends Objects

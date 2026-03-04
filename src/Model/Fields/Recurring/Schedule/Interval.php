@@ -1,6 +1,6 @@
 <?php
 
-namespace Tpay\OpenApi\Model\Fields\Recurring;
+namespace Tpay\OpenApi\Model\Fields\Recurring\Schedule;
 
 use Tpay\OpenApi\Model\Fields\Field;
 

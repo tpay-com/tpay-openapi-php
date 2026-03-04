@@ -2,8 +2,8 @@
 
 namespace Tpay\OpenApi\Model\Objects\Recurring;
 
-use Tpay\OpenApi\Model\Fields\Recurring\PaymentType;
-use Tpay\OpenApi\Model\Fields\Recurring\Value;
+use Tpay\OpenApi\Model\Fields\Recurring\PaymentInstrument\PaymentType;
+use Tpay\OpenApi\Model\Fields\Recurring\PaymentInstrument\Value;
 use Tpay\OpenApi\Model\Objects\Objects;
 
 class PaymentInstrument extends Objects
