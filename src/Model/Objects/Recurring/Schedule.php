@@ -1,0 +1,52 @@
+<?php
+
+namespace Tpay\OpenApi\Model\Objects\Recurring;
+
+use Tpay\OpenApi\Model\Fields\Recurring\Amount;
+use Tpay\OpenApi\Model\Fields\Recurring\ChargeCount;
+use Tpay\OpenApi\Model\Fields\Recurring\Currency;
+use Tpay\OpenApi\Model\Fields\Recurring\FirstChargeDate;
+use Tpay\OpenApi\Model\Fields\Recurring\Interval;
+use Tpay\OpenApi\Model\Fields\Recurring\IntervalType;
+use Tpay\OpenApi\Model\Objects\Objects;
+
+class Schedule extends Objects
+{
+    const OBJECT_FIELDS = [
+        'amount' => Amount::class,
+        'currency' => Currency::class,
+        'firstChargeDate' => FirstChargeDate::class,
+        'interval' => Interval::class,
+        'intervalType' => IntervalType::class,
+        'chargeCount' => ChargeCount::class,
+    ];
+
+    /** @var Amount */
+    public $amount;
+
+    /** @var Currency */
+    public $currency;
+
+    /** @var FirstChargeDate */
+    public $firstChargeDate;
+
+    /** @var Interval */
+    public $interval;
+
+    /** @var IntervalType */
+    public $intervalType;
+
+    /** @var ChargeCount */
+    public $chargeCount;
+
+    public function getRequiredFields()
+    {
+        return [
+            $this->amount,
+            $this->currency,
+            $this->firstChargeDate,
+            $this->interval,
+            $this->intervalType,
+        ];
+    }
+}
