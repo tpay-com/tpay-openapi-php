@@ -49,7 +49,6 @@ class Recurring extends Objects
     /** @var Reason */
     public $reason;
 
-
     public function getRequiredFields()
     {
         return [
