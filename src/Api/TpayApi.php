@@ -133,7 +133,7 @@ class TpayApi
     public function recurring()
     {
         $this->authorize();
-        if (null === $this->recurring()) {
+        if (null === $this->recurring) {
             $this->recurring = (new RecurringApi($this->token, $this->productionMode))
                 ->overrideApiUrl($this->apiUrl);
 
