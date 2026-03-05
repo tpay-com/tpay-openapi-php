@@ -7,6 +7,7 @@ use Tpay\OpenApi\Model\Objects\NotificationBody\BasicPayment;
 use Tpay\OpenApi\Model\Objects\NotificationBody\BlikAliasRegister;
 use Tpay\OpenApi\Model\Objects\NotificationBody\BlikAliasUnregister;
 use Tpay\OpenApi\Model\Objects\NotificationBody\MarketplaceTransaction;
+use Tpay\OpenApi\Model\Objects\NotificationBody\Recurring;
 use Tpay\OpenApi\Model\Objects\NotificationBody\Tokenization;
 use Tpay\OpenApi\Model\Objects\NotificationBody\TokenUpdate;
 use Tpay\OpenApi\Utilities\TpayException;
@@ -222,6 +223,62 @@ JSON;
 
         $payload = http_build_query($data);
         $result[] = ['application/x-www-form-urlencoded', $data, $payload, $this->sign($payload, true), 'x', true, BlikAliasUnregister::class, 'value', 'user_unique_alias_456'];
+
+        $payload = <<<'JSON'
+{
+  "recurringId": "01KHXNTSWXP42CYFTF5TM3FJJX",
+  "transactionId": "TR-1234-12012345678901234567822",
+  "hiddenDescription": "ORDER-123",
+  "iterationCount": "1",
+  "iterationAttemptCount": "1",
+  "status": "active",
+  "nextChargeDate": null,
+  "reason": null
+}
+JSON;
+        $data = json_decode($payload, true);
+        $result[] = ['application/json', $data, $payload, $this->sign($payload, true), 'x', true, Recurring::class, 'recurringId', '01KHXNTSWXP42CYFTF5TM3FJJX'];
+
+        $payload = <<<'JSON'
+{
+  "recurringId": "01KHXNTSWXP42CYFTF5TM3FJJY",
+  "transactionId": "TR-1234-12012345678901234567822",
+  "hiddenDescription": "ORDER-123",
+  "iterationCount": "1",
+  "iterationAttemptCount": "1",
+  "status": "active"
+}
+JSON;
+        $data = json_decode($payload, true);
+        $result[] = ['application/json', $data, $payload, $this->sign($payload, true), 'x', true, Recurring::class, 'recurringId', '01KHXNTSWXP42CYFTF5TM3FJJY'];
+
+        $payload = <<<'JSON'
+{
+  "recurringId": "01KHXNTSWXP42CYFTF5TM3FJJZ",
+  "transactionId": "TR-1234-12012345678901234567822",
+  "hiddenDescription": "ORDER-123",
+  "iterationCount": "1",
+  "iterationAttemptCount": "1",
+  "status": "active",
+  "nextChargeDate": "2024-12-10 09:27:59"
+}
+JSON;
+        $data = json_decode($payload, true);
+        $result[] = ['application/json', $data, $payload, $this->sign($payload, true), 'x', true, Recurring::class, 'recurringId', '01KHXNTSWXP42CYFTF5TM3FJJZ'];
+
+        $payload = <<<'JSON'
+{
+  "recurringId": "01KHXNTSWXP42CYFTF5TM3FJJA",
+  "transactionId": "",
+  "hiddenDescription": "ORDER-123",
+  "iterationCount": "1",
+  "iterationAttemptCount": "1",
+  "status": "failed",
+  "reason": "insufficient funds"
+}
+JSON;
+        $data = json_decode($payload, true);
+        $result[] = ['application/json', $data, $payload, $this->sign($payload, true), 'x', true, Recurring::class, 'recurringId', '01KHXNTSWXP42CYFTF5TM3FJJA'];
 
         return $result;
     }

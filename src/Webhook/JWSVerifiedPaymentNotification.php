@@ -7,6 +7,7 @@ use Tpay\OpenApi\Model\Objects\NotificationBody\BasicPayment;
 use Tpay\OpenApi\Model\Objects\NotificationBody\BlikAliasRegister;
 use Tpay\OpenApi\Model\Objects\NotificationBody\BlikAliasUnregister;
 use Tpay\OpenApi\Model\Objects\NotificationBody\MarketplaceTransaction;
+use Tpay\OpenApi\Model\Objects\NotificationBody\Recurring;
 use Tpay\OpenApi\Model\Objects\NotificationBody\Tokenization;
 use Tpay\OpenApi\Model\Objects\NotificationBody\TokenUpdate;
 use Tpay\OpenApi\Model\Objects\Objects;
@@ -210,6 +211,8 @@ class JWSVerifiedPaymentNotification extends Notification
                 throw new TpayException('Not recognised or invalid notification event: '.json_encode($source));
             }
             $source = $source['msg_value'];
+        } elseif (isset($source['recurringId'])) {
+            $requestBody = new Recurring();
         } else {
             throw new TpayException(
                 'Cannot determine notification type. POST payload: '.json_encode($source)

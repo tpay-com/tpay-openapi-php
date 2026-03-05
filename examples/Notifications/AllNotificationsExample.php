@@ -9,6 +9,7 @@ use Tpay\OpenApi\Model\Objects\NotificationBody\BasicPayment;
 use Tpay\OpenApi\Model\Objects\NotificationBody\BlikAliasRegister;
 use Tpay\OpenApi\Model\Objects\NotificationBody\BlikAliasUnregister;
 use Tpay\OpenApi\Model\Objects\NotificationBody\MarketplaceTransaction;
+use Tpay\OpenApi\Model\Objects\NotificationBody\Recurring;
 use Tpay\OpenApi\Model\Objects\NotificationBody\Tokenization;
 use Tpay\OpenApi\Model\Objects\NotificationBody\TokenUpdate;
 use Tpay\OpenApi\Model\Objects\Objects;
@@ -103,6 +104,20 @@ try {
         // You can access any notification field by $notification->fieldName
 
         // $blikAliasRegisteredProcessor->process($notification)
+        exit('TRUE');
+    }
+
+    if ($notification instanceof Recurring) {
+        // Notification about successful recurring registered
+
+        $recurringId = $notification->recurringId->getValue();
+        // The above example will check the notification and return the value of recurring id
+
+        $transactionId = $notification->transactionId->getValue();
+        // The above example will check the notification and return the value of received transaction id field
+        // You can access any notification field by $notification->fieldName
+
+        // $recurringProcessor->process($notification)
         exit('TRUE');
     }
 
