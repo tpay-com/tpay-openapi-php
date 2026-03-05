@@ -4,6 +4,7 @@ namespace Tpay\OpenApi\Api\Recurring;
 
 use Tpay\OpenApi\Api\ApiAction;
 use Tpay\OpenApi\Model\Objects\RequestBody\Recurring;
+use Tpay\OpenApi\Model\Objects\RequestBody\UpdatePaymentInstrument;
 
 class RecurringApi extends ApiAction
 {
@@ -50,7 +51,8 @@ class RecurringApi extends ApiAction
         return $this->run(
             static::POST,
             sprintf('/recurring/%s/payment_instrument', $recurringId),
-            $fields
+            $fields,
+            new UpdatePaymentInstrument()
         );
     }
 }
