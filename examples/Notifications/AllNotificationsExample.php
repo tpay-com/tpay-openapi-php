@@ -118,7 +118,7 @@ try {
         // You can access any notification field by $notification->fieldName
 
         // $recurringProcessor->process($notification)
-        exit('TRUE');
+        exit('{"result":true}');
     }
 
     // Ignore and silence other notification types if not expected
