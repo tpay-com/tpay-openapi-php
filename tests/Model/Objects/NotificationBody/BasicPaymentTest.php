@@ -3,7 +3,6 @@
 namespace Tpay\Tests\OpenApi\Model\Objects\NotificationBody;
 
 use PHPUnit\Framework\TestCase;
-use Tpay\OpenApi\Model\Fields\Notification\TransactionId;
 use Tpay\OpenApi\Model\Objects\NotificationBody\BasicPayment;
 
 class BasicPaymentTest extends TestCase
