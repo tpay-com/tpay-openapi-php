@@ -10,6 +10,8 @@ class BasicPaymentTest extends TestCase
 {
     /**
      * @dataProvider validTestNotificationProvider
+     *
+     * @param mixed $transactionId
      */
     public function testIsTestNotificationReturnsTrue($transactionId)
     {
@@ -23,6 +25,8 @@ class BasicPaymentTest extends TestCase
 
     /**
      * @dataProvider invalidTestNotificationProvider
+     *
+     * @param mixed $transactionId
      */
     public function testIsTestNotificationReturnsFalse($transactionId)
     {
@@ -47,13 +51,13 @@ class BasicPaymentTest extends TestCase
     public static function invalidTestNotificationProvider()
     {
         return [
-            ['empty first part' => 'TR--TST456X'],
-            ['empty second part' => 'TR-123-TSTX'],
-            ['missing final X' => 'TR-123-TST456'],
-            ['wrong prefix' => 'XX-123-TST456X'],
-            ['missing TST' => 'TR-123-ABC456X'],
-            ['extra chars after X' => 'TR-123-TST45X6'],
-            ['first part contains dash' => 'TR-12-3-TST456X'],
+            'empty first part' => ['TR--TST456X'],
+            'empty second part' => ['TR-123-TSTX'],
+            'missing final X' => ['TR-123-TST456'],
+            'wrong prefix' => ['XX-123-TST456X'],
+            'missing TST' => ['TR-123-ABC456X'],
+            'extra chars after X' => ['TR-123-TST45X6'],
+            'first part contains dash' => ['TR-12-3-TST456X'],
         ];
     }
 }
