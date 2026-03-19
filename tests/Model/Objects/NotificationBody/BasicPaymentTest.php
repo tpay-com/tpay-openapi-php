@@ -8,10 +8,15 @@ use Tpay\OpenApi\Model\Objects\NotificationBody\BasicPayment;
 
 class BasicPaymentTest extends TestCase
 {
+    /**
+     * @dataProvider validTestNotificationProvider
+     */
     public function testIsTestNotificationReturnsTrue($transactionId)
     {
         $payment = new BasicPayment();
-        $payment->tr_id = new TransactionId($transactionId);
+        $payment->setObjectValues($payment, [
+            'tr_id' => $transactionId,
+        ]);
 
         $this->assertTrue($payment->isTestNotification());
     }
@@ -22,7 +27,9 @@ class BasicPaymentTest extends TestCase
     public function testIsTestNotificationReturnsFalse($transactionId)
     {
         $payment = new BasicPayment();
-        $payment->tr_id = new TransactionId($transactionId);
+        $payment->setObjectValues($payment, [
+            'tr_id' => $transactionId,
+        ]);
 
         $this->assertFalse($payment->isTestNotification());
     }
