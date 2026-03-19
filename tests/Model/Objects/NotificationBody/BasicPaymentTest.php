@@ -42,8 +42,7 @@ class BasicPaymentTest extends TestCase
         return [
             ['TR-123-TST456X'],
             ['TR-ABC-TST999X'],
-            ['TR-test-TSTvalueX'],
-            ['TR-!@#-TST***X'],
+            ['TR-123ABC-TST456X'],
         ];
     }
 
