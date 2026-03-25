@@ -151,4 +151,10 @@ class BasicPayment extends Objects
 
         return $notification;
     }
+
+    /** @return bool */
+    public function isTestNotification()
+    {
+        return 1 === preg_match('/^TR-[A-Z0-9]+-TST[0-9]+X$/', $this->tr_id->getValue());
+    }
 }
