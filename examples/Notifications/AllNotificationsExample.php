@@ -6,8 +6,10 @@ use Doctrine\Common\Cache\FilesystemCache;
 use PSX\Cache\SimpleCache;
 use Tpay\Example\ExamplesConfig;
 use Tpay\OpenApi\Model\Objects\NotificationBody\BasicPayment;
+use Tpay\OpenApi\Model\Objects\NotificationBody\BlikAliasExpired;
 use Tpay\OpenApi\Model\Objects\NotificationBody\BlikAliasRegister;
 use Tpay\OpenApi\Model\Objects\NotificationBody\BlikAliasUnregister;
+use Tpay\OpenApi\Model\Objects\NotificationBody\BlikAliasUpdated;
 use Tpay\OpenApi\Model\Objects\NotificationBody\MarketplaceTransaction;
 use Tpay\OpenApi\Model\Objects\NotificationBody\Tokenization;
 use Tpay\OpenApi\Model\Objects\NotificationBody\TokenUpdate;
@@ -103,6 +105,28 @@ try {
         // You can access any notification field by $notification->fieldName
 
         // $blikAliasRegisteredProcessor->process($notification)
+        exit('TRUE');
+    }
+
+    if ($notification instanceof BlikAliasUpdated) {
+        // Notification about change in blik expiry date
+
+        $value = $notification->value->getValue();
+        // The above example will check the notification and return the value of deleted token
+        // You can access any notification field by $notification->fieldName
+
+        // $blikAliasUpdatedProcessor->process($notification)
+        exit('TRUE');
+    }
+
+    if ($notification instanceof BlikAliasExpired) {
+        // Notification about blik alias expiry
+
+        $value = $notification->value->getValue();
+        // The above example will check the notification and return the value of deleted token
+        // You can access any notification field by $notification->fieldName
+
+        // $blikAliasExpiredProcessor->process($notification)
         exit('TRUE');
     }
 

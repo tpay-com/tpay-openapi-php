@@ -4,8 +4,10 @@ namespace Tpay\OpenApi\Webhook;
 
 use Tpay\OpenApi\Model\Fields\Field;
 use Tpay\OpenApi\Model\Objects\NotificationBody\BasicPayment;
+use Tpay\OpenApi\Model\Objects\NotificationBody\BlikAliasExpired;
 use Tpay\OpenApi\Model\Objects\NotificationBody\BlikAliasRegister;
 use Tpay\OpenApi\Model\Objects\NotificationBody\BlikAliasUnregister;
+use Tpay\OpenApi\Model\Objects\NotificationBody\BlikAliasUpdated;
 use Tpay\OpenApi\Model\Objects\NotificationBody\MarketplaceTransaction;
 use Tpay\OpenApi\Model\Objects\NotificationBody\Tokenization;
 use Tpay\OpenApi\Model\Objects\NotificationBody\TokenUpdate;
@@ -200,6 +202,12 @@ class JWSVerifiedPaymentNotification extends Notification
                     break;
                 case 'ALIAS_UNREGISTER':
                     $requestBody = new BlikAliasUnregister();
+                    break;
+                case 'ALIAS_UPDATE':
+                    $requestBody = new BlikAliasUpdated();
+                    break;
+                case 'ALIAS_EXPIRED':
+                    $requestBody = new BlikAliasExpired();
                     break;
                 default:
                     throw new TpayException(

@@ -2,7 +2,7 @@
 
 namespace Tpay\OpenApi\Model\Objects\NotificationBody;
 
-class BlikAliasUnregister extends AbstractBlikAlias
+class BlikAliasExpired extends AbstractBlikAlias
 {
     static protected $requiresExpirationDate = false;
 }
