@@ -100,6 +100,10 @@ class TransactionsApiTest extends TestCase
 
         yield 'with payer.taxId' => [$transactionData];
 
+        $transactionData['currency'] = 'PLN';
+
+        yield 'with currency' => [$transactionData];
+
         $transactionData['pay'] = [
             'groupId' => 150,
             'method' => 'pay_by_link',

@@ -4,5 +4,5 @@ namespace Tpay\OpenApi;
 
 final class SdkVersion
 {
-    const VERSION = '2.4.2';
+    const VERSION = '2.4.3';
 }
