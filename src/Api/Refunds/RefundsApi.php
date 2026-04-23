@@ -14,6 +14,6 @@ class RefundsApi extends ApiAction
     /** @param string $refundId */
     public function getRefundById($refundId)
     {
-        return $this->run(static::GET, sprintf('/refunds/%s', $refundId));
+        return $this->run(static::GET, sprintf('/refunds/%s', basename($refundId)));
     }
 }
