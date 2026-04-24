@@ -19,7 +19,7 @@ class AccountsApi extends ApiAction
     /** @param string $accountId */
     public function getAccountById($accountId)
     {
-        return $this->run(static::GET, sprintf('/accounts/%s', $accountId));
+        return $this->run(static::GET, sprintf('/accounts/%s', basename($accountId)));
     }
 
     public function getCategories()
@@ -30,7 +30,7 @@ class AccountsApi extends ApiAction
     /** @param string $categoryId */
     public function getCategoryById($categoryId)
     {
-        return $this->run(static::GET, sprintf('/accounts/category/%s', $categoryId));
+        return $this->run(static::GET, sprintf('/accounts/category/%s', basename($categoryId)));
     }
 
     public function getLegalForms()
@@ -41,7 +41,7 @@ class AccountsApi extends ApiAction
     /** @param string $legalFormId */
     public function getLegalFormById($legalFormId)
     {
-        return $this->run(static::GET, sprintf('/accounts/legalForm/%s', $legalFormId));
+        return $this->run(static::GET, sprintf('/accounts/legalForm/%s', basename($legalFormId)));
     }
 
     public function getDocuments()
@@ -52,13 +52,13 @@ class AccountsApi extends ApiAction
     /** @param string $documentId */
     public function getDocumentById($documentId)
     {
-        return $this->run(static::GET, sprintf('/accounts/document/%s', $documentId));
+        return $this->run(static::GET, sprintf('/accounts/document/%s', basename($documentId)));
     }
 
     /** @param string $accountId */
     public function getBalanceByAccountId($accountId)
     {
-        return $this->run(static::GET, sprintf('/accounts/%s/balance', $accountId));
+        return $this->run(static::GET, sprintf('/accounts/%s/balance', basename($accountId)));
     }
 
     /**
