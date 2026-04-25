@@ -4,6 +4,7 @@ namespace Tpay\OpenApi\Model\Objects\Transactions;
 
 use Tpay\OpenApi\Model\Fields\Alias\Key;
 use Tpay\OpenApi\Model\Fields\Alias\Label;
+use Tpay\OpenApi\Model\Fields\Alias\RecommendedAuthLevel;
 use Tpay\OpenApi\Model\Fields\Alias\Type;
 use Tpay\OpenApi\Model\Fields\Alias\Value;
 use Tpay\OpenApi\Model\Fields\Boolean;
@@ -17,6 +18,7 @@ class Alias extends Objects
         'type' => Type::class,
         'label' => Label::class,
         'key' => Key::class,
+        'recommendedAuthLevel' => RecommendedAuthLevel::class,
         'autopayment' => Autopayment::class,
         'noDelay' => Boolean::class,
     ];
@@ -32,6 +34,9 @@ class Alias extends Objects
 
     /** @var Key */
     public $key;
+
+    /** @var RecommendedAuthLevel */
+    public $recommendedAuthLevel;
 
     /** @var Autopayment */
     public $autopayment;
