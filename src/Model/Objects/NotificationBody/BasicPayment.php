@@ -6,6 +6,7 @@ use Tpay\OpenApi\Model\Fields\Notification\CardBrand;
 use Tpay\OpenApi\Model\Fields\Notification\CardExpiryDate;
 use Tpay\OpenApi\Model\Fields\Notification\CardToken;
 use Tpay\OpenApi\Model\Fields\Notification\Crc;
+use Tpay\OpenApi\Model\Fields\Notification\Currency;
 use Tpay\OpenApi\Model\Fields\Notification\Description;
 use Tpay\OpenApi\Model\Fields\Notification\Email;
 use Tpay\OpenApi\Model\Fields\Notification\Error;
@@ -38,6 +39,7 @@ class BasicPayment extends Objects
         'tr_status' => TransactionStatus::class,
         'tr_error' => Error::class,
         'tr_email' => Email::class,
+        'tr_currency' => Currency::class,
         'md5sum' => Md5sum::class,
         'test_mode' => TestMode::class,
         'wallet' => Wallet::class,
@@ -80,6 +82,9 @@ class BasicPayment extends Objects
 
     /** @var Email */
     public $tr_email;
+
+    /** @var Currency */
+    public $tr_currency;
 
     /** @var Md5sum */
     public $md5sum;
