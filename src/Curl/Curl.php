@@ -193,7 +193,7 @@ class Curl extends CurlOptions
             case 'POST':
                 curl_setopt($curl, CURLOPT_POST, 1);
                 if (!empty($this->postData)) {
-                    $json = json_encode($this->postData);
+                    $json = json_encode($this->postData, JSON_PRESERVE_ZERO_FRACTION);
                     curl_setopt($curl, CURLOPT_POSTFIELDS, $json);
                 }
                 break;
