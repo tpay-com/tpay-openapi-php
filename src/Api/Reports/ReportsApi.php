@@ -22,6 +22,6 @@ class ReportsApi extends ApiAction
 
     public function getReportFile($reportId, $fileId)
     {
-        return $this->download(static::GET, sprintf('/reports/%s/files/%s', $reportId, $fileId));
+        return $this->download(static::GET, sprintf('/reports/%s/files/%s', basename($reportId), basename($fileId)));
     }
 }

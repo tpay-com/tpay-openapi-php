@@ -23,7 +23,7 @@ class TransactionsApi extends ApiAction
     /** @param string $transactionId */
     public function getTransactionById($transactionId)
     {
-        return $this->run(static::GET, sprintf('/transactions/%s', $transactionId));
+        return $this->run(static::GET, sprintf('/transactions/%s', basename($transactionId)));
     }
 
     public function getTransactionQR($transactionId, $size = 'M', $logoPath = null, $desiredType = 'image/png')
@@ -44,7 +44,7 @@ class TransactionsApi extends ApiAction
 
         return $this
             ->sendRequest(
-                sprintf('/transactions/%s/qr', $transactionId),
+                sprintf('/transactions/%s/qr', basename($transactionId)),
                 static::POST,
                 $fields
             )
@@ -57,7 +57,7 @@ class TransactionsApi extends ApiAction
      */
     public function getRefundsByTransactionId($transactionId, $queryFields = [])
     {
-        $requestUrl = $this->addQueryFields(sprintf('/transactions/%s/refunds', $transactionId), $queryFields);
+        $requestUrl = $this->addQueryFields(sprintf('/transactions/%s/refunds', basename($transactionId)), $queryFields);
 
         return $this->run(static::GET, $requestUrl);
     }
@@ -96,7 +96,7 @@ class TransactionsApi extends ApiAction
      */
     public function createPaymentByTransactionId($fields, $transactionId)
     {
-        return $this->run(static::POST, sprintf('/transactions/%s/pay', $transactionId), $fields, new Pay());
+        return $this->run(static::POST, sprintf('/transactions/%s/pay', basename($transactionId)), $fields, new Pay());
     }
 
     /**
@@ -107,7 +107,7 @@ class TransactionsApi extends ApiAction
     {
         return $this->run(
             static::POST,
-            sprintf('/transactions/%s/pay', $transactionId),
+            sprintf('/transactions/%s/pay', basename($transactionId)),
             $fields,
             new PayWithInstantRedirection()
         );
@@ -119,13 +119,13 @@ class TransactionsApi extends ApiAction
      */
     public function createRefundByTransactionId($fields, $transactionId)
     {
-        return $this->run(static::POST, sprintf('/transactions/%s/refunds', $transactionId), $fields, new Refund());
+        return $this->run(static::POST, sprintf('/transactions/%s/refunds', basename($transactionId)), $fields, new Refund());
     }
 
     /** @param string $transactionId */
     public function cancelTransaction($transactionId)
     {
-        return $this->run(static::POST, sprintf('/transactions/%s/cancel', $transactionId));
+        return $this->run(static::POST, sprintf('/transactions/%s/cancel', basename($transactionId)));
     }
 
     /** @param array $fields */
