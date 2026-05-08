@@ -101,6 +101,7 @@ class TpayApi
             $this->accounts = (new AccountsApi($this->token, $this->productionMode))
                 ->overrideApiUrl($this->apiUrl);
 
+            $this->accounts->setClientId($this->clientId);
             if ($this->clientName) {
                 $this->accounts->setClientName($this->clientName);
             }
@@ -117,6 +118,7 @@ class TpayApi
             $this->authorization = (new AuthorizationApi($this->token, $this->productionMode))
                 ->overrideApiUrl($this->apiUrl);
 
+            $this->authorization->setClientId($this->clientId);
             if ($this->clientName) {
                 $this->authorization->setClientName($this->clientName);
             }
@@ -133,6 +135,7 @@ class TpayApi
             $this->refunds = (new RefundsApi($this->token, $this->productionMode))
                 ->overrideApiUrl($this->apiUrl);
 
+            $this->refunds->setClientId($this->clientId);
             if ($this->clientName) {
                 $this->refunds->setClientName($this->clientName);
             }
@@ -149,6 +152,7 @@ class TpayApi
             $this->reports = (new ReportsApi($this->token, $this->productionMode))
                 ->overrideApiUrl($this->apiUrl);
 
+            $this->reports->setClientId($this->clientId);
             if ($this->clientName) {
                 $this->reports->setClientName($this->clientName);
             }
@@ -165,6 +169,7 @@ class TpayApi
             $this->transactions = (new TransactionsApi($this->token, $this->productionMode))
                 ->overrideApiUrl($this->apiUrl);
 
+            $this->transactions->setClientId($this->clientId);
             if ($this->clientName) {
                 $this->transactions->setClientName($this->clientName);
             }
@@ -181,6 +186,7 @@ class TpayApi
             $this->collect = (new CollectApi($this->token, $this->productionMode))
                 ->overrideApiUrl($this->apiUrl);
 
+            $this->collect->setClientId($this->clientId);
             if ($this->clientName) {
                 $this->collect->setClientName($this->clientName);
             }
@@ -209,6 +215,7 @@ class TpayApi
 
         $authApi = (new AuthorizationApi(new Token(), $this->productionMode))->overrideApiUrl($this->apiUrl);
 
+        $authApi->setClientId($this->clientId);
         if ($this->clientName) {
             $authApi->setClientName($this->clientName);
         }

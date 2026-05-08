@@ -34,6 +34,9 @@ class ApiAction
 
     private $clientName;
 
+    /** @var string */
+    private $clientId;
+
     public function __construct(Token $Token, bool $productionMode)
     {
         $this->productionMode = $productionMode;
@@ -149,6 +152,12 @@ class ApiAction
         return $this->clientName;
     }
 
+    public function setClientId($clientId)
+    {
+        $parts = explode('-', $clientId);
+        $this->clientId = $parts[0];
+    }
+
     public function enableVerbose()
     {
         $this->Curl->enableVerbose();
@@ -177,7 +186,7 @@ class ApiAction
             $headers[] = 'X-Client-Source: '.$this->clientName;
         }
 
-        $headers[] = 'User-Agent: tpay.com PHP SDK Client/'.gethostname().'/'.$this->clientName;
+        $headers[] = 'User-Agent: tpay.com PHP SDK Client/'.gethostname().'/'.$this->clientName.'/'.$this->clientId;
 
         Logger::log(
             'Outgoing request',
