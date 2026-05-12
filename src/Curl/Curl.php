@@ -205,6 +205,7 @@ class Curl extends CurlOptions
                 if (!empty($this->postData)) {
                     $json = json_encode($this->postData, JSON_PRESERVE_ZERO_FRACTION);
                     curl_setopt($curl, CURLOPT_POSTFIELDS, $json);
+                    curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'DELETE');
                 }
                 break;
             case 'GET':
