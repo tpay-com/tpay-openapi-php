@@ -5,6 +5,7 @@ namespace Tpay\OpenApi\Api;
 use RuntimeException;
 use Tpay\OpenApi\Api\Accounts\AccountsApi;
 use Tpay\OpenApi\Api\Authorization\AuthorizationApi;
+use Tpay\OpenApi\Api\Blik\BlikApi;
 use Tpay\OpenApi\Api\Collect\CollectApi;
 use Tpay\OpenApi\Api\Refunds\RefundsApi;
 use Tpay\OpenApi\Api\Reports\ReportsApi;
@@ -15,6 +16,9 @@ use Tpay\OpenApi\Utilities\TpayException;
 
 class TpayApi
 {
+    /** @var null|BlikApi */
+    private $blik;
+
     /** @var null|AccountsApi */
     private $accounts;
 
@@ -91,6 +95,22 @@ class TpayApi
     public function getToken()
     {
         return $this->token;
+    }
+
+    /** @return BlikApi */
+    public function blik()
+    {
+        $this->authorize();
+        if (null === $this->blik) {
+            $this->blik = (new BlikApi($this->token, $this->productionMode))
+                ->overrideApiUrl($this->apiUrl);
+
+            if ($this->clientName) {
+                $this->blik->setClientName($this->clientName);
+            }
+        }
+
+        return $this->blik;
     }
 
     /** @return AccountsApi */
