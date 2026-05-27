@@ -108,7 +108,6 @@ class Objects implements ObjectsInterface
     {
         foreach ($fieldValue as $field => $value) {
             if (is_array($object->{$fieldName})) {
-
                 if (!isset($object->{$fieldName}[$field])) {
                     $object->{$fieldName}[$field] = $this->factory->create($fieldName, $object);
                 }
