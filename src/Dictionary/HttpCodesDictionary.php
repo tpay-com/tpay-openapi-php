@@ -9,6 +9,7 @@ class HttpCodesDictionary
         200 => 'OK - default successful outcome of the request',
         201 => 'Created - successfully created a new object',
         202 => 'Accepted - successfully created a new object, but requires further action',
+        204 => 'No Content - successful outcome of the request, but no content to return',
     ];
 
     const HTTP_ERROR_CODES = [

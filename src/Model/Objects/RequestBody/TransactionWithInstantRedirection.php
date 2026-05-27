@@ -3,6 +3,7 @@
 namespace Tpay\OpenApi\Model\Objects\RequestBody;
 
 use Tpay\OpenApi\Model\Fields\Transaction\Amount;
+use Tpay\OpenApi\Model\Fields\Transaction\Currency;
 use Tpay\OpenApi\Model\Fields\Transaction\Description;
 use Tpay\OpenApi\Model\Fields\Transaction\HiddenDescription;
 use Tpay\OpenApi\Model\Fields\Transaction\Lang;
@@ -14,6 +15,7 @@ class TransactionWithInstantRedirection extends Objects
 {
     const OBJECT_FIELDS = [
         'amount' => Amount::class,
+        'currency' => Currency::class,
         'description' => Description::class,
         'hiddenDescription' => HiddenDescription::class,
         'lang' => Lang::class,
@@ -24,6 +26,9 @@ class TransactionWithInstantRedirection extends Objects
 
     /** @var Amount */
     public $amount;
+
+    /** @var Currency */
+    public $currency;
 
     /** @var Description */
     public $description;
