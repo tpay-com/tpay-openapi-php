@@ -19,6 +19,7 @@ class Schedule extends Objects
         'interval' => Interval::class,
         'intervalType' => IntervalType::class,
         'chargeCount' => ChargeCount::class,
+        'retryIntervals' => [RetryInterval::class],
     ];
 
     /** @var Amount */
@@ -38,6 +39,9 @@ class Schedule extends Objects
 
     /** @var ChargeCount */
     public $chargeCount;
+
+    /** @var RetryInterval */
+    public $retryIntervals;
 
     public function getRequiredFields()
     {

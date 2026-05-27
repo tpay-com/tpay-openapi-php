@@ -11,5 +11,5 @@ class IntervalType extends Field
 {
     protected $name = __CLASS__;
     protected $type = self::STRING;
-    protected $enum = ['days', 'months'];
+    protected $enum = ['minutes', 'days', 'months'];
 }

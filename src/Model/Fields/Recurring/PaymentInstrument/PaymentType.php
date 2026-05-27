@@ -11,5 +11,5 @@ class PaymentType extends Field
 {
     protected $name = __CLASS__;
     protected $type = self::STRING;
-    protected $enum = ['card_token'];
+    protected $enum = ['card_token', 'blik_payid', 'test'];
 }

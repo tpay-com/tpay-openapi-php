@@ -10,6 +10,8 @@ use Tpay\OpenApi\Model\Objects\Merchant\Address as MerchantAddress;
 use Tpay\OpenApi\Model\Objects\Merchant\ContactPerson;
 use Tpay\OpenApi\Model\Objects\Merchant\PointOfSale as MerchantPointOfSale;
 use Tpay\OpenApi\Model\Objects\Objects;
+use Tpay\OpenApi\Model\Objects\Recurring\RetryInterval;
+use Tpay\OpenApi\Model\Objects\Recurring\Schedule;
 use Tpay\OpenApi\Model\Objects\RequestBody\Account;
 use Tpay\OpenApi\Model\Objects\RequestBody\Merchant;
 
@@ -46,6 +48,15 @@ class ArrayObjectFactory
                     return new AccountPointOfSale();
                 case 'person':
                     return new Person();
+                default:
+                    throw new InvalidArgumentException(sprintf('Unsupported field "%s" in %s', $fieldName, $parentObject->getName()));
+            }
+        }
+
+        if ($parentObject instanceof Schedule) {
+            switch ($fieldName) {
+                case 'retryIntervals':
+                    return new RetryInterval();
                 default:
                     throw new InvalidArgumentException(sprintf('Unsupported field "%s" in %s', $fieldName, $parentObject->getName()));
             }

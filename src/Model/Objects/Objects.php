@@ -44,22 +44,42 @@ class Objects implements ObjectsInterface
     public function setObjectValues(&$object, $values)
     {
         foreach ($values as $fieldName => $fieldValue) {
-            if (is_array($fieldValue) && property_exists($object, $fieldName)) {
-                $this->setObjectsInArray($object, $fieldValue, $fieldName);
+            if (!is_object($object)) {
                 continue;
             }
-            if (property_exists($object, $fieldName) && $this->isField($object->{$fieldName})) {
-                $object->{$fieldName}->setValue($fieldValue);
-            } elseif (property_exists($object, $fieldName) && $this->isObject($object->{$fieldName})) {
-                $this->setObjectValues($object->{$fieldName}, $fieldValue);
-            } else {
-                $errorField = $fieldName;
-                if (0 === $errorField) {
-                    $errorField = $fieldValue;
-                }
+
+            if (!property_exists($object, $fieldName)) {
                 if (true === $this->strictCheck) {
-                    throw new InvalidArgumentException(sprintf('Field %s is not supported', $errorField));
+                    throw new InvalidArgumentException(
+                        sprintf('Field %s is not supported', $fieldName)
+                    );
                 }
+
+                continue;
+            }
+
+            if (is_array($fieldValue) && is_array($object->{$fieldName})) {
+                $this->setObjectsInArray($object, $fieldValue, $fieldName);
+
+                continue;
+            }
+
+            if (is_array($fieldValue) && $this->isObject($object->{$fieldName})) {
+                $this->setObjectValues($object->{$fieldName}, $fieldValue);
+
+                continue;
+            }
+
+            if ($this->isField($object->{$fieldName})) {
+                $object->{$fieldName}->setValue($fieldValue);
+
+                continue;
+            }
+
+            if (true === $this->strictCheck) {
+                throw new InvalidArgumentException(
+                    sprintf('Field %s is not supported', $fieldName)
+                );
             }
         }
 
@@ -72,6 +92,7 @@ class Objects implements ObjectsInterface
         foreach ($objectFields as $objectVar => $fieldClass) {
             if (is_array($fieldClass)) {
                 $this->{$objectVar}[] = new $fieldClass[0]();
+
                 continue;
             }
             $this->{$objectVar} = new $fieldClass();
@@ -86,25 +107,34 @@ class Objects implements ObjectsInterface
     private function setObjectsInArray($object, $fieldValue, $fieldName)
     {
         foreach ($fieldValue as $field => $value) {
+            if (is_array($object->{$fieldName})) {
+
+                if (!isset($object->{$fieldName}[$field])) {
+                    $object->{$fieldName}[$field] = $this->factory->create($fieldName, $object);
+                }
+                $this->setObjectValues($object->{$fieldName}[$field], $value);
+
+                continue;
+            }
+
             if (is_array($value)) {
                 if (isset($object->{$fieldName}->{$field})) {
                     $this->setObjectValues($object->{$fieldName}->{$field}, $value);
                 }
-                if (is_array($object->{$fieldName})) {
-                    if (!isset($object->{$fieldName}[$field])) {
-                        $object->{$fieldName}[] = $this->factory->create($fieldName, $object);
-                    }
 
-                    $this->setObjectValues($object->{$fieldName}[$field], $value);
-                }
-            } else {
-                if (isset($object->{$fieldName}->{$field}) && $this->isField($object->{$fieldName}->{$field})) {
-                    $object->{$fieldName}->{$field}->setValue($value);
-                } else {
-                    if (true === $this->strictCheck) {
-                        throw new InvalidArgumentException(sprintf('Field %s is not supported', $field));
-                    }
-                }
+                continue;
+            }
+
+            if (isset($object->{$fieldName}->{$field}) && $this->isField($object->{$fieldName}->{$field})) {
+                $object->{$fieldName}->{$field}->setValue($value);
+
+                continue;
+            }
+
+            if (true === $this->strictCheck) {
+                throw new InvalidArgumentException(
+                    sprintf('Field %s is not supported', $field)
+                );
             }
         }
     }
