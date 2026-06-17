@@ -5,6 +5,7 @@ namespace Tpay\OpenApi\Api;
 use RuntimeException;
 use Tpay\OpenApi\Api\Accounts\AccountsApi;
 use Tpay\OpenApi\Api\Authorization\AuthorizationApi;
+use Tpay\OpenApi\Api\Blik\BlikApi;
 use Tpay\OpenApi\Api\Collect\CollectApi;
 use Tpay\OpenApi\Api\Refunds\RefundsApi;
 use Tpay\OpenApi\Api\Reports\ReportsApi;
@@ -15,6 +16,9 @@ use Tpay\OpenApi\Utilities\TpayException;
 
 class TpayApi
 {
+    /** @var null|BlikApi */
+    private $blik;
+
     /** @var null|AccountsApi */
     private $accounts;
 
@@ -93,6 +97,22 @@ class TpayApi
         return $this->token;
     }
 
+    /** @return BlikApi */
+    public function blik()
+    {
+        $this->authorize();
+        if (null === $this->blik) {
+            $this->blik = (new BlikApi($this->token, $this->productionMode))
+                ->overrideApiUrl($this->apiUrl);
+
+            if ($this->clientName) {
+                $this->blik->setClientName($this->clientName);
+            }
+        }
+
+        return $this->blik;
+    }
+
     /** @return AccountsApi */
     public function accounts()
     {
@@ -101,6 +121,7 @@ class TpayApi
             $this->accounts = (new AccountsApi($this->token, $this->productionMode))
                 ->overrideApiUrl($this->apiUrl);
 
+            $this->accounts->setClientId($this->clientId);
             if ($this->clientName) {
                 $this->accounts->setClientName($this->clientName);
             }
@@ -117,6 +138,7 @@ class TpayApi
             $this->authorization = (new AuthorizationApi($this->token, $this->productionMode))
                 ->overrideApiUrl($this->apiUrl);
 
+            $this->authorization->setClientId($this->clientId);
             if ($this->clientName) {
                 $this->authorization->setClientName($this->clientName);
             }
@@ -133,6 +155,7 @@ class TpayApi
             $this->refunds = (new RefundsApi($this->token, $this->productionMode))
                 ->overrideApiUrl($this->apiUrl);
 
+            $this->refunds->setClientId($this->clientId);
             if ($this->clientName) {
                 $this->refunds->setClientName($this->clientName);
             }
@@ -149,6 +172,7 @@ class TpayApi
             $this->reports = (new ReportsApi($this->token, $this->productionMode))
                 ->overrideApiUrl($this->apiUrl);
 
+            $this->reports->setClientId($this->clientId);
             if ($this->clientName) {
                 $this->reports->setClientName($this->clientName);
             }
@@ -165,6 +189,7 @@ class TpayApi
             $this->transactions = (new TransactionsApi($this->token, $this->productionMode))
                 ->overrideApiUrl($this->apiUrl);
 
+            $this->transactions->setClientId($this->clientId);
             if ($this->clientName) {
                 $this->transactions->setClientName($this->clientName);
             }
@@ -181,6 +206,7 @@ class TpayApi
             $this->collect = (new CollectApi($this->token, $this->productionMode))
                 ->overrideApiUrl($this->apiUrl);
 
+            $this->collect->setClientId($this->clientId);
             if ($this->clientName) {
                 $this->collect->setClientName($this->clientName);
             }
@@ -209,6 +235,7 @@ class TpayApi
 
         $authApi = (new AuthorizationApi(new Token(), $this->productionMode))->overrideApiUrl($this->apiUrl);
 
+        $authApi->setClientId($this->clientId);
         if ($this->clientName) {
             $authApi->setClientName($this->clientName);
         }

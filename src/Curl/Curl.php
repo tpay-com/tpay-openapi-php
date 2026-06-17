@@ -193,7 +193,7 @@ class Curl extends CurlOptions
             case 'POST':
                 curl_setopt($curl, CURLOPT_POST, 1);
                 if (!empty($this->postData)) {
-                    $json = json_encode($this->postData);
+                    $json = json_encode($this->postData, JSON_PRESERVE_ZERO_FRACTION);
                     curl_setopt($curl, CURLOPT_POSTFIELDS, $json);
                 }
                 break;
@@ -203,7 +203,9 @@ class Curl extends CurlOptions
             case 'DELETE':
                 curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'DELETE');
                 if (!empty($this->postData)) {
-                    curl_setopt($curl, CURLOPT_POSTFIELDS, $this->postData);
+                    $json = json_encode($this->postData, JSON_PRESERVE_ZERO_FRACTION);
+                    curl_setopt($curl, CURLOPT_POSTFIELDS, $json);
+                    curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'DELETE');
                 }
                 break;
             case 'GET':
