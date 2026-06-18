@@ -20,6 +20,9 @@ class PaymentInstrument extends Objects
     /** @var Value */
     public $value;
 
+    /** @var BlikPaymentDetails */
+    public $blik;
+
     public function getRequiredFields()
     {
         return [
