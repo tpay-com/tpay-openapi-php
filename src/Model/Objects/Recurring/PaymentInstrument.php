@@ -11,6 +11,7 @@ class PaymentInstrument extends Objects
     const OBJECT_FIELDS = [
         'paymentType' => PaymentType::class,
         'value' => Value::class,
+        'blik' => BlikPaymentDetails::class,
     ];
 
     /** @var PaymentType */

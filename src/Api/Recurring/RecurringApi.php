@@ -40,9 +40,15 @@ class RecurringApi extends ApiAction
     }
 
     /** @param string $recurringId */
-    public function cancelTransaction($recurringId)
+    public function cancelRecurring($recurringId)
     {
         return $this->run(static::POST, sprintf('/recurring/%s/cancel', $recurringId));
+    }
+
+    /** @param string $recurringId */
+    public function retryRecurring($recurringId)
+    {
+        return $this->run(static::POST, sprintf('/recurring/%s/retry', $recurringId));
     }
 
     /** @param string $recurringId */
