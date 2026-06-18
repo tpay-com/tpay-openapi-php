@@ -14,13 +14,13 @@ class BlikPaymentDetails extends Objects
     const OBJECT_FIELDS = [
         'model' => BlikModel::class,
         'noDelay' => Boolean::class,
-        'recommendedAuthLevel' => RecommendedAuthLevel::class
+        'recommendedAuthLevel' => RecommendedAuthLevel::class,
     ];
 
     /** @var BlikModel */
     public $model;
 
-    /** @var Boolean */
+    /** @var \Tpay\OpenApi\Model\Fields\Boolean */
     public $noDelay;
 
     /** @var RecommendedAuthLevel */
