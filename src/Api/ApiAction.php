@@ -3,9 +3,11 @@
 namespace Tpay\OpenApi\Api;
 
 use RuntimeException;
+use UnexpectedValueException;
 use Tpay\OpenApi\Curl\Curl;
 use Tpay\OpenApi\Dictionary\HttpCodesDictionary;
 use Tpay\OpenApi\Manager\Manager;
+use Tpay\OpenApi\Model\Fields\Recurring\PaymentInstrument\PaymentType;
 use Tpay\OpenApi\Model\Objects\Authorization\Token;
 use Tpay\OpenApi\SdkVersion;
 use Tpay\OpenApi\Utilities\Logger;
@@ -19,6 +21,7 @@ class ApiAction
     const POST = 'POST';
     const DELETE = 'DELETE';
     const PUT = 'PUT';
+    private const PAYMENT_TYPE_FIELD = 'paymentType';
 
     public $Manager;
     protected $Curl;
@@ -65,6 +68,8 @@ class ApiAction
 
     public function run($requestMethod, $apiMethod, $fields = [], $requestBody = null, $headers = [])
     {
+        $this->validateProductionPaymentType($fields);
+
         if (is_array($fields) && count($fields) > 0) {
             $this->Manager
                 ->setRequestBody($requestBody)
@@ -236,5 +241,35 @@ class ApiAction
         if (!array_key_exists($responseCode, $errorCodesDict) && !array_key_exists($responseCode, $successCodesDict)) {
             throw new TpayException(sprintf('Unknown error response code %s', $responseCode));
         }
+    }
+
+    /** @param mixed $fields */
+    private function validateProductionPaymentType($fields)
+    {
+        if (true !== $this->productionMode || !is_array($fields)) {
+            return;
+        }
+
+        if ($this->containsTestPaymentType($fields)) {
+            throw new UnexpectedValueException(
+                sprintf('paymentType "%s" is not allowed in production mode', PaymentType::TEST)
+            );
+        }
+    }
+
+    /** @param array $fields */
+    private function containsTestPaymentType(array $fields)
+    {
+        foreach ($fields as $fieldName => $fieldValue) {
+            if (self::PAYMENT_TYPE_FIELD === $fieldName && PaymentType::TEST === $fieldValue) {
+                return true;
+            }
+
+            if (is_array($fieldValue) && $this->containsTestPaymentType($fieldValue)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

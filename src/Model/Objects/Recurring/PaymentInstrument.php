@@ -2,6 +2,7 @@
 
 namespace Tpay\OpenApi\Model\Objects\Recurring;
 
+use UnexpectedValueException;
 use Tpay\OpenApi\Model\Fields\Recurring\PaymentInstrument\PaymentType;
 use Tpay\OpenApi\Model\Fields\Recurring\PaymentInstrument\Value;
 use Tpay\OpenApi\Model\Objects\Objects;
@@ -25,9 +26,32 @@ class PaymentInstrument extends Objects
 
     public function getRequiredFields()
     {
-        return [
+        $requiredFields = [
             $this->paymentType,
             $this->value,
         ];
+
+        if (PaymentType::BLIK_PAYID === $this->paymentType->getValue() && $this->wasFieldProvided('blik')) {
+            $requiredFields[] = $this->blik;
+        }
+
+        return $requiredFields;
+    }
+
+    public function validate()
+    {
+        if (PaymentType::CARD_TOKEN === $this->paymentType->getValue() && $this->wasFieldProvided('blik')) {
+            throw new UnexpectedValueException(
+                sprintf('Field "blik" must be null when paymentType is "%s"', PaymentType::CARD_TOKEN)
+            );
+        }
+
+        if (PaymentType::BLIK_PAYID === $this->paymentType->getValue() && !$this->wasFieldProvided('blik')) {
+            throw new UnexpectedValueException(
+                sprintf('Field "blik" is required when paymentType is "%s"', PaymentType::BLIK_PAYID)
+            );
+        }
+
+        return true;
     }
 }

@@ -12,7 +12,12 @@ class Objects implements ObjectsInterface
     const OBJECT_FIELDS = [];
     const UNIQUE_FIELDS = [];
 
+    private const PROVIDED_FIELDS_PROPERTY = 'providedFields';
+
     public $strictCheck = true;
+
+    /** @var array<string, bool> */
+    protected $providedFields = [];
 
     /** @var ArrayObjectFactory */
     private $factory;
@@ -27,6 +32,17 @@ class Objects implements ObjectsInterface
     public function getRequiredFields()
     {
         return [];
+    }
+
+    public function validate()
+    {
+        return true;
+    }
+
+    /** @param string $fieldName */
+    public function wasFieldProvided($fieldName)
+    {
+        return isset($this->providedFields[$fieldName]);
     }
 
     /** @return string */
@@ -48,7 +64,21 @@ class Objects implements ObjectsInterface
                 continue;
             }
 
+            if ($object instanceof self) {
+                $object->markFieldProvided($fieldName);
+            }
+
             if (!property_exists($object, $fieldName)) {
+                if (true === $this->strictCheck) {
+                    throw new InvalidArgumentException(
+                        sprintf('Field %s is not supported', $fieldName)
+                    );
+                }
+
+                continue;
+            }
+
+            if (self::PROVIDED_FIELDS_PROPERTY === $fieldName) {
                 if (true === $this->strictCheck) {
                     throw new InvalidArgumentException(
                         sprintf('Field %s is not supported', $fieldName)
@@ -97,6 +127,12 @@ class Objects implements ObjectsInterface
             }
             $this->{$objectVar} = new $fieldClass();
         }
+    }
+
+    /** @param string $fieldName */
+    protected function markFieldProvided($fieldName)
+    {
+        $this->providedFields[$fieldName] = true;
     }
 
     /**
