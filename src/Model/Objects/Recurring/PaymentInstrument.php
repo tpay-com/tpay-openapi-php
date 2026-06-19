@@ -2,10 +2,10 @@
 
 namespace Tpay\OpenApi\Model\Objects\Recurring;
 
-use UnexpectedValueException;
 use Tpay\OpenApi\Model\Fields\Recurring\PaymentInstrument\PaymentType;
 use Tpay\OpenApi\Model\Fields\Recurring\PaymentInstrument\Value;
 use Tpay\OpenApi\Model\Objects\Objects;
+use UnexpectedValueException;
 
 class PaymentInstrument extends Objects
 {

@@ -3,7 +3,6 @@
 namespace Tpay\OpenApi\Api;
 
 use RuntimeException;
-use UnexpectedValueException;
 use Tpay\OpenApi\Curl\Curl;
 use Tpay\OpenApi\Dictionary\HttpCodesDictionary;
 use Tpay\OpenApi\Manager\Manager;
@@ -12,6 +11,7 @@ use Tpay\OpenApi\Model\Objects\Authorization\Token;
 use Tpay\OpenApi\SdkVersion;
 use Tpay\OpenApi\Utilities\Logger;
 use Tpay\OpenApi\Utilities\TpayException;
+use UnexpectedValueException;
 
 class ApiAction
 {
@@ -257,7 +257,6 @@ class ApiAction
         }
     }
 
-    /** @param array $fields */
     private function containsTestPaymentType(array $fields)
     {
         foreach ($fields as $fieldName => $fieldValue) {

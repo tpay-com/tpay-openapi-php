@@ -11,7 +11,6 @@ class Objects implements ObjectsInterface
 {
     const OBJECT_FIELDS = [];
     const UNIQUE_FIELDS = [];
-
     private const PROVIDED_FIELDS_PROPERTY = 'providedFields';
 
     public $strictCheck = true;
