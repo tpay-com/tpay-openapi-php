@@ -42,7 +42,7 @@ class PaymentInstrument extends Objects
     {
         if (PaymentType::CARD_TOKEN === $this->paymentType->getValue() && $this->wasFieldProvided('blik')) {
             throw new UnexpectedValueException(
-                sprintf('Field "blik" must be null when paymentType is "%s"', PaymentType::CARD_TOKEN)
+                sprintf('Field "blik" is not allowed with paymentType "%s"', PaymentType::CARD_TOKEN)
             );
         }
 

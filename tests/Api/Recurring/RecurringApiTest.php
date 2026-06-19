@@ -19,7 +19,7 @@ class RecurringApiTest extends TestCase
         CurlMock::expectNoCurlExecCall();
 
         $this->expectException(UnexpectedValueException::class);
-        $this->expectExceptionMessage('Field "blik" must be null when paymentType is "card_token"');
+        $this->expectExceptionMessage('Field "blik" is not allowed with paymentType "card_token"');
 
         $this->createRecurringApi(false)->updatePaymentInstrument([
             'paymentInstrument' => [
