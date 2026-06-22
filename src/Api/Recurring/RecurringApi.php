@@ -3,11 +3,16 @@
 namespace Tpay\OpenApi\Api\Recurring;
 
 use Tpay\OpenApi\Api\ApiAction;
+use Tpay\OpenApi\Model\Fields\Recurring\PaymentInstrument\PaymentType;
 use Tpay\OpenApi\Model\Objects\RequestBody\Recurring;
 use Tpay\OpenApi\Model\Objects\RequestBody\UpdatePaymentInstrument;
+use UnexpectedValueException;
 
 class RecurringApi extends ApiAction
 {
+    private const PAYMENT_INSTRUMENT_FIELD = 'paymentInstrument';
+    private const PAYMENT_TYPE_FIELD = 'paymentType';
+
     /** @param array $queryFields */
     public function getRecurring($queryFields = [])
     {
@@ -36,6 +41,8 @@ class RecurringApi extends ApiAction
     /** @param array $fields */
     public function createRecurring($fields)
     {
+        $this->validateProductionPaymentType($fields);
+
         return $this->run(static::POST, '/recurring', $fields, new Recurring());
     }
 
@@ -59,6 +66,22 @@ class RecurringApi extends ApiAction
             sprintf('/recurring/%s/payment_instrument', $recurringId),
             $fields,
             new UpdatePaymentInstrument()
+        );
+    }
+
+    /** @param array $fields */
+    private function validateProductionPaymentType($fields)
+    {
+        if (
+            !$this->isProductionMode()
+            || !isset($fields[self::PAYMENT_INSTRUMENT_FIELD][self::PAYMENT_TYPE_FIELD])
+            || PaymentType::TEST !== $fields[self::PAYMENT_INSTRUMENT_FIELD][self::PAYMENT_TYPE_FIELD]
+        ) {
+            return;
+        }
+
+        throw new UnexpectedValueException(
+            sprintf('paymentType "%s" is not allowed in production mode', PaymentType::TEST)
         );
     }
 }

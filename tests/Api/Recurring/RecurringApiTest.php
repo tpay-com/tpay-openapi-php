@@ -64,19 +64,33 @@ class RecurringApiTest extends TestCase
         self::assertSame('ok', $result);
     }
 
-    public function testProductionModeDoesNotAllowTestPaymentType()
+    public function testCreateRecurringInProductionModeDoesNotAllowTestPaymentType()
     {
         CurlMock::expectNoCurlExecCall();
 
         $this->expectException(UnexpectedValueException::class);
         $this->expectExceptionMessage('paymentType "test" is not allowed in production mode');
 
-        $this->createRecurringApi(true)->updatePaymentInstrument([
+        $this->createRecurringApi(true)->createRecurring([
             'paymentInstrument' => [
                 'paymentType' => 'test',
                 'value' => 'test-value',
             ],
         ], 'recurring-id');
+    }
+
+    public function testUpdatePaymentInstrumentInProductionModeAllowsTestPaymentType()
+    {
+        CurlMock::setConsecutiveReturnedTransfers('"ok"');
+
+        $result = $this->createRecurringApi(true)->updatePaymentInstrument([
+            'paymentInstrument' => [
+                'paymentType' => 'test',
+                'value' => 'test-value',
+            ],
+        ], 'recurring-id');
+
+        self::assertSame('ok', $result);
     }
 
     private function createRecurringApi($productionMode)
