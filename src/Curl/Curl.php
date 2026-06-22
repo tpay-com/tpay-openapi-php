@@ -122,7 +122,7 @@ class Curl extends CurlOptions
         $this->curlInfo = curl_getinfo($ch);
         $this->curlError = curl_error($ch);
         $this->curlErrorNumber = curl_errno($ch);
-        curl_close($ch);
+
         $this->result = $curlRes;
 
         return $this;
@@ -138,7 +138,7 @@ class Curl extends CurlOptions
         $this->curlInfo = curl_getinfo($ch);
         $this->curlError = curl_error($ch);
         $this->curlErrorNumber = curl_errno($ch);
-        curl_close($ch);
+
         $this->result = $curlRes;
         fseek($fp, 0);
 
