@@ -76,7 +76,7 @@ class RecurringApiTest extends TestCase
                 'paymentType' => 'test',
                 'value' => 'test-value',
             ],
-        ], 'recurring-id');
+        ]);
     }
 
     public function testUpdatePaymentInstrumentInProductionModeAllowsTestPaymentType()
