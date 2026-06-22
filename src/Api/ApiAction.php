@@ -242,5 +242,4 @@ class ApiAction
             throw new TpayException(sprintf('Unknown error response code %s', $responseCode));
         }
     }
-
 }
