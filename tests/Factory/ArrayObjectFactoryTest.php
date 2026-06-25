@@ -12,6 +12,8 @@ use Tpay\OpenApi\Model\Objects\Accounts\PointOfSale as AccountPointOfSale;
 use Tpay\OpenApi\Model\Objects\Merchant\Address as MerchantAddress;
 use Tpay\OpenApi\Model\Objects\Merchant\ContactPerson;
 use Tpay\OpenApi\Model\Objects\Merchant\PointOfSale as MerchantPointOfSale;
+use Tpay\OpenApi\Model\Objects\Recurring\RetryInterval;
+use Tpay\OpenApi\Model\Objects\Recurring\Schedule;
 use Tpay\OpenApi\Model\Objects\RequestBody\Account;
 use Tpay\OpenApi\Model\Objects\RequestBody\Merchant;
 use Tpay\OpenApi\Model\Objects\RequestBody\Refund;
@@ -74,6 +76,12 @@ class ArrayObjectFactoryTest extends TestCase
             'fieldName' => 'person',
             'object' => new Account(),
             'expectedResult' => Person::class,
+        ];
+
+        yield 'recurring retryIntervals' => [
+            'fieldName' => 'retryIntervals',
+            'object' => new Schedule(),
+            'expectedResult' => RetryInterval::class,
         ];
     }
 

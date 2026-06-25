@@ -225,6 +225,11 @@ class ApiAction
         return $requestUrl;
     }
 
+    protected function isProductionMode()
+    {
+        return true === $this->productionMode;
+    }
+
     private function checkResponse()
     {
         $responseCode = $this->getHttpResponseCode();
