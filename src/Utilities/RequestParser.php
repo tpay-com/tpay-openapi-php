@@ -51,7 +51,7 @@ class RequestParser
     {
         $jws = isset($_SERVER['HTTP_X_JWS_SIGNATURE']) ? $_SERVER['HTTP_X_JWS_SIGNATURE'] : null;
         if (null === $jws) {
-            throw new TpayException('Missing JSW header');
+            throw new TpayException('Missing JWS header');
         }
 
         return $jws;
