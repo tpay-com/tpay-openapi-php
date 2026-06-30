@@ -4,6 +4,9 @@ namespace Tpay\OpenApi\Curl;
 
 class CurlOptions
 {
+    const DEFAULT_TIMEOUT = 5;
+    const DEFAULT_CONNECT_TIMEOUT = 3;
+
     /** @var array<string> */
     protected $headers = [];
 
@@ -11,10 +14,10 @@ class CurlOptions
     private $verifyHost = 0;
 
     /** @var int */
-    private $timeout = 30;
+    private $timeout = self::DEFAULT_TIMEOUT;
 
     /** @var int */
-    private $connectTimeout = 15;
+    private $connectTimeout = self::DEFAULT_CONNECT_TIMEOUT;
 
     /** @var bool */
     private $verifyPeer = false;
