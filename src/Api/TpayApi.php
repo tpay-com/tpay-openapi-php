@@ -7,6 +7,7 @@ use Tpay\OpenApi\Api\Accounts\AccountsApi;
 use Tpay\OpenApi\Api\Authorization\AuthorizationApi;
 use Tpay\OpenApi\Api\Blik\BlikApi;
 use Tpay\OpenApi\Api\Collect\CollectApi;
+use Tpay\OpenApi\Api\Recurring\RecurringApi;
 use Tpay\OpenApi\Api\Refunds\RefundsApi;
 use Tpay\OpenApi\Api\Reports\ReportsApi;
 use Tpay\OpenApi\Api\Transactions\TransactionsApi;
@@ -27,6 +28,9 @@ class TpayApi
 
     /** @var null|CollectApi */
     private $collect;
+
+    /** @var null|RecurringApi */
+    private $recurring;
 
     /** @var null|RefundsApi */
     private $refunds;
@@ -145,6 +149,22 @@ class TpayApi
         }
 
         return $this->authorization;
+    }
+
+    /** @return RecurringApi */
+    public function recurring()
+    {
+        $this->authorize();
+        if (null === $this->recurring) {
+            $this->recurring = (new RecurringApi($this->token, $this->productionMode))
+                ->overrideApiUrl($this->apiUrl);
+
+            if ($this->clientName) {
+                $this->recurring->setClientName($this->clientName);
+            }
+        }
+
+        return $this->recurring;
     }
 
     /** @return RefundsApi */

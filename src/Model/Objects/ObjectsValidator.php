@@ -52,6 +52,33 @@ class ObjectsValidator
     }
 
     /**
+     * @param Objects $objectClass
+     *
+     * @return bool
+     */
+    public function validate($objectClass)
+    {
+        $objectClass->validate();
+
+        foreach (get_object_vars($objectClass) as $field) {
+            if ($field instanceof Objects) {
+                $this->validate($field);
+                continue;
+            }
+
+            if (is_array($field)) {
+                foreach ($field as $value) {
+                    if ($value instanceof Objects) {
+                        $this->validate($value);
+                    }
+                }
+            }
+        }
+
+        return true;
+    }
+
+    /**
      * @param array<Objects> $objects
      * @param mixed          $fieldName
      * @param mixed          $uniqueValue
