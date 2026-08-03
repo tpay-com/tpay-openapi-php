@@ -43,10 +43,10 @@ class Recurring extends Objects
     /** @var Status */
     public $status;
 
-    /** @var NextChargeDate */
+    /** @var NextChargeDate|null */
     public $nextChargeDate;
 
-    /** @var Reason */
+    /** @var Reason|null */
     public $reason;
 
     public function getRequiredFields()

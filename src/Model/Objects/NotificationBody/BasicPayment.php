@@ -83,40 +83,40 @@ class BasicPayment extends Objects
     /** @var Email */
     public $tr_email;
 
-    /** @var Currency */
+    /** @var Currency|null */
     public $tr_currency;
 
     /** @var Md5sum */
     public $md5sum;
 
-    /** @var TestMode */
+    /** @var TestMode|null */
     public $test_mode;
 
-    /** @var Wallet */
+    /** @var Wallet|null */
     public $wallet;
 
-    /** @var Masterpass */
+    /** @var Masterpass|null */
     public $masterpass;
 
-    /** @var TransactionChannel */
+    /** @var TransactionChannel|null */
     public $tr_channel;
 
-    /** @var CardToken */
+    /** @var CardToken|null */
     public $card_token;
 
-    /** @var TokenValue */
+    /** @var TokenValue|null */
     public $tokenPaymentData_tokenValue;
 
-    /** @var InitialTransactionId */
+    /** @var InitialTransactionId|null */
     public $tokenPaymentData_initialTransactionId;
 
-    /** @var CardExpiryDate */
+    /** @var CardExpiryDate|null */
     public $tokenPaymentData_cardExpiryDate;
 
-    /** @var CardBrand */
+    /** @var CardBrand|null */
     public $tokenPaymentData_cardBrand;
 
-    /** @var CardTail */
+    /** @var CardTail|null */
     public $tokenPaymentData_cardTail;
 
     public function getRequiredFields()
