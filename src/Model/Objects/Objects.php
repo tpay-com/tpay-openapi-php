@@ -27,7 +27,7 @@ class Objects implements ObjectsInterface
         $this->factory = new ArrayObjectFactory();
     }
 
-    /** @return array<Field|self> */
+    /** @return array */
     public function getRequiredFields()
     {
         return [];

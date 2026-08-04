@@ -21,7 +21,7 @@ class AbstractBlikAlias extends Objects
     /** @var Type */
     public $type;
 
-    /** @var ExpirationDate */
+    /** @var null|ExpirationDate */
     public $expirationDate;
 
     static protected $requiresExpirationDate = false;

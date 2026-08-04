@@ -56,7 +56,7 @@ class MarketplaceTransaction extends Objects
     /** @var TransactionDescription */
     public $transactionDescription;
 
-    /** @var CardToken */
+    /** @var null|CardToken */
     public $cardToken;
 
     public function getRequiredFields()
