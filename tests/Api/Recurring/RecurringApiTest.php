@@ -2,6 +2,7 @@
 
 namespace Tpay\Tests\OpenApi\Api\Recurring;
 
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use Tpay\OpenApi\Api\Recurring\RecurringApi;
 use Tpay\OpenApi\Model\Fields\Token\AccessToken;
@@ -91,6 +92,59 @@ class RecurringApiTest extends TestCase
         ], 'recurring-id');
 
         self::assertSame('ok', $result);
+    }
+
+    public function testCreateRecurringAcceptsAnchorDayInSchedule()
+    {
+        CurlMock::setConsecutiveReturnedTransfers('"ok"');
+
+        $result = $this->createRecurringApi(false)->createRecurring($this->recurringFields(28));
+
+        self::assertSame('ok', $result);
+    }
+
+    public function testCreateRecurringAcceptsNullAnchorDayInSchedule()
+    {
+        CurlMock::setConsecutiveReturnedTransfers('"ok"');
+
+        $result = $this->createRecurringApi(false)->createRecurring($this->recurringFields(null));
+
+        self::assertSame('ok', $result);
+    }
+
+    public function testCreateRecurringDoesNotAllowAnchorDayOutOfRange()
+    {
+        CurlMock::expectNoCurlExecCall();
+
+        $this->expectException(InvalidArgumentException::class);
+
+        $this->createRecurringApi(false)->createRecurring($this->recurringFields(32));
+    }
+
+    /** @param null|int $anchorDay */
+    private function recurringFields($anchorDay)
+    {
+        return [
+            'id' => 'rec_12345678901234567890AB',
+            'description' => 'Recurring Order AB-CD-12',
+            'payer' => [
+                'email' => 'jan.kowalski@example.com',
+                'name' => 'Jan Kowalski',
+            ],
+            'schedule' => [
+                'amount' => 12.34,
+                'currency' => 'PLN',
+                'firstChargeDate' => '2025-11-12T12:34:00+02:00',
+                'interval' => 1,
+                'intervalType' => 'months',
+                'anchorDay' => $anchorDay,
+            ],
+            'paymentInstrument' => [
+                'paymentType' => 'card_token',
+                'value' => 'card-token-value',
+            ],
+            'callbackUrl' => 'https://example.com/callback',
+        ];
     }
 
     private function createRecurringApi($productionMode)

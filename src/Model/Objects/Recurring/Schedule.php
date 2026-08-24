@@ -3,6 +3,7 @@
 namespace Tpay\OpenApi\Model\Objects\Recurring;
 
 use Tpay\OpenApi\Model\Fields\Recurring\Schedule\Amount;
+use Tpay\OpenApi\Model\Fields\Recurring\Schedule\AnchorDay;
 use Tpay\OpenApi\Model\Fields\Recurring\Schedule\ChargeCount;
 use Tpay\OpenApi\Model\Fields\Recurring\Schedule\Currency;
 use Tpay\OpenApi\Model\Fields\Recurring\Schedule\FirstChargeDate;
@@ -20,6 +21,7 @@ class Schedule extends Objects
         'intervalType' => IntervalType::class,
         'chargeCount' => ChargeCount::class,
         'retryIntervals' => [RetryInterval::class],
+        'anchorDay' => AnchorDay::class,
     ];
 
     /** @var Amount */
@@ -42,6 +44,9 @@ class Schedule extends Objects
 
     /** @var RetryInterval */
     public $retryIntervals;
+
+    /** @var AnchorDay */
+    public $anchorDay;
 
     public function getRequiredFields()
     {
