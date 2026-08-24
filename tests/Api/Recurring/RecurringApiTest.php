@@ -125,6 +125,7 @@ class RecurringApiTest extends TestCase
     private function recurringFields($anchorDay)
     {
         return [
+            'id' => 'rec_12345678901234567890AB',
             'description' => 'Recurring Order AB-CD-12',
             'payer' => [
                 'email' => 'jan.kowalski@example.com',
@@ -142,6 +143,7 @@ class RecurringApiTest extends TestCase
                 'paymentType' => 'card_token',
                 'value' => 'card-token-value',
             ],
+            'callbackUrl' => 'https://example.com/callback',
         ];
     }
 
