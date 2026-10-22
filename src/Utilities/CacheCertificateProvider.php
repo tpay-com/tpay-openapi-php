@@ -29,7 +29,7 @@ class CacheCertificateProvider implements CertificateProvider
             $certificate = $this->getFile($certificatePath);
             $this->cache->set('cert_'.md5($certificatePath), $certificate, 7200);
         }
-        $trusted = $this->cache->get('trusted_'.md5($certificatePath));
+        $trusted = $this->cache->get('trusted_'.md5($rootCa));
         if (!$trusted) {
             $trusted = $this->getFile($rootCa);
             $this->cache->set('trusted_'.md5($rootCa), $trusted, 7200);
