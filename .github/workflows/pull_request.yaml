@@ -39,5 +39,5 @@ jobs:
       - uses: mshick/add-pr-comment@v2
         with:
           message: |
-            Tpay OpenAPI SDK - ${{ steps.plugin-upload.outputs.artifact-url }}
+            Tpay OpenAPI SDK - ${{ steps.sdk-upload.outputs.artifact-url }}
 
