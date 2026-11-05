@@ -2,9 +2,9 @@
 
 namespace Tpay\OpenApi\Api;
 
-use Exception;
 use Psr\Log\LogLevel;
 use RuntimeException;
+use Throwable;
 use Tpay\OpenApi\Api\Accounts\AccountsApi;
 use Tpay\OpenApi\Api\Authorization\AuthorizationApi;
 use Tpay\OpenApi\Api\Blik\BlikApi;
@@ -17,7 +17,6 @@ use Tpay\OpenApi\Model\Objects\Authorization\Token;
 use Tpay\OpenApi\Utilities\Cache;
 use Tpay\OpenApi\Utilities\Logger;
 use Tpay\OpenApi\Utilities\SensitiveDataMasker;
-use Tpay\OpenApi\Utilities\TokenCacheCipher;
 use Tpay\OpenApi\Utilities\TpayException;
 
 class TpayApi
@@ -73,6 +72,7 @@ class TpayApi
     public function __construct(
         Cache $cache,
         string $clientId,
+        #[\SensitiveParameter]
         string $clientSecret,
         bool $productionMode = false,
         ?string $apiUrlOverride = null,
@@ -248,9 +248,8 @@ class TpayApi
             'scope' => $this->scope,
         ];
         $cacheKey = sha1(json_encode($fields).$this->apiUrl);
-        $cipher = new TokenCacheCipher($this->clientSecret, $cacheKey);
 
-        $this->token = $this->getCachedToken($cacheKey, $cipher);
+        $this->token = $this->cache->get($cacheKey);
 
         if (
             $this->token instanceof Token
@@ -280,71 +279,23 @@ class TpayApi
 
         $this->token = new Token();
         $this->token->setObjectValues($this->token, $authApi->getRequestResult());
-        $this->cacheToken($cacheKey, $cipher, $this->token);
+        $this->cacheToken($cacheKey, $this->token);
     }
 
     /**
-     * @param string $cacheKey
+     * Cache failures must not crash the request: an uncaught exception from the cache backend
+     * (e.g. a database error containing the query with the token) would end up in the PHP error log.
      *
-     * @return null|Token
+     * @param string $cacheKey
      */
-    private function getCachedToken($cacheKey, TokenCacheCipher $cipher)
-    {
-        if (!TokenCacheCipher::isSupported()) {
-            return null;
-        }
-
+    private function cacheToken(
+        $cacheKey,
+        #[\SensitiveParameter]
+        Token $token
+    ) {
         try {
-            // Values stored by previous SDK versions (unencrypted Token objects) are ignored and overwritten
-            $tokenJson = $cipher->decrypt($this->cache->get($cacheKey));
-            if (null === $tokenJson) {
-                return null;
-            }
-            $tokenData = json_decode($tokenJson, true);
-            if (!is_array($tokenData)) {
-                return null;
-            }
-            $token = new Token();
-            $token->setObjectValues($token, $tokenData);
-
-            return $token;
-        } catch (Exception $exception) {
-            Logger::log('Token cache', 'Unable to read token from cache: '.get_class($exception), LogLevel::WARNING);
-
-            return null;
-        }
-    }
-
-    /** @param string $cacheKey */
-    private function cacheToken($cacheKey, TokenCacheCipher $cipher, Token $token)
-    {
-        if (!TokenCacheCipher::isSupported()) {
-            Logger::log(
-                'Token cache',
-                'Token is not cached: neither ext-openssl (aes-256-gcm) nor ext-sodium is available',
-                LogLevel::WARNING
-            );
-
-            return;
-        }
-
-        $tokenData = [];
-        foreach (array_keys(Token::OBJECT_FIELDS) as $fieldName) {
-            if ($token->wasFieldProvided($fieldName)) {
-                $tokenData[$fieldName] = $token->{$fieldName}->getValue();
-            }
-        }
-        $encryptedToken = $cipher->encrypt((string) json_encode($tokenData));
-        if (null === $encryptedToken) {
-            Logger::log('Token cache', 'Token is not cached: encryption failed', LogLevel::WARNING);
-
-            return;
-        }
-
-        try {
-            $this->cache->set($cacheKey, $encryptedToken, 7100);
-        } catch (Exception $exception) {
-            // Caching is an optimisation only - do not fail the API call and do not propagate cache errors
+            $this->cache->set($cacheKey, $token, 7100);
+        } catch (Throwable $exception) {
             Logger::log('Token cache', 'Unable to store token in cache: '.get_class($exception), LogLevel::WARNING);
         }
     }

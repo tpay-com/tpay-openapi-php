@@ -20,8 +20,12 @@ class Cache
         }
     }
 
-    public function set($key, $value, $ttl)
-    {
+    public function set(
+        $key,
+        #[\SensitiveParameter]
+        $value,
+        $ttl
+    ) {
         if ($this->cache) {
             $this->cache->set($key, $value, $ttl);
 
