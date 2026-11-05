@@ -28,4 +28,23 @@ class CurlOptionsTest extends TestCase
         self::assertSame(15, $options[CURLOPT_CONNECTTIMEOUT]);
         self::assertSame(30, $options[CURLOPT_TIMEOUT]);
     }
+
+    public function testTlsVerificationIsEnabledByDefault()
+    {
+        $options = (new CurlOptions())->getOptionsArray();
+
+        self::assertSame(2, $options[CURLOPT_SSL_VERIFYHOST]);
+        self::assertTrue($options[CURLOPT_SSL_VERIFYPEER]);
+    }
+
+    public function testTlsVerificationCanBeExplicitlyDisabled()
+    {
+        $options = (new CurlOptions())
+            ->setVerifyHost(0)
+            ->disableVerifyPeer()
+            ->getOptionsArray();
+
+        self::assertSame(0, $options[CURLOPT_SSL_VERIFYHOST]);
+        self::assertFalse($options[CURLOPT_SSL_VERIFYPEER]);
+    }
 }

@@ -2,6 +2,8 @@
 
 namespace Tpay\OpenApi\Api;
 
+use Exception;
+use Psr\Log\LogLevel;
 use RuntimeException;
 use Tpay\OpenApi\Api\Accounts\AccountsApi;
 use Tpay\OpenApi\Api\Authorization\AuthorizationApi;
@@ -13,6 +15,9 @@ use Tpay\OpenApi\Api\Reports\ReportsApi;
 use Tpay\OpenApi\Api\Transactions\TransactionsApi;
 use Tpay\OpenApi\Model\Objects\Authorization\Token;
 use Tpay\OpenApi\Utilities\Cache;
+use Tpay\OpenApi\Utilities\Logger;
+use Tpay\OpenApi\Utilities\SensitiveDataMasker;
+use Tpay\OpenApi\Utilities\TokenCacheCipher;
 use Tpay\OpenApi\Utilities\TpayException;
 
 class TpayApi
@@ -243,8 +248,9 @@ class TpayApi
             'scope' => $this->scope,
         ];
         $cacheKey = sha1(json_encode($fields).$this->apiUrl);
+        $cipher = new TokenCacheCipher($this->clientSecret, $cacheKey);
 
-        $this->token = $this->cache->get($cacheKey);
+        $this->token = $this->getCachedToken($cacheKey, $cipher);
 
         if (
             $this->token instanceof Token
@@ -267,13 +273,79 @@ class TpayApi
                 sprintf(
                     'Authorization error. HTTP code: %d, response: %s',
                     $authApi->getHttpResponseCode(),
-                    json_encode($authApi->getRequestResult())
+                    json_encode(SensitiveDataMasker::maskData($authApi->getRequestResult()))
                 )
             );
         }
 
         $this->token = new Token();
         $this->token->setObjectValues($this->token, $authApi->getRequestResult());
-        $this->cache->set($cacheKey, $this->token, 7100);
+        $this->cacheToken($cacheKey, $cipher, $this->token);
+    }
+
+    /**
+     * @param string $cacheKey
+     *
+     * @return null|Token
+     */
+    private function getCachedToken($cacheKey, TokenCacheCipher $cipher)
+    {
+        if (!TokenCacheCipher::isSupported()) {
+            return null;
+        }
+
+        try {
+            // Values stored by previous SDK versions (unencrypted Token objects) are ignored and overwritten
+            $tokenJson = $cipher->decrypt($this->cache->get($cacheKey));
+            if (null === $tokenJson) {
+                return null;
+            }
+            $tokenData = json_decode($tokenJson, true);
+            if (!is_array($tokenData)) {
+                return null;
+            }
+            $token = new Token();
+            $token->setObjectValues($token, $tokenData);
+
+            return $token;
+        } catch (Exception $exception) {
+            Logger::log('Token cache', 'Unable to read token from cache: '.get_class($exception), LogLevel::WARNING);
+
+            return null;
+        }
+    }
+
+    /** @param string $cacheKey */
+    private function cacheToken($cacheKey, TokenCacheCipher $cipher, Token $token)
+    {
+        if (!TokenCacheCipher::isSupported()) {
+            Logger::log(
+                'Token cache',
+                'Token is not cached: neither ext-openssl (aes-256-gcm) nor ext-sodium is available',
+                LogLevel::WARNING
+            );
+
+            return;
+        }
+
+        $tokenData = [];
+        foreach (array_keys(Token::OBJECT_FIELDS) as $fieldName) {
+            if ($token->wasFieldProvided($fieldName)) {
+                $tokenData[$fieldName] = $token->{$fieldName}->getValue();
+            }
+        }
+        $encryptedToken = $cipher->encrypt((string) json_encode($tokenData));
+        if (null === $encryptedToken) {
+            Logger::log('Token cache', 'Token is not cached: encryption failed', LogLevel::WARNING);
+
+            return;
+        }
+
+        try {
+            $this->cache->set($cacheKey, $encryptedToken, 7100);
+        } catch (Exception $exception) {
+            // Caching is an optimisation only - do not fail the API call and do not propagate cache errors
+            Logger::log('Token cache', 'Unable to store token in cache: '.get_class($exception), LogLevel::WARNING);
+        }
     }
 }
