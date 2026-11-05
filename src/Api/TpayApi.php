@@ -4,6 +4,7 @@ namespace Tpay\OpenApi\Api;
 
 use Psr\Log\LogLevel;
 use RuntimeException;
+use SensitiveParameter;
 use Throwable;
 use Tpay\OpenApi\Api\Accounts\AccountsApi;
 use Tpay\OpenApi\Api\Authorization\AuthorizationApi;
@@ -72,7 +73,7 @@ class TpayApi
     public function __construct(
         Cache $cache,
         string $clientId,
-        #[\SensitiveParameter]
+        #[SensitiveParameter]
         string $clientSecret,
         bool $productionMode = false,
         ?string $apiUrlOverride = null,
@@ -290,7 +291,7 @@ class TpayApi
      */
     private function cacheToken(
         $cacheKey,
-        #[\SensitiveParameter]
+        #[SensitiveParameter]
         Token $token
     ) {
         try {

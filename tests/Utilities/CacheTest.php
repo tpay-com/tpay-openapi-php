@@ -4,9 +4,9 @@ namespace Tpay\Tests\OpenApi\Utilities;
 
 use Doctrine\Common\Cache\ArrayCache;
 use PHPUnit\Framework\TestCase;
+use Psr\SimpleCache\CacheInterface;
 use PSX\Cache\Pool;
 use PSX\Cache\SimpleCache;
-use Psr\SimpleCache\CacheInterface;
 use RuntimeException;
 use Tpay\OpenApi\Api\TpayApi;
 use Tpay\OpenApi\Model\Objects\Authorization\Token;

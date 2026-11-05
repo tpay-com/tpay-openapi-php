@@ -116,7 +116,7 @@ final class SensitiveDataMasker
 
                 continue;
             }
-            list($name, $value) = explode(':', $header, 2);
+            [$name, $value] = explode(':', $header, 2);
             if (!in_array(self::normalize($name), self::SENSITIVE_HEADERS, true)) {
                 $result[$key] = $header;
 

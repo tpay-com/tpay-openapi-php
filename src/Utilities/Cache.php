@@ -4,6 +4,7 @@ namespace Tpay\OpenApi\Utilities;
 
 use Psr\Cache\CacheItemPoolInterface;
 use Psr\SimpleCache\CacheInterface;
+use SensitiveParameter;
 
 class Cache
 {
@@ -22,7 +23,7 @@ class Cache
 
     public function set(
         $key,
-        #[\SensitiveParameter]
+        #[SensitiveParameter]
         $value,
         $ttl
     ) {
