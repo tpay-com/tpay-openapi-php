@@ -4,6 +4,7 @@ namespace Tpay\OpenApi\Utilities;
 
 use Psr\Cache\CacheItemPoolInterface;
 use Psr\SimpleCache\CacheInterface;
+use SensitiveParameter;
 
 class Cache
 {
@@ -20,8 +21,12 @@ class Cache
         }
     }
 
-    public function set($key, $value, $ttl)
-    {
+    public function set(
+        $key,
+        #[SensitiveParameter]
+        $value,
+        $ttl
+    ) {
         if ($this->cache) {
             $this->cache->set($key, $value, $ttl);
 
@@ -31,7 +36,7 @@ class Cache
         if ($this->cacheItemPool) {
             $item = $this->cacheItemPool->getItem($key);
             $item->set($value);
-            $item->expiresAfter(7100);
+            $item->expiresAfter($ttl);
             $this->cacheItemPool->save($item);
         }
     }

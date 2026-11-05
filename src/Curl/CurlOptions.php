@@ -10,8 +10,12 @@ class CurlOptions
     /** @var array<string> */
     protected $headers = [];
 
-    /** @var int */
-    private $verifyHost = 0;
+    /**
+     * 2 = verify that the certificate matches the requested host name.
+     *
+     * @var int
+     */
+    private $verifyHost = 2;
 
     /** @var int */
     private $timeout = self::DEFAULT_TIMEOUT;
@@ -19,8 +23,12 @@ class CurlOptions
     /** @var int */
     private $connectTimeout = self::DEFAULT_CONNECT_TIMEOUT;
 
-    /** @var bool */
-    private $verifyPeer = false;
+    /**
+     * Verify the server certificate against trusted CA bundle.
+     *
+     * @var bool
+     */
+    private $verifyPeer = true;
 
     /** @var bool */
     private $verbose = false;
@@ -66,7 +74,9 @@ class CurlOptions
     }
 
     /**
-     * Set host verification
+     * Set host verification (CURLOPT_SSL_VERIFYHOST). Defaults to 2.
+     * Lowering this value exposes the connection to man-in-the-middle attacks
+     * and should be done only in local, non-production environments.
      *
      * @param int $verifyHost
      *
@@ -80,7 +90,9 @@ class CurlOptions
     }
 
     /**
-     * Disable peer verification
+     * Disable peer verification (CURLOPT_SSL_VERIFYPEER).
+     * This exposes the connection to man-in-the-middle attacks and should be done
+     * only in local, non-production environments.
      *
      * @return $this
      */

@@ -85,7 +85,7 @@ class Logger
             'ip' => $ip,
             'title' => $title,
             'date' => date('Y-m-d H:i:s'),
-            'message' => $text,
+            'message' => SensitiveDataMasker::maskString($text),
             'logLevel' => $logLevel,
         ];
         $logger->log($logLevel, json_encode($content));
