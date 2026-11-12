@@ -38,4 +38,25 @@ class CachedCertProviderTest extends TestCase
         }
         $this->assertTrue($exceptionThrown);
     }
+
+    public function testProvideReadsBothCertificatesFromCache()
+    {
+        $cache = new Cache(new Pool(new ArrayCache()));
+
+        $x5u = 'https://secure.tpay.com/x509/notifications-jws.pem';
+        $rootCa = 'https://secure.tpay.com/x509/tpay-jws-root.pem';
+
+        $provider = new CacheCertificateProvider($cache);
+        $provider->provide($x5u, $rootCa);
+
+        $unreachableX5u = 'https://tpay.invalid/x509/notifications-jws.pem';
+        $unreachableRootCa = 'https://tpay.invalid/x509/tpay-jws-root.pem';
+
+        $cache->set('cert_'.md5($unreachableX5u), $cache->get('cert_'.md5($x5u)), 10);
+        $cache->set('trusted_'.md5($unreachableRootCa), $cache->get('trusted_'.md5($rootCa)), 10);
+
+        $x509 = $provider->provide($unreachableX5u, $unreachableRootCa);
+
+        $this->assertTrue($x509->validateSignature());
+    }
 }
