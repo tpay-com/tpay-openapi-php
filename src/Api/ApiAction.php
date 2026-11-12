@@ -221,30 +221,36 @@ class ApiAction
      */
     private function logRequest($requestUrl, $requestMethod, $fields, array $headers)
     {
-        Logger::log(
-            'Outgoing request',
-            vsprintf(
-                "URL: %s \n Method: %s \n Fields: %s \n Headers: %s",
-                [
-                    SensitiveDataMasker::maskString($requestUrl),
-                    $requestMethod,
-                    json_encode(SensitiveDataMasker::maskData($fields)),
-                    json_encode(SensitiveDataMasker::maskHeaders($headers)),
-                ]
-            )
-        );
+        Logger::withSerializePrecision(function () use ($requestUrl, $requestMethod, $fields, $headers) {
+            return Logger::log(
+                'Outgoing request',
+                vsprintf(
+                    "URL: %s \n Method: %s \n Fields: %s \n Headers: %s",
+                    [
+                        SensitiveDataMasker::maskString($requestUrl),
+                        $requestMethod,
+                        json_encode(SensitiveDataMasker::maskData($fields)),
+                        json_encode(SensitiveDataMasker::maskHeaders($headers)),
+                    ]
+                )
+            );
+        });
     }
 
     private function logResponse()
     {
-        Logger::log(
-            'Request response',
-            sprintf(
-                "Fields: %s \n HTTP code: %s",
-                json_encode(SensitiveDataMasker::maskData($this->getRequestResult())),
-                $this->getHttpResponseCode()
-            )
-        );
+        $result = $this->getRequestResult();
+        $httpCode = $this->getHttpResponseCode();
+        Logger::withSerializePrecision(function () use ($result, $httpCode) {
+            return Logger::log(
+                'Request response',
+                sprintf(
+                    "Fields: %s \n HTTP code: %s",
+                    json_encode(SensitiveDataMasker::maskData($result)),
+                    $httpCode
+                )
+            );
+        });
     }
 
     private function checkResponse()

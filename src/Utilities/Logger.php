@@ -88,8 +88,35 @@ class Logger
             'message' => SensitiveDataMasker::maskString($text),
             'logLevel' => $logLevel,
         ];
-        $logger->log($logLevel, json_encode($content));
+        $logger->log($logLevel, self::withSerializePrecision(function () use ($content) {
+            return json_encode($content);
+        }));
 
         return true;
+    }
+
+    /**
+     * Runs callback with serialize_precision temporarily set to -1 (shortest float representation),
+     * then restores the previous value. Failures of ini_set (e.g. disabled function) are silenced.
+     *
+     * @return mixed callback result
+     */
+    public static function withSerializePrecision(callable $callback)
+    {
+        $previous = false;
+        if (PHP_VERSION_ID >= 70100 && function_exists('ini_get') && function_exists('ini_set')) {
+            $current = @ini_get('serialize_precision');
+            if (false !== $current && '-1' !== $current) {
+                $previous = @ini_set('serialize_precision', '-1');
+            }
+        }
+
+        try {
+            return $callback();
+        } finally {
+            if (false !== $previous) {
+                @ini_set('serialize_precision', $previous);
+            }
+        }
     }
 }
