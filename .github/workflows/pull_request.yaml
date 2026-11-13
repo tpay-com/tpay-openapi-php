@@ -36,7 +36,9 @@ jobs:
           name: 'tpay-openapi-php'
           path: 'sdk/'
 
+      # GITHUB_TOKEN is read-only for PRs from forks, so commenting would fail there
       - uses: mshick/add-pr-comment@v2
+        if: github.event.pull_request.head.repo.full_name == github.repository
         with:
           message: |
             Tpay OpenAPI SDK - ${{ steps.sdk-upload.outputs.artifact-url }}

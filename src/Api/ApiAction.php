@@ -9,6 +9,7 @@ use Tpay\OpenApi\Manager\Manager;
 use Tpay\OpenApi\Model\Objects\Authorization\Token;
 use Tpay\OpenApi\SdkVersion;
 use Tpay\OpenApi\Utilities\Logger;
+use Tpay\OpenApi\Utilities\SensitiveDataMasker;
 use Tpay\OpenApi\Utilities\TpayException;
 
 class ApiAction
@@ -95,23 +96,14 @@ class ApiAction
         if (!empty($fields)) {
             $headers[] = 'Content-Type: application/json';
         }
-        Logger::log(
-            'Outgoing request',
-            vsprintf(
-                "URL: %s \n Method: %s \n Fields: %s \n Headers: %s",
-                [$requestUrl, $requestMethod, json_encode($fields), json_encode($headers)]
-            )
-        );
+        $this->logRequest($requestUrl, $requestMethod, $fields, $headers);
         $fp = $this->Curl
             ->setRequestUrl($requestUrl)
             ->setPostData($fields)
             ->setMethod($requestMethod)
             ->setHeader($headers)
             ->download();
-        Logger::log(
-            'Request response',
-            sprintf("Fields: %s \n HTTP code: %s", json_encode($this->getRequestResult()), $this->getHttpResponseCode())
-        );
+        $this->logResponse();
         $this->checkResponse();
 
         return $fp;
@@ -188,23 +180,14 @@ class ApiAction
 
         $headers[] = 'User-Agent: tpay.com PHP SDK Client/'.gethostname().'/'.$this->clientName.'/'.$this->clientId;
 
-        Logger::log(
-            'Outgoing request',
-            vsprintf(
-                "URL: %s \n Method: %s \n Fields: %s \n Headers: %s",
-                [$requestUrl, $requestMethod, json_encode($fields), json_encode($headers)]
-            )
-        );
+        $this->logRequest($requestUrl, $requestMethod, $fields, $headers);
         $this->Curl
             ->setRequestUrl($requestUrl)
             ->setPostData($fields)
             ->setMethod($requestMethod)
             ->setHeader($headers)
             ->sendRequest();
-        Logger::log(
-            'Request response',
-            sprintf("Fields: %s \n HTTP code: %s", json_encode($this->getRequestResult()), $this->getHttpResponseCode())
-        );
+        $this->logResponse();
         $this->checkResponse();
 
         return $this;
@@ -228,6 +211,46 @@ class ApiAction
     protected function isProductionMode()
     {
         return true === $this->productionMode;
+    }
+
+    /**
+     * @param string        $requestUrl
+     * @param string        $requestMethod
+     * @param mixed         $fields
+     * @param array<string> $headers
+     */
+    private function logRequest($requestUrl, $requestMethod, $fields, array $headers)
+    {
+        Logger::withSerializePrecision(function () use ($requestUrl, $requestMethod, $fields, $headers) {
+            return Logger::log(
+                'Outgoing request',
+                vsprintf(
+                    "URL: %s \n Method: %s \n Fields: %s \n Headers: %s",
+                    [
+                        SensitiveDataMasker::maskString($requestUrl),
+                        $requestMethod,
+                        json_encode(SensitiveDataMasker::maskData($fields)),
+                        json_encode(SensitiveDataMasker::maskHeaders($headers)),
+                    ]
+                )
+            );
+        });
+    }
+
+    private function logResponse()
+    {
+        $result = $this->getRequestResult();
+        $httpCode = $this->getHttpResponseCode();
+        Logger::withSerializePrecision(function () use ($result, $httpCode) {
+            return Logger::log(
+                'Request response',
+                sprintf(
+                    "Fields: %s \n HTTP code: %s",
+                    json_encode(SensitiveDataMasker::maskData($result)),
+                    $httpCode
+                )
+            );
+        });
     }
 
     private function checkResponse()

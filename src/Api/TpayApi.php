@@ -2,7 +2,10 @@
 
 namespace Tpay\OpenApi\Api;
 
+use Psr\Log\LogLevel;
 use RuntimeException;
+use SensitiveParameter;
+use Throwable;
 use Tpay\OpenApi\Api\Accounts\AccountsApi;
 use Tpay\OpenApi\Api\Authorization\AuthorizationApi;
 use Tpay\OpenApi\Api\Blik\BlikApi;
@@ -13,6 +16,8 @@ use Tpay\OpenApi\Api\Reports\ReportsApi;
 use Tpay\OpenApi\Api\Transactions\TransactionsApi;
 use Tpay\OpenApi\Model\Objects\Authorization\Token;
 use Tpay\OpenApi\Utilities\Cache;
+use Tpay\OpenApi\Utilities\Logger;
+use Tpay\OpenApi\Utilities\SensitiveDataMasker;
 use Tpay\OpenApi\Utilities\TpayException;
 
 class TpayApi
@@ -68,6 +73,7 @@ class TpayApi
     public function __construct(
         Cache $cache,
         string $clientId,
+        #[SensitiveParameter]
         string $clientSecret,
         bool $productionMode = false,
         ?string $apiUrlOverride = null,
@@ -267,13 +273,31 @@ class TpayApi
                 sprintf(
                     'Authorization error. HTTP code: %d, response: %s',
                     $authApi->getHttpResponseCode(),
-                    json_encode($authApi->getRequestResult())
+                    json_encode(SensitiveDataMasker::maskData($authApi->getRequestResult()))
                 )
             );
         }
 
         $this->token = new Token();
         $this->token->setObjectValues($this->token, $authApi->getRequestResult());
-        $this->cache->set($cacheKey, $this->token, 7100);
+        $this->cacheToken($cacheKey, $this->token);
+    }
+
+    /**
+     * Cache failures must not crash the request: an uncaught exception from the cache backend
+     * (e.g. a database error containing the query with the token) would end up in the PHP error log.
+     *
+     * @param string $cacheKey
+     */
+    private function cacheToken(
+        $cacheKey,
+        #[SensitiveParameter]
+        Token $token
+    ) {
+        try {
+            $this->cache->set($cacheKey, $token, 7100);
+        } catch (Throwable $exception) {
+            Logger::log('Token cache', 'Unable to store token in cache: '.get_class($exception), LogLevel::WARNING);
+        }
     }
 }

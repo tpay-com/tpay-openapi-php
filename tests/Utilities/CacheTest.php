@@ -4,8 +4,10 @@ namespace Tpay\Tests\OpenApi\Utilities;
 
 use Doctrine\Common\Cache\ArrayCache;
 use PHPUnit\Framework\TestCase;
+use Psr\SimpleCache\CacheInterface;
 use PSX\Cache\Pool;
 use PSX\Cache\SimpleCache;
+use RuntimeException;
 use Tpay\OpenApi\Api\TpayApi;
 use Tpay\OpenApi\Model\Objects\Authorization\Token;
 use Tpay\OpenApi\Utilities\Cache;
@@ -81,6 +83,31 @@ class CacheTest extends TestCase
         $cacheKey = sha1(json_encode($fields).'https://openapi.sandbox.tpay.com');
 
         self::assertInstanceOf(Token::class, $cache->get($cacheKey));
+    }
+
+    public function testCacheFailureDoesNotBreakAuthorization()
+    {
+        $cache = $this->createMock(CacheInterface::class);
+        $cache->method('set')->willThrowException(new RuntimeException('INSERT ... 01G6WAPZFNNX4CXBPKQH5MYD4H1857b07a64af14'));
+        $tpayApi = new TpayApi(new Cache(null, $cache), '12345-132123', '456');
+
+        CurlMock::setReturnedHttpCode(200);
+        CurlMock::setConsecutiveReturnedTransfers(
+            json_encode(
+                [
+                    'issued_at' => time(),
+                    'scope' => 'read',
+                    'token_type' => 'Bearer',
+                    'expires_in' => 7200,
+                    'client_id' => '12345-132123',
+                    'access_token' => '01G6WAPZFNNX4CXBPKQH5MYD4H1857b07a64af14',
+                ]
+            )
+        );
+
+        $tpayApi->authorization();
+
+        self::assertSame('01G6WAPZFNNX4CXBPKQH5MYD4H1857b07a64af14', $tpayApi->getToken()->access_token->getValue());
     }
 
     public function testExceptionWhenNoCacheGiven()
