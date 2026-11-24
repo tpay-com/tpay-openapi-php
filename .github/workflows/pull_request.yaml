@@ -12,11 +12,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v7
 
       - uses: shivammathur/setup-php@v2
         with:
-          php-version: 7.1
+          php-version: '8.2'
           extensions: none, curl, dom, mbstring, simplexml, tokenizer, xml, xmlwriter, json, fileinfo
           coverage: none
 
@@ -30,14 +30,14 @@ jobs:
 
       - run: mkdir sdk && unzip tpay-openapi-php.zip -d sdk
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         id: sdk-upload
         with:
           name: 'tpay-openapi-php'
           path: 'sdk/'
 
       # GITHUB_TOKEN is read-only for PRs from forks, so commenting would fail there
-      - uses: mshick/add-pr-comment@v2
+      - uses: mshick/add-pr-comment@v3
         if: github.event.pull_request.head.repo.full_name == github.repository
         with:
           message: |
