@@ -19,7 +19,7 @@
         "ext-curl": "*",
         "ext-fileinfo": "*",
         "ext-json": "*",
-        "phpseclib/phpseclib": "^2 || ^3",
+        "phpseclib/phpseclib": "^2 || ^3 || ^4",
         "psr/cache": "^1 || ^2 || ^3",
         "psr/log": "^1 || ^2 || ^3",
         "psr/simple-cache": "^1 || ^2 || ^3"
