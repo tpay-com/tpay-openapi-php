@@ -15,7 +15,7 @@
         "docs": "https://openapi.tpay.com"
     },
     "require": {
-        "php": ">=7.1",
+        "php": ">=8.2",
         "ext-curl": "*",
         "ext-fileinfo": "*",
         "ext-json": "*",
