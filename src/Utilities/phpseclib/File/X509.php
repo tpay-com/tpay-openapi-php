@@ -22,9 +22,7 @@ if (class_exists('phpseclib4\File\X509')) {
             return $this->x509;
         }
 
-        /**
-         * @param string $cert
-         */
+        /** @param string $cert */
         public function loadCA($cert)
         {
             // phpseclib 4 keeps trust anchors in a static store. Reset it so each
@@ -33,9 +31,7 @@ if (class_exists('phpseclib4\File\X509')) {
             \phpseclib4\File\X509::addCA($cert);
         }
 
-        /**
-         * @return bool
-         */
+        /** @return bool */
         public function validateSignature()
         {
             return $this->x509->validateSignature();
